@@ -258,9 +258,11 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .zoom-ctl .zbtn:hover { background: #28323f; color: var(--text); }
 
-/* docks: vertical stacks that hold panels without overlap */
+/* docks: vertical stacks that hold panels without overlap.
+   z-index: 22 — above the topbar (20), HUD (18) and rail (18) so an OPEN panel
+   visibly sits on top of the player cards instead of being overlapped by them. */
 .dock {
-  position: absolute; top: 150px; bottom: 92px; z-index: 17;
+  position: absolute; top: 150px; bottom: 92px; z-index: 22;
   width: 330px; max-width: 86vw;
   display: flex; flex-direction: column; gap: 10px;
   overflow-y: auto; overflow-x: hidden;  /* fallback scroll if many panels open */
@@ -275,7 +277,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 
 /* panels live inside docks (flow layout, no absolute positioning) */
 .panel {
-  position: relative; z-index: 17;
+  position: relative; z-index: 22;
   flex: 0 0 auto;        /* size to content */
   /* Cap the height: never taller than the dock, and never more than ~55vh,
      so the body scrolls instead of the panel growing indefinitely. */
