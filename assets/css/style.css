@@ -290,25 +290,22 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 .panel-h {
   display: flex; align-items: center; gap: 8px; flex: 0 0 auto;
-  padding: 10px 12px;
+  padding: 10px 12px 10px 8px;
   border-bottom: 1px solid var(--border-soft);
 }
-.panel-h .ttl { font-size: 13px; font-weight: 600; flex: 1 1 auto; min-width: 0; }
-/* Close button: always clearly visible — boxed white ✕ at the right of the
-   panel header. Sits in the flex flow with margin-left:auto so it is pushed to
-   the far right; flex:none so it never shrinks; ttl above is the only flexible
-   item, so the X always gets its full slot. */
+/* Close button comes FIRST in the source order so it is always at the LEFT of
+   the header (always visible, never clipped by the right edge / device corner
+   on mobile). The title fills the rest of the row. */
 .panel-h .x {
-  margin-left: auto; flex: none;
+  order: -1; flex: none;
   color: #fff; font-size: 18px; line-height: 1; cursor: pointer;
-  min-width: 30px; height: 30px; display: grid; place-items: center;
+  min-width: 32px; height: 32px; display: grid; place-items: center;
   border: 1px solid var(--border); border-radius: 6px; background: #1a212b;
 }
 .panel-h .x:hover { background: #28323f; }
 .panel-h .x:active { background: #3a4654; }
-/* If a badge sits between title and X, the badge stays right after the title
-   and the X keeps the auto-margin (so it stays pinned to the right). */
-.panel-h .badge-p0, .panel-h .badge-p1 { flex: none; }
+.panel-h .ttl { font-size: 13px; font-weight: 600; flex: 1 1 auto; min-width: 0; }
+.panel-h .badge-p0, .panel-h .badge-p1 { flex: none; margin-left: auto; }
 .panel-body {
   padding: 11px 12px;
   overflow-y: auto; overflow-x: hidden;
