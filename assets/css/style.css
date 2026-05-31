@@ -584,11 +584,13 @@ table.lb tbody tr.lb-archive-toggle td {
   .player-card .pmodel { font-size: 14px; }
   /* Side panel on tablet: take the full window width with a comfortable inner
      padding. The dock is anchored to the LEFT of the screen and the panel
-     content wraps naturally before the right edge — no more clipping. */
-  .dock { width: 100vw; max-width: 100vw; }
+     content wraps naturally before the right edge — no more clipping. An open
+     panel must SIT ABOVE the topbar / HUD / rail so the player cards do not
+     show through and overlap the panel content. */
+  .dock { width: 100vw; max-width: 100vw; z-index: 30; }
   .dock-left { left: 0; }
   .dock-right { right: 0; }
-  .panel { width: 100%; max-width: 100%; }
+  .panel { width: 100%; max-width: 100%; z-index: 30; }
   .panel-body { padding-right: 16px; }
 
   /* Touch / tablet: a bigger close button, comfortably tappable. */
