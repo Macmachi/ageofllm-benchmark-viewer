@@ -555,8 +555,42 @@
         const id = x.dataset.close;
         $(id).style.display = 'none';
         syncRailButtons();
+        updateBackdrop();
       });
     });
+    // Tap-to-close backdrop: clicking the dimmed area beside an open panel (the
+    // exposed board / the ~20% gap on tablet widths) closes all open panels.
+    const bd = ensureBackdrop();
+    bd.addEventListener('click', closeAllPanels);
+  }
+
+  const PANEL_IDS = ['reason-panel', 'diplo-panel', 'stats-panel', 'legend-panel'];
+
+  function ensureBackdrop() {
+    let bd = $('panel-backdrop');
+    if (!bd) {
+      bd = document.createElement('div');
+      bd.id = 'panel-backdrop';
+      bd.className = 'panel-backdrop';
+      document.body.appendChild(bd);
+    }
+    return bd;
+  }
+
+  function anyPanelOpen() {
+    return PANEL_IDS.some((id) => { const p = $(id); return p && p.style.display !== 'none'; });
+  }
+
+  // Show the dimmed backdrop whenever at least one panel is open (CSS only makes
+  // it visible at touch widths; on desktop it stays hidden).
+  function updateBackdrop() {
+    ensureBackdrop().classList.toggle('show', anyPanelOpen());
+  }
+
+  function closeAllPanels() {
+    PANEL_IDS.forEach((id) => { const p = $(id); if (p) p.style.display = 'none'; });
+    syncRailButtons();
+    updateBackdrop();
   }
 
   function bindToggle(btnId, panelId, startOpen, cls, onOpen) {
@@ -568,6 +602,7 @@
       btn.classList.toggle('on', !open);
       if (cls) btn.classList.toggle(cls, !open);
       if (!open && typeof onOpen === 'function') onOpen();
+      updateBackdrop();
     });
     if (startOpen) { btn.classList.add('on'); if (cls) btn.classList.add(cls); }
   }
@@ -602,8 +637,10 @@
           const p = $(id); p.style.display = p.style.display === 'none' ? 'flex' : 'none';
         });
         syncRailButtons();
+        updateBackdrop();
         if (lastFrame) drawFrame(lastFrame);
       }
+      else if (e.code === 'Escape') { closeAllPanels(); }
     });
   }
 

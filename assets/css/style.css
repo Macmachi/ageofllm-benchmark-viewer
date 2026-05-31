@@ -584,6 +584,27 @@ table.lb tbody tr.lb-archive-toggle td {
   .player-card .pmodel { font-size: 14px; }
   .dock { width: 80vw; }
   .dock-right { right: 60px; }
+
+  /* Touch / tablet: the close button MUST be obvious — a white boxed ✕ pinned to
+     the far right of the panel header (the faint desktop ✕ is too easy to miss). */
+  .panel-h .x {
+    color: #fff; background: #1a212b; flex: none;
+    min-width: 36px; height: 36px; font-size: 18px;
+    border: 1px solid var(--border); border-radius: 8px;
+    display: grid; place-items: center; margin-left: auto;
+  }
+  .panel-h .badge-p0, .panel-h .badge-p1 { margin-left: auto; }
+  .panel-h .badge-p0 + .x, .panel-h .badge-p1 + .x { margin-left: 8px; }
+}
+
+/* Tap-to-close backdrop behind an open panel (touch widths only). Clicking the
+   exposed board area / the gap beside the panel dismisses the open panels. */
+.panel-backdrop { display: none; }
+@media (max-width: 900px) {
+  .panel-backdrop.show {
+    display: block; position: fixed; inset: 0; z-index: 16;
+    background: rgba(0, 0, 0, 0.45);
+  }
 }
 
 @media (max-width: 640px) {
