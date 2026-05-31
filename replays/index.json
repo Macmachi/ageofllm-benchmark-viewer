@@ -1,0 +1,114 @@
+{
+  "replays": [
+    {
+      "match_id": "2026-05-31_011306",
+      "date": "2026-05-31T00:29:56.130697+00:00",
+      "p1_model": "mimo-v2.5-pro",
+      "p2_model": "deepseek-v4-pro-e",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 0,
+      "victory_type": "nuclear",
+      "total_turns": 17
+    },
+    {
+      "match_id": "tournament_r1_MiMo_2.5_vs_Gemini_Flash_3.5",
+      "date": "2026-05-31T02:23:03.207574+00:00",
+      "p1_model": "mimo-v2.5-pro",
+      "p2_model": "gemini-3.5-flash",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 16
+    },
+    {
+      "match_id": "tournament_r1_Claude_Opus_4.8_vs_Grok_4.3",
+      "date": "2026-05-31T02:33:25.754669+00:00",
+      "p1_model": "claude-opus-4.8",
+      "p2_model": "grok-4.3",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 0,
+      "victory_type": "nuclear",
+      "total_turns": 16
+    },
+    {
+      "match_id": "tournament_r1_GPT_5.5_vs_Gemini_Pro_3.1",
+      "date": "2026-05-31T03:30:13.095811+00:00",
+      "p1_model": "gpt-5.5",
+      "p2_model": "gemini-3.1-pro",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 0,
+      "victory_type": "nuclear",
+      "total_turns": 17
+    },
+    {
+      "match_id": "tournament_r1_Qwen_3.7_vs_DeepSeek_V4",
+      "date": "2026-05-31T04:22:42.639935+00:00",
+      "p1_model": "qwen3.7-max",
+      "p2_model": "deepseek-v4-pro-e",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 19
+    },
+    {
+      "match_id": "tournament_r2_DeepSeek_V4_vs_GPT_5.5",
+      "date": "2026-05-31T05:31:38.413093+00:00",
+      "p1_model": "deepseek-v4-pro-e",
+      "p2_model": "gpt-5.5",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 16
+    },
+    {
+      "match_id": "tournament_r2_GPT_5.5_vs_Claude_Opus_4.8",
+      "date": "2026-05-31T10:46:35.585697+00:00",
+      "p1_model": "gpt-5.5",
+      "p2_model": "claude-opus-4.8",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 0,
+      "victory_type": "nuclear",
+      "total_turns": 21
+    },
+    {
+      "match_id": "tournament_r2_DeepSeek_V4_vs_Gemini_Flash_3.5",
+      "date": "2026-05-31T11:58:02.650229+00:00",
+      "p1_model": "deepseek-v4-pro-e",
+      "p2_model": "gemini-3.5-flash",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 19
+    },
+    {
+      "match_id": "tournament_r2_MiMo_2.5_vs_Gemini_Pro_3.1",
+      "date": "2026-05-31T13:46:10.623304+00:00",
+      "p1_model": "mimo-v2.5-pro",
+      "p2_model": "gemini-3.1-pro",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 18
+    },
+    {
+      "match_id": "tournament_r2_Grok_4.3_vs_Qwen_3.7",
+      "date": "2026-05-31T14:02:12.931626+00:00",
+      "p1_model": "grok-4.3",
+      "p2_model": "qwen3.7-max",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 19
+    }
+  ]
+}

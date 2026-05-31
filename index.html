@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Age of LLM — Benchmark · Leaderboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png" />
+  <link rel="manifest" href="assets/images/favicon/site.webmanifest" />
+  <link rel="icon" href="assets/images/favicon/favicon.ico" />
+</head>
+<body>
+  <div class="lb-root">
+    <div class="lb-header">
+      <img src="assets/images/Logo_rymentz_32px.png" alt="Rymentz" class="header-logo" />
+      <h1>Age of LLM <span class="lb-tag">— Benchmark</span></h1>
+      <span class="lb-ver">v0.9.3</span>
+    </div>
+    <div class="lb-sub">1v1 strategic benchmark — two LLMs face off. Win by nuclear bomb or military conquest. Ranking by points (3/1/0).</div>
+
+    <div class="lb-section-title">Model ranking</div>
+    <div class="lb-filters">
+      <input type="text" id="f-model" placeholder="Filter by model…" />
+      <label style="color:var(--text-dim);font-size:13px">Min. matches to rank
+        <input type="number" id="f-min" value="3" min="0" style="width:70px" />
+      </label>
+      <span class="lb-rank-note" title="Models below the minimum are ranked after the others and marked “provisional”.">Ranked by points/match · ties by win rate</span>
+    </div>
+    <div class="table-wrap">
+      <table class="lb" id="lb-table">
+        <thead>
+          <tr>
+            <th data-sort="rank" title="Rank (by points/match, then win rate)">#</th>
+            <th data-sort="model" title="LLM model name (reasoning effort shown below)">Model</th>
+            <th data-sort="points_per_match" class="num" title="Average points per match (3 win / 1 draw / 0 loss). Primary ranking key — fair across different match counts.">Pts/match</th>
+            <th data-sort="points" class="num" title="Total points: win = 3, draw = 1, loss / mutual destruction = 0">Pts</th>
+            <th data-sort="win_rate" class="num" title="Win rate = wins / total">Win&nbsp;rate</th>
+            <th data-sort="wins" class="num" title="Wins">W</th>
+            <th data-sort="losses" class="num" title="Losses">L</th>
+            <th data-sort="draws" class="num" title="Draws (peace or timeout)">D</th>
+            <th data-sort="total" class="num" title="Total matches played">Total</th>
+            <th data-sort="nuclear_wins" class="num" title="Wins by nuclear bomb">☢ Nuc.</th>
+            <th data-sort="military_wins" class="num" title="Military wins (enemy base destroyed by tanks)">⚔ Mil.</th>
+            <th data-sort="diplomatic_wins" class="num" title="Diplomatic wins (ultimatum accepted)">📜 Dip.</th>
+            <th data-sort="mutual_destructions" class="num" title="Mutual destructions (both launched the bomb the same turn — both lose)">☢☢ MD</th>
+            <th data-sort="avg_think_ms" class="num" title="Average thinking time per played turn">⏱ avg/turn</th>
+            <th data-sort="avg_tokens_per_turn" class="num" title="Average tokens consumed per played turn">▦ tok/turn</th>
+            <th data-sort="avg_cost_per_match" class="num" title="Estimated average USD cost per match (from token usage and configured prices)">💲 $/match</th>
+            <th data-sort="invalid_action_rate" class="num" title="Percentage of proposed actions rejected by the engine (illegal actions)">⚠ % illegal</th>
+          </tr>
+        </thead>
+        <tbody id="lb-body"></tbody>
+      </table>
+    </div>
+
+    <div class="lb-section-title">Recent matches</div>
+    <div class="lb-filters">
+      <input type="text" id="f-match" placeholder="Search a match (model, id, victory type)…" />
+    </div>
+    <div class="matches" id="matches"></div>
+    <div class="matches-pager" id="matches-pager"></div>
+
+    <footer class="site-footer">
+      <a class="foot-link" href="https://www.youtube.com/@AgeofLLM" target="_blank" rel="noopener" title="YouTube">▶ YouTube</a>
+      <a class="foot-link" href="https://x.com/ageofllm" target="_blank" rel="noopener" title="X">𝕏 @ageofllm</a>
+      <span class="foot-copy">© Rymentz 2026</span>
+    </footer>
+  </div>
+
+  <script src="assets/js/leaderboard.js"></script>
+</body>
+</html>

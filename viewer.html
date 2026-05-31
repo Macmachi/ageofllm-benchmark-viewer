@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Age of LLM — Benchmark · Replay</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png" />
+  <link rel="manifest" href="assets/images/favicon/site.webmanifest" />
+  <link rel="icon" href="assets/images/favicon/favicon.ico" />
+</head>
+<body>
+  <div class="viewer-root">
+    <div id="board-wrap"><canvas id="board"></canvas></div>
+
+    <!-- loading / error -->
+    <div id="loading" class="loading">Loading replay…</div>
+
+    <!-- top bar -->
+    <div class="topbar">
+      <div class="brand">
+        <a class="home-link" href="index.html" title="Back to leaderboard">⮜ Leaderboard</a>
+        <span class="bolt">⚡</span>
+        <span class="title">Age of LLM</span>
+        <span class="ver">Benchmark · v0.9.3</span>
+        <span class="mid" id="match-id"></span>
+      </div>
+      <div class="view-toggle" id="view-toggle">
+        <button class="btn active" data-view="spectator">👁 Spectator</button>
+        <button class="btn" data-view="p0">Player 1</button>
+        <button class="btn" data-view="p1">Player 2</button>
+      </div>
+    </div>
+
+    <!-- player HUD: two bricks, top-centered under the header -->
+    <div class="hud-bar">
+      <div class="player-card left" id="card0">
+        <div class="pc-head">
+          <span class="pdot dot0"></span>
+          <span class="pmodel" id="model0">—</span>
+          <span class="peffort" id="effort0"></span>
+        </div>
+        <div class="pname" id="name0">Player 1</div>
+        <div class="res">
+          <span class="cred" id="cred0" title="Credits">◆ 0</span>
+          <span class="ura" id="ura0" title="Uranium">☢ 0</span>
+          <span class="cnt cnt-u" id="units0" title="Units">⛬ 0</span>
+          <span class="cnt cnt-b" id="blds0" title="Buildings">🏚 0</span>
+        </div>
+        <div class="bomb" id="bomb0">
+          <div class="bomb-top"><span class="bomb-label">☢ Bomb</span><span class="bomb-pct" id="bombpct0">0%</span></div>
+          <div class="bomb-bar"><span class="bomb-fill" id="bombfill0"></span></div>
+          <div class="bomb-reqs">
+            <span class="req" id="req0-silo" title="Silo built">🏗 Silo</span>
+            <span class="req" id="req0-ura" title="Uranium required">☢ U</span>
+            <span class="req" id="req0-base" title="Enemy base discovered">📡 Base</span>
+          </div>
+        </div>
+        <div class="perf" id="perf0"><span class="tok" id="tok0"></span><span class="thk" id="thk0"></span></div>
+      </div>
+      <div class="player-card right" id="card1">
+        <div class="pc-head">
+          <span class="pdot dot1"></span>
+          <span class="pmodel" id="model1">—</span>
+          <span class="peffort" id="effort1"></span>
+        </div>
+        <div class="pname" id="name1">Player 2</div>
+        <div class="res">
+          <span class="cred" id="cred1" title="Credits">◆ 0</span>
+          <span class="ura" id="ura1" title="Uranium">☢ 0</span>
+          <span class="cnt cnt-u" id="units1" title="Units">⛬ 0</span>
+          <span class="cnt cnt-b" id="blds1" title="Buildings">🏚 0</span>
+        </div>
+        <div class="bomb" id="bomb1">
+          <div class="bomb-top"><span class="bomb-label">☢ Bomb</span><span class="bomb-pct" id="bombpct1">0%</span></div>
+          <div class="bomb-bar"><span class="bomb-fill" id="bombfill1"></span></div>
+          <div class="bomb-reqs">
+            <span class="req" id="req1-silo" title="Silo built">🏗 Silo</span>
+            <span class="req" id="req1-ura" title="Uranium required">☢ U</span>
+            <span class="req" id="req1-base" title="Enemy base discovered">📡 Base</span>
+          </div>
+        </div>
+        <div class="perf" id="perf1"><span class="tok" id="tok1"></span><span class="thk" id="thk1"></span></div>
+      </div>
+    </div>
+
+    <!-- action rail -->
+    <div class="rail">
+      <button class="rbtn" id="btn-reason" title="AI reasoning">🧠</button>
+      <button class="rbtn" id="btn-diplo" title="Diplomacy">💬<span class="count" id="diplo-count" style="display:none">0</span></button>
+      <button class="rbtn" id="btn-stats" title="Statistics">📊</button>
+      <button class="rbtn" id="btn-legend" title="Legend">≡</button>
+    </div>
+
+    <!-- zoom controls -->
+    <div class="zoom-ctl">
+      <button class="zbtn" id="zoom-in" title="Zoom in (+)">+</button>
+      <button class="zbtn" id="zoom-out" title="Zoom out (-)">−</button>
+      <button class="zbtn" id="zoom-reset" title="Reset (0)">⊙</button>
+    </div>
+
+    <!-- LEFT dock: scrollable, panels stack without overlap -->
+    <div class="dock dock-left" id="dock-left">
+      <!-- diplomacy panel -->
+      <div class="panel" id="diplo-panel" style="display:none">
+        <div class="panel-h">
+          <span class="ttl">💬 Diplomacy</span>
+          <span class="x" data-close="diplo-panel">✕</span>
+        </div>
+        <div class="panel-body">
+          <div class="diplo-log" id="diplo-log"></div>
+        </div>
+      </div>
+
+      <!-- stats panel -->
+      <div class="panel" id="stats-panel" style="display:none">
+        <div class="panel-h">
+          <span class="ttl">📊 Statistics</span>
+          <span class="x" data-close="stats-panel">✕</span>
+        </div>
+        <div class="panel-body">
+          <div id="stats-host"></div>
+        </div>
+      </div>
+
+      <!-- legend panel -->
+      <div class="panel" id="legend-panel" style="display:none">
+        <div class="panel-h">
+          <span class="ttl">📖 Legend &amp; rules</span>
+          <span class="x" data-close="legend-panel">✕</span>
+        </div>
+        <div class="panel-body legend-body">
+          <div class="lg-sec">Goal of the game</div>
+          <p class="lg-p">A 1v1 duel between two AIs. Each turn both players take up to <b>3 actions</b>.
+          Win by destroying the enemy base before the turn limit (default 80) — by <b>nuclear bomb</b> or
+          <b>military conquest</b> (tanks reduce the base to 0 HP) — or by an accepted <b>ultimatum</b>.
+          A <b>peace</b> or the turn limit ends in a draw. Fog of war hides the enemy half: you must scout.</p>
+
+          <div class="lg-sec">Victory conditions</div>
+          <table class="lg-table">
+            <thead><tr><th>Outcome</th><th>How</th><th>Points</th></tr></thead>
+            <tbody>
+              <tr><td>☢ Nuclear</td><td>You launch, the enemy does not (same turn)</td><td>3 / 0</td></tr>
+              <tr><td>⚔ Military</td><td>Enemy base reduced to 0 HP by tanks</td><td>3 / 0</td></tr>
+              <tr><td>📜 Ultimatum</td><td>Your ultimatum is accepted</td><td>3 / 0</td></tr>
+              <tr><td>🕊 Peace</td><td>A peace proposal is accepted</td><td>1 / 1</td></tr>
+              <tr><td>⏳ Timeout</td><td>Turn limit reached, no winner</td><td>1 / 1</td></tr>
+              <tr><td>☢☢ Mutual</td><td>Both launch the bomb the same turn</td><td>0 / 0</td></tr>
+            </tbody>
+          </table>
+
+          <div class="lg-sec">Units <span class="lg-hint">(fatal combat, no HP)</span></div>
+          <table class="lg-table">
+            <thead><tr><th>Unit</th><th>Cost</th><th>Move</th><th>Sight</th><th>Range</th><th>Hits</th></tr></thead>
+            <tbody>
+              <tr><td>🛩 Drone</td><td>2◆</td><td>3</td><td>3</td><td>—</td><td>recon</td></tr>
+              <tr><td>🚀 SAM</td><td>3◆</td><td>1</td><td>2</td><td>2</td><td>air</td></tr>
+              <tr><td>🛡 Tank</td><td>4◆</td><td>2</td><td>1</td><td>2</td><td>ground+bldg</td></tr>
+              <tr><td>✈ Fighter</td><td>4◆</td><td>3</td><td>2</td><td>2</td><td>tank/air</td></tr>
+            </tbody>
+          </table>
+          <p class="lg-p lg-small">Triangle: Fighter &gt; Tank/Drone/Fighter · Tank &gt; SAM/Tank/buildings ·
+          SAM &gt; air units. Only the Tank can hit buildings (2 HP/hit). Attacker survives (mirror rule).</p>
+
+          <div class="lg-sec">Buildings <span class="lg-hint">(have HP)</span></div>
+          <table class="lg-table">
+            <thead><tr><th>Building</th><th>Cost</th><th>HP</th><th>Effect</th></tr></thead>
+            <tbody>
+              <tr><td>🏛 Base</td><td>—</td><td>8</td><td>produces units</td></tr>
+              <tr><td>⛏ Credit mine (oil)</td><td>1◆</td><td>2</td><td>+3◆/turn</td></tr>
+              <tr><td>☢ Uranium mine</td><td>1◆</td><td>2</td><td>+1☢/turn</td></tr>
+              <tr><td>☢ Central mine</td><td>2◆</td><td>3</td><td>+1☢/turn (6,3)</td></tr>
+              <tr><td>🏗 Silo</td><td>5◆</td><td>3</td><td>required for the bomb</td></tr>
+            </tbody>
+          </table>
+          <p class="lg-p lg-small">Construction: operational on the <b>next turn</b>. Under construction =
+          no effect + destroyed in <b>1 hit</b>. You can only build on a <b>visible</b>, free cell.
+          One building per cell; cells <b>adjacent to a base</b> are reserved for unit spawning.</p>
+
+          <div class="lg-sec">Nuclear bomb</div>
+          <p class="lg-p lg-small">Cost 25☢ (drops after T40, floor 13). Requires an operational silo +
+          uranium ≥ cost + enemy base discovered. Launches are <b>secret &amp; simultaneous</b>: resolved at
+          end of turn — a double launch = mutual destruction.</p>
+
+          <div class="lg-sec">Diplomacy <span class="lg-hint">(free, off the action quota)</span></div>
+          <table class="lg-table">
+            <thead><tr><th>Type</th><th>When</th><th>Effect</th></tr></thead>
+            <tbody>
+              <tr><td>💬 Message</td><td>always</td><td>Free text read by the opponent next turn</td></tr>
+              <tr><td>🤝 Ceasefire</td><td>turn 10+</td><td>No attacks for 3 turns (+6☢ bomb penalty)</td></tr>
+              <tr><td>🕊 Peace</td><td>turn 15+</td><td>Immediate draw if accepted</td></tr>
+              <tr><td>📜 Ultimatum</td><td>turn 10+</td><td>"Surrender by turn X" — if accepted, proposer wins</td></tr>
+            </tbody>
+          </table>
+          <p class="lg-p lg-small">Proposals are <b>binding only if accepted</b>; a promise in a message is not.
+          During a ceasefire, attacks are forbidden but launching the bomb is still allowed (with a penalty).</p>
+
+          <div class="lg-sec">Map</div>
+          <div class="legend-grid">
+            <div class="li"><span class="sw" style="background:var(--gold)"></span>Credit deposit (oil)</div>
+            <div class="li"><span class="sw" style="background:var(--uranium)"></span>Uranium deposit</div>
+            <div class="li"><span class="sw" style="background:var(--accent)"></span>Central uranium</div>
+            <div class="li"><span class="sw" style="background:#4a5568"></span>Mountain (impassable)</div>
+            <div class="li"><span class="sw dot" style="background:var(--p0)"></span>Player 1</div>
+            <div class="li"><span class="sw dot" style="background:var(--p1)"></span>Player 2</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT dock -->
+    <div class="dock dock-right" id="dock-right">
+      <!-- reasoning panel (closed by default) -->
+      <div class="panel" id="reason-panel" style="display:none">
+        <div class="panel-h">
+          <span class="ttl">🧠 Reasoning</span>
+          <span class="badge-p0" id="reason-badge">1</span>
+          <span class="x" data-close="reason-panel">✕</span>
+        </div>
+        <div class="panel-body">
+          <div class="reason-text" id="reason-text"></div>
+          <div class="actions-row" id="reason-actions"></div>
+          <div class="discovered" id="reason-discovered" style="display:none">📡 Enemy base spotted</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- victory banner -->
+    <div class="victory hidden" id="victory">
+      <div class="vbolt" id="vbolt">⚡</div>
+      <div class="vttl" id="vttl">VICTORY</div>
+      <div class="vsub" id="vsub"></div>
+    </div>
+
+    <!-- transport -->
+    <div class="transport">
+      <div class="transport-inner">
+        <div class="transport-row">
+          <button class="tbtn" id="t-first" title="Start">⏮</button>
+          <button class="tbtn" id="t-prev" title="Previous turn">◀</button>
+          <button class="tbtn play" id="t-play" title="Play/Pause">▶</button>
+          <button class="tbtn" id="t-next" title="Next turn">▶</button>
+          <button class="tbtn" id="t-last" title="End">⏭</button>
+          <div class="speeds" id="speeds">
+            <button class="sp" data-sp="0.5">0.5×</button>
+            <button class="sp active" data-sp="1">1×</button>
+            <button class="sp" data-sp="2">2×</button>
+            <button class="sp" data-sp="4">4×</button>
+          </div>
+          <span class="turn-label" id="turn-label">Turn 1</span>
+        </div>
+        <input type="range" class="scrubber" id="scrubber" min="0" max="0" value="0" />
+      </div>
+    </div>
+
+    <footer class="viewer-footer">
+      <a class="foot-link" href="https://www.youtube.com/@AgeofLLM" target="_blank" rel="noopener" title="YouTube">▶ YouTube</a>
+      <a class="foot-link" href="https://x.com/ageofllm" target="_blank" rel="noopener" title="X">𝕏 @ageofllm</a>
+      <span class="foot-copy">© Rymentz 2026</span>
+    </footer>
+  </div>
+
+  <script src="assets/js/iso.js"></script>
+  <script src="assets/js/sprites.js"></script>
+  <script src="assets/js/renderer.js"></script>
+  <script src="assets/js/player.js"></script>
+  <script src="assets/js/stats.js"></script>
+  <script src="assets/js/viewer.js"></script>
+</body>
+</html>
