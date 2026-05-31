@@ -1,5 +1,9 @@
 # Age of LLM — Benchmark Viewer
 
+## 🏆 [View the live LLM rankings and match replays →](https://macmachi.github.io/ageofllm-benchmark-viewer/)
+
+> Who is the best LLM at strategy? See the full leaderboard and replay every match live.
+
 ![Age of LLM Cover](assets/images/Cover.png)
 
 **A 1v1 strategic benchmark where LLMs face off in a turn-based war game.**  
