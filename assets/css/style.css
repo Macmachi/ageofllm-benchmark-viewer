@@ -582,11 +582,16 @@ table.lb tbody tr.lb-archive-toggle td {
   .hud-bar { gap: 8px; top: 86px; }
   .player-card { min-width: 150px; font-size: 13px; padding: 8px 10px; }
   .player-card .pmodel { font-size: 14px; }
-  .dock { width: 80vw; }
-  .dock-right { right: 60px; }
+  /* Side panel on tablet: take the full window width with a comfortable inner
+     padding. The dock is anchored to the LEFT of the screen and the panel
+     content wraps naturally before the right edge — no more clipping. */
+  .dock { width: 100vw; max-width: 100vw; }
+  .dock-left { left: 0; }
+  .dock-right { right: 0; }
+  .panel { width: 100%; max-width: 100%; }
+  .panel-body { padding-right: 16px; }
 
   /* Touch / tablet: a bigger close button, comfortably tappable. */
-  .panel-h { padding-right: 14px; }
   .panel-h .x {
     min-width: 40px; height: 40px; font-size: 20px;
   }
@@ -601,24 +606,6 @@ table.lb tbody tr.lb-archive-toggle td {
     display: block; position: fixed; inset: 0; z-index: 16;
     background: rgba(0, 0, 0, 0.45);
     pointer-events: auto;
-  }
-}
-
-/* On any TOUCH width (phone + tablet portrait), an OPEN panel becomes a
-   full-screen overlay so its body fills the screen and text never gets clipped
-   by the right edge of a partial-width side panel. */
-@media (max-width: 900px) {
-  .dock {
-    width: 100vw; left: 0; right: 0;
-    top: 0; bottom: 0; max-height: 100vh;
-    flex-direction: column; flex-wrap: nowrap;
-    overflow: hidden; padding: 0;
-    z-index: 40;
-  }
-  .dock-left, .dock-right { left: 0; right: 0; }
-  .panel {
-    min-width: 0; width: 100vw; height: 100vh; max-height: 100vh;
-    border-radius: 0; border: none;
   }
 }
 
