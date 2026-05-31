@@ -289,23 +289,25 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   overflow: hidden;
 }
 .panel-h {
+  /* The close button is positioned ABSOLUTELY so it cannot be pushed out of
+     the header by a long title or a badge — it is always pinned top-right. */
+  position: relative;
   display: flex; align-items: center; gap: 8px; flex: 0 0 auto;
-  padding: 10px 12px; border-bottom: 1px solid var(--border-soft);
+  padding: 10px 50px 10px 12px;
+  border-bottom: 1px solid var(--border-soft);
 }
 .panel-h .ttl { font-size: 13px; font-weight: 600; }
-/* Close button: always clearly visible (a real boxed button), pushed to the far
-   right of the header. The badge between the title and the X must not steal its
-   slot, so the X owns the margin-left:auto. */
+/* Close button: ALWAYS clearly visible — boxed white ✕ pinned to the top-right
+   of the panel header. Independent of the flex flow so it can never overflow. */
 .panel-h .x {
-  margin-left: auto; flex: none;
-  color: var(--text); font-size: 16px; line-height: 1; cursor: pointer;
-  min-width: 26px; height: 26px; display: grid; place-items: center;
+  position: absolute; top: 50%; right: 8px; transform: translateY(-50%);
+  color: #fff; font-size: 18px; line-height: 1; cursor: pointer; flex: none;
+  min-width: 30px; height: 30px; display: grid; place-items: center;
   border: 1px solid var(--border); border-radius: 6px; background: #1a212b;
+  z-index: 2;
 }
-.panel-h .x:hover { background: #28323f; color: #fff; }
-/* a badge (e.g. reasoning player number) sits before the X, never after it */
-.panel-h .badge-p0, .panel-h .badge-p1 { margin-left: auto; }
-.panel-h .badge-p0 + .x, .panel-h .badge-p1 + .x { margin-left: 8px; }
+.panel-h .x:hover { background: #28323f; }
+.panel-h .x:active { background: #3a4654; }
 .panel-body {
   padding: 11px 12px;
   overflow-y: auto; overflow-x: hidden;
@@ -585,25 +587,23 @@ table.lb tbody tr.lb-archive-toggle td {
   .dock { width: 80vw; }
   .dock-right { right: 60px; }
 
-  /* Touch / tablet: the close button MUST be obvious — a white boxed ✕ pinned to
-     the far right of the panel header (the faint desktop ✕ is too easy to miss). */
+  /* Touch / tablet: bigger boxed ✕, more padding for the title to keep clear */
+  .panel-h { padding-right: 60px; }
   .panel-h .x {
-    color: #fff; background: #1a212b; flex: none;
-    min-width: 36px; height: 36px; font-size: 18px;
-    border: 1px solid var(--border); border-radius: 8px;
-    display: grid; place-items: center; margin-left: auto;
+    min-width: 40px; height: 40px; font-size: 20px;
+    right: 10px;
   }
-  .panel-h .badge-p0, .panel-h .badge-p1 { margin-left: auto; }
-  .panel-h .badge-p0 + .x, .panel-h .badge-p1 + .x { margin-left: 8px; }
 }
 
-/* Tap-to-close backdrop behind an open panel (touch widths only). Clicking the
-   exposed board area / the gap beside the panel dismisses the open panels. */
+/* Tap-to-close backdrop behind an open panel (touch widths only). Sits BEHIND
+   the panel (z-index 16) but ABOVE the board (which is in #board-wrap). On
+   click it dismisses every open panel. */
 .panel-backdrop { display: none; }
 @media (max-width: 900px) {
   .panel-backdrop.show {
     display: block; position: fixed; inset: 0; z-index: 16;
     background: rgba(0, 0, 0, 0.45);
+    pointer-events: auto;
   }
 }
 
@@ -649,27 +649,23 @@ table.lb tbody tr.lb-archive-toggle td {
     border-radius: 0; border: none;
   }
   /* Sticky header so the close button is always reachable even after the
-     panel body scrolls. The full-screen overlay starts at the very top of the
-     screen, so the header must clear the device status bar / notch (safe-area)
-     — otherwise the title and the ✕ button slide under it and look missing. */
+     panel body scrolls. Full-screen overlay starts at the very top of the
+     screen, so the header must clear the device status bar / notch. */
   .panel-h {
-    padding: 14px 16px; position: sticky; top: 0; z-index: 2;
+    position: sticky; top: 0; z-index: 2;
+    padding: 14px 60px 14px 16px;
     padding-top: calc(14px + env(safe-area-inset-top));
     background: var(--panel-solid);
     border-bottom: 1px solid var(--border);
   }
   .panel-h .ttl { font-size: 15px; }
-  /* Large, obviously-tappable WHITE close button, far right of the title. */
+  /* Large, always-pinned WHITE close button, far right of the header. */
   .panel-h .x {
-    font-size: 20px; line-height: 1; margin-left: auto; flex: none;
-    min-width: 44px; height: 44px; display: grid; place-items: center;
-    border: 1px solid var(--border); border-radius: 8px;
-    background: #1a212b; color: #fff;
+    top: calc(50% + env(safe-area-inset-top) / 2);
+    right: 10px;
+    min-width: 44px; height: 44px; font-size: 22px;
+    border-radius: 8px;
   }
-  .panel-h .x:active { background: #28323f; }
-  /* keep any header badge before the X (never overlapping it) */
-  .panel-h .badge-p0, .panel-h .badge-p1 { margin-left: auto; }
-  .panel-h .badge-p0 + .x, .panel-h .badge-p1 + .x { margin-left: 10px; }
 
   .rail { top: auto; bottom: 100px; right: 8px; flex-direction: row; }
   .rail .rbtn { width: 36px; height: 36px; font-size: 15px; }
