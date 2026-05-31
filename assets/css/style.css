@@ -289,25 +289,26 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   overflow: hidden;
 }
 .panel-h {
-  /* The close button is positioned ABSOLUTELY so it cannot be pushed out of
-     the header by a long title or a badge — it is always pinned top-right. */
-  position: relative;
   display: flex; align-items: center; gap: 8px; flex: 0 0 auto;
-  padding: 10px 50px 10px 12px;
+  padding: 10px 12px;
   border-bottom: 1px solid var(--border-soft);
 }
-.panel-h .ttl { font-size: 13px; font-weight: 600; }
-/* Close button: ALWAYS clearly visible — boxed white ✕ pinned to the top-right
-   of the panel header. Independent of the flex flow so it can never overflow. */
+.panel-h .ttl { font-size: 13px; font-weight: 600; flex: 1 1 auto; min-width: 0; }
+/* Close button: always clearly visible — boxed white ✕ at the right of the
+   panel header. Sits in the flex flow with margin-left:auto so it is pushed to
+   the far right; flex:none so it never shrinks; ttl above is the only flexible
+   item, so the X always gets its full slot. */
 .panel-h .x {
-  position: absolute; top: 50%; right: 8px; transform: translateY(-50%);
-  color: #fff; font-size: 18px; line-height: 1; cursor: pointer; flex: none;
+  margin-left: auto; flex: none;
+  color: #fff; font-size: 18px; line-height: 1; cursor: pointer;
   min-width: 30px; height: 30px; display: grid; place-items: center;
   border: 1px solid var(--border); border-radius: 6px; background: #1a212b;
-  z-index: 2;
 }
 .panel-h .x:hover { background: #28323f; }
 .panel-h .x:active { background: #3a4654; }
+/* If a badge sits between title and X, the badge stays right after the title
+   and the X keeps the auto-margin (so it stays pinned to the right). */
+.panel-h .badge-p0, .panel-h .badge-p1 { flex: none; }
 .panel-body {
   padding: 11px 12px;
   overflow-y: auto; overflow-x: hidden;
@@ -587,11 +588,10 @@ table.lb tbody tr.lb-archive-toggle td {
   .dock { width: 80vw; }
   .dock-right { right: 60px; }
 
-  /* Touch / tablet: bigger boxed ✕, more padding for the title to keep clear */
-  .panel-h { padding-right: 60px; }
+  /* Touch / tablet: a bigger close button, comfortably tappable. */
+  .panel-h { padding-right: 14px; }
   .panel-h .x {
     min-width: 40px; height: 40px; font-size: 20px;
-    right: 10px;
   }
 }
 
@@ -653,16 +653,14 @@ table.lb tbody tr.lb-archive-toggle td {
      screen, so the header must clear the device status bar / notch. */
   .panel-h {
     position: sticky; top: 0; z-index: 2;
-    padding: 14px 60px 14px 16px;
+    padding: 14px 16px;
     padding-top: calc(14px + env(safe-area-inset-top));
     background: var(--panel-solid);
     border-bottom: 1px solid var(--border);
   }
   .panel-h .ttl { font-size: 15px; }
-  /* Large, always-pinned WHITE close button, far right of the header. */
+  /* Large WHITE close button at the right of the header (flex flow). */
   .panel-h .x {
-    top: calc(50% + env(safe-area-inset-top) / 2);
-    right: 10px;
     min-width: 44px; height: 44px; font-size: 22px;
     border-radius: 8px;
   }
