@@ -293,8 +293,19 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   padding: 10px 12px; border-bottom: 1px solid var(--border-soft);
 }
 .panel-h .ttl { font-size: 13px; font-weight: 600; }
-.panel-h .x { margin-left: auto; color: var(--text-faint); font-size: 16px; line-height: 1; cursor: pointer; }
-.panel-h .x:hover { color: var(--text); }
+/* Close button: always clearly visible (a real boxed button), pushed to the far
+   right of the header. The badge between the title and the X must not steal its
+   slot, so the X owns the margin-left:auto. */
+.panel-h .x {
+  margin-left: auto; flex: none;
+  color: var(--text); font-size: 16px; line-height: 1; cursor: pointer;
+  min-width: 26px; height: 26px; display: grid; place-items: center;
+  border: 1px solid var(--border); border-radius: 6px; background: #1a212b;
+}
+.panel-h .x:hover { background: #28323f; color: #fff; }
+/* a badge (e.g. reasoning player number) sits before the X, never after it */
+.panel-h .badge-p0, .panel-h .badge-p1 { margin-left: auto; }
+.panel-h .badge-p0 + .x, .panel-h .badge-p1 + .x { margin-left: 8px; }
 .panel-body {
   padding: 11px 12px;
   overflow-y: auto; overflow-x: hidden;
@@ -617,21 +628,27 @@ table.lb tbody tr.lb-archive-toggle td {
     border-radius: 0; border: none;
   }
   /* Sticky header so the close button is always reachable even after the
-     panel body scrolls. The full-screen overlay covers the rail, so the ✕ is
-     the primary way to close a panel on mobile — make it a clear, large,
-     obviously-tappable button at the top-right. */
+     panel body scrolls. The full-screen overlay starts at the very top of the
+     screen, so the header must clear the device status bar / notch (safe-area)
+     — otherwise the title and the ✕ button slide under it and look missing. */
   .panel-h {
-    padding: 14px 16px; position: sticky; top: 0; z-index: 1;
+    padding: 14px 16px; position: sticky; top: 0; z-index: 2;
+    padding-top: calc(14px + env(safe-area-inset-top));
     background: var(--panel-solid);
+    border-bottom: 1px solid var(--border);
   }
   .panel-h .ttl { font-size: 15px; }
+  /* Large, obviously-tappable WHITE close button, far right of the title. */
   .panel-h .x {
-    font-size: 20px; line-height: 1; margin-left: auto;
-    min-width: 40px; height: 40px; display: grid; place-items: center;
+    font-size: 20px; line-height: 1; margin-left: auto; flex: none;
+    min-width: 44px; height: 44px; display: grid; place-items: center;
     border: 1px solid var(--border); border-radius: 8px;
-    background: #1a212b; color: var(--text);
+    background: #1a212b; color: #fff;
   }
   .panel-h .x:active { background: #28323f; }
+  /* keep any header badge before the X (never overlapping it) */
+  .panel-h .badge-p0, .panel-h .badge-p1 { margin-left: auto; }
+  .panel-h .badge-p0 + .x, .panel-h .badge-p1 + .x { margin-left: 10px; }
 
   .rail { top: auto; bottom: 100px; right: 8px; flex-direction: row; }
   .rail .rbtn { width: 36px; height: 36px; font-size: 15px; }
