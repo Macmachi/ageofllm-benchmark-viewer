@@ -27,7 +27,7 @@ const Renderer = (() => {
     depA: '#0f1820', depB: '#1a1018', depPass: '#0d2317',
     p0: '#4da6ff', p1: '#ff5d6c',
     credit: '#d4af37', uranium: '#5fd95f', uraniumCentral: '#39ff77',
-    fog: '#05080c', fogTile: '#0a0f15',
+    fog: '#05080c', fogTile: '#0a0f15', fogMemory: '#161d27',
     hpGood: '#5fd95f', hpMid: '#e0b020', hpBad: '#e0503a', hpBack: '#10161d',
     text: '#e8eef5', shadow: 'rgba(0,0,0,0.38)',
   };
@@ -82,7 +82,10 @@ const Renderer = (() => {
   // Spectator => nothing fogged. Player view => only the cells the viewed player
   // can currently SEE are clear; everything else is fog. We read the exact
   // visible_cells set serialized by the engine for the turn being shown.
-  // Returns null (no fog) or { side, visible:Set("c,r"), key }.
+  // We ALSO read the player's REMEMBERED enemy buildings: a building discovered
+  // earlier stays known even when it leaves vision, so its cell is rendered as a
+  // dim "memory" (greyed) rather than pitch-black fog.
+  // Returns null (no fog) or { side, visible:Set, remembered:Set("c,r") }.
   function fogFor(view, replay, turn) {
     if (view !== 'p0' && view !== 'p1') return null;
     const side = view === 'p0' ? 0 : 1;
@@ -91,12 +94,26 @@ const Renderer = (() => {
     if (ps && Array.isArray(ps.visible_cells)) {
       for (const [c, r] of ps.visible_cells) set.add(c + ',' + r);
     }
-    return { side, visible: set };
+    const remembered = new Set();
+    const rb = ps && ps.knowledge && ps.knowledge.remembered_enemy_buildings;
+    if (Array.isArray(rb)) {
+      for (const m of rb) {
+        if (m && Array.isArray(m.pos)) remembered.add(m.pos[0] + ',' + m.pos[1]);
+      }
+    }
+    return { side, visible: set, remembered };
   }
 
   function isFoggedCell(col, row, fog) {
     if (!fog) return false;
     return !fog.visible.has(col + ',' + row);
+  }
+
+  // A cell that is fogged but holds a building the viewed player remembers (saw
+  // earlier and that has not been destroyed): shown as a dim memory, not black.
+  function isRememberedCell(col, row, fog) {
+    if (!fog) return false;
+    return fog.remembered.has(col + ',' + row);
   }
 
   // ---- diamond path for a tile top face ----
@@ -167,7 +184,14 @@ const Renderer = (() => {
 
     for (const b of frame.buildings) {
       const [c, r] = b.pos;
-      if (isFoggedCell(c, r, fog)) continue;
+      // In player view: a building on a fogged cell is normally hidden, EXCEPT
+      // an enemy building the viewed player has discovered before — that one is
+      // drawn dimmed (a "remembered" sighting) instead of disappearing.
+      if (isFoggedCell(c, r, fog)) {
+        if (!isRememberedCell(c, r, fog)) continue;
+        drawList.push({ z: Iso.depthKey(c, r, 0.5), kind: 'building', e: b, _memory: true });
+        continue;
+      }
       drawList.push({ z: Iso.depthKey(c, r, 0.5), kind: 'building', e: b });
     }
     for (const u of frame.units) {
@@ -179,7 +203,7 @@ const Renderer = (() => {
     drawList.sort((a, b) => a.z - b.z);
 
     for (const item of drawList) {
-      if (item.kind === 'building') drawBuilding(ctx, item.e, v);
+      if (item.kind === 'building') drawBuilding(ctx, item.e, v, item._memory);
       else drawUnit(ctx, item.e, v);
     }
 
@@ -203,17 +227,24 @@ const Renderer = (() => {
     const dep = T.dep.get(k);
     const fogged = isFoggedCell(c, r, fog);
 
+    // A fogged cell that holds a remembered enemy building is rendered as a
+    // lighter "memory" tile (greyed) rather than pitch-black, so the player can
+    // still see WHERE a building they discovered sits even out of current vision.
+    const remembered = fogged && isRememberedCell(c, r, fog);
+
     // Tile top face
     diamond(ctx, x, y, v.tileW, v.tileH);
     let fill = c < (v.cols / 2 - 0.5) ? C.tileA : c > (v.cols / 2 - 0.5) ? C.tileB : C.passage;
     if (isPass) fill = C.passage;
-    if (fogged) fill = C.fogTile;
+    if (fogged) fill = remembered ? C.fogMemory : C.fogTile;
     ctx.fillStyle = fill;
     ctx.fill();
     ctx.strokeStyle = fogged ? C.edgeSoft : C.edge;
     ctx.lineWidth = 1;
     ctx.stroke();
 
+    // Fully-dark fog hides everything; a remembered cell keeps showing its
+    // building (drawn later, dimmed) but no terrain detail underneath.
     if (fogged) return;
 
     // Deposit marker (under any sprite)
@@ -250,12 +281,14 @@ const Renderer = (() => {
     }
   }
 
-  function drawBuilding(ctx, b, v) {
+  function drawBuilding(ctx, b, v, memory = false) {
     const [c, r] = b.pos;
     const { x, y } = Iso.cellToScreen(c, r, v);
     const maxhp = MAXHP[b.type] || 10;
     // state + stable variant come from player.js (b._state, b._variant)
-    const state = b._state || (b.hp <= 0 ? 'destroy' : 'normal');
+    // A remembered building (out of current vision) is always drawn in its
+    // 'normal' state — we no longer have live HP/under-construction info for it.
+    const state = memory ? 'normal' : (b._state || (b.hp <= 0 ? 'destroy' : 'normal'));
     const variant = b._variant || Sprites.variantFor(b.id);
     const img = Sprites.building(b.type, state, variant, b.owner);
     const bscale = v.scale * BLDG_SCALE;
@@ -267,7 +300,13 @@ const Renderer = (() => {
     ctx.beginPath();
     ctx.ellipse(x, y, v.tileW * 0.26, v.tileH * 0.26, 0, 0, Math.PI * 2);
     ctx.fill();
-    drawSpriteCentered(ctx, img, x, baseY, bscale, b.hp <= 0 ? 0.9 : 1);
+    // Remembered buildings are dimmed (faded "from memory" look).
+    const alpha = memory ? 0.42 : (b.hp <= 0 ? 0.9 : 1);
+    drawSpriteCentered(ctx, img, x, baseY, bscale, alpha);
+
+    // A remembered (out-of-vision) building shows no live owner chip / HP bar:
+    // we are only recalling its position, not its current state.
+    if (memory) return;
 
     // owner marker: a small colored dot like units (skip on wreck), instead of
     // the old bar that looked like a health bar.

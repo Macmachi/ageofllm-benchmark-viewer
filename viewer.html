@@ -24,7 +24,7 @@
     <div class="topbar">
       <div class="brand">
         <a class="home-link" href="index.html" title="Back to leaderboard">⮜ Leaderboard</a>
-        <span class="bolt">⚡</span>
+        <img src="assets/images/Logo_rymentz_32px.png" alt="Rymentz" class="brand-logo" />
         <span class="title">Age of LLM</span>
         <span class="ver">Benchmark · v0.9.3</span>
         <span class="mid" id="match-id"></span>
@@ -146,7 +146,7 @@
             <tbody>
               <tr><td>☢ Nuclear</td><td>You launch, the enemy does not (same turn)</td><td>3 / 0</td></tr>
               <tr><td>⚔ Military</td><td>Enemy base reduced to 0 HP by tanks</td><td>3 / 0</td></tr>
-              <tr><td>📜 Ultimatum</td><td>Your ultimatum is accepted</td><td>3 / 0</td></tr>
+              <tr><td>📜 Ultimatum</td><td>Your ultimatum is accepted (the accepter gets 0.5 pt)</td><td>3 / 0.5</td></tr>
               <tr><td>🕊 Peace</td><td>A peace proposal is accepted</td><td>1 / 1</td></tr>
               <tr><td>⏳ Timeout</td><td>Turn limit reached, no winner</td><td>1 / 1</td></tr>
               <tr><td>☢☢ Mutual</td><td>Both launch the bomb the same turn</td><td>0 / 0</td></tr>
@@ -193,7 +193,7 @@
               <tr><td>💬 Message</td><td>always</td><td>Free text read by the opponent next turn</td></tr>
               <tr><td>🤝 Ceasefire</td><td>turn 10+</td><td>No attacks for 3 turns (+6☢ bomb penalty)</td></tr>
               <tr><td>🕊 Peace</td><td>turn 15+</td><td>Immediate draw if accepted</td></tr>
-              <tr><td>📜 Ultimatum</td><td>turn 10+</td><td>"Surrender by turn X" — if accepted, proposer wins</td></tr>
+              <tr><td>📜 Ultimatum</td><td>turn 10+</td><td>"Surrender by turn X" — if accepted, proposer wins (accepter gets 0.5 pt)</td></tr>
             </tbody>
           </table>
           <p class="lg-p lg-small">Proposals are <b>binding only if accepted</b>; a promise in a message is not.

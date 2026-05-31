@@ -54,6 +54,7 @@ Win by nuclear bomb or military conquest. Rankings by points (3 win / 1 draw / 0
 ### Ranking Points
 - **Win** = 3 pts
 - **Draw** = 1 pt
+- **Accepted ultimatum (the accepter/loser)** = 0.5 pt — a consolation so surrendering a lost position beats fighting on for 0
 - **Loss / Mutual Destruction** = 0 pts
 
 ---

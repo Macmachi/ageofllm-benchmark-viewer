@@ -180,6 +180,7 @@ const Player = (() => {
 
       // events this turn: which entities were destroyed (for ghost rendering)
       const destroyedUnits = new Map();
+      const destroyedBldgs = new Map();  // building id -> event (non-base, by a tank)
       const nukedBases = [];           // base buildings destroyed by the bomb
       const nukedOwners = new Set();   // players whose base was nuked this turn
       for (const e of turn.events || []) {
@@ -188,6 +189,12 @@ const Player = (() => {
                  && e.unit_type === 'base') {
           nukedBases.push(e);
           if (e.owner === 0 || e.owner === 1) nukedOwners.add(e.owner);
+        } else if (e.type === 'building_destroyed' && e.by !== 'nuke') {
+          // A non-base building (mine/silo) blown up by a tank is REMOVED from
+          // the end-of-turn snapshot, so we must synthesize a ghost to play its
+          // destruction in sync with the attack (otherwise the tank seems to
+          // fire at an empty cell).
+          destroyedBldgs.set(e.unit, e);
         }
       }
       // On the resolution frame, once the mushroom is blooming (animT past the
@@ -296,6 +303,30 @@ const Player = (() => {
         buildings.push({ ...b, _variant: variant, _state: bstate });
       }
 
+      // Ghost buildings: a mine/silo destroyed by a TANK this turn is gone from
+      // the end-of-turn snapshot. Re-inject it so it stands intact until the
+      // attack slice that destroys it, then plays its 'destroy' sprite during
+      // that slice's FX phase — keeping the tank's shot synced with the wreck
+      // (no more "firing at an empty cell").
+      const liveBldgIds = new Set(buildings.map((b) => b.id));
+      for (const [bid, ev] of destroyedBldgs) {
+        if (liveBldgIds.has(bid)) continue;
+        const info = this._lastKnownBuilding(bid);
+        if (!info) continue;
+        // Which slice destroyed it: the attack whose attacker == ev.by.
+        let di = n - 1;
+        acts.forEach((a, i) => { if (a.type === 'attack' && a.unit === ev.by) di = i; });
+        if (activeI > di) continue;                 // already gone after its slice
+        const dying = activeI === di && !inMove;     // play 'destroy' during FX
+        buildings.push({
+          id: bid, owner: ev.owner, type: ev.unit_type,
+          pos: info.pos, hp: dying ? 0 : (info.hp || 1),
+          _variant: Sprites.variantFor(bid),
+          _state: dying ? 'destroy' : (info.under_construction ? 'construct' : 'normal'),
+          _ghost: true,
+        });
+      }
+
       // ---- overlays ----
       const overlays = [];
       if (activeI >= 0) {
@@ -385,6 +416,17 @@ const Player = (() => {
 
     _unitAltitude(type) {
       return (type === 'drone' || type === 'fighter') ? 'air' : 'ground';
+    }
+
+    /** Last full snapshot of a building id, scanning prior turns backward. */
+    _lastKnownBuilding(bid) {
+      for (let i = this.idx; i >= 0; i--) {
+        const t = this.turns[i];
+        const b = (t.buildings || []).find((x) => x.id === bid);
+        if (b) return { pos: [b.pos[0], b.pos[1]], hp: b.hp,
+                        under_construction: !!b.under_construction };
+      }
+      return null;
     }
 
     /** Last position a unit id was seen at, scanning prior turns backward. */

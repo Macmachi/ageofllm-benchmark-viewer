@@ -120,6 +120,39 @@
       "winner": 0,
       "victory_type": "nuclear",
       "total_turns": 22
+    },
+    {
+      "match_id": "tournament_r3_Gemini_Pro_3.1_vs_Claude_Opus_4.8",
+      "date": "2026-05-31T16:57:00.551127+00:00",
+      "p1_model": "gemini-3.1-pro",
+      "p2_model": "claude-opus-4.8",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 21
+    },
+    {
+      "match_id": "tournament_r3_DeepSeek_V4_vs_Grok_4.3",
+      "date": "2026-05-31T17:32:20.057504+00:00",
+      "p1_model": "deepseek-v4-pro-e",
+      "p2_model": "grok-4.3",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 0,
+      "victory_type": "nuclear",
+      "total_turns": 17
+    },
+    {
+      "match_id": "tournament_r3_Qwen_3.7_vs_MiMo_2.5",
+      "date": "2026-05-31T18:41:02.286561+00:00",
+      "p1_model": "qwen3.7-max",
+      "p2_model": "mimo-v2.5-pro",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 19
     }
   ]
 }

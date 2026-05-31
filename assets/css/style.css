@@ -72,6 +72,10 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .viewer-root {
   position: relative;
   width: 100%; height: 100vh;
+  /* Use the dynamic viewport height on mobile so the bottom transport bar is
+     never hidden behind the browser's address bar (100vh overshoots on iOS /
+     Android; 100dvh tracks the actual visible area). */
+  height: 100dvh;
   overflow: hidden;
   background:
     radial-gradient(1200px 700px at 50% -10%, #131a24 0%, var(--bg) 60%);
@@ -91,6 +95,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .topbar > * { pointer-events: auto; }
 .brand { display: flex; align-items: center; gap: 9px; }
 .brand .bolt { color: var(--gold); font-size: 18px; }
+.brand .brand-logo { width: 24px; height: 24px; object-fit: contain; display: block; }
 .brand .title { font-weight: 700; letter-spacing: .5px; font-size: 15px; }
 .brand .ver {
   font-family: var(--mono); font-size: 9px; color: var(--text-faint);
@@ -296,18 +301,22 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   flex: 1 1 auto;  /* fill remaining panel height */
   min-height: 0;   /* allow shrink — critical for scroll to work inside flex */
   scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+  /* Long unbroken strings (URLs, JSON blobs in reasoning) must wrap inside the
+     panel instead of overflowing to the right (notably on mobile). */
+  overflow-wrap: anywhere; word-break: break-word;
 }
 .panel-body::-webkit-scrollbar { width: 6px; }
 .panel-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
 #reason-panel .reason-text {
   font-size: 13px; line-height: 1.55; color: #cdd7e2; white-space: pre-wrap;
+  overflow-wrap: anywhere; word-break: break-word;
 }
 #reason-panel .actions-row { margin-top: 9px; padding-top: 9px; border-top: 1px solid var(--border-soft); display: flex; flex-wrap: wrap; gap: 5px; }
 #reason-panel .discovered { margin-top: 8px; color: var(--uranium); font-size: 12px; display: flex; align-items: center; gap: 5px; }
 
 .diplo-log { display: flex; flex-direction: column; gap: 7px; }
-.diplo-item { font-size: 12px; border-radius: 5px; padding: 7px 9px; border-left: 3px solid; }
+.diplo-item { font-size: 12px; border-radius: 5px; padding: 7px 9px; border-left: 3px solid; overflow-wrap: anywhere; word-break: break-word; }
 .diplo-item.from0 { background: var(--p0-bg); border-color: var(--p0); }
 .diplo-item.from1 { background: var(--p1-bg); border-color: var(--p1); }
 .diplo-item.diplo-new { outline: 1px solid var(--amber); outline-offset: -1px; }
@@ -629,6 +638,9 @@ table.lb tbody tr.lb-archive-toggle td {
   .zoom-ctl { top: auto; bottom: 146px; right: 8px; flex-direction: row; }
   .zoom-ctl .zbtn { width: 36px; height: 34px; }
 
+  /* keep the transport bar clear of the mobile home-bar / safe area so it is
+     fully visible without scrolling */
+  .transport { padding: 10px 10px calc(10px + env(safe-area-inset-bottom)); }
   .transport-inner { width: 96vw; padding: 8px 10px; }
   .tbtn { width: 30px; height: 30px; font-size: 13px; }
   .tbtn.play { width: 36px; height: 36px; }
