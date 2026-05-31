@@ -604,6 +604,24 @@ table.lb tbody tr.lb-archive-toggle td {
   }
 }
 
+/* On any TOUCH width (phone + tablet portrait), an OPEN panel becomes a
+   full-screen overlay so its body fills the screen and text never gets clipped
+   by the right edge of a partial-width side panel. */
+@media (max-width: 900px) {
+  .dock {
+    width: 100vw; left: 0; right: 0;
+    top: 0; bottom: 0; max-height: 100vh;
+    flex-direction: column; flex-wrap: nowrap;
+    overflow: hidden; padding: 0;
+    z-index: 40;
+  }
+  .dock-left, .dock-right { left: 0; right: 0; }
+  .panel {
+    min-width: 0; width: 100vw; height: 100vh; max-height: 100vh;
+    border-radius: 0; border: none;
+  }
+}
+
 @media (max-width: 640px) {
   /* header wraps; brand title shrinks */
   .topbar { flex-wrap: wrap; gap: 6px; padding: 8px 10px; }
@@ -628,23 +646,6 @@ table.lb tbody tr.lb-archive-toggle td {
   .player-card.right .perf { flex-direction: row; justify-content: flex-start; }
   .player-card .bomb { margin-top: 5px; }
   .player-card .perf { font-size: 11px; }
-
-  /* On mobile, an OPEN panel becomes a full-screen overlay (reasoning, stats,
-     diplomacy, legend) instead of a small bottom sheet. The dock fills the
-     viewport; the panel inside stretches to fill it. Empty docks stay out of
-     the way (no pointer capture). */
-  .dock {
-    width: 100vw; left: 0; right: 0;
-    top: 0; bottom: 0; max-height: 100vh;
-    flex-direction: column; flex-wrap: nowrap;
-    overflow: hidden; padding: 0;
-    z-index: 40;
-  }
-  .dock-left, .dock-right { left: 0; right: 0; }
-  .panel {
-    min-width: 0; width: 100vw; height: 100vh; max-height: 100vh;
-    border-radius: 0; border: none;
-  }
   /* Sticky header so the close button is always reachable even after the
      panel body scrolls. Full-screen overlay starts at the very top of the
      screen, so the header must clear the device status bar / notch. */
