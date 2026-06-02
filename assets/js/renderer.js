@@ -60,22 +60,38 @@ const Renderer = (() => {
     return { cw, ch, dpr };
   }
 
-  // ---- terrain lookups (built once per replay) ----
+  // ---- terrain lookups ----
+  // Mountains & passages are fixed for the whole match (read from terrain once).
+  // Deposits now DEPLETE and respawn during a match, so they are read PER TURN
+  // from `turn.deposits` when present (falling back to the static terrain.deposits
+  // for older replays that predate per-turn deposit snapshots).
+  const tkey = (c, r) => c + ',' + r;
+
   function buildTerrainIndex(replay) {
-    const t = replay.terrain;
-    const key = (c, r) => c + ',' + r;
-    const mtn = new Set((t.mountains || []).map(([c, r]) => key(c, r)));
-    const pass = new Set((t.passages || []).map(([c, r]) => key(c, r)));
-    const dep = new Map();
-    for (const [c, r] of (t.deposits.credits || [])) dep.set(key(c, r), 'credits');
-    for (const [c, r] of (t.deposits.uranium || [])) dep.set(key(c, r), 'uranium');
-    for (const [c, r] of (t.deposits.uranium_central || [])) dep.set(key(c, r), 'uranium_central');
-    return { mtn, pass, dep, key };
+    const t = replay.terrain || {};
+    const mtn = new Set((t.mountains || []).map(([c, r]) => tkey(c, r)));
+    const pass = new Set((t.passages || []).map(([c, r]) => tkey(c, r)));
+    return { mtn, pass, key: tkey };
   }
   let _terrainCache = null, _terrainFor = null;
   function terrain(replay) {
     if (_terrainFor !== replay) { _terrainCache = buildTerrainIndex(replay); _terrainFor = replay; }
     return _terrainCache;
+  }
+
+  // Deposit map for the turn being shown: prefer the per-turn snapshot, fall back
+  // to the static terrain block. Cached on the (replay, turn) pair.
+  let _depCache = null, _depForReplay = null, _depForTurn = null;
+  function depositsFor(replay, turn) {
+    if (_depForReplay === replay && _depForTurn === turn && _depCache) return _depCache;
+    const src = (turn && turn.deposits) ? turn.deposits
+              : ((replay.terrain && replay.terrain.deposits) || {});
+    const dep = new Map();
+    for (const [c, r] of (src.credits || [])) dep.set(tkey(c, r), 'credits');
+    for (const [c, r] of (src.uranium || [])) dep.set(tkey(c, r), 'uranium');
+    for (const [c, r] of (src.uranium_central || [])) dep.set(tkey(c, r), 'uranium_central');
+    _depCache = dep; _depForReplay = replay; _depForTurn = turn;
+    return dep;
   }
 
   // ---- fog of war (true per-cell visibility) ----
@@ -166,6 +182,7 @@ const Renderer = (() => {
     applyCamera(v, cam, cw, ch);
     const T = terrain(replay);
     const turn = replay.turns[frame.turnIndex];
+    const dep = depositsFor(replay, turn);
     const fog = fogFor(view, replay, turn);
 
     // 1) TERRAIN — back to front (painter's order by col+row).
@@ -173,7 +190,7 @@ const Renderer = (() => {
       for (let c = 0; c < W; c++) {
         const r = s - c;
         if (r < 0 || r >= H) continue;
-        drawTile(ctx, c, r, v, T, fog);
+        drawTile(ctx, c, r, v, T, dep, fog);
       }
     }
 
@@ -219,12 +236,12 @@ const Renderer = (() => {
     }
   }
 
-  function drawTile(ctx, c, r, v, T, fog) {
+  function drawTile(ctx, c, r, v, T, depMap, fog) {
     const { x, y } = Iso.cellToScreen(c, r, v);
     const k = T.key(c, r);
     const isPass = T.pass.has(k);
     const isMtn = T.mtn.has(k);
-    const dep = T.dep.get(k);
+    const dep = depMap.get(k);
     const fogged = isFoggedCell(c, r, fog);
 
     // A fogged cell that holds a remembered enemy building is rendered as a

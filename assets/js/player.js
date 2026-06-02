@@ -181,6 +181,7 @@ const Player = (() => {
       // events this turn: which entities were destroyed (for ghost rendering)
       const destroyedUnits = new Map();
       const destroyedBldgs = new Map();  // building id -> event (non-base, by a tank)
+      const damagedBldgs = new Map();    // building id -> event (hit but survived)
       const nukedBases = [];           // base buildings destroyed by the bomb
       const nukedOwners = new Set();   // players whose base was nuked this turn
       for (const e of turn.events || []) {
@@ -195,6 +196,12 @@ const Player = (() => {
           // destruction in sync with the attack (otherwise the tank seems to
           // fire at an empty cell).
           destroyedBldgs.set(e.unit, e);
+        } else if (e.type === 'building_damaged') {
+          // A building HIT this turn but NOT destroyed: the end-of-turn snapshot
+          // already shows its reduced HP, so naively it would look 'damaged' from
+          // the very start of the turn. Record the event (with the attacker) so we
+          // can delay the damaged sprite until the attack slice that caused it.
+          damagedBldgs.set(e.unit, e);
         }
       }
       // On the resolution frame, once the mushroom is blooming (animT past the
@@ -296,7 +303,19 @@ const Player = (() => {
           // always shown as 'construct' on the very turn it was placed.
           bstate = 'construct';
         } else if (this._isDamaged(b)) {
-          bstate = 'damage';
+          // If this building was DAMAGED by an attack THIS turn, hold its pre-hit
+          // (normal) look until the attack slice resolves, so the damage sprite
+          // appears in sync with the shot rather than from the turn's first frame.
+          const dmgEv = damagedBldgs.get(b.id);
+          if (dmgEv) {
+            let di = n - 1;
+            acts.forEach((a, i) => {
+              if (a.type === 'attack' && a.unit === dmgEv.by) di = i;
+            });
+            bstate = (activeI > di || (activeI === di && !inMove)) ? 'damage' : 'normal';
+          } else {
+            bstate = 'damage';
+          }
         } else {
           bstate = 'normal';
         }

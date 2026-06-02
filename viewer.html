@@ -26,13 +26,17 @@
         <a class="home-link" href="index.html" title="Back to leaderboard">⮜ Leaderboard</a>
         <img src="assets/images/Logo_rymentz_32px.png" alt="Rymentz" class="brand-logo" />
         <span class="title">Age of LLM</span>
-        <span class="ver">Benchmark · v0.9.4</span>
+        <span class="ver">Benchmark · v0.10.0</span>
         <span class="mid" id="match-id"></span>
       </div>
-      <div class="view-toggle" id="view-toggle">
-        <button class="btn active" data-view="spectator">👁 Spectator</button>
-        <button class="btn" data-view="p0">Player 1</button>
-        <button class="btn" data-view="p1">Player 2</button>
+      <div class="topbar-right">
+        <a class="present-link" href="https://youtu.be/Ec-CV1uzyVY" target="_blank" rel="noopener"
+           title="Watch the presentation video">▶ Presentation <span class="ext-ico" aria-hidden="true">↗</span></a>
+        <div class="view-toggle" id="view-toggle">
+          <button class="btn active" data-view="spectator">👁 Spectator</button>
+          <button class="btn" data-view="p0">Player 1</button>
+          <button class="btn" data-view="p1">Player 2</button>
+        </div>
       </div>
     </div>
 
@@ -164,22 +168,28 @@
             </tbody>
           </table>
           <p class="lg-p lg-small">Triangle: Fighter &gt; Tank/Drone/Fighter · Tank &gt; SAM/Tank/buildings ·
-          SAM &gt; air units. Only the Tank can hit buildings (2 HP/hit). Attacker survives (mirror rule).</p>
+          SAM &gt; air units. Only the Tank can hit buildings (2 HP/hit). Attacker survives (mirror rule).
+          <b>Line of sight:</b> a ground attack (tank/sam) is blocked by a <b>mountain or building</b>
+          between shooter and target — flank around cover. The fighter (air) ignores obstacles.</p>
 
           <div class="lg-sec">Buildings <span class="lg-hint">(have HP)</span></div>
           <table class="lg-table">
             <thead><tr><th>Building</th><th>Cost</th><th>HP</th><th>Effect</th></tr></thead>
             <tbody>
               <tr><td>🏛 Base</td><td>—</td><td>8</td><td>produces units</td></tr>
-              <tr><td>⛏ Credit mine (oil)</td><td>1◆</td><td>2</td><td>+3◆/turn</td></tr>
-              <tr><td>☢ Uranium mine</td><td>1◆</td><td>2</td><td>+1☢/turn</td></tr>
-              <tr><td>☢ Central mine</td><td>2◆</td><td>3</td><td>+1☢/turn (6,3)</td></tr>
+              <tr><td>⛏ Credit mine (oil)</td><td>2◆</td><td>2</td><td>+3◆/turn</td></tr>
+              <tr><td>☢ Uranium mine</td><td>2◆</td><td>2</td><td>+1☢/turn</td></tr>
+              <tr><td>☢ Central mine</td><td>3◆</td><td>3</td><td>+1☢/turn (col 6)</td></tr>
               <tr><td>🏗 Silo</td><td>5◆</td><td>3</td><td>required for the bomb</td></tr>
             </tbody>
           </table>
           <p class="lg-p lg-small">Construction: operational on the <b>next turn</b>. Under construction =
           no effect + destroyed in <b>1 hit</b>. You can only build on a <b>visible</b>, free cell.
-          One building per cell; cells <b>adjacent to a base</b> are reserved for unit spawning.</p>
+          One building per cell; cells <b>adjacent to a base</b> are reserved for unit spawning.
+          <b>Mines</b> can go on any free matching deposit you see — incl. the enemy's side (no instant
+          capture: destroy the enemy mine or wait for its deposit to run dry, then claim it); the
+          <b>silo</b> stays own-territory only. <b>Deposits deplete:</b> a drained deposit removes its
+          mine and respawns elsewhere on the same side (central on column 6).</p>
 
           <div class="lg-sec">Nuclear bomb</div>
           <p class="lg-p lg-small">Cost 25☢ (drops after T40, floor 13). Requires an operational silo +
@@ -200,11 +210,14 @@
           During a ceasefire, attacks are forbidden but launching the bomb is still allowed (with a penalty).</p>
 
           <div class="lg-sec">Map</div>
+          <p class="lg-p lg-small">The central barrier (column 6), the in-territory mountains and all
+          deposit positions are <b>seed-driven</b> — they differ every match. Mountains block ground
+          movement, construction <b>and line of sight</b> for ground attacks (air flies over).</p>
           <div class="legend-grid">
             <div class="li"><span class="sw" style="background:var(--gold)"></span>Credit deposit (oil)</div>
             <div class="li"><span class="sw" style="background:var(--uranium)"></span>Uranium deposit</div>
             <div class="li"><span class="sw" style="background:var(--accent)"></span>Central uranium</div>
-            <div class="li"><span class="sw" style="background:#4a5568"></span>Mountain (impassable)</div>
+            <div class="li"><span class="sw" style="background:#4a5568"></span>Mountain (blocks move/LOS)</div>
             <div class="li"><span class="sw dot" style="background:var(--p0)"></span>Player 1</div>
             <div class="li"><span class="sw dot" style="background:var(--p1)"></span>Player 2</div>
           </div>
@@ -258,8 +271,10 @@
     </div>
 
     <footer class="viewer-footer">
+      <a class="foot-link" href="https://youtu.be/Ec-CV1uzyVY" target="_blank" rel="noopener" title="Presentation video">▶ Presentation ↗</a>
+      <a class="foot-link" href="https://github.com/Macmachi/ageofllm-benchmark-viewer" target="_blank" rel="noopener" title="Star on GitHub">⭐ Star on GitHub</a>
+      <a class="foot-link" href="https://x.com/ageofllm" target="_blank" rel="noopener" title="Follow on X — know when new models are tested">𝕏 Follow @ageofllm</a>
       <a class="foot-link" href="https://www.youtube.com/@AgeofLLM" target="_blank" rel="noopener" title="YouTube">▶ YouTube</a>
-      <a class="foot-link" href="https://x.com/ageofllm" target="_blank" rel="noopener" title="X">𝕏 @ageofllm</a>
       <span class="foot-copy">© Rymentz 2026</span>
     </footer>
   </div>

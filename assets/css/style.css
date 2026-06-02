@@ -103,6 +103,15 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   opacity: .8;
 }
 .brand .mid { font-family: var(--mono); font-size: 11px; color: var(--text-faint); }
+.topbar-right { display: flex; align-items: center; gap: 10px; }
+.present-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 12px; font-weight: 700; color: var(--gold);
+  border: 1px solid var(--gold); border-radius: 5px; padding: 5px 10px;
+  text-decoration: none; white-space: nowrap; transition: background .15s, color .15s;
+}
+.present-link:hover { background: var(--gold); color: #06121f; }
+.present-link .ext-ico { font-size: 11px; opacity: .85; }
 .view-toggle { display: flex; gap: 4px; }
 .view-toggle .btn { padding: 6px 10px; font-size: 12px; }
 .view-toggle .btn.active[data-view="spectator"] { background: #3a4654; color: #fff; }
@@ -439,7 +448,24 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   border: 1px solid var(--border-soft); border-radius: 4px; padding: 2px 6px;
   align-self: center;
 }
-.lb-sub { color: var(--text-dim); font-size: 14px; margin-bottom: 28px; }
+.lb-header .present-link { margin-left: auto; }
+.lb-sub { color: var(--text-dim); font-size: 14px; margin-bottom: 16px; }
+
+/* Call-to-action row: star + follow on X */
+.lb-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 28px; }
+.cta-btn {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 13px; font-weight: 700; text-decoration: none;
+  border-radius: 6px; padding: 8px 14px; transition: background .15s, color .15s, border-color .15s;
+}
+.cta-btn.star { color: var(--gold); border: 1px solid var(--gold); }
+.cta-btn.star:hover { background: var(--gold); color: #06121f; }
+.cta-btn.xfollow { color: var(--text); border: 1px solid var(--border); background: var(--panel-solid); }
+.cta-btn.xfollow:hover { border-color: var(--text); }
+@media (max-width: 640px) {
+  .lb-header .present-link { margin-left: 0; }
+  .cta-btn { font-size: 12px; padding: 7px 11px; }
+}
 
 .lb-section-title { font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-faint); margin: 30px 0 12px; }
 
