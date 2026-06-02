@@ -153,6 +153,28 @@
       "winner": 1,
       "victory_type": "nuclear",
       "total_turns": 19
+    },
+    {
+      "match_id": "tournament_r1_MiMo_2.5_vs_MiniMax_M3",
+      "date": "2026-06-02T20:19:12.003108+00:00",
+      "p1_model": "mimo-v2.5-pro",
+      "p2_model": "minimax-m3",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 17
+    },
+    {
+      "match_id": "tournament_r1_DeepSeek_V4_vs_Gemini_Flash_3.5",
+      "date": "2026-06-02T21:33:42.671895+00:00",
+      "p1_model": "deepseek-v4-pro-e",
+      "p2_model": "gemini-3.5-flash",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 20
     }
   ]
 }
