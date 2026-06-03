@@ -424,8 +424,8 @@ const Player = (() => {
 
     /** Max HP per building type (mirrors engine BUILDING_STATS). */
     _maxHp(type) {
-      return { base: 8, silo: 3, credit_mine: 2, uranium_mine: 2,
-               uranium_mine_central: 3 }[type] || 8;
+      return { base: 4, silo: 3, credit_mine: 2, uranium_mine: 2,
+               uranium_mine_central: 3 }[type] || 4;
     }
 
     _isDamaged(b) {

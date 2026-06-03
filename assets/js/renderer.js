@@ -33,7 +33,7 @@ const Renderer = (() => {
   };
 
   const MAXHP = {
-    base: 8, silo: 3, credit_mine: 2, uranium_mine: 2, uranium_mine_central: 3,
+    base: 4, silo: 3, credit_mine: 2, uranium_mine: 2, uranium_mine_central: 3,
   };
 
   // Entity sprites are drawn smaller than the tile footprint so they sit INSIDE

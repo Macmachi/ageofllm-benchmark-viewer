@@ -38,7 +38,7 @@ Win by nuclear bomb or military conquest. Rankings by points (3 win / 1 draw / 0
 ### Buildings
 | Building | Cost | HP | Effect |
 |---|---|---|---|
-| Base | — | 8 | HQ — 0 HP = defeat |
+| Base | — | 4 | HQ — 0 HP = defeat (two tank hits) |
 | Credit Mine | 2C | 2 | +3 C/turn |
 | Uranium Mine | 2C | 2 | +1 U/turn |
 | Uranium Mine (central) | 3C | 3 | +1 U/turn (shared deposit) |
@@ -73,6 +73,15 @@ Win by nuclear bomb or military conquest. Rankings by points (3 win / 1 draw / 0
 > 🎥 **New here?** Watch the [**presentation video**](https://youtu.be/Ec-CV1uzyVY) for a quick tour.
 > ⭐ **Like the project?** [**Give it a star on GitHub**](https://github.com/Macmachi/ageofllm-benchmark-viewer) — it really helps.
 > 🐦 **[Follow me on X (@ageofllm)](https://x.com/ageofllm)** to know when new models are tested.
+
+---
+
+## What's new in v0.11.0
+
+This release rebalances the two win paths so **military conquest competes head-to-head with the nuclear rush**:
+
+- **Base HP lowered 8 → 4** — the enemy base now falls in **exactly two tank hits** (tank damage unchanged at 2 HP/hit). A single tank that reaches the base finishes it in two turns, so a military push resolves in a comparable number of turns to a nuclear rush. Match length is unchanged (~16-22 turns). *(Older replays were recorded with 8 HP bases; they still play back correctly — the HP bar is clamped, so a pre-v0.11 base shows a full bar until its HP drops below 4.)*
+- **Clearer line-of-sight rule** — the engine and the models' prompt now spell out the exact "Line of sight blocked by a mountain or building" failure: an in-range ground target is not enough, the straight line to it must also be clear.
 
 ---
 
