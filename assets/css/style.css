@@ -97,6 +97,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .brand .bolt { color: var(--gold); font-size: 18px; }
 .brand .brand-logo { width: 24px; height: 24px; object-fit: contain; display: block; }
 .brand .title { font-weight: 700; letter-spacing: .5px; font-size: 15px; }
+.brand .title .lb-tag { color: var(--text-faint); font-weight: 600; }
 .brand .ver {
   font-family: var(--mono); font-size: 9px; color: var(--text-faint);
   border: 1px solid var(--border-soft); border-radius: 3px; padding: 1px 4px;
