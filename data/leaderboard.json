@@ -1,9 +1,10 @@
 {
-  "generated_at": "2026-06-05T23:48:38.246249+00:00",
+  "generated_at": "2026-06-05T23:58:16.294063+00:00",
   "engine_version": "0.11.0",
   "models": [
     {
       "model": "gpt-5.5",
+      "display_name": "GPT-5.5",
       "reasoning_effort": "high",
       "wins": 5,
       "losses": 0,
@@ -30,6 +31,7 @@
     },
     {
       "model": "minimax-m3",
+      "display_name": "MiniMax M3",
       "reasoning_effort": "high",
       "wins": 3,
       "losses": 1,
@@ -56,6 +58,7 @@
     },
     {
       "model": "claude-opus-4.8",
+      "display_name": "Claude Opus 4.8",
       "reasoning_effort": "high",
       "wins": 3,
       "losses": 2,
@@ -82,6 +85,7 @@
     },
     {
       "model": "gemini-3.5-flash",
+      "display_name": "Gemini Flash 3.5",
       "reasoning_effort": "high",
       "wins": 3,
       "losses": 2,
@@ -108,6 +112,7 @@
     },
     {
       "model": "deepseek-v4-pro-e",
+      "display_name": "DeepSeek V4",
       "reasoning_effort": "high",
       "wins": 4,
       "losses": 4,
@@ -134,6 +139,7 @@
     },
     {
       "model": "gemini-3.1-pro",
+      "display_name": "Gemini Pro 3.1",
       "reasoning_effort": "high",
       "wins": 1,
       "losses": 2,
@@ -160,6 +166,7 @@
     },
     {
       "model": "qwen3.7-max",
+      "display_name": "Qwen 3.7",
       "reasoning_effort": "high",
       "wins": 1,
       "losses": 2,
@@ -186,6 +193,7 @@
     },
     {
       "model": "zai-org-glm-5-1",
+      "display_name": "GLM 5.1",
       "reasoning_effort": "off",
       "wins": 0,
       "losses": 0,
@@ -198,10 +206,10 @@
       "military_wins": 0,
       "diplomatic_wins": 0,
       "mutual_destructions": 0,
-      "avg_think_ms": 419017.7,
-      "avg_tokens_per_turn": 9193.0,
+      "avg_think_ms": 393230.5,
+      "avg_tokens_per_turn": 9368.2,
       "invalid_actions": 2,
-      "invalid_action_rate": 0.1,
+      "invalid_action_rate": 0.087,
       "total_cost_usd": 0.0,
       "avg_cost_per_match": 0.0,
       "retries_timeout": 0,
@@ -212,6 +220,7 @@
     },
     {
       "model": "gemini-3.5-flash",
+      "display_name": "Gemini Flash 3.5",
       "reasoning_effort": "off",
       "wins": 0,
       "losses": 0,
@@ -224,20 +233,21 @@
       "military_wins": 0,
       "diplomatic_wins": 0,
       "mutual_destructions": 0,
-      "avg_think_ms": 43460.0,
-      "avg_tokens_per_turn": 13149.4,
+      "avg_think_ms": 60910.9,
+      "avg_tokens_per_turn": 17136.8,
       "invalid_actions": 0,
       "invalid_action_rate": 0.0,
       "total_cost_usd": 0.0,
       "avg_cost_per_match": 0.0,
       "retries_timeout": 0,
       "retries_api_error": 0,
-      "retries_malformed": 0,
-      "retries_total": 0,
+      "retries_malformed": 1,
+      "retries_total": 1,
       "archived": false
     },
     {
       "model": "mimo-v2.5-pro",
+      "display_name": "MiMo 2.5 Pro",
       "reasoning_effort": "high",
       "wins": 2,
       "losses": 5,
@@ -264,6 +274,7 @@
     },
     {
       "model": "grok-4.3",
+      "display_name": "Grok 4.3",
       "reasoning_effort": "high",
       "wins": 0,
       "losses": 3,
@@ -290,6 +301,7 @@
     },
     {
       "model": "nvidia-nemotron-3-ultra-550b-a55b",
+      "display_name": "Nvidia Nematron 3 Ultra",
       "reasoning_effort": "high",
       "wins": 0,
       "losses": 1,
