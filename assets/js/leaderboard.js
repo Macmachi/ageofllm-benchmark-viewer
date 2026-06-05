@@ -8,6 +8,29 @@
 (function () {
   'use strict';
 
+  // Country flag emoji per model ID.
+  // Add new entries here when new models are benchmarked.
+  const MODEL_FLAGS = {
+    // 🇺🇸 United States
+    'gpt-5.5':                          '🇺🇸',
+    'claude-opus-4.8':                  '🇺🇸',
+    'gemini-3.5-flash':                 '🇺🇸',
+    'gemini-3.1-pro':                   '🇺🇸',
+    'grok-4.3':                         '🇺🇸',
+    'nvidia-nemotron-3-ultra-550b-a55b': '🇺🇸',
+    // 🇨🇳 China
+    'deepseek-v4-pro-e':                '🇨🇳',
+    'mimo-v2.5-pro':                    '🇨🇳',
+    'qwen3.7-max':                      '🇨🇳',
+    'minimax-m3':                       '🇨🇳',
+    'kimi-k2.6':                        '🇨🇳',
+    'zai-org-glm-5-1':                  '🇨🇳',
+  };
+
+  function modelFlag(modelId) {
+    return MODEL_FLAGS[modelId] ? MODEL_FLAGS[modelId] + ' ' : '';
+  }
+
   const VT_LABEL = {
     nuclear: 'Nuclear', military: 'Military', ultimatum: 'Ultimatum',
     peace: 'Peace', mutual_destruction: 'Mutual destr.', timeout: 'Timeout',
@@ -143,7 +166,7 @@
           : '';
       tr.innerHTML =
         rankCell +
-        `<td><div class="model-name">${esc(m.model)} ${effortBadge(m.reasoning_effort)}${tag}</div>` +
+        `<td><div class="model-name">${modelFlag(m.model)}${esc(m.model)} ${effortBadge(m.reasoning_effort)}${tag}</div>` +
         `<div class="wr-bar"><span style="width:${wr}%"></span></div></td>` +
         `<td class="num"><strong>${ppm}</strong></td>` +
         `<td class="num">${m.points || 0}</td>` +
@@ -152,14 +175,14 @@
         `<td class="num">${m.losses}</td>` +
         `<td class="num">${m.draws}</td>` +
         `<td class="num">${m.total}</td>` +
-        `<td class="num">${m.nuclear_wins}</td>` +
-        `<td class="num">${m.military_wins}</td>` +
-        `<td class="num">${m.diplomatic_wins || 0}</td>` +
-        `<td class="num">${m.mutual_destructions}</td>` +
         `<td class="num">${fmtMs(m.avg_think_ms)}</td>` +
         `<td class="num">${fmtTok(m.avg_tokens_per_turn)}</td>` +
         `<td class="num">${fmtUsd(m.avg_cost_per_match)}</td>` +
-        `<td class="num">${fmtRate(m.invalid_action_rate)}</td>`;
+        `<td class="num">${fmtRate(m.invalid_action_rate)}</td>` +
+        `<td class="num">${m.nuclear_wins}</td>` +
+        `<td class="num">${m.military_wins}</td>` +
+        `<td class="num">${m.diplomatic_wins || 0}</td>` +
+        `<td class="num">${m.mutual_destructions}</td>`;
       return tr;
     };
 
@@ -233,8 +256,8 @@
       const winLabel = r.winner === 0 ? r.p1_model : r.winner === 1 ? r.p2_model : 'Draw';
       a.innerHTML =
         `<div class="mc-top"><span class="mc-id">${esc(r.match_id)}</span></div>` +
-        `<div class="mc-vs"><span class="tag-p0">${esc(r.p1_model)} ${effortBadge(r.p1_reasoning_effort)}</span>` +
-        `<span class="vs">vs</span><span class="tag-p1">${esc(r.p2_model)} ${effortBadge(r.p2_reasoning_effort)}</span></div>` +
+        `<div class="mc-vs"><span class="tag-p0">${modelFlag(r.p1_model)}${esc(r.p1_model)} ${effortBadge(r.p1_reasoning_effort)}</span>` +
+        `<span class="vs">vs</span><span class="tag-p1">${modelFlag(r.p2_model)}${esc(r.p2_model)} ${effortBadge(r.p2_reasoning_effort)}</span></div>` +
         `<div class="mc-foot"><span>${formatDate(r.date)}</span>` +
         `<span>🏆 ${esc(winLabel)} · <span class="vt vt-${vt}">${VT_LABEL[vt] || vt}</span> · ${r.total_turns} turns</span></div>`;
       wrap.appendChild(a);
