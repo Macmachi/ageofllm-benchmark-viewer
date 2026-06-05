@@ -219,6 +219,39 @@
       "winner": 1,
       "victory_type": "nuclear",
       "total_turns": 19
+    },
+    {
+      "match_id": "tournament_r1_MiMo_2.5_Pro_vs_DeepSeek_V4",
+      "date": "2026-06-05T22:34:29.758874+00:00",
+      "p1_model": "mimo-v2.5-pro",
+      "p2_model": "deepseek-v4-pro-e",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 18
+    },
+    {
+      "match_id": "tournament_r1_Nvidia_Nemotron_3_Ultra_vs_Claude_Opus_4.8",
+      "date": "2026-06-05T22:52:27.669460+00:00",
+      "p1_model": "nvidia-nemotron-3-ultra-550b-a55b",
+      "p2_model": "claude-opus-4.8",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 16
+    },
+    {
+      "match_id": "tournament_r1_GLM_5.1_vs_Gemini_Flash_3.5",
+      "date": "2026-06-05T23:46:25.209408+00:00",
+      "p1_model": "zai-org-glm-5-1",
+      "p2_model": "gemini-3.5-flash",
+      "p1_reasoning_effort": "off",
+      "p2_reasoning_effort": "off",
+      "winner": -1,
+      "victory_type": "in_progress",
+      "total_turns": 7
     }
   ]
 }
