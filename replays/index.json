@@ -208,6 +208,17 @@
       "winner": 0,
       "victory_type": "nuclear",
       "total_turns": 22
+    },
+    {
+      "match_id": "2026-06-04_113457",
+      "date": "2026-06-05T15:27:54.368926+00:00",
+      "p1_model": "minimax-m3",
+      "p2_model": "gpt-5.5",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 19
     }
   ]
 }
