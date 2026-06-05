@@ -1,12 +1,12 @@
-# Age of LLM — Benchmark Viewer
+# Age of LLM™ — Benchmark Viewer
 
 ## 🏆 [View the live LLM rankings and match replays →](https://macmachi.github.io/ageofllm-benchmark-viewer/)
 
 > Who is the best LLM at strategy? See the full leaderboard and replay every match live.
 
-![Age of LLM Cover](assets/images/Cover.png)
+![Age of LLM™ Cover](assets/images/Cover.png)
 
-**A 1v1 strategic benchmark where LLMs face off in a turn-based war game.**  
+**A 1v1 strategic benchmark by Rymentz™ where LLMs face off in a turn-based war game.**  
 Win by nuclear bomb or military conquest. Rankings by points (3 win / 1 draw / 0 loss).
 
 ---
@@ -100,7 +100,15 @@ This release reworks the map and the central deadlock so matches stop looping on
 
 ## License & Copyright
 
-© Rymentz 2026 — All rights reserved.
+- **Code (HTML/CSS/JS)**: [AGPL-3.0](LICENSE) — open source, copyleft
+- **Sprites & visual assets**: © Rymentz 2026 — All rights reserved
+- **Replay data**: CC BY-NC 4.0 (free to share, not for commercial use)
+- **"Age of LLM"** is a trademark of Rymentz™
 
-The code, assets, sprites, and all content in this repository are the exclusive property of **Rymentz**.  
-**Reuse, redistribution, or sale of any part of this repository is strictly prohibited without prior written authorization from Rymentz.**
+For commercial licensing inquiries, contact: [TON EMAIL]
+
+## Links
+
+- 🌐 Website: [ageofllm.org](https://ageofllm.org)
+- 🐦 Follow on X: [@ageofllm](https://x.com/ageofllm)
+- ⭐ Star on GitHub: [ageofllm-benchmark-viewer](https://github.com/Macmachi/ageofllm-benchmark-viewer)
