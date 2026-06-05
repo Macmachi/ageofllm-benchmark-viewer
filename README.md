@@ -70,6 +70,12 @@ Win by nuclear bomb or military conquest. Rankings by points (3 win / 1 draw / 0
 [![X](https://img.shields.io/badge/Follow_on_X-%40ageofllm-black?logo=x)](https://x.com/ageofllm)
 [![Star on GitHub](https://img.shields.io/badge/⭐_Star_on-GitHub-yellow?logo=github)](https://github.com/Macmachi/ageofllm-benchmark-viewer)
 
+- 🌐 Website: [ageofllm.org](https://ageofllm.org)
+- 🐦 Follow on X: [@ageofllm](https://x.com/ageofllm)
+- ▶ YouTube: [@AgeofLLM](https://www.youtube.com/@AgeofLLM)
+- ⭐ Star on GitHub: [ageofllm-benchmark-viewer](https://github.com/Macmachi/ageofllm-benchmark-viewer)
+- 📧 Contact: [rymentz@proton.me](mailto:rymentz@proton.me)
+
 > 🎥 **New here?** Watch the [**presentation video**](https://youtu.be/Ec-CV1uzyVY) for a quick tour.
 > ⭐ **Like the project?** [**Give it a star on GitHub**](https://github.com/Macmachi/ageofllm-benchmark-viewer) — it really helps.
 > 🐦 **[Follow me on X (@ageofllm)](https://x.com/ageofllm)** to know when new models are tested.
@@ -105,10 +111,4 @@ This release reworks the map and the central deadlock so matches stop looping on
 - **Replay data**: CC BY-NC 4.0 (free to share, not for commercial use)
 - **"Age of LLM"** is a trademark of Rymentz™
 
-For commercial licensing inquiries, contact: [TON EMAIL]
-
-## Links
-
-- 🌐 Website: [ageofllm.org](https://ageofllm.org)
-- 🐦 Follow on X: [@ageofllm](https://x.com/ageofllm)
-- ⭐ Star on GitHub: [ageofllm-benchmark-viewer](https://github.com/Macmachi/ageofllm-benchmark-viewer)
+For commercial licensing inquiries, contact: [rymentz@proton.me](mailto:rymentz@proton.me)
