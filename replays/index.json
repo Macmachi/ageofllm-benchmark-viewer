@@ -57,7 +57,7 @@
       "date": "2026-05-31T04:22:42.639935+00:00",
       "p1_model": "qwen3.7-max",
       "p2_model": "deepseek-v4-pro-e",
-      "p1_display_name": "Qwen 3.7",
+      "p1_display_name": "Qwen 3.7 Max",
       "p2_display_name": "DeepSeek V4",
       "p1_reasoning_effort": "high",
       "p2_reasoning_effort": "high",
@@ -123,7 +123,7 @@
       "p1_model": "grok-4.3",
       "p2_model": "qwen3.7-max",
       "p1_display_name": "Grok 4.3",
-      "p2_display_name": "Qwen 3.7",
+      "p2_display_name": "Qwen 3.7 Max",
       "p1_reasoning_effort": "high",
       "p2_reasoning_effort": "high",
       "winner": 1,
@@ -174,7 +174,7 @@
       "date": "2026-05-31T18:41:02.286561+00:00",
       "p1_model": "qwen3.7-max",
       "p2_model": "mimo-v2.5-pro",
-      "p1_display_name": "Qwen 3.7",
+      "p1_display_name": "Qwen 3.7 Max",
       "p2_display_name": "MiMo 2.5 Pro",
       "p1_reasoning_effort": "high",
       "p2_reasoning_effort": "high",
@@ -285,6 +285,19 @@
       "winner": 1,
       "victory_type": "nuclear",
       "total_turns": 16
+    },
+    {
+      "match_id": "tournament_r1_GLM_5.1_vs_Gemini_Flash_3.5",
+      "date": "2026-06-06T00:16:00.247641+00:00",
+      "p1_model": "zai-org-glm-5-1",
+      "p2_model": "gemini-3.5-flash",
+      "p1_display_name": "GLM 5.1",
+      "p2_display_name": "Gemini Flash 3.5",
+      "p1_reasoning_effort": "off",
+      "p2_reasoning_effort": "off",
+      "winner": -1,
+      "victory_type": "in_progress",
+      "total_turns": 9
     }
   ]
 }

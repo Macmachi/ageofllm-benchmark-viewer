@@ -549,10 +549,9 @@ table.lb tbody tr.lb-archive-toggle td {
 }
 .match-card:hover { border-color: #3a4654; transform: translateY(-2px); box-shadow: 0 8px 24px -10px rgba(0,0,0,0.6); }
 .match-card .mc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px; }
-.match-card .mc-id { font-family: var(--mono); font-size: 11px; color: var(--text-faint); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
-.match-card .mc-vs { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; min-width: 0; }
-.match-card .mc-vs .tag-p0, .match-card .mc-vs .tag-p1 { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; flex: 1; }
-.match-card .mc-vs .vs { color: var(--text-faint); font-size: 11px; flex-shrink: 0; }
+.match-card .mc-id { font-family: var(--mono); font-size: 11px; color: var(--text-faint); word-break: break-all; }
+.match-card .mc-vs { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; flex-wrap: wrap; }
+.match-card .mc-vs .vs { color: var(--text-faint); font-size: 11px; }
 .match-card .mc-foot { display: flex; justify-content: space-between; margin-top: 10px; font-size: 12px; color: var(--text-dim); flex-wrap: wrap; gap: 4px; }
 .vt { padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
 .vt-nuclear { background: rgba(224,168,46,0.16); color: var(--amber); }
