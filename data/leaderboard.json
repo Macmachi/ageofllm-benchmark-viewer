@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-06T18:24:53.350368+00:00",
+  "generated_at": "2026-06-06T19:54:39.329976+00:00",
   "engine_version": "0.11.0",
   "models": [
     {
@@ -27,7 +27,8 @@
       "retries_api_error": 0,
       "retries_malformed": 0,
       "retries_total": 4,
-      "archived": false
+      "archived": false,
+      "avg_win_turns": 19.0
     },
     {
       "model": "minimax-m3",
@@ -54,7 +55,8 @@
       "retries_api_error": 0,
       "retries_malformed": 2,
       "retries_total": 21,
-      "archived": false
+      "archived": false,
+      "avg_win_turns": 19.33
     },
     {
       "model": "claude-opus-4.8",
@@ -81,7 +83,8 @@
       "retries_api_error": 0,
       "retries_malformed": 0,
       "retries_total": 0,
-      "archived": false
+      "archived": false,
+      "avg_win_turns": 17.67
     },
     {
       "model": "gemini-3.5-flash",
@@ -108,7 +111,8 @@
       "retries_api_error": 0,
       "retries_malformed": 1,
       "retries_total": 1,
-      "archived": false
+      "archived": false,
+      "avg_win_turns": 18.33
     },
     {
       "model": "deepseek-v4-pro-e",
@@ -135,7 +139,8 @@
       "retries_api_error": 2,
       "retries_malformed": 0,
       "retries_total": 3,
-      "archived": false
+      "archived": false,
+      "avg_win_turns": 17.75
     },
     {
       "model": "gemini-3.1-pro",
@@ -162,7 +167,8 @@
       "retries_api_error": 0,
       "retries_malformed": 0,
       "retries_total": 0,
-      "archived": false
+      "archived": false,
+      "avg_win_turns": 18.0
     },
     {
       "model": "qwen3.7-max",
@@ -189,7 +195,8 @@
       "retries_api_error": 1,
       "retries_malformed": 0,
       "retries_total": 1,
-      "archived": false
+      "archived": false,
+      "avg_win_turns": 19.0
     },
     {
       "model": "mimo-v2.5-pro",
@@ -216,7 +223,8 @@
       "retries_api_error": 6,
       "retries_malformed": 3,
       "retries_total": 23,
-      "archived": false
+      "archived": false,
+      "avg_win_turns": 18.0
     },
     {
       "model": "grok-4.3",
@@ -243,7 +251,8 @@
       "retries_api_error": 0,
       "retries_malformed": 0,
       "retries_total": 0,
-      "archived": false
+      "archived": false,
+      "avg_win_turns": null
     },
     {
       "model": "nvidia-nemotron-3-ultra-550b-a55b",
@@ -270,7 +279,8 @@
       "retries_api_error": 0,
       "retries_malformed": 0,
       "retries_total": 0,
-      "archived": false
+      "archived": false,
+      "avg_win_turns": null
     }
   ]
 }
