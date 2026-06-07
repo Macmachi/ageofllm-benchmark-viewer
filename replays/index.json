@@ -363,6 +363,19 @@
       "winner": 1,
       "victory_type": "ultimatum",
       "total_turns": 19
+    },
+    {
+      "match_id": "glm-5.1-fw_vs_grok-4.3_2026-06-07_181219",
+      "date": "2026-06-07T16:21:15.577640+00:00",
+      "p1_model": "glm-5.1-fw",
+      "p2_model": "grok-4.3",
+      "p1_display_name": "GLM 5.1",
+      "p2_display_name": "Grok 4.3",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 0,
+      "victory_type": "military",
+      "total_turns": 9
     }
   ]
 }
