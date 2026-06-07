@@ -25,6 +25,7 @@
     'minimax-m3':                       '🇨🇳',
     'kimi-k2.6':                        '🇨🇳',
     'zai-org-glm-5-1':                  '🇨🇳',
+    'glm-5.1-fw':                       '🇨🇳',
   };
 
   function modelDisplayName(m) {
