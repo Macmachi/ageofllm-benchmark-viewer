@@ -389,6 +389,58 @@
       "winner": 0,
       "victory_type": "nuclear",
       "total_turns": 17
+    },
+    {
+      "match_id": "gemini-3.1-pro_vs_glm-5.1-fw_2026-06-07_182759",
+      "date": "2026-06-07T17:04:59.065634+00:00",
+      "p1_model": "gemini-3.1-pro",
+      "p2_model": "glm-5.1-fw",
+      "p1_display_name": "Gemini Pro 3.1",
+      "p2_display_name": "GLM 5.1",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 19
+    },
+    {
+      "match_id": "MiMo_2.5_Pro_vs_DeepSeek_V4_2026-06-07_154953",
+      "date": "2026-06-07T17:21:25.307937+00:00",
+      "p1_model": "mimo-v2.5-pro",
+      "p2_model": "deepseek-v4-pro-e",
+      "p1_display_name": "MiMo 2.5 Pro",
+      "p2_display_name": "DeepSeek V4",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 21
+    },
+    {
+      "match_id": "qwen3.7-max_vs_glm-5.1-fw_2026-06-07_182506",
+      "date": "2026-06-07T17:42:06.423933+00:00",
+      "p1_model": "qwen3.7-max",
+      "p2_model": "glm-5.1-fw",
+      "p1_display_name": "Qwen 3.7 Max",
+      "p2_display_name": "GLM 5.1",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 22
+    },
+    {
+      "match_id": "Nvidia_Nemotron_3_Ultra_vs_DeepSeek_V4_2026-06-07_192125",
+      "date": "2026-06-07T17:48:55.040813+00:00",
+      "p1_model": "nvidia-nemotron-3-ultra-550b-a55b",
+      "p2_model": "deepseek-v4-pro-e",
+      "p1_display_name": "Nvidia Nematron 3 Ultra",
+      "p2_display_name": "DeepSeek V4",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 17
     }
   ]
 }
