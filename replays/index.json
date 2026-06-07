@@ -350,6 +350,19 @@
       "winner": 1,
       "victory_type": "nuclear",
       "total_turns": 17
+    },
+    {
+      "match_id": "nvidia-nemotron-3-ultra-550b-a55b_vs_gemini-3.5-flash_2026-06-07_161947",
+      "date": "2026-06-07T14:57:50.400337+00:00",
+      "p1_model": "nvidia-nemotron-3-ultra-550b-a55b",
+      "p2_model": "gemini-3.5-flash",
+      "p1_display_name": "Nvidia Nematron 3 Ultra",
+      "p2_display_name": "Gemini Flash 3.5",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "ultimatum",
+      "total_turns": 19
     }
   ]
 }
