@@ -311,6 +311,32 @@
       "winner": 1,
       "victory_type": "nuclear",
       "total_turns": 18
+    },
+    {
+      "match_id": "MiMo_2.5_Pro_vs_Nvidia_Nemotron_3_Ultra_2026-06-07_000353",
+      "date": "2026-06-07T02:58:20.691405+00:00",
+      "p1_model": "mimo-v2.5-pro",
+      "p2_model": "nvidia-nemotron-3-ultra-550b-a55b",
+      "p1_display_name": "MiMo 2.5 Pro",
+      "p2_display_name": "Nvidia Nematron 3 Ultra",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 19
+    },
+    {
+      "match_id": "Claude_Opus_4.8_vs_DeepSeek_V4_2026-06-07_045820",
+      "date": "2026-06-07T03:48:14.320904+00:00",
+      "p1_model": "claude-opus-4.8",
+      "p2_model": "deepseek-v4-pro-e",
+      "p1_display_name": "Claude Opus 4.8",
+      "p2_display_name": "DeepSeek V4",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 17
     }
   ]
 }
