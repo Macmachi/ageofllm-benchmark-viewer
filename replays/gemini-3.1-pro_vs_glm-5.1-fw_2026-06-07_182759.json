@@ -1,0 +1,897 @@
+{
+  "schema_version": "1.0",
+  "engine_version": "0.11.0",
+  "meta": {
+    "match_id": "gemini-3.1-pro_vs_glm-5.1-fw_2026-06-07_182759",
+    "date": "2026-06-07T16:28:46.331160+00:00",
+    "seed": 1854002810,
+    "grid_width": 13,
+    "grid_height": 7,
+    "max_turns": 80,
+    "bomb_base_cost": 25,
+    "players": [
+      {
+        "slot": 0,
+        "model": "gemini-3.1-pro",
+        "name": "Gemini Pro 3.1",
+        "base": [
+          1,
+          3
+        ]
+      },
+      {
+        "slot": 1,
+        "model": "glm-5.1-fw",
+        "name": "GLM 5.1",
+        "base": [
+          11,
+          3
+        ]
+      }
+    ],
+    "winner": -1,
+    "victory_type": "in_progress",
+    "total_turns": 1
+  },
+  "terrain": {
+    "mountains": [
+      [
+        2,
+        5
+      ],
+      [
+        4,
+        5
+      ],
+      [
+        6,
+        0
+      ],
+      [
+        6,
+        3
+      ],
+      [
+        6,
+        5
+      ],
+      [
+        8,
+        1
+      ],
+      [
+        10,
+        1
+      ]
+    ],
+    "passages": [
+      [
+        6,
+        1
+      ],
+      [
+        6,
+        2
+      ],
+      [
+        6,
+        4
+      ],
+      [
+        6,
+        6
+      ]
+    ],
+    "deposits": {
+      "credits": [
+        [
+          3,
+          3
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          9,
+          3
+        ]
+      ],
+      "uranium": [
+        [
+          3,
+          0
+        ],
+        [
+          9,
+          6
+        ]
+      ],
+      "uranium_central": [
+        [
+          6,
+          2
+        ]
+      ]
+    }
+  },
+  "turns": [
+    {
+      "turn": 1,
+      "active_player": 0,
+      "players_state": [
+        {
+          "slot": 0,
+          "credits": 1,
+          "uranium": 0,
+          "bomb_cost": 25,
+          "has_silo": false,
+          "reasoning": "**Starting with economy**\n\nMy initial focus is on securing an economic advantage. I've decided to build a credit mine at [3,3] and produce a drone for scouting. This allows me to leverage my starting credits and begin generating income as soon as possible. I'm deferring any unit movement until the next turn to avoid issues with unit ID generation.",
+          "diplomacy_sent": "message",
+          "visible_cells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              0,
+              5
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              4,
+              4
+            ]
+          ],
+          "knowledge": {
+            "enemy_base_discovered": false,
+            "visible_enemy_units": [],
+            "remembered_enemy_buildings": []
+          }
+        },
+        {
+          "slot": 1,
+          "credits": 5,
+          "uranium": 0,
+          "bomb_cost": 25,
+          "has_silo": false,
+          "reasoning": "",
+          "diplomacy_sent": null,
+          "visible_cells": [
+            [
+              9,
+              1
+            ],
+            [
+              9,
+              2
+            ],
+            [
+              9,
+              3
+            ],
+            [
+              9,
+              4
+            ],
+            [
+              9,
+              5
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              10,
+              2
+            ],
+            [
+              10,
+              3
+            ],
+            [
+              10,
+              4
+            ],
+            [
+              10,
+              5
+            ],
+            [
+              11,
+              1
+            ],
+            [
+              11,
+              2
+            ],
+            [
+              11,
+              3
+            ],
+            [
+              11,
+              4
+            ],
+            [
+              11,
+              5
+            ],
+            [
+              12,
+              1
+            ],
+            [
+              12,
+              2
+            ],
+            [
+              12,
+              3
+            ],
+            [
+              12,
+              4
+            ],
+            [
+              12,
+              5
+            ]
+          ],
+          "knowledge": {
+            "enemy_base_discovered": false,
+            "visible_enemy_units": [],
+            "remembered_enemy_buildings": []
+          }
+        }
+      ],
+      "units": [
+        {
+          "id": "A_drone_1",
+          "owner": 0,
+          "type": "drone",
+          "pos": [
+            0,
+            2
+          ],
+          "altitude": "air"
+        }
+      ],
+      "buildings": [
+        {
+          "id": "A_base",
+          "owner": 0,
+          "type": "base",
+          "pos": [
+            1,
+            3
+          ],
+          "hp": 4
+        },
+        {
+          "id": "B_base",
+          "owner": 1,
+          "type": "base",
+          "pos": [
+            11,
+            3
+          ],
+          "hp": 4
+        },
+        {
+          "id": "A_credit_mine_1",
+          "owner": 0,
+          "type": "credit_mine",
+          "pos": [
+            3,
+            3
+          ],
+          "hp": 2,
+          "under_construction": true
+        }
+      ],
+      "deposits": {
+        "credits": [
+          [
+            3,
+            3
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            7,
+            4
+          ],
+          [
+            9,
+            3
+          ]
+        ],
+        "uranium": [
+          [
+            3,
+            0
+          ],
+          [
+            9,
+            6
+          ]
+        ],
+        "uranium_central": [
+          [
+            6,
+            2
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "player": 0,
+          "type": "produce",
+          "unit": "A_drone_1",
+          "unit_type": "drone"
+        },
+        {
+          "player": 0,
+          "type": "build",
+          "target": "credit_mine",
+          "pos": [
+            3,
+            3
+          ],
+          "building": "A_credit_mine_1",
+          "under_construction": true
+        }
+      ],
+      "diplomacy": [
+        {
+          "from": 0,
+          "to": 1,
+          "kind": "message",
+          "text": "GLHF! May the best commander win.",
+          "turn": 1
+        }
+      ],
+      "events": [],
+      "perf": {
+        "think_ms": 34259,
+        "tokens": {
+          "prompt": 5295,
+          "completion": 3500,
+          "total": 8795
+        }
+      }
+    },
+    {
+      "turn": 1,
+      "active_player": 1,
+      "players_state": [
+        {
+          "slot": 0,
+          "credits": 1,
+          "uranium": 0,
+          "bomb_cost": 25,
+          "has_silo": false,
+          "reasoning": "**Starting with economy**\n\nMy initial focus is on securing an economic advantage. I've decided to build a credit mine at [3,3] and produce a drone for scouting. This allows me to leverage my starting credits and begin generating income as soon as possible. I'm deferring any unit movement until the next turn to avoid issues with unit ID generation.",
+          "diplomacy_sent": null,
+          "visible_cells": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              1
+            ],
+            [
+              0,
+              2
+            ],
+            [
+              0,
+              3
+            ],
+            [
+              0,
+              4
+            ],
+            [
+              0,
+              5
+            ],
+            [
+              1,
+              0
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              2
+            ],
+            [
+              1,
+              3
+            ],
+            [
+              1,
+              4
+            ],
+            [
+              1,
+              5
+            ],
+            [
+              2,
+              0
+            ],
+            [
+              2,
+              1
+            ],
+            [
+              2,
+              2
+            ],
+            [
+              2,
+              3
+            ],
+            [
+              2,
+              4
+            ],
+            [
+              2,
+              5
+            ],
+            [
+              3,
+              0
+            ],
+            [
+              3,
+              1
+            ],
+            [
+              3,
+              2
+            ],
+            [
+              3,
+              3
+            ],
+            [
+              3,
+              4
+            ],
+            [
+              3,
+              5
+            ],
+            [
+              4,
+              2
+            ],
+            [
+              4,
+              3
+            ],
+            [
+              4,
+              4
+            ]
+          ],
+          "knowledge": {
+            "enemy_base_discovered": false,
+            "visible_enemy_units": [],
+            "remembered_enemy_buildings": []
+          }
+        },
+        {
+          "slot": 1,
+          "credits": 1,
+          "uranium": 0,
+          "bomb_cost": 25,
+          "has_silo": false,
+          "reasoning": "Let me analyze the game state and plan my strategy.\n\nI'm Player 2 (B), base at (11,3). Enemy base is on the LEFT at (1,3).\n\nKey information:\n- Turn 1, max_turns 80\n- I play second this turn (you_play_first: false)\n- Resources: 5 credits, 0 uranium\n- No units yet\n- Base spawn: 8 free ground cells, 8 free air cells\n\nTerrain:\n- Mountains: [2,5], [4,5], [6,0], [6,3], [6,5], [8,1], [10,1]\n- Passages on column 6: [6,1], [6,2], [6,4], [6,6]\n- Credit deposits: [7,4], [9,3]\n- Uranium deposits: [9,6]\n- Central uranium: [6,2]\n\nStrategy considerations:\n1. I need to build economy (credit mines and uranium mines)\n2. I need to scout the enemy base to discover it\n3. I should produce a drone early for scouting\n4. The central uranium deposit at [6,2] is on a passage - I can build there\n\nOpening strategy:\n- Build a credit mine on [9,3] (2 credits) - this is close to base\n- Produce a drone (2 credits) - for scouting\n- That's 4 credits, leaving 1 credit\n\nWait, let me reconsider. I have 5 credits:\n- Build credit_mine on [7,4] or [9,3]: 2 credits\n- Produce drone: 2 credits\n- That leaves 1 credit\n\nOr I could:\n- Build credit_mine on [9,3]: 2 credits (closer to base)\n- Produce drone: 2 credits\n- Save 1 credit\n\nOr:\n- Build uranium_mine on [9,6]: 2 credits\n- Produce drone: 2 credits\n- Save 1 credit\n\nThe credit mine gives me +3/turn, which helps me produce units faster. The uranium mine gives me +1/turn toward the nuclear bomb.\n\nFor long-term strategy, I need both credits and uranium. But early game, credits are more important for unit production.\n\nLet me build a credit mine and produce a drone:\n1. Build credit_mine on [9,3] - 2 credits (this is on my side, close to base)\n2. Produce drone - 2 credits\n3. Save 1 credit for next turn\n\nNext turn I'll have: 1 + 1 (passive) + 3 (mine) = 5 credits (if mine is operational)\n\nActually, the mine is under construction until my NEXT turn, so it won't produce this turn. I'll get:\n- Passive: +1\n- Mine income: starts next turn after mine is complete\n\nSo next turn I'll have: 1 (saved) + 1 (passive) = 2 credits, then +3 from mine the turn after.\n\nLet me reconsider - maybe I should build the uranium mine first since uranium takes longer to accumulate for the bomb.\n\nActually, a balanced approach:\n1. Build credit_mine on [9,3] - 2 credits (will give +3/turn after construction)\n2. Produce drone - 2 credits (to scout enemy base)\n3. Wait\n\nThis gives me scouting capability and economic growth.\n\nActually, looking at [7,4] - it's on row 4, which has a passage at [6,4]. If I build at [7,4], I'm closer to the central passage. But [9,3] is more protected.\n\nLet me go with [9,3] for the credit mine - it's more protected and closer to base.\n\nWait, I should also consider the uranium mine at [9,6]. Building an uranium mine early would start accumulating uranium toward the bomb. But I need to scout first.\n\nPlan:\n1. Build credit_mine at [9,3] - 2 credits\n2. Produce drone - 2 credits  \n3. (1 credit remaining)\n\nThe drone will be placed on a free adjacent cell to the base, then I can move it toward the enemy to scout.\n\nLet me finalize my actions:\n1. Build credit_mine at [9,3]\n2. Produce drone\n\nThat's only 2 actions, which is fine.",
+          "diplomacy_sent": "message",
+          "visible_cells": [
+            [
+              7,
+              0
+            ],
+            [
+              7,
+              1
+            ],
+            [
+              7,
+              2
+            ],
+            [
+              7,
+              3
+            ],
+            [
+              7,
+              4
+            ],
+            [
+              7,
+              5
+            ],
+            [
+              8,
+              0
+            ],
+            [
+              8,
+              1
+            ],
+            [
+              8,
+              2
+            ],
+            [
+              8,
+              3
+            ],
+            [
+              8,
+              4
+            ],
+            [
+              8,
+              5
+            ],
+            [
+              9,
+              0
+            ],
+            [
+              9,
+              1
+            ],
+            [
+              9,
+              2
+            ],
+            [
+              9,
+              3
+            ],
+            [
+              9,
+              4
+            ],
+            [
+              9,
+              5
+            ],
+            [
+              10,
+              0
+            ],
+            [
+              10,
+              1
+            ],
+            [
+              10,
+              2
+            ],
+            [
+              10,
+              3
+            ],
+            [
+              10,
+              4
+            ],
+            [
+              10,
+              5
+            ],
+            [
+              11,
+              0
+            ],
+            [
+              11,
+              1
+            ],
+            [
+              11,
+              2
+            ],
+            [
+              11,
+              3
+            ],
+            [
+              11,
+              4
+            ],
+            [
+              11,
+              5
+            ],
+            [
+              12,
+              0
+            ],
+            [
+              12,
+              1
+            ],
+            [
+              12,
+              2
+            ],
+            [
+              12,
+              3
+            ],
+            [
+              12,
+              4
+            ],
+            [
+              12,
+              5
+            ]
+          ],
+          "knowledge": {
+            "enemy_base_discovered": false,
+            "visible_enemy_units": [],
+            "remembered_enemy_buildings": []
+          }
+        }
+      ],
+      "units": [
+        {
+          "id": "A_drone_1",
+          "owner": 0,
+          "type": "drone",
+          "pos": [
+            0,
+            2
+          ],
+          "altitude": "air"
+        },
+        {
+          "id": "B_drone_2",
+          "owner": 1,
+          "type": "drone",
+          "pos": [
+            10,
+            2
+          ],
+          "altitude": "air"
+        }
+      ],
+      "buildings": [
+        {
+          "id": "A_base",
+          "owner": 0,
+          "type": "base",
+          "pos": [
+            1,
+            3
+          ],
+          "hp": 4
+        },
+        {
+          "id": "B_base",
+          "owner": 1,
+          "type": "base",
+          "pos": [
+            11,
+            3
+          ],
+          "hp": 4
+        },
+        {
+          "id": "A_credit_mine_1",
+          "owner": 0,
+          "type": "credit_mine",
+          "pos": [
+            3,
+            3
+          ],
+          "hp": 2,
+          "under_construction": true
+        },
+        {
+          "id": "B_credit_mine_2",
+          "owner": 1,
+          "type": "credit_mine",
+          "pos": [
+            9,
+            3
+          ],
+          "hp": 2,
+          "under_construction": true
+        }
+      ],
+      "deposits": {
+        "credits": [
+          [
+            3,
+            3
+          ],
+          [
+            5,
+            2
+          ],
+          [
+            7,
+            4
+          ],
+          [
+            9,
+            3
+          ]
+        ],
+        "uranium": [
+          [
+            3,
+            0
+          ],
+          [
+            9,
+            6
+          ]
+        ],
+        "uranium_central": [
+          [
+            6,
+            2
+          ]
+        ]
+      },
+      "actions": [
+        {
+          "player": 1,
+          "type": "build",
+          "target": "credit_mine",
+          "pos": [
+            9,
+            3
+          ],
+          "building": "B_credit_mine_2",
+          "under_construction": true
+        },
+        {
+          "player": 1,
+          "type": "produce",
+          "unit": "B_drone_2",
+          "unit_type": "drone"
+        }
+      ],
+      "diplomacy": [
+        {
+          "from": 1,
+          "to": 0,
+          "kind": "message",
+          "text": "Good luck! Let's see who comes out on top.",
+          "turn": 1
+        }
+      ],
+      "events": [],
+      "perf": {
+        "think_ms": 12382,
+        "tokens": {
+          "prompt": 5136,
+          "completion": 176,
+          "total": 5312
+        }
+      }
+    }
+  ]
+}
