@@ -463,6 +463,9 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .cta-btn.star:hover { background: var(--gold); color: #06121f; }
 .cta-btn.xfollow { color: var(--text); border: 1px solid var(--border); background: var(--panel-solid); }
 .cta-btn.xfollow:hover { border-color: var(--text); }
+.cta-btn.snapshot { color: var(--text-dim); border: 1px solid var(--border); background: var(--panel-solid); cursor: pointer; font-size: 13px; }
+.cta-btn.snapshot:hover { border-color: var(--text); color: var(--text); }
+.cta-btn.snapshot:disabled { opacity: .5; cursor: wait; }
 @media (max-width: 640px) {
   .lb-header .present-link { margin-left: 0; }
   .cta-btn { font-size: 12px; padding: 7px 11px; }
@@ -549,10 +552,10 @@ table.lb tbody tr.lb-archive-toggle td {
 }
 .match-card:hover { border-color: #3a4654; transform: translateY(-2px); box-shadow: 0 8px 24px -10px rgba(0,0,0,0.6); }
 .match-card .mc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px; }
-.match-card .mc-id { font-family: var(--mono); font-size: 11px; color: var(--text-faint); word-break: break-all; }
-.match-card .mc-vs { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; flex-wrap: wrap; }
+.match-card .mc-id { font-family: var(--mono); font-size: 11px; color: var(--text-faint); }
+.match-card .mc-vs { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; }
 .match-card .mc-vs .vs { color: var(--text-faint); font-size: 11px; }
-.match-card .mc-foot { display: flex; justify-content: space-between; margin-top: 10px; font-size: 12px; color: var(--text-dim); flex-wrap: wrap; gap: 4px; }
+.match-card .mc-foot { display: flex; justify-content: space-between; margin-top: 10px; font-size: 12px; color: var(--text-dim); }
 .vt { padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
 .vt-nuclear { background: rgba(224,168,46,0.16); color: var(--amber); }
 .vt-military { background: rgba(255,93,108,0.16); color: var(--p1); }
