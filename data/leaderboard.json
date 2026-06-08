@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-08T13:53:52.566777+00:00",
+  "generated_at": "2026-06-08T13:56:26.617173+00:00",
   "engine_version": "0.11.0",
   "models": [
     {
@@ -200,7 +200,7 @@
     },
     {
       "model": "nvidia-nemotron-3-ultra-550b-a55b",
-      "display_name": "Nvidia Nematron 3 Ultra",
+      "display_name": "Nematron 3 Ultra",
       "reasoning_effort": "high",
       "wins": 2,
       "losses": 4,
