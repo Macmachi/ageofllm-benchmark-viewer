@@ -177,7 +177,8 @@
           : '';
       tr.innerHTML =
         rankCell +
-        `<td><div class="model-name">${modelFlag(m.model)}${esc(modelDisplayName(m))} ${effortBadge(m.reasoning_effort)}${modelAuthorTag(m.model)}${tag}</div>` +
+        `<td><div class="model-name">${modelFlag(m.model)}${esc(modelDisplayName(m))} ${effortBadge(m.reasoning_effort)}${tag}</div>` +
+        `<div class="model-sub">${modelAuthorTag(m.model)}</div>` +
         `<div class="wr-bar"><span style="width:${wr}%"></span></div></td>` +
         `<td class="num"><strong>${ppm}</strong></td>` +
         `<td class="num">${wr}%</td>` +

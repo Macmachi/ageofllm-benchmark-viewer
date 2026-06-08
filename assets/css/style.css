@@ -495,6 +495,7 @@ table.lb td.num { font-family: var(--mono); text-align: right; }
 .rank { font-family: var(--mono); color: var(--text-faint); }
 .rank.gold { color: var(--gold); font-weight: 700; }
 .model-name { font-weight: 600; display: inline-flex; align-items: center; gap: 6px; }
+.model-sub { margin-top: 2px; }
 .model-author {
   font-size: 9px; font-weight: 500; font-family: var(--mono);
   color: var(--text-faint); letter-spacing: .3px;
