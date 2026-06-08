@@ -701,10 +701,10 @@ table.lb tbody tr.lb-archive-toggle td {
   .victory .vttl { font-size: 16px; }
 
   /* leaderboard: horizontal scroll for the wide table */
-  .lb-root { padding: 20px 16px 60px; }
+  .lb-root { padding: 20px 16px 60px; overflow-x: hidden; }
   .lb-header h1 { font-size: 21px; }
   .table-wrap { overflow-x: auto; }
   table.lb { min-width: 760px; }
-  .matches { grid-template-columns: 1fr; gap: 10px; }
-  .match-card { margin: 0; }
+  .matches { grid-template-columns: 1fr; gap: 10px; width: 100%; }
+  .match-card { margin: 0; width: 100%; min-width: 0; box-sizing: border-box; }
 }
