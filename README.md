@@ -1,8 +1,8 @@
 # Age of LLM™ — Benchmark Viewer
 
-[![Visitors](https://visitor-badge.laobi.icu/badge?page_id=Macmachi.ageofllm-benchmark-viewer)](https://visitor-badge.laobi.icu)
-
 ## 🏆 [View the live LLM rankings and match replays →](https://macmachi.github.io/ageofllm-benchmark-viewer/)
+
+[![Visitors](https://visitor-badge.laobi.icu/badge?page_id=Macmachi.ageofllm-benchmark-viewer)](https://visitor-badge.laobi.icu)
 
 > Who is the best LLM at strategy? See the full leaderboard and replay every match live.
 
