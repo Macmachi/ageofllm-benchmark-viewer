@@ -8,24 +8,24 @@
 (function () {
   'use strict';
 
-  // Country flag emoji per model ID.
-  // Add new entries here when new models are benchmarked.
-  const MODEL_FLAGS = {
+  // Per-model metadata: flag (country emoji) + author (company name).
+  // Add a single entry here when a new model is benchmarked.
+  const MODEL_META = {
     // 🇺🇸 United States
-    'gpt-5.5':                           '🇺🇸',
-    'claude-opus-4.8':                   '🇺🇸',
-    'gemini-3.5-flash':                  '🇺🇸',
-    'gemini-3.1-pro':                    '🇺🇸',
-    'grok-4.3':                          '🇺🇸',
-    'nvidia-nemotron-3-ultra-550b-a55b': '🇺🇸',
+    'gpt-5.5':                           { flag: '🇺🇸', author: 'OpenAI' },
+    'claude-opus-4.8':                   { flag: '🇺🇸', author: 'Anthropic' },
+    'gemini-3.5-flash':                  { flag: '🇺🇸', author: 'Google' },
+    'gemini-3.1-pro':                    { flag: '🇺🇸', author: 'Google' },
+    'grok-4.3':                          { flag: '🇺🇸', author: 'xAI' },
+    'nvidia-nemotron-3-ultra-550b-a55b': { flag: '🇺🇸', author: 'Nvidia' },
     // 🇨🇳 China
-    'deepseek-v4-pro-e':                 '🇨🇳',
-    'mimo-v2.5-pro':                     '🇨🇳',
-    'qwen3.7-max':                       '🇨🇳',
-    'minimax-m3':                        '🇨🇳',
-    'kimi-k2.6':                         '🇨🇳',
-    'zai-org-glm-5-1':                   '🇨🇳',
-    'glm-5.1-fw':                        '🇨🇳',
+    'deepseek-v4-pro-e':                 { flag: '🇨🇳', author: 'DeepSeek' },
+    'mimo-v2.5-pro':                     { flag: '🇨🇳', author: 'Xiaomi' },
+    'qwen3.7-max':                       { flag: '🇨🇳', author: 'Alibaba' },
+    'minimax-m3':                        { flag: '🇨🇳', author: 'MiniMax' },
+    'kimi-k2.6':                         { flag: '🇨🇳', author: 'Moonshot' },
+    'zai-org-glm-5-1':                   { flag: '🇨🇳', author: 'Zhipu' },
+    'glm-5.1-fw':                        { flag: '🇨🇳', author: 'Zhipu' },
   };
 
   function modelDisplayName(m) {
@@ -33,7 +33,13 @@
   }
 
   function modelFlag(modelId) {
-    return MODEL_FLAGS[modelId] ? MODEL_FLAGS[modelId] + ' ' : '';
+    const meta = MODEL_META[modelId];
+    return meta && meta.flag ? meta.flag + ' ' : '';
+  }
+
+  function modelAuthorTag(modelId) {
+    const meta = MODEL_META[modelId];
+    return meta && meta.author ? `<span class="model-author">${esc(meta.author)}</span>` : '';
   }
 
   const VT_LABEL = {
@@ -171,7 +177,7 @@
           : '';
       tr.innerHTML =
         rankCell +
-        `<td><div class="model-name">${modelFlag(m.model)}${esc(modelDisplayName(m))} ${effortBadge(m.reasoning_effort)}${tag}</div>` +
+        `<td><div class="model-name">${modelFlag(m.model)}${esc(modelDisplayName(m))}${modelAuthorTag(m.model)} ${effortBadge(m.reasoning_effort)}${tag}</div>` +
         `<div class="wr-bar"><span style="width:${wr}%"></span></div></td>` +
         `<td class="num"><strong>${ppm}</strong></td>` +
         `<td class="num">${wr}%</td>` +
@@ -261,8 +267,8 @@
       const winLabel = r.winner === 0 ? (r.p1_display_name || r.p1_model) : r.winner === 1 ? (r.p2_display_name || r.p2_model) : 'Draw';
       a.innerHTML =
         `<div class="mc-top"><span class="mc-id">${esc(r.match_id)}</span></div>` +
-        `<div class="mc-vs"><span class="tag-p0">${modelFlag(r.p1_model)}${esc(r.p1_display_name || r.p1_model)} ${effortBadge(r.p1_reasoning_effort)}</span>` +
-        `<span class="vs">vs</span><span class="tag-p1">${modelFlag(r.p2_model)}${esc(r.p2_display_name || r.p2_model)} ${effortBadge(r.p2_reasoning_effort)}</span></div>` +
+        `<div class="mc-vs"><span class="tag-p0">${modelFlag(r.p1_model)}${esc(r.p1_display_name || r.p1_model)}${modelAuthorTag(r.p1_model)} ${effortBadge(r.p1_reasoning_effort)}</span>` +
+        `<span class="vs">vs</span><span class="tag-p1">${modelFlag(r.p2_model)}${esc(r.p2_display_name || r.p2_model)}${modelAuthorTag(r.p2_model)} ${effortBadge(r.p2_reasoning_effort)}</span></div>` +
         `<div class="mc-foot"><span>${formatDate(r.date)}</span>` +
         `<span>🏆 ${esc(winLabel)} · <span class="vt vt-${vt}">${VT_LABEL[vt] || vt}</span> · ${r.total_turns} turns</span></div>`;
       wrap.appendChild(a);
