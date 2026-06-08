@@ -163,7 +163,7 @@
             <thead><tr><th>Unit</th><th>Cost</th><th>Move</th><th>Sight</th><th>Range</th><th>Hits</th></tr></thead>
             <tbody>
               <tr><td>🛩 Drone</td><td>2◆</td><td>3</td><td>3</td><td>—</td><td>recon</td></tr>
-              <tr><td>🚀 SAM</td><td>3◆</td><td>1</td><td>2</td><td>2</td><td>air</td></tr>
+              <tr><td>🚀 SAM</td><td>3◆</td><td>2</td><td>2</td><td>2</td><td>air</td></tr>
               <tr><td>🛡 Tank</td><td>4◆</td><td>2</td><td>1</td><td>2</td><td>ground+bldg</td></tr>
               <tr><td>✈ Fighter</td><td>4◆</td><td>3</td><td>2</td><td>2</td><td>tank/air</td></tr>
             </tbody>
@@ -180,7 +180,7 @@
               <tr><td>🏛 Base</td><td>—</td><td>4</td><td>produces units</td></tr>
               <tr><td>⛏ Credit mine (oil)</td><td>2◆</td><td>2</td><td>+3◆/turn</td></tr>
               <tr><td>☢ Uranium mine</td><td>2◆</td><td>2</td><td>+1☢/turn</td></tr>
-              <tr><td>☢ Central mine</td><td>3◆</td><td>3</td><td>+1☢/turn (col 6)</td></tr>
+              <tr><td>☢ Central mine</td><td>4◆</td><td>3</td><td>+1☢/turn (col 6)</td></tr>
               <tr><td>🏗 Silo</td><td>5◆</td><td>3</td><td>required for the bomb</td></tr>
             </tbody>
           </table>
@@ -213,7 +213,10 @@
           <div class="lg-sec">Map</div>
           <p class="lg-p lg-small">The central barrier (column 6), the in-territory mountains and all
           deposit positions are <b>seed-driven</b> — they differ every match. Mountains block ground
-          movement, construction <b>and line of sight</b> for ground attacks (air flies over).</p>
+          movement, construction <b>and line of sight</b> for ground attacks (air flies over).
+          Extra mountains are confined to cols 2-4 / 8-10; the cell immediately in front of each
+          col.6 passage (col.5 side A, col.7 side B) is always kept clear so neither side's
+          access to the central deposit is randomly sealed.</p>
           <div class="legend-grid">
             <div class="li"><span class="sw" style="background:var(--gold)"></span>Credit deposit (oil)</div>
             <div class="li"><span class="sw" style="background:var(--uranium)"></span>Uranium deposit</div>

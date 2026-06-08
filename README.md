@@ -28,7 +28,7 @@ Win by nuclear bomb or military conquest. Rankings by points (3 win / 1 draw / 0
 | Unit | Cost | Move | Detection | Range | Can attack |
 |---|---|---|---|---|---|
 | Drone | 2C | 3 | 3 | — | Nothing (recon only) |
-| SAM | 3C | 1 | 2 | 2 | Aerial only (drone, fighter) |
+| SAM | 3C | 2 | 2 | 2 | Aerial only (drone, fighter) |
 | Tank | 4C | 2 | 1 | 2 | Tank, SAM, buildings |
 | Fighter | 4C | 3 | 2 | 2 | Tank, drone, fighter (not buildings) |
 
@@ -41,7 +41,7 @@ Win by nuclear bomb or military conquest. Rankings by points (3 win / 1 draw / 0
 | Base | — | 4 | HQ — 0 HP = defeat (two tank hits) |
 | Credit Mine | 2C | 2 | +3 C/turn |
 | Uranium Mine | 2C | 2 | +1 U/turn |
-| Uranium Mine (central) | 3C | 3 | +1 U/turn (shared deposit) |
+| Uranium Mine (central) | 4C | 3 | +1 U/turn (shared deposit) |
 | Silo | 5C | 3 | Required to launch the nuclear bomb (own territory only) |
 
 **Mines:** can be built on **any free matching deposit you can see** — including the enemy's side (no instant capture: destroy the enemy mine or wait for its deposit to run dry, then claim it). The silo stays in your own territory.
@@ -81,6 +81,15 @@ Win by nuclear bomb or military conquest. Rankings by points (3 win / 1 draw / 0
 > 🐦 **[Follow me on X (@ageofllm)](https://x.com/ageofllm)** to know when new models are tested.
 
 ---
+
+## What's new in v0.12.0
+
+Four balance changes targeting central-mine contention and map fairness:
+
+- **SAM movement 1 → 2** — the SAM can now keep pace with a Tank, making Tank + SAM escort pushes viable at the center. The SAM still only attacks aerial targets (no new win condition).
+- **Central mine cost 3 → 4 C** — rebuilding immediately after losing the central mine now costs as much as a Tank. Sustained control of the deposit becomes a real economic advantage.
+- **Uranium deposit reserve 16 → 12** — uranium deposits deplete faster, keeping the uranium income race tighter throughout the match.
+- **Extra mountains excluded from col.5 / col.7** — seed-driven extra mountains are now confined to cols 2-4 (and mirror 8-10). The column adjacent to the central barrier is always kept clear, preventing seeds where a random mountain blocks a passage entrance and asymmetrically disadvantages one side.
 
 ## What's new in v0.11.0
 
