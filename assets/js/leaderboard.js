@@ -174,11 +174,11 @@
         `<td><div class="model-name">${modelFlag(m.model)}${esc(modelDisplayName(m))} ${effortBadge(m.reasoning_effort)}${tag}</div>` +
         `<div class="wr-bar"><span style="width:${wr}%"></span></div></td>` +
         `<td class="num"><strong>${ppm}</strong></td>` +
-        `<td class="num">${m.total}</td>` +
+        `<td class="num">${wr}%</td>` +
         `<td class="num">${m.wins}</td>` +
         `<td class="num">${m.losses}</td>` +
         `<td class="num">${m.draws}</td>` +
-        `<td class="num">${wr}%</td>` +
+        `<td class="num">${m.total}</td>` +
         `<td class="num">${m.points || 0}</td>` +
         `<td class="num">${m.nuclear_wins}</td>` +
         `<td class="num">${m.military_wins}</td>` +
