@@ -8,12 +8,12 @@
 (function () {
   'use strict';
 
-  // Per-model metadata: flag (country emoji) + author (company name).
+  // Per-model metadata: flag (country emoji) + author (company name) + optional new badge.
   // Add a single entry here when a new model is benchmarked.
   const MODEL_META = {
     // 🇺🇸 United States
     'gpt-5.5':                           { flag: '🇺🇸', author: 'OpenAI' },
-    'claude-opus-4.8':                   { flag: '🇺🇸', author: 'Anthropic' },
+    'claude-opus-4.8':                   { flag: '🇺🇸', author: 'Anthropic', isNew: true },
     'gemini-3.5-flash':                  { flag: '🇺🇸', author: 'Google' },
     'gemini-3.1-pro':                    { flag: '🇺🇸', author: 'Google' },
     'grok-4.3':                          { flag: '🇺🇸', author: 'xAI' },
@@ -24,6 +24,7 @@
     'qwen3.7-max':                       { flag: '🇨🇳', author: 'Alibaba' },
     'minimax-m3':                        { flag: '🇨🇳', author: 'MiniMax' },
     'kimi-k2.6':                         { flag: '🇨🇳', author: 'Moonshot' },
+    'kimi-k2-6':                         { flag: '🇨🇳', author: 'Moonshot', isNew: true },
     'zai-org-glm-5-1':                   { flag: '🇨🇳', author: 'Zhipu' },
     'glm-5.1-fw':                        { flag: '🇨🇳', author: 'Zhipu' },
   };
@@ -40,6 +41,11 @@
   function modelAuthorTag(modelId) {
     const meta = MODEL_META[modelId];
     return meta && meta.author ? `<span class="model-author">${esc(meta.author)}</span>` : '';
+  }
+
+  function modelNewBadge(modelId) {
+    const meta = MODEL_META[modelId];
+    return meta && meta.isNew ? `<span class="new-badge" title="New model">NEW</span>` : '';
   }
 
   const VT_LABEL = {
@@ -177,7 +183,7 @@
           : '';
       tr.innerHTML =
         rankCell +
-        `<td><div class="model-name">${modelFlag(m.model)}${esc(modelDisplayName(m))} ${effortBadge(m.reasoning_effort)}${tag}</div>` +
+        `<td><div class="model-name">${modelFlag(m.model)}${esc(modelDisplayName(m))} ${effortBadge(m.reasoning_effort)}${modelNewBadge(m.model)}${tag}</div>` +
         `<div class="model-sub">${modelAuthorTag(m.model)}</div>` +
         `<div class="wr-bar"><span style="width:${wr}%"></span></div></td>` +
         `<td class="num"><strong>${ppm}</strong></td>` +

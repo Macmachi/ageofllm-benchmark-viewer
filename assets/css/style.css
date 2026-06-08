@@ -517,6 +517,18 @@ table.lb td.num { font-family: var(--mono); text-align: right; }
 .wr-bar { position: relative; height: 6px; background: #1a212b; border-radius: 3px; margin-top: 4px; overflow: hidden; }
 .wr-bar > span { position: absolute; left: 0; top: 0; bottom: 0; background: linear-gradient(90deg, var(--p0), var(--accent)); }
 
+/* new model badge */
+.new-badge {
+  font-family: var(--mono); font-size: 9px; font-weight: 700; letter-spacing: .5px;
+  padding: 1px 5px; border-radius: 3px; border: 1px solid rgba(80,220,140,.5);
+  color: #50dc8c; background: rgba(80,220,140,.12); white-space: nowrap;
+  animation: new-badge-pulse 2s ease-in-out infinite;
+}
+@keyframes new-badge-pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.55; }
+}
+
 /* provisional models (fewer than the min-matches threshold) */
 table.lb tbody tr.provisional { opacity: 0.6; }
 .prov-badge {
