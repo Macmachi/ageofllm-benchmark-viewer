@@ -582,6 +582,12 @@ table.lb tbody tr.lb-archive-toggle td {
 .matches-pager .pg-ellipsis { color: var(--text-faint); padding: 0 2px; }
 .matches-pager .pg-info { margin-left: 10px; color: var(--text-faint); font-size: 12px; }
 
+/* visitor counter (above footer) */
+.visitor-counter {
+  display: flex; justify-content: center; margin-top: 32px;
+}
+.visitor-counter img { border-radius: 4px; }
+
 /* ---------- footer (home + viewer) ---------- */
 .site-footer {
   display: flex; align-items: center; justify-content: center; flex-wrap: wrap;
