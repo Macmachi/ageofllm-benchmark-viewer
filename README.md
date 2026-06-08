@@ -88,6 +88,8 @@ This release rebalances the two win paths so **military conquest competes head-t
 
 - **Base HP lowered 8 → 4** — the enemy base now falls in **exactly two tank hits** (tank damage unchanged at 2 HP/hit). A single tank that reaches the base finishes it in two turns, so a military push resolves in a comparable number of turns to a nuclear rush. Match length is unchanged (~16-22 turns). *(Older replays were recorded with 8 HP bases; they still play back correctly — the HP bar is clamped, so a pre-v0.11 base shows a full bar until its HP drops below 4.)*
 - **Clearer line-of-sight rule** — the engine and the models' prompt now spell out the exact "Line of sight blocked by a mountain or building" failure: an in-range ground target is not enough, the straight line to it must also be clear.
+- **Leaderboard column order** — columns are now in logical order: `Pts/match | Total | W | L | D | Win rate | Pts | …` (volume → detail → derived).
+- **📷 Save as image** — a new button in the leaderboard filters captures the ranking as a branded PNG (title, date, link to [ageofllm.org](https://ageofllm.org)) — share it directly.
 
 ---
 
