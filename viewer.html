@@ -12,6 +12,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png" />
   <link rel="manifest" href="assets/images/favicon/site.webmanifest" />
   <link rel="icon" href="assets/images/favicon/favicon.ico" />
+  <link rel="canonical" href="https://ageofllm.org/viewer.html" />
 </head>
 <body>
   <div class="viewer-root">
@@ -25,7 +26,7 @@
       <div class="brand">
         <a class="home-link" href="index.html" title="Back to leaderboard">⮜ Leaderboard</a>
         <img src="assets/images/Logo_AOL.png" alt="Age of LLM" class="brand-logo" />
-        <span class="title">Age of LLM <span class="lb-tag">— Benchmark</span></span>
+        <span class="title">Age of LLM™ <span class="lb-tag">— Benchmark</span></span>
         <span class="ver">v0.11.0</span>
         <span class="mid" id="match-id"></span>
       </div>
@@ -162,15 +163,15 @@
             <thead><tr><th>Unit</th><th>Cost</th><th>Move</th><th>Sight</th><th>Range</th><th>Hits</th></tr></thead>
             <tbody>
               <tr><td>🛩 Drone</td><td>2◆</td><td>3</td><td>3</td><td>—</td><td>recon</td></tr>
-              <tr><td>🚀 SAM</td><td>3◆</td><td>1</td><td>2</td><td>2</td><td>air</td></tr>
+              <tr><td>🚀 SAM</td><td>3◆</td><td>2</td><td>2</td><td>2</td><td>air</td></tr>
               <tr><td>🛡 Tank</td><td>4◆</td><td>2</td><td>1</td><td>2</td><td>ground+bldg</td></tr>
               <tr><td>✈ Fighter</td><td>4◆</td><td>3</td><td>2</td><td>2</td><td>tank/air</td></tr>
             </tbody>
           </table>
           <p class="lg-p lg-small">Triangle: Fighter &gt; Tank/Drone/Fighter · Tank &gt; SAM/Tank/buildings ·
           SAM &gt; air units. Only the Tank can hit buildings (2 HP/hit). Attacker survives (mirror rule).
-          <b>Line of sight:</b> a ground attack (tank/sam) is blocked by a mountain between shooter and
-          target — flank around it. The fighter (air) ignores mountains.</p>
+          <b>Line of sight:</b> a ground attack (tank/sam) is blocked by a <b>mountain or building</b>
+          between shooter and target — flank around cover. The fighter (air) ignores obstacles.</p>
 
           <div class="lg-sec">Buildings <span class="lg-hint">(have HP)</span></div>
           <table class="lg-table">
@@ -179,16 +180,17 @@
               <tr><td>🏛 Base</td><td>—</td><td>4</td><td>produces units</td></tr>
               <tr><td>⛏ Credit mine (oil)</td><td>2◆</td><td>2</td><td>+3◆/turn</td></tr>
               <tr><td>☢ Uranium mine</td><td>2◆</td><td>2</td><td>+1☢/turn</td></tr>
-              <tr><td>☢ Central mine</td><td>3◆</td><td>3</td><td>+1☢/turn (col 6)</td></tr>
+              <tr><td>☢ Central mine</td><td>4◆</td><td>3</td><td>+1☢/turn (col 6)</td></tr>
               <tr><td>🏗 Silo</td><td>5◆</td><td>3</td><td>required for the bomb</td></tr>
             </tbody>
           </table>
           <p class="lg-p lg-small">Construction: operational on the <b>next turn</b>. Under construction =
           no effect + destroyed in <b>1 hit</b>. You can only build on a <b>visible</b>, free cell.
           One building per cell; cells <b>adjacent to a base</b> are reserved for unit spawning.
-          <b>Deposits deplete:</b> each holds a finite reserve — when a mine drains it, the mine is
-          removed and a fresh deposit of that kind respawns elsewhere on the same side (central on
-          column 6). Mines are not forever; redeploy when one runs dry.</p>
+          <b>Mines</b> can go on any free matching deposit you see — incl. the enemy's side (no instant
+          capture: destroy the enemy mine or wait for its deposit to run dry, then claim it); the
+          <b>silo</b> stays own-territory only. <b>Deposits deplete:</b> a drained deposit removes its
+          mine and respawns elsewhere on the same side (central on column 6).</p>
 
           <div class="lg-sec">Nuclear bomb</div>
           <p class="lg-p lg-small">Cost 25☢ (drops after T40, floor 13). Requires an operational silo +
@@ -211,7 +213,10 @@
           <div class="lg-sec">Map</div>
           <p class="lg-p lg-small">The central barrier (column 6), the in-territory mountains and all
           deposit positions are <b>seed-driven</b> — they differ every match. Mountains block ground
-          movement, construction <b>and line of sight</b> for ground attacks (air flies over).</p>
+          movement, construction <b>and line of sight</b> for ground attacks (air flies over).
+          Extra mountains are confined to cols 2-4 / 8-10; the cell immediately in front of each
+          col.6 passage (col.5 side A, col.7 side B) is always kept clear so neither side's
+          access to the central deposit is randomly sealed.</p>
           <div class="legend-grid">
             <div class="li"><span class="sw" style="background:var(--gold)"></span>Credit deposit (oil)</div>
             <div class="li"><span class="sw" style="background:var(--uranium)"></span>Uranium deposit</div>
@@ -274,7 +279,7 @@
       <a class="foot-link" href="https://github.com/Macmachi/ageofllm-benchmark-viewer" target="_blank" rel="noopener" title="Star on GitHub">⭐ Star on GitHub</a>
       <a class="foot-link" href="https://x.com/ageofllm" target="_blank" rel="noopener" title="Follow on X — know when new models are tested">𝕏 Follow @ageofllm</a>
       <a class="foot-link" href="https://www.youtube.com/@AgeofLLM" target="_blank" rel="noopener" title="YouTube">▶ YouTube</a>
-      <span class="foot-copy">© Rymentz 2026</span>
+      <span class="foot-copy">© 2026 Rymentz — Age of LLM™ — All rights reserved</span>
     </footer>
   </div>
 
