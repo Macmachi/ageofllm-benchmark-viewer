@@ -454,6 +454,58 @@
       "winner": 1,
       "victory_type": "nuclear",
       "total_turns": 20
+    },
+    {
+      "match_id": "Kimi_K2.6_vs_DeepSeek_V4_2026-06-08_223828",
+      "date": "2026-06-09T02:43:07.880716+00:00",
+      "p1_model": "kimi-k2-6",
+      "p2_model": "deepseek-v4-pro-e",
+      "p1_display_name": "Kimi 2.6",
+      "p2_display_name": "DeepSeek V4",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 19
+    },
+    {
+      "match_id": "Kimi_K2.6_vs_Gemini_Flash_3.5_2026-06-09_044307",
+      "date": "2026-06-09T03:35:35.019357+00:00",
+      "p1_model": "kimi-k2-6",
+      "p2_model": "gemini-3.5-flash",
+      "p1_display_name": "Kimi 2.6",
+      "p2_display_name": "Gemini Flash 3.5",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "ultimatum",
+      "total_turns": 17
+    },
+    {
+      "match_id": "Kimi_K2.6_vs_GLM_5.1_2026-06-09_053535",
+      "date": "2026-06-09T04:46:47.666786+00:00",
+      "p1_model": "kimi-k2-6",
+      "p2_model": "glm-5.1-fw",
+      "p1_display_name": "Kimi 2.6",
+      "p2_display_name": "GLM 5.1",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "military",
+      "total_turns": 12
+    },
+    {
+      "match_id": "Kimi_K2.6_vs_Claude_Opus_4.8_2026-06-09_064647",
+      "date": "2026-06-09T06:31:43.978758+00:00",
+      "p1_model": "kimi-k2-6",
+      "p2_model": "claude-opus-4.8",
+      "p1_display_name": "Kimi 2.6",
+      "p2_display_name": "Claude Opus 4.8",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 21
     }
   ]
 }
