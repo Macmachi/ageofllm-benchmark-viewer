@@ -572,7 +572,7 @@ table.lb tbody tr.lb-archive-toggle td {
 }
 .match-card:hover { border-color: #3a4654; transform: translateY(-2px); box-shadow: 0 8px 24px -10px rgba(0,0,0,0.6); }
 .match-card .mc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 9px; }
-.match-card .mc-id { font-family: var(--mono); font-size: 11px; color: var(--text-faint); }
+.match-card .mc-id { font-family: var(--mono); font-size: 11px; color: var(--text-faint); word-break: break-all; overflow-wrap: anywhere; min-width: 0; }
 .match-card .mc-vs { display: flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; }
 .match-card .mc-vs .vs { color: var(--text-faint); font-size: 11px; }
 .match-card .mc-foot { display: flex; justify-content: space-between; margin-top: 10px; font-size: 12px; color: var(--text-dim); }
