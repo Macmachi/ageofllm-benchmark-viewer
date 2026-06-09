@@ -14,7 +14,7 @@
     // 🇺🇸 United States
     'gpt-5.5':                           { flag: '🇺🇸', author: 'OpenAI' },
     'claude-opus-4.8':                   { flag: '🇺🇸', author: 'Anthropic', isNew: true },
-    'gemini-3.5-flash':                  { flag: '🇺🇸', author: 'Google' },
+    'gemini-3.5-flash':                  { flag: '🇺🇸', author: 'Google', isNew: true },
     'gemini-3.1-pro':                    { flag: '🇺🇸', author: 'Google' },
     'grok-4.3':                          { flag: '🇺🇸', author: 'xAI' },
     'nvidia-nemotron-3-ultra-550b-a55b': { flag: '🇺🇸', author: 'Nvidia' },
