@@ -79,9 +79,16 @@ const Player = (() => {
     // ---- transport ----
     play() {
       if (this.playing) return;
-      if (this.idx >= this.count - 1 && this.animT >= 1) this.seek(0);
+      // Restart from the beginning if: at the end, OR at turn 0 not yet started
+      // (animT === 1 means the turn snapshot is shown fully resolved — clicking
+      // Play from the initial state should animate from turn 0, not skip it).
+      if ((this.idx >= this.count - 1 && this.animT >= 1) ||
+          (this.idx === 0 && this.animT >= 1)) {
+        this.idx = 0;
+        this.animT = 0;
+        this.onTurnChange(this.idx, this.current);
+      }
       this.playing = true;
-      this.animT = 0;
       this._turnStart = performance.now();
       this._lastTs = this._turnStart;
       this._raf = requestAnimationFrame(this._loop);

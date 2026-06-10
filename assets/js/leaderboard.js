@@ -13,7 +13,8 @@
   const MODEL_META = {
     // 🇺🇸 United States
     'gpt-5.5':                           { flag: '🇺🇸', author: 'OpenAI' },
-    'claude-opus-4.8':                   { flag: '🇺🇸', author: 'Anthropic', isNew: true },
+    'claude-fable-5':                    { flag: '🇺🇸', author: 'Anthropic', isNew: true },
+    'claude-opus-4.8':                   { flag: '🇺🇸', author: 'Anthropic' },
     'gemini-3.5-flash':                  { flag: '🇺🇸', author: 'Google' },
     'gemini-3.1-pro':                    { flag: '🇺🇸', author: 'Google' },
     'grok-4.3':                          { flag: '🇺🇸', author: 'xAI' },
@@ -74,7 +75,7 @@
   let sortDir = -1;
   // Models with fewer than this many matches are listed AFTER ranked ones and
   // flagged "provisional" (kept in sync with the #f-min input default).
-  let minMatches = 3;
+  let minMatches = 1;
 
   async function init() {
     const [lb, idx] = await Promise.all([
