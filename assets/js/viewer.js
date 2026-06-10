@@ -81,8 +81,9 @@
     const ev = replay.engine_version || replay.meta.engine_version;
     if (verEl && ev) verEl.textContent = `Benchmark · v${ev}`;
     renderStaticHeader();
-    // initial draw at turn 0, fully resolved
-    playback.seek(0);
+    // initial draw at turn 0, BEFORE its actions play (starting board), so the
+    // first frame doesn't show player 1's moves already done before Play.
+    playback.start();
   }
 
   function cacheEls() {

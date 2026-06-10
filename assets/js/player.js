@@ -113,6 +113,19 @@ const Player = (() => {
 
     seek(i) { this.pause(); this._goto(clampInt(i, 0, this.count - 1), 1); }
 
+    /**
+     * Initial draw: show turn 0 BEFORE its actions are played (animT = 0), so the
+     * very first frame on load shows the starting board, not turn 0 already
+     * resolved (which made player 1's moves appear done before clicking Play).
+     */
+    start() {
+      this.pause();
+      this.idx = 0;
+      this.animT = 0;
+      this.onTurnChange(this.idx, this.current);
+      this._emit();
+    }
+
     _goto(i, animT) {
       const changed = i !== this.idx;
       this.idx = i;
