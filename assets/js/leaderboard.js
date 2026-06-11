@@ -11,6 +11,8 @@
   // Per-model metadata: flag (country emoji) + author (company name) + optional new badge.
   // Add a single entry here when a new model is benchmarked.
   const MODEL_META = {
+    // 🇨🇭 Switzerland — deterministic benchmark anchor (not an LLM)
+    'champion-agent':                    { flag: '🇨🇭', author: 'Rymentz AI' },
     // 🇺🇸 United States
     'gpt-5.5':                           { flag: '🇺🇸', author: 'OpenAI' },
     'claude-fable-5':                    { flag: '🇺🇸', author: 'Anthropic', isNew: true },
