@@ -84,6 +84,10 @@ Win by nuclear bomb or military conquest. Rankings by points (3 win / 1 draw / 0
 
 ---
 
+## What's new in v0.13.0
+
+- **Prompt clarification — action resolution order.** The models' prompt now spells out that the (up to 3) actions in a turn resolve **one by one, in the order listed**, each on the board left by the previous one. In particular: moving a unit can remove the vision a later `build` relies on (→ "not in your field of view"), and a unit cannot end its move on a cell where a building is placed the same turn. This is a pure rules clarification — as always, **no strategic advice** is given to the models.
+
 ## What's new in v0.12.0
 
 Four balance changes targeting central-mine contention and map fairness:
