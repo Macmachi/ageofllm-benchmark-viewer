@@ -558,6 +558,19 @@
       "winner": 1,
       "victory_type": "military",
       "total_turns": 16
+    },
+    {
+      "match_id": "gpt-5.5_vs_champion-agent_2026-06-11_144612",
+      "date": "2026-06-12T01:41:51.668985+00:00",
+      "p1_model": "gpt-5.5",
+      "p2_model": "champion-agent",
+      "p1_display_name": "GPT-5.5",
+      "p2_display_name": "🤖 Champion (Rymentz AI)",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "off",
+      "winner": 0,
+      "victory_type": "nuclear",
+      "total_turns": 18
     }
   ]
 }
