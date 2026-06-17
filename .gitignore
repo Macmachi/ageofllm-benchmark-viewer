@@ -1,0 +1,47 @@
+# ── Secrets / config ──────────────────────────────────────────────────────────
+.config.ini
+config.ini
+config.example.ini
+*.key
+*.env
+.env*
+
+# ── Engine & backend code ─────────────────────────────────────────────────────
+engine/
+run_game.py
+run_tournament.py
+generate_stats.py
+update_site.sh
+test_models.py
+
+# ── Tournament runtime state & model lists ────────────────────────────────────
+tournament_state.json
+tournament_models.json
+tournament_models.example.json
+archived_models.json
+models_validated.json
+queue.json
+
+# ── Python ────────────────────────────────────────────────────────────────────
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.mypy_cache/
+.pytest_cache/
+requirements.txt
+
+# ── Heavy design sources ──────────────────────────────────────────────────────
+Ressources/
+ressources/
+resources/
+*.fig
+scripts/
+
+# ── Editors / OS ──────────────────────────────────────────────────────────────
+.vscode/
+.idea/
+.DS_Store
+*.crdownload
+Thumbs.db

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Age of LLM™ — Benchmark · LLMs Leaderboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png" />
+  <link rel="manifest" href="assets/images/favicon/site.webmanifest" />
+  <link rel="icon" href="assets/images/favicon/favicon.ico" />
+  <link rel="canonical" href="https://ageofllm.org/" />
+</head>
+<body>
+  <div class="lb-root">
+    <div class="lb-header">
+      <img src="assets/images/Logo_AOL.png" alt="Age of LLM" class="header-logo" />
+      <h1>Age of LLM™ <span class="lb-tag">— Benchmark</span></h1>
+      <span class="lb-ver">v0.15.0</span>
+      <a class="present-link" href="https://youtu.be/Ec-CV1uzyVY" target="_blank" rel="noopener"
+         title="Watch the presentation video">▶ Presentation <span class="ext-ico" aria-hidden="true">↗</span></a>
+    </div>
+    <div class="lb-tagline">The benchmark that measures emergent intelligence of LLMs</div>
+    <div class="lb-sub">1v1 strategic benchmark — two LLMs face off. Win by nuclear bomb or military conquest. Ranking by points (3/1/0.5/0).</div>
+    <div class="lb-cta">
+      <a class="cta-btn star" href="https://github.com/Macmachi/ageofllm-benchmark-viewer" target="_blank" rel="noopener"
+         title="Star the project on GitHub">⭐ Give a star on GitHub</a>
+      <a class="cta-btn xfollow" href="https://x.com/ageofllm" target="_blank" rel="noopener"
+         title="Follow on X to know when new models are tested">𝕏 Follow on X — know when new models are tested</a>
+    </div>
+
+    <div class="lb-section-title">Model ranking</div>
+    <div class="lb-filters">
+      <input type="text" id="f-model" placeholder="Filter by model…" />
+      <label style="color:var(--text-dim);font-size:13px">Min. matches to rank
+        <input type="number" id="f-min" value="3" min="0" style="width:70px" />
+      </label>
+      <span class="lb-rank-note" title="Models below the minimum are ranked after the others and marked “provisional”.">Ranked by points/match · ties: win rate → head-to-head → avg turns to win</span>
+      <button id="btn-snapshot" class="cta-btn snapshot" title="Download the leaderboard as a PNG image">📷 Save as image</button>
+    </div>
+    <div class="table-wrap">
+      <table class="lb" id="lb-table">
+        <thead>
+          <tr>
+            <th data-sort="rank" title="Rank (by points/match, then win rate)">#</th>
+            <th data-sort="model" title="LLM model name (reasoning effort shown below)">Model</th>
+            <th data-sort="points_per_match" class="num" title="Average points per match (3 win / 1 draw / 0.5 ultimatum accepted / 0 loss). Primary ranking key — fair across different match counts.">Pts/match</th>
+            <th data-sort="win_rate" class="num" title="Win rate = wins / total — 1st tie-breaker">Win&nbsp;rate</th>
+            <th data-sort="wins" class="num" title="Wins">W</th>
+            <th data-sort="losses" class="num" title="Losses">L</th>
+            <th data-sort="draws" class="num" title="Draws (peace or timeout)">D</th>
+            <th data-sort="total" class="num" title="Total matches played">Total</th>
+            <th data-sort="points" class="num hidden-col" title="Total raw points — kept for export but hidden because it favours models that played more matches">Pts</th>
+            <th data-sort="nuclear_wins" class="num" title="Wins by nuclear bomb">☢ Nuc.</th>
+            <th data-sort="military_wins" class="num" title="Military wins (enemy base destroyed by tanks)">⚔ Mil.</th>
+            <th data-sort="diplomatic_wins" class="num" title="Diplomatic wins (ultimatum accepted)">📜 Dip.</th>
+            <th data-sort="peace_draws" class="num" title="Draws by accepted peace proposal">☮ Peace</th>
+            <th data-sort="mutual_destructions" class="num" title="Mutual destructions (both launched the bomb the same turn — both lose)">☢☢ MD</th>
+            <th data-sort="avg_think_ms" class="num" title="Average thinking time per played turn">⏱ avg/turn</th>
+            <th data-sort="avg_tokens_per_turn" class="num" title="Average tokens consumed per played turn">▦ tok/turn</th>
+            <th data-sort="avg_cost_per_match" class="num" title="Estimated average USD cost per match (from token usage and configured prices)">💲 $/match</th>
+            <th data-sort="invalid_action_rate" class="num" title="Percentage of proposed actions rejected by the engine (illegal actions)">⚠ % illegal</th>
+          </tr>
+        </thead>
+        <tbody id="lb-body"></tbody>
+      </table>
+    </div>
+
+    <div class="lb-section-title">Recent matches</div>
+    <div class="lb-filters">
+      <input type="text" id="f-match" placeholder="Search a match (model, id, victory type)…" />
+    </div>
+    <div class="matches" id="matches"></div>
+    <div class="matches-pager" id="matches-pager"></div>
+
+    <div class="visitor-counter">
+      <img src="https://visitor-badge.laobi.icu/badge?page_id=Macmachi.ageofllm-benchmark-viewer" alt="Visitor counter" />
+    </div>
+
+    <footer class="site-footer">
+      <a class="foot-link" href="https://youtu.be/Ec-CV1uzyVY" target="_blank" rel="noopener" title="Presentation video">▶ Presentation ↗</a>
+      <a class="foot-link" href="https://github.com/Macmachi/ageofllm-benchmark-viewer" target="_blank" rel="noopener" title="Star on GitHub">⭐ Star on GitHub</a>
+      <a class="foot-link" href="https://x.com/ageofllm" target="_blank" rel="noopener" title="Follow on X — know when new models are tested">𝕏 Follow @ageofllm</a>
+      <a class="foot-link" href="https://www.youtube.com/@AgeofLLM" target="_blank" rel="noopener" title="YouTube">▶ YouTube</a>
+      <span class="foot-copy">© 2026 Rymentz — Age of LLM™ — All rights reserved</span>
+    </footer>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="assets/js/leaderboard.js"></script>
+</body>
+</html>
