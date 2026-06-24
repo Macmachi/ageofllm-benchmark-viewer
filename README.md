@@ -1,4 +1,4 @@
-# Age of LLM™ — Benchmark · v0.15.0
+# Age of LLM™ — Benchmark · v0.16.0
 
 ![Age of LLM — Benchmark cover](assets/images/Cover.png)
 
@@ -25,6 +25,20 @@ rendering.
 > **factories/research centers**.
 
 ---
+
+## What's new in v0.16.0
+
+This release makes the system prompt **fully rule-only**. Engine bumped **0.15.0 → 0.16.0**.
+
+- **Removed the last two tactical seed phrases from the system prompt.** Earlier
+  versions still contained two residual hints — *"Push tanks + a scout into enemy
+  ground to contest their economy"* and *"Scout with a drone early"* — described as
+  the *"two tactical seed phrases present during data collection"* in the companion
+  paper (Section 2.7). They are now removed, so the prompt describes **only the
+  rules, win conditions and the JSON schema, with no strategic or build-order
+  advice**. Replays produced from v0.16.0 onward are a clean, advice-free baseline;
+  the v0.9.2–v0.15.0 corpus (the 54 matches analysed in the papers) is unaffected
+  and remains as collected, with the seed phrases present.
 
 ## What's new in v0.15.0
 
