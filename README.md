@@ -1,4 +1,4 @@
-# Age of LLM™ — Benchmark · v0.16.0
+# Age of LLM™ — Benchmark · v0.16.1
 
 ![Age of LLM — Benchmark cover](assets/images/Cover.png)
 
@@ -25,6 +25,37 @@ rendering.
 > **factories/research centers**.
 
 ---
+
+## What's new in v0.16.1
+
+Patch release: **leaderboard tooling only — no change to the rules, the system
+prompt or engine behaviour.** Version bumped **0.16.0 → 0.16.1**. Replays are
+untouched and the ranking order is unchanged.
+
+- **Head-to-head tiebreak fixed for aliased models.** Matches played under a
+  provider alias (e.g. `openai/gpt-5.5`) recorded their head-to-head under a key
+  the tiebreak never read, silently returning 0 instead of the real result. It
+  had never fired yet — no two models are currently tied on both points/match
+  and win rate — so no ranking moves.
+- **Two aggregation bugs fixed**: `zai-org-glm-5-1` was missing from the alias
+  table and could have produced two separate "GLM 5.1" rows; and the retry
+  counters were overwriting the turn loop variable.
+- **Silent failures made loud**: replays written into a nested `replays/`
+  sub-folder (unsanitized `/` in `match_id`) used to disappear from the
+  leaderboard without an error, and a decisive match with a corrupted `winner`
+  was counted as a draw without warning. Both now report.
+- **`data/leaderboard.json` publishes its caveats.** New `min_matches_ranked`
+  and per-model `provisional` fields — the minimum-match threshold used to exist
+  only in the website's JavaScript, so anyone reading the raw JSON saw models
+  ranked on 3 matches with nothing marking them as preliminary.
+- **Side-bias audit published.** New `slot_bias` block and per-model
+  `matches_as_p0` / `matches_as_p1`. Player 1 wins **38 of 53 decisive matches
+  (71.7 %, p ≈ 0.002)** while only **2 of 50 pairings were played in both
+  directions**, so side and model identity are currently confounded. It is not a
+  first-move effect — the board is mirrored, the opening player is drawn from the
+  seed and alternates each turn, and the opener wins 24 against 29. Published
+  rather than hidden; isolating it requires mirror matches (identical model on
+  both sides), which is the next step.
 
 ## What's new in v0.16.0
 
