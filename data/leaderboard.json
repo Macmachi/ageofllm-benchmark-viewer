@@ -1,6 +1,13 @@
 {
-  "generated_at": "2026-06-24T16:35:53.608179+00:00",
+  "generated_at": "2026-08-11T23:22:07.961441+00:00",
   "engine_version": "0.15.0",
+  "min_matches_ranked": 3,
+  "slot_bias": {
+    "decisive_matches": 53,
+    "p0_wins": 15,
+    "p1_wins": 38,
+    "p1_win_rate": 0.717
+  },
   "models": [
     {
       "model": "gpt-5.5",
@@ -13,6 +20,8 @@
       "points": 21,
       "points_per_match": 3.0,
       "win_rate": 1.0,
+      "matches_as_p0": 3,
+      "matches_as_p1": 4,
       "nuclear_wins": 6,
       "military_wins": 1,
       "diplomatic_wins": 0,
@@ -29,6 +38,7 @@
       "retries_malformed": 2,
       "retries_total": 7,
       "archived": false,
+      "provisional": false,
       "avg_win_turns": 18.57
     },
     {
@@ -42,6 +52,8 @@
       "points": 24,
       "points_per_match": 2.4,
       "win_rate": 0.8,
+      "matches_as_p0": 1,
+      "matches_as_p1": 9,
       "nuclear_wins": 6,
       "military_wins": 0,
       "diplomatic_wins": 2,
@@ -58,6 +70,7 @@
       "retries_malformed": 2,
       "retries_total": 2,
       "archived": false,
+      "provisional": false,
       "avg_win_turns": 18.62
     },
     {
@@ -71,6 +84,8 @@
       "points": 15,
       "points_per_match": 2.1429,
       "win_rate": 0.7143,
+      "matches_as_p0": 2,
+      "matches_as_p1": 5,
       "nuclear_wins": 5,
       "military_wins": 0,
       "diplomatic_wins": 0,
@@ -87,6 +102,7 @@
       "retries_malformed": 6,
       "retries_total": 28,
       "archived": false,
+      "provisional": false,
       "avg_win_turns": 19.6
     },
     {
@@ -100,6 +116,8 @@
       "points": 6,
       "points_per_match": 2.0,
       "win_rate": 0.6667,
+      "matches_as_p0": 3,
+      "matches_as_p1": 0,
       "nuclear_wins": 2,
       "military_wins": 0,
       "diplomatic_wins": 0,
@@ -116,6 +134,7 @@
       "retries_malformed": 0,
       "retries_total": 0,
       "archived": false,
+      "provisional": false,
       "avg_win_turns": 20.0
     },
     {
@@ -129,6 +148,8 @@
       "points": 28,
       "points_per_match": 1.8667,
       "win_rate": 0.6,
+      "matches_as_p0": 5,
+      "matches_as_p1": 10,
       "nuclear_wins": 8,
       "military_wins": 0,
       "diplomatic_wins": 1,
@@ -145,6 +166,7 @@
       "retries_malformed": 0,
       "retries_total": 5,
       "archived": false,
+      "provisional": false,
       "avg_win_turns": 18.11
     },
     {
@@ -158,6 +180,8 @@
       "points": 18,
       "points_per_match": 1.8,
       "win_rate": 0.6,
+      "matches_as_p0": 4,
+      "matches_as_p1": 6,
       "nuclear_wins": 4,
       "military_wins": 2,
       "diplomatic_wins": 0,
@@ -174,6 +198,7 @@
       "retries_malformed": 1,
       "retries_total": 1,
       "archived": false,
+      "provisional": false,
       "avg_win_turns": 17.33
     },
     {
@@ -187,6 +212,8 @@
       "points": 15,
       "points_per_match": 1.6667,
       "win_rate": 0.5556,
+      "matches_as_p0": 2,
+      "matches_as_p1": 7,
       "nuclear_wins": 5,
       "military_wins": 0,
       "diplomatic_wins": 0,
@@ -203,6 +230,7 @@
       "retries_malformed": 0,
       "retries_total": 0,
       "archived": false,
+      "provisional": false,
       "avg_win_turns": 18.4
     },
     {
@@ -216,6 +244,8 @@
       "points": 10,
       "points_per_match": 1.6667,
       "win_rate": 0.5,
+      "matches_as_p0": 6,
+      "matches_as_p1": 0,
       "nuclear_wins": 3,
       "military_wins": 0,
       "diplomatic_wins": 0,
@@ -232,6 +262,7 @@
       "retries_malformed": 6,
       "retries_total": 8,
       "archived": false,
+      "provisional": false,
       "avg_win_turns": 19.0
     },
     {
@@ -245,6 +276,8 @@
       "points": 6,
       "points_per_match": 1.2,
       "win_rate": 0.4,
+      "matches_as_p0": 3,
+      "matches_as_p1": 2,
       "nuclear_wins": 2,
       "military_wins": 0,
       "diplomatic_wins": 0,
@@ -261,6 +294,7 @@
       "retries_malformed": 0,
       "retries_total": 0,
       "archived": false,
+      "provisional": false,
       "avg_win_turns": 17.5
     },
     {
@@ -274,6 +308,8 @@
       "points": 6.5,
       "points_per_match": 0.8125,
       "win_rate": 0.25,
+      "matches_as_p0": 3,
+      "matches_as_p1": 5,
       "nuclear_wins": 2,
       "military_wins": 0,
       "diplomatic_wins": 0,
@@ -290,6 +326,7 @@
       "retries_malformed": 0,
       "retries_total": 0,
       "archived": false,
+      "provisional": false,
       "avg_win_turns": 18.0
     },
     {
@@ -303,6 +340,8 @@
       "points": 3.5,
       "points_per_match": 0.7,
       "win_rate": 0.2,
+      "matches_as_p0": 4,
+      "matches_as_p1": 1,
       "nuclear_wins": 0,
       "military_wins": 1,
       "diplomatic_wins": 0,
@@ -319,6 +358,7 @@
       "retries_malformed": 24,
       "retries_total": 24,
       "archived": false,
+      "provisional": false,
       "avg_win_turns": 12.0
     },
     {
@@ -332,6 +372,8 @@
       "points": 6,
       "points_per_match": 0.6667,
       "win_rate": 0.2222,
+      "matches_as_p0": 8,
+      "matches_as_p1": 1,
       "nuclear_wins": 2,
       "military_wins": 0,
       "diplomatic_wins": 0,
@@ -348,6 +390,7 @@
       "retries_malformed": 14,
       "retries_total": 36,
       "archived": false,
+      "provisional": false,
       "avg_win_turns": 18.0
     },
     {
@@ -361,6 +404,8 @@
       "points": 3,
       "points_per_match": 0.6,
       "win_rate": 0.2,
+      "matches_as_p0": 4,
+      "matches_as_p1": 1,
       "nuclear_wins": 1,
       "military_wins": 0,
       "diplomatic_wins": 0,
@@ -377,6 +422,7 @@
       "retries_malformed": 0,
       "retries_total": 1,
       "archived": false,
+      "provisional": false,
       "avg_win_turns": 19.0
     },
     {
@@ -390,6 +436,8 @@
       "points": 0.5,
       "points_per_match": 0.1,
       "win_rate": 0.0,
+      "matches_as_p0": 5,
+      "matches_as_p1": 0,
       "nuclear_wins": 0,
       "military_wins": 0,
       "diplomatic_wins": 0,
@@ -406,6 +454,7 @@
       "retries_malformed": 24,
       "retries_total": 25,
       "archived": true,
+      "provisional": false,
       "avg_win_turns": null
     },
     {
@@ -419,6 +468,8 @@
       "points": 0,
       "points_per_match": 0.0,
       "win_rate": 0.0,
+      "matches_as_p0": 1,
+      "matches_as_p1": 3,
       "nuclear_wins": 0,
       "military_wins": 0,
       "diplomatic_wins": 0,
@@ -435,6 +486,7 @@
       "retries_malformed": 0,
       "retries_total": 0,
       "archived": false,
+      "provisional": false,
       "avg_win_turns": null
     }
   ]
