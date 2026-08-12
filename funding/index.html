@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Funding &amp; independence · Age of LLM™ Benchmark</title>
+  <meta name="description" content="How Age of LLM is funded, what sponsors can and cannot influence, what a match costs, and every contribution received." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/images/favicon/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/images/favicon/favicon-16x16.png" />
+  <link rel="manifest" href="../assets/images/favicon/site.webmanifest" />
+  <link rel="icon" href="../assets/images/favicon/favicon.ico" />
+  <link rel="canonical" href="https://ageofllm.org/funding/" />
+  <style>
+    .doc { max-width: 820px; margin: 0 auto; padding: 0 4px 48px; }
+    .doc h2 {
+      font-size: 15px; letter-spacing: .06em; text-transform: uppercase;
+      color: var(--text-dim); font-weight: 700;
+      margin: 38px 0 14px; padding-bottom: 8px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+    .doc p { line-height: 1.65; margin: 0 0 14px; color: var(--text); font-size: 15px; }
+    .doc p.lede { font-size: 16.5px; color: var(--text); }
+    .doc .muted { color: var(--text-dim); font-size: 14px; }
+    .doc a.inline { color: var(--p0); border-bottom: 1px solid rgba(77,166,255,.35); }
+    .doc a.inline:hover { border-bottom-color: var(--p0); }
+    .pledge { list-style: none; margin: 0 0 8px; padding: 0; }
+    .pledge li {
+      position: relative; padding: 14px 16px 14px 46px; margin-bottom: 10px;
+      background: var(--panel); border: 1px solid var(--border-soft);
+      border-left: 3px solid var(--accent); border-radius: var(--radius);
+      line-height: 1.6; font-size: 15px;
+    }
+    .pledge li::before {
+      content: "✓"; position: absolute; left: 17px; top: 13px;
+      color: var(--accent); font-weight: 700; font-size: 15px;
+    }
+    .pledge strong { color: var(--text); }
+    .doc table { width: 100%; border-collapse: collapse; margin: 4px 0 16px; font-size: 14px; }
+    .doc table th {
+      text-align: left; padding: 9px 12px; font-size: 11px; letter-spacing: .06em;
+      text-transform: uppercase; color: var(--text-dim); font-weight: 700;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc table td {
+      padding: 10px 12px; border-bottom: 1px solid var(--border-soft);
+      color: var(--text); vertical-align: top;
+    }
+    .doc table td.num { font-family: var(--mono); text-align: right; white-space: nowrap; }
+    .doc table tr:last-child td { border-bottom: none; }
+    .doc table td.empty { color: var(--text-faint); text-align: center; font-style: italic; padding: 20px 12px; }
+    .note {
+      background: var(--bg-2); border: 1px solid var(--border-soft);
+      border-radius: var(--radius); padding: 14px 16px; margin: 0 0 16px;
+      color: var(--text-dim); font-size: 14px; line-height: 1.6;
+    }
+    .note strong { color: var(--text); }
+    .backlink { display: inline-block; margin: 4px 0 22px; color: var(--text-dim); font-size: 14px; }
+    .backlink:hover { color: var(--text); }
+    .doc-title { font-size: 26px; font-weight: 800; letter-spacing: -.01em; margin: 0 0 10px; }
+    .updated { font-family: var(--mono); font-size: 12px; color: var(--text-faint); margin-bottom: 26px; }
+  </style>
+</head>
+<body>
+  <div class="lb-root">
+    <div class="lb-header">
+      <a href="../"><img src="../assets/images/Logo_AOL.png" alt="Age of LLM" class="header-logo" /></a>
+      <h1>Age of LLM™ <span class="lb-tag">· Funding</span></h1>
+      <span class="lb-ver">v0.16.2</span>
+    </div>
+
+    <div class="doc">
+      <a class="backlink" href="../">← Back to the leaderboard</a>
+
+      <h1 class="doc-title">Funding &amp; independence</h1>
+      <div class="updated">Last updated 2026-08-12</div>
+
+      <p class="lede">
+        Age of LLM accepts API credits and compute from model providers, inference
+        providers and platforms. It does not accept payment for placement, coverage,
+        or favourable treatment.
+      </p>
+      <p>
+        Every benchmark that takes money from the labs it ranks has to answer the same
+        question, so this page answers it before anyone asks. The rules below are
+        binding, they apply to every contributor without exception, and every
+        contribution received is listed at the bottom of this page.
+      </p>
+
+      <h2>The commitments</h2>
+      <ul class="pledge">
+        <li>
+          <strong>Sponsors fund compute, never methodology.</strong>
+          No funder has any input into the rules, the system prompt, the scoring, the
+          tie-breakers, the map, or which models enter the corpus.
+        </li>
+        <li>
+          <strong>No preview.</strong>
+          No result is shared with any party before publication, including with the
+          funder of the model concerned. Nobody sees a score early, and nobody gets to
+          ask for a rerun after seeing one.
+        </li>
+        <li>
+          <strong>Identical protocol.</strong>
+          A funded model is tested exactly as any other: same engine version, same
+          prompt, same reasoning effort, same opponents, same match count.
+        </li>
+        <li>
+          <strong>Full disclosure.</strong>
+          Every contribution is listed below with its amount and what it paid for,
+          before the results it funded are published.
+        </li>
+        <li>
+          <strong>Right to publish anything.</strong>
+          Results are published regardless of how a funded model performs, and so are
+          our own methodological failures. See the side-bias audit below.
+        </li>
+      </ul>
+
+      <h2>What a fair test costs</h2>
+      <p>
+        The threshold for a non-provisional ranking is <strong>20 matches per
+        model</strong>. Below that, a position on the board is an anecdote. The figures
+        below are measured from the actual token usage of the published corpus, not
+        estimated.
+      </p>
+      <table>
+        <thead>
+          <tr><th>Item</th><th class="num">Cost</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Screening a new model (6 matches)</td><td class="num">$10</td></tr>
+          <tr><td>Ranking a new model properly (20 matches)</td><td class="num">$34</td></tr>
+          <tr><td>Completing the current corpus at 20 matches per model</td><td class="num">$254</td></tr>
+          <tr><td>Day-one coverage of every new release, per year</td><td class="num">$1,000&ndash;1,500</td></tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <strong>Why 20 and not 200.</strong> Simulated over a full round-robin with a
+        Bradley-Terry fit, the global ordering converges fast while separating
+        <em>neighbouring</em> models converges very slowly: at 28 matches per model the
+        overall ranking is already near-perfect (Spearman ρ = 0.97) but barely 3
+        adjacent pairs in 5 are ordered correctly, and 14× more compute still misses 1
+        adjacent pair in 25. Twenty matches is not the point where the ranking becomes
+        exact. It is the point where the marginal return collapses. The board therefore
+        supports "this model is in the top tier", and it does not support "this model
+        is 1st and that one is 2nd".
+      </div>
+
+      <h2>What independence has already cost us</h2>
+      <p>
+        In August 2026 an internal check found that the player-2 slot had won 71.7% of
+        decisive matches in our own corpus, which is the kind of number that quietly
+        invalidates a leaderboard. Rather than leave it, we ran a 57-match controlled
+        mirror experiment: the same model on both sides, so model strength is held
+        constant by construction and any remaining imbalance can only come from the
+        engine.
+      </p>
+      <p>
+        The engine turned out to be neutral: player 2 won 51.9% of decisive mirror
+        matches (Wilson 95% CI [38.9&ndash;64.6], exact binomial p = 0.89), significantly
+        different from the corpus figure (Fisher exact p = 0.047). The imbalance came
+        from our own match scheduling, not from the game, so no published result needed
+        correcting and every A-vs-B match had been a fair fight. Matches are now
+        side-swapped by default.
+      </p>
+      <p class="muted">
+        We publish this because a benchmark that never reports a problem with itself is
+        not a benchmark that has none. Full method and figures are in the
+        <a class="inline" href="https://github.com/Macmachi/ageofllm-benchmark-viewer#readme" target="_blank" rel="noopener">README</a>.
+      </p>
+
+      <h2>On verifiability</h2>
+      <p>
+        The full replay corpus, the leaderboard data and the complete methodology are
+        public. The engine itself is deliberately not published: releasing it would
+        allow models to be trained against it, which is the one thing a benchmark built
+        on adversarial play cannot afford. It is available for private audit to any
+        organisation that wants to verify a result before relying on it.
+      </p>
+
+      <h2>Contributions received</h2>
+      <table>
+        <thead>
+          <tr><th>Date</th><th>Contributor</th><th class="num">Amount</th><th>What it paid for</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="empty" colspan="4">No contributions received to date. All compute so far has been paid for personally.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Contributing compute</h2>
+      <p>
+        If you build, host or resell a model and want it tested properly, the ask is API
+        credits or inference, never cash. Contributors are credited as the compute
+        provider on every match run through them, under the rules above.
+      </p>
+      <p class="muted">
+        Reach out on <a class="inline" href="https://x.com/ageofllm" target="_blank" rel="noopener">X (@ageofllm)</a>
+        or open an issue on
+        <a class="inline" href="https://github.com/Macmachi/ageofllm-benchmark-viewer/issues" target="_blank" rel="noopener">GitHub</a>.
+      </p>
+    </div>
+
+    <footer class="site-footer">
+      <a class="foot-link" href="../">← Leaderboard</a>
+      <a class="foot-link" href="https://youtu.be/Ec-CV1uzyVY" target="_blank" rel="noopener" title="Presentation video">▶ Presentation ↗</a>
+      <a class="foot-link" href="https://github.com/Macmachi/ageofllm-benchmark-viewer" target="_blank" rel="noopener" title="Star on GitHub">⭐ Star on GitHub</a>
+      <a class="foot-link" href="https://x.com/ageofllm" target="_blank" rel="noopener" title="Follow on X">𝕏 Follow @ageofllm</a>
+      <a class="foot-link" href="https://www.youtube.com/@AgeofLLM" target="_blank" rel="noopener" title="YouTube">▶ YouTube</a>
+      <span class="foot-copy">© 2026 Rymentz · Age of LLM™ · All rights reserved</span>
+    </footer>
+  </div>
+</body>
+</html>
