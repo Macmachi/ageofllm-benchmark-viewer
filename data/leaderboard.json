@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-12T12:15:58.267544+00:00",
+  "generated_at": "2026-08-12T12:25:26.770774+00:00",
   "engine_version": "0.15.0",
   "min_matches_ranked": 3,
   "slot_bias": {
@@ -23,7 +23,9 @@
       "models": [
         "nvidia/nemotron-3.5-lightning",
         "nvidia/nemotron-3.5-lightning:free"
-      ]
+      ],
+      "measured_at": "2026-08-12",
+      "source": "replays_slot_audit"
     }
   },
   "models": [
