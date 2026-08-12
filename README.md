@@ -1,4 +1,4 @@
-# Age of LLM™ — Benchmark · v0.16.1
+# Age of LLM™ — Benchmark · v0.16.2
 
 ![Age of LLM — Benchmark cover](assets/images/Cover.png)
 
@@ -25,6 +25,28 @@ rendering.
 > **factories/research centers**.
 
 ---
+
+## What's new in v0.16.2
+
+**The side-bias question is settled: the engine favours neither slot.**
+
+A 57-match **mirror campaign** (`nvidia/nemotron-3.5-lightning`, the same model
+on both sides, so model strength is constant by construction) gives **p2 51.9 %,
+Wilson 95 % CI [38.9 – 64.6], p = 0.89** — indistinguishable from a fair coin.
+The main corpus's **71.7 %** falls outside that interval, and the two sets differ
+significantly (Fisher exact, **p = 0.047**).
+
+The imbalance therefore comes from **slot assignment in the queue files** —
+stronger models were written into the p2 field — and not from the game itself.
+
+- **The ranking needs no correction.** Every A-vs-B match was a fair fight; the
+  recorded outcomes stand. The 71.7 % only reflects which models sat in p2.
+- **Side-swapping stays recommended as hygiene, not as a fix**: the audit covers
+  a single model, and balanced pairings make neutrality verifiable from the
+  corpus rather than something a reader must assume.
+- `data/leaderboard.json` now publishes both figures under `slot_bias` and
+  `slot_bias.mirror`, each with its Wilson interval, so no consumer reads a rate
+  without its uncertainty.
 
 ## What's new in v0.16.1
 
