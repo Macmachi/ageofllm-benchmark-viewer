@@ -135,10 +135,10 @@
     // how the four got there. The record does, and it links to the matches.
     const rec = (p.wins + p.losses)
       ? `<a class="lad-stat rec" href="#opening-history" title="Record across every match played on this ladder. Click to open the match list and the replays.">▤ ${p.wins}W–${p.losses}L</a>` : '';
-    // Tempo. Not a ranking criterion — it only breaks a tie in the opening, and
-    // and, since engine 0.17.0, settles a level tie in a challenge as well.
+    // Tempo. It settles the opening table when points, wins and head-to-head
+    // are all level, and since site 0.17.1 it settles a level challenge too.
     const tempo = p.winTurns != null
-      ? `<span class="lad-stat" title="Mean turns taken in the ${p.wins} match(es) this model won. Shown as information: it settles a tie in the opening table, never a challenge.">⚔ wins in ${p.winTurns.toFixed(0)}</span>` : '';
+      ? `<span class="lad-stat" title="Mean turns taken in the ${p.wins} match(es) this model won. Career figure, shown as information — a challenge is settled on the speed inside that duel, not on this average.">⚔ wins in ${p.winTurns.toFixed(0)}</span>` : '';
     const cost = p.usdPerMatch != null
       ? `<span class="lad-stat${p.allReported ? '' : ' estimated'}" title="${p.allReported
           ? 'Average USD per match, as charged by the provider'
@@ -196,12 +196,14 @@
     const bits = [
       `${r.rungs || 4} places`,
       'one pinned provider per model',
-      `${r.legs_per_tie || 2} legs per tie, sides swapped`,
-      'level tie → the faster win takes the rung',
-      // Not "one defeat": run_ladder breaks on any result that is not a win,
-      // so a tie the challenger fails to take ends the climb just as a defeat
-      // does — and since the speed rule, a level tie can also continue it.
-      'the first tie not won ends the climb',
+      `${r.legs_per_tie || 2} legs per rung, sides swapped`,
+      'level on points → the faster win takes the rung',
+      // Not "one defeat": run_ladder breaks on any result that is not a win, so
+      // failing to take a rung ends the climb just as a defeat does. And not
+      // "the first tie not won" either — "tie" means the two-leg duel here but
+      // "level tie" in the chip above means a draw, and one word cannot do both
+      // jobs in two neighbouring chips without misleading everyone.
+      'a rung it does not take ends the climb',
     ];
     document.getElementById('lad-rules').innerHTML =
       bits.map((b) => `<span class="lad-rule">${esc(b)}</span>`).join('');
