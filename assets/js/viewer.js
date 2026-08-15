@@ -269,8 +269,85 @@
     // bomb readiness (uranium / cost + silo + enemy base discovered)
     updateBombHud(turn, showU, view);
 
+    // ceasefire in force / unanswered proposal, under the model names
+    updateDiploHud(frame.turnIndex);
+
     // LLM performance HUD: cumulative tokens + last think time per player
     updatePerfHud(frame.turnIndex);
+  }
+
+  // ── diplomacy status, under the model names ───────────────────────────────
+  // A ceasefire in force and an offer still awaiting an answer both change how
+  // the moves on screen should be read, and until now neither was visible
+  // outside the diplomacy log — you had to open a panel to know the players
+  // were not allowed to shoot at each other.
+  const PROPOSAL_KINDS = new Set(['ceasefire', 'peace', 'ultimatum']);
+  // Replays written before engine 0.18.0 carry no ceasefire window, so for those
+  // it is inferred from the accepted offer plus the duration in force when they
+  // were played. Newer replays carry the engine's own value and never use this.
+  const LEGACY_CEASEFIRE_DURATION = 3;
+
+  function diploStatus(turnIndex) {
+    const frames = replay.turns || [];
+    const now = frames[turnIndex];
+    if (!now) return { ceasefireLeft: null, pending: [] };
+    const nowTurn = now.turn;
+
+    let until = null;
+    if (Object.prototype.hasOwnProperty.call(now, 'ceasefire_until')) {
+      until = now.ceasefire_until;                       // authoritative
+    } else {
+      for (let i = 0; i <= turnIndex; i++) {             // inferred, legacy only
+        for (const e of frames[i].diplomacy || []) {
+          if (e.kind === 'ceasefire' && e.response === 'accepted') {
+            const end = frames[i].turn + LEGACY_CEASEFIRE_DURATION;
+            if (until === null || end > until) until = end;
+          }
+        }
+      }
+    }
+    const ceasefireLeft =
+      (until !== null && until !== undefined && nowTurn <= until) ? until - nowTurn + 1 : null;
+
+    // An offer is serialized twice: once when made (no response) and again in
+    // the half-turn it is answered. Anything never answered is still open.
+    const key = (e) => `${e.from}|${e.to}|${e.kind}|${e.turn}`;
+    const answered = new Set(), open = new Map();
+    for (let i = 0; i <= turnIndex; i++) {
+      for (const e of frames[i].diplomacy || []) {
+        if (!PROPOSAL_KINDS.has(e.kind)) continue;
+        const k = key(e);
+        if (e.response) { answered.add(k); open.delete(k); }
+        else if (!answered.has(k)) open.set(k, e);
+      }
+    }
+    return { ceasefireLeft, pending: [...open.values()] };
+  }
+
+  function updateDiploHud(turnIndex) {
+    const { ceasefireLeft, pending } = diploStatus(turnIndex);
+    for (let i = 0; i < 2; i++) {
+      const host = $(`diplo${i}`);
+      if (!host) continue;
+      host.innerHTML = '';
+      // A ceasefire binds both sides, so it is shown on both cards.
+      if (ceasefireLeft !== null) {
+        const b = document.createElement('span');
+        b.className = 'pdiplo-badge cf';
+        b.textContent = `🕊 Ceasefire · ${ceasefireLeft} turn${ceasefireLeft > 1 ? 's' : ''} left`;
+        b.title = 'No attack allowed between the two players. Launching the bomb is still possible but costs extra.';
+        host.appendChild(b);
+      }
+      for (const e of pending) {
+        if (e.from !== i) continue;             // shown under whoever offered
+        const b = document.createElement('span');
+        b.className = 'pdiplo-badge pending';
+        const label = e.kind.charAt(0).toUpperCase() + e.kind.slice(1);
+        b.textContent = `📨 ${label} offered · awaiting reply`;
+        b.title = e.text || '';
+        host.appendChild(b);
+      }
+    }
   }
 
   // Bomb progress bar + the three launch requirements per player.
