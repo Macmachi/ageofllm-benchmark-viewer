@@ -69,6 +69,12 @@ stores what the player was told before deciding, and the viewer marks it in the
 reasoning panel — separating *"it knew and did not fire back"* from *"it never
 knew"*.
 
+**A ceasefire lasts 4 turns, not 3.** Accepted on turn T, it is active on T, T+1,
+T+2 and T+3 — while the prompt said *"3 turns"* in three places. The wording was
+corrected rather than the engine: changing the value would be a rules change, and
+6 of the 12 opening matches ran under a ceasefire. The discrepancy has cost
+nobody anything so far — **zero ceasefire rejections across all 66 replays**.
+
 **Diplomatic state left the chat.** A ceasefire in force, and an offer still
 awaiting an answer, now show as badges under the model names instead of being
 readable only inside the diplomacy panel. Replays carry `ceasefire_until` so the
