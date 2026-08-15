@@ -193,17 +193,18 @@
 
   function renderRules() {
     const r = data.rules || {};
+    // Plain words only. "tie", "leg" and "home and away" all read as jargon to
+    // anyone who has not read the README, and two of them mean something else
+    // in ordinary English.
     const bits = [
       `${r.rungs || 4} places`,
-      'one pinned provider per model',
-      `${r.legs_per_tie || 2} legs per rung, sides swapped`,
-      'level on points → the faster win takes the rung',
+      'challengers enter at the bottom',
+      `${r.legs_per_tie || 2} matches per place, one from each side`,
+      'split 1–1 → the faster win takes it',
       // Not "one defeat": run_ladder breaks on any result that is not a win, so
-      // failing to take a rung ends the climb just as a defeat does. And not
-      // "the first tie not won" either — "tie" means the two-leg duel here but
-      // "level tie" in the chip above means a draw, and one word cannot do both
-      // jobs in two neighbouring chips without misleading everyone.
-      'a rung it does not take ends the climb',
+      // failing to take a place ends the run exactly as a defeat does.
+      'the run ends at the first place not taken',
+      'one pinned endpoint per model',
     ];
     document.getElementById('lad-rules').innerHTML =
       bits.map((b) => `<span class="lad-rule">${esc(b)}</span>`).join('');
@@ -235,8 +236,9 @@
          <div class="opening pending">
            <div class="opening-lead">
              <b>${op.matches_to_play || 0} matches to play.</b>
-             These four models meet each other home and away; the table they
-             produce becomes the ladder. Nothing is placed by decree.
+             These four models play each other twice, once from each side of the
+             map; the table they produce becomes the ladder. Nothing is placed by
+             decree.
            </div>
            <div class="opening-models">
              ${(op.models || []).map((m) =>
@@ -330,7 +332,7 @@
          <div class="throne-stats">
            <div class="ts"><b>${days}</b><span>days held</span></div>
            <div class="ts"><b>${reign ? reign.defences : 0}</b><span>defence${(reign && reign.defences) === 1 ? '' : 's'}</span></div>
-           <div class="ts"><b>${top.seeded ? '—' : top.climbed}</b><span>rungs climbed</span></div>
+           <div class="ts"><b>${top.seeded ? '—' : top.climbed}</b><span>places climbed</span></div>
          </div>
        </div>`;
   }
@@ -355,7 +357,7 @@
                 <div class="lad-meta">
                   ${perfCells(e.model)}
                   <span title="Date this model took the place">${e.seeded ? 'seeded ' : 'entered '}${fmtDate(e.entered_at)}</span>
-                  <span title="Challenges survived at this rung">${e.holds} hold${e.holds === 1 ? '' : 's'}</span>
+                  <span title="Challenges survived at this place">${e.holds} hold${e.holds === 1 ? '' : 's'}</span>
                 </div>
               </div>`;
     }).join('');
