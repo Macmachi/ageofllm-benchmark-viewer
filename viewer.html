@@ -242,6 +242,9 @@
           <div class="reason-text" id="reason-text"></div>
           <div class="actions-row" id="reason-actions"></div>
           <div class="discovered" id="reason-discovered" style="display:none">📡 Enemy base spotted</div>
+          <!-- Only shown when the engine actually told this player. It separates
+               "it knew and did not fire back" from "it never knew". -->
+          <div class="launch-warned" id="reason-launch" style="display:none">☢ Enemy launch detected — this player was told, and could still fire back this turn</div>
         </div>
       </div>
     </div>

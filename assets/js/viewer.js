@@ -89,6 +89,7 @@
   function cacheEls() {
     ['loading', 'match-id', 'turn-label', 'scrubber', 't-play',
      'reason-text', 'reason-actions', 'reason-badge', 'reason-discovered',
+     'reason-launch',
      'diplo-log', 'diplo-count', 'victory', 'vttl', 'vsub', 'vbolt']
       .forEach((id) => els[id] = $(id));
   }
@@ -396,6 +397,13 @@
     }
     const disc = ps.knowledge && ps.knowledge.enemy_base_discovered;
     els['reason-discovered'].style.display = disc ? 'flex' : 'none';
+
+    // Recorded from engine 0.18.0 on. Absent in older replays, where it must
+    // stay hidden rather than render as "not warned" — we simply do not know.
+    const warned = ps.knowledge && ps.knowledge.enemy_launch_detected;
+    if (els['reason-launch']) {
+      els['reason-launch'].style.display = warned ? 'flex' : 'none';
+    }
 
     // diplomacy cumulative
     renderDiplomacy(turn.turn);

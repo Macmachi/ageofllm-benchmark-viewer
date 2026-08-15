@@ -341,6 +341,14 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 }
 #reason-panel .actions-row { margin-top: 9px; padding-top: 9px; border-top: 1px solid var(--border-soft); display: flex; flex-wrap: wrap; gap: 5px; }
 #reason-panel .discovered { margin-top: 8px; color: var(--uranium); font-size: 12px; display: flex; align-items: center; gap: 5px; }
+/* The early warning is the one signal that can flip a defeat into a draw, and it
+   lasts a single half-turn — it gets a louder treatment than the other badges. */
+#reason-panel .launch-warned {
+  margin-top: 8px; font-size: 12px; align-items: center; gap: 5px;
+  color: var(--p1); font-weight: 600;
+  background: var(--p1-bg); border: 1px solid var(--p1);
+  border-radius: var(--radius); padding: 6px 9px; line-height: 1.35;
+}
 
 .diplo-log { display: flex; flex-direction: column; gap: 7px; }
 .diplo-item { font-size: 12px; border-radius: 5px; padding: 7px 9px; border-left: 3px solid; overflow-wrap: anywhere; word-break: break-word; }
