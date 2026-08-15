@@ -8,30 +8,10 @@
 (function () {
   'use strict';
 
-  // Per-model metadata: flag (country emoji) + author (company name) + optional new badge.
-  // Add a single entry here when a new model is benchmarked.
-  const MODEL_META = {
-    // 🇨🇭 Switzerland — deterministic benchmark anchor (not an LLM)
-    'champion-agent':                    { flag: '🇨🇭', author: 'Rymentz AI' },
-    // 🇺🇸 United States
-    'gpt-5.5':                           { flag: '🇺🇸', author: 'OpenAI' },
-    'claude-fable-5':                    { flag: '🇺🇸', author: 'Anthropic', isNew: true },
-    'claude-opus-4.8':                   { flag: '🇺🇸', author: 'Anthropic' },
-    'gemini-3.5-flash':                  { flag: '🇺🇸', author: 'Google' },
-    'gemini-3.1-pro':                    { flag: '🇺🇸', author: 'Google' },
-    'grok-4.3':                          { flag: '🇺🇸', author: 'xAI' },
-    'nvidia-nemotron-3-ultra-550b-a55b': { flag: '🇺🇸', author: 'Nvidia' },
-    // 🇨🇳 China
-    'deepseek-v4-pro-e':                 { flag: '🇨🇳', author: 'DeepSeek' },
-    'mimo-v2.5-pro':                     { flag: '🇨🇳', author: 'Xiaomi' },
-    'qwen3.7-max':                       { flag: '🇨🇳', author: 'Alibaba' },
-    'minimax-m3':                        { flag: '🇨🇳', author: 'MiniMax', isNew: true },
-    'kimi-k2.7-code':                    { flag: '🇨🇳', author: 'Moonshot', isNew: true },
-    'kimi-k2.6':                         { flag: '🇨🇳', author: 'Moonshot' },
-    'zai-org-glm-5-1':                   { flag: '🇨🇳', author: 'Zhipu' },
-    'glm-5.1-fw':                        { flag: '🇨🇳', author: 'Zhipu' },
-    'glm-5.2':                           { flag: '🇨🇳', author: 'Zhipu', isNew: true },
-  };
+  // Per-model metadata (flag / author / NEW badge) lives in model-meta.js so
+  // this page and the ladder page can never drift apart. Falls back to an empty
+  // table if the script failed to load — names still render, flags just vanish.
+  const MODEL_META = window.MODEL_META || {};
 
   function modelDisplayName(m) {
     return m.display_name || m.model;
@@ -57,15 +37,8 @@
     peace: 'Peace', mutual_destruction: 'Mutual destr.', timeout: 'Timeout',
   };
 
-  // Reasoning-effort badge label. Extendable in the future.
-  const EFFORT_LABEL = {
-    high: 'HIGH', medium: 'MED', low: 'LOW', off: 'OFF', na: 'NA',
-  };
-  function effortBadge(effort) {
-    const e = String(effort || 'off').toLowerCase();
-    const label = EFFORT_LABEL[e] || e.toUpperCase();
-    return `<span class="effort effort-${esc(e)}" title="Reasoning effort">${esc(label)}</span>`;
-  }
+  // Effort badge lives in model-meta.js, shared with the ladder page.
+  const effortBadge = window.effortBadge || (() => '');
 
   const PAGE_SIZE = 20;   // matches per page
 
@@ -81,14 +54,19 @@
   let minMatches = 3;
 
   async function init() {
+    // V1 is an ARCHIVE: it reads frozen snapshots, never the live files that
+    // generate_stats.py rewrites. Otherwise the first ladder match played would
+    // silently reopen a ranking that is closed on purpose.
     const [lb, idx] = await Promise.all([
-      fetchJSON('data/leaderboard.json').catch(() => ({ models: [] })),
-      fetchJSON('replays/index.json').catch(() => ({ models: [], replays: [] })),
+      fetchJSON('data/leaderboard_v1.json').catch(() => ({ models: [] })),
+      fetchJSON('replays/index_v1.json').catch(() => ({ models: [], replays: [] })),
     ]);
     models = lb.models || [];
     // Show engine version from leaderboard.json in the header badge.
     const verEl = document.querySelector('.lb-ver');
-    if (verEl && lb.engine_version) verEl.textContent = `v${lb.engine_version}`;
+    // A frozen archive keeps the label the page already carries ("V1 · archive"):
+    // stamping it with one engine version would hide that it spans several.
+    if (verEl && lb.engine_version && !lb.frozen) verEl.textContent = `v${lb.engine_version}`;
     // index.json is sorted oldest->newest; show newest first (by date, then id).
     allMatches = (idx.replays || []).slice().sort((a, b) => {
       const d = String(b.date || '').localeCompare(String(a.date || ''));

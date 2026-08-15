@@ -1,0 +1,586 @@
+{
+  "generated_at": "2026-08-15T18:39:42.596530+00:00",
+  "engine_version": "0.17.0",
+  "site_version": "0.17.1",
+  "preview": false,
+  "note": "",
+  "rules": {
+    "rungs": 4,
+    "legs_per_tie": 2,
+    "tie_rule": "incumbent_retains",
+    "points": {
+      "win": 3.0,
+      "draw": 1.0,
+      "ultimatum_loss": 0.5,
+      "loss": 0.0
+    }
+  },
+  "started_at": "2026-08-15",
+  "opening": {
+    "status": "complete",
+    "date": "2026-08-15",
+    "models": [
+      {
+        "model": "anthropic/claude-opus-5",
+        "display_name": "Claude Opus 5",
+        "reasoning_effort": "high",
+        "quantization": "unknown"
+      },
+      {
+        "model": "openai/gpt-5.6-sol",
+        "display_name": "GPT-5.6 Sol",
+        "reasoning_effort": "high",
+        "quantization": "unknown"
+      },
+      {
+        "model": "moonshotai/kimi-k3",
+        "display_name": "Kimi K3",
+        "reasoning_effort": "high",
+        "quantization": "mxfp4"
+      },
+      {
+        "model": "x-ai/grok-4.6",
+        "display_name": "Grok 4.6",
+        "reasoning_effort": "high",
+        "quantization": "unknown"
+      }
+    ],
+    "legs": [
+      {
+        "match_id": "ladder_opening_anthropic-claude-opus-5_vs_openai-gpt-5.6-sol_leg1",
+        "a": "anthropic/claude-opus-5",
+        "b": "openai/gpt-5.6-sol",
+        "a_side": 0,
+        "outcome": "b",
+        "victory_type": "nuclear",
+        "turns": 22,
+        "date": "2026-08-15T06:56:32.499437+00:00",
+        "usd": 4.1438,
+        "perf": {
+          "anthropic/claude-opus-5": {
+            "usd": 2.72759,
+            "cost_source": "provider",
+            "think_ms": 41253,
+            "half_turns": 22,
+            "served_by": "Anthropic",
+            "actions_ok": 62,
+            "illegal": 2,
+            "fog_blocked": 0
+          },
+          "openai/gpt-5.6-sol": {
+            "usd": 1.416208,
+            "cost_source": "provider",
+            "think_ms": 37007,
+            "half_turns": 22,
+            "served_by": "OpenAI",
+            "actions_ok": 63,
+            "illegal": 2,
+            "fog_blocked": 0
+          }
+        },
+        "source": "replay"
+      },
+      {
+        "match_id": "ladder_opening_anthropic-claude-opus-5_vs_openai-gpt-5.6-sol_leg2",
+        "a": "anthropic/claude-opus-5",
+        "b": "openai/gpt-5.6-sol",
+        "a_side": 1,
+        "outcome": "a",
+        "victory_type": "nuclear",
+        "turns": 22,
+        "date": "2026-08-15T07:24:40.390850+00:00",
+        "usd": 4.1434,
+        "perf": {
+          "openai/gpt-5.6-sol": {
+            "usd": 1.649924,
+            "cost_source": "provider",
+            "think_ms": 43103,
+            "half_turns": 22,
+            "served_by": "OpenAI",
+            "actions_ok": 61,
+            "illegal": 1,
+            "fog_blocked": 0
+          },
+          "anthropic/claude-opus-5": {
+            "usd": 2.493495,
+            "cost_source": "provider",
+            "think_ms": 33556,
+            "half_turns": 22,
+            "served_by": "Anthropic",
+            "actions_ok": 58,
+            "illegal": 2,
+            "fog_blocked": 0
+          }
+        },
+        "source": "replay"
+      },
+      {
+        "match_id": "ladder_opening_anthropic-claude-opus-5_vs_moonshotai-kimi-k3_leg1",
+        "a": "anthropic/claude-opus-5",
+        "b": "moonshotai/kimi-k3",
+        "a_side": 0,
+        "outcome": "b",
+        "victory_type": "nuclear",
+        "turns": 24,
+        "date": "2026-08-15T08:15:50.656948+00:00",
+        "usd": 4.1468,
+        "perf": {
+          "anthropic/claude-opus-5": {
+            "usd": 2.57993,
+            "cost_source": "provider",
+            "think_ms": 29260,
+            "half_turns": 24,
+            "served_by": "Anthropic",
+            "actions_ok": 67,
+            "illegal": 0,
+            "fog_blocked": 0
+          },
+          "moonshotai/kimi-k3": {
+            "usd": 1.566839,
+            "cost_source": "provider",
+            "think_ms": 98603,
+            "half_turns": 24,
+            "served_by": "Moonshot AI",
+            "actions_ok": 63,
+            "illegal": 1,
+            "fog_blocked": 0
+          }
+        },
+        "source": "replay"
+      },
+      {
+        "match_id": "ladder_opening_anthropic-claude-opus-5_vs_moonshotai-kimi-k3_leg2",
+        "a": "anthropic/claude-opus-5",
+        "b": "moonshotai/kimi-k3",
+        "a_side": 1,
+        "outcome": "a",
+        "victory_type": "nuclear",
+        "turns": 20,
+        "date": "2026-08-15T09:01:04.541604+00:00",
+        "usd": 3.1624,
+        "perf": {
+          "moonshotai/kimi-k3": {
+            "usd": 1.407018,
+            "cost_source": "provider",
+            "think_ms": 114701,
+            "half_turns": 20,
+            "served_by": "Moonshot AI",
+            "actions_ok": 56,
+            "illegal": 1,
+            "fog_blocked": 0
+          },
+          "anthropic/claude-opus-5": {
+            "usd": 1.755345,
+            "cost_source": "provider",
+            "think_ms": 20918,
+            "half_turns": 20,
+            "served_by": "Anthropic",
+            "actions_ok": 52,
+            "illegal": 2,
+            "fog_blocked": 0
+          }
+        },
+        "source": "replay"
+      },
+      {
+        "match_id": "ladder_opening_anthropic-claude-opus-5_vs_x-ai-grok-4.6_leg1",
+        "a": "anthropic/claude-opus-5",
+        "b": "x-ai/grok-4.6",
+        "a_side": 0,
+        "outcome": "b",
+        "victory_type": "nuclear",
+        "turns": 23,
+        "date": "2026-08-15T10:22:26.381647+00:00",
+        "usd": 4.4562,
+        "perf": {
+          "anthropic/claude-opus-5": {
+            "usd": 2.81054,
+            "cost_source": "provider",
+            "think_ms": 39654,
+            "half_turns": 23,
+            "served_by": "Anthropic",
+            "actions_ok": 63,
+            "illegal": 1,
+            "fog_blocked": 0
+          },
+          "x-ai/grok-4.6": {
+            "usd": 1.64563,
+            "cost_source": "provider",
+            "think_ms": 172005,
+            "half_turns": 23,
+            "served_by": "xAI",
+            "actions_ok": 64,
+            "illegal": 1,
+            "fog_blocked": 0
+          }
+        },
+        "source": "replay"
+      },
+      {
+        "match_id": "ladder_opening_anthropic-claude-opus-5_vs_x-ai-grok-4.6_leg2",
+        "a": "anthropic/claude-opus-5",
+        "b": "x-ai/grok-4.6",
+        "a_side": 1,
+        "outcome": "b",
+        "victory_type": "nuclear",
+        "turns": 19,
+        "date": "2026-08-15T11:24:29.840999+00:00",
+        "usd": 3.4405,
+        "perf": {
+          "x-ai/grok-4.6": {
+            "usd": 1.315184,
+            "cost_source": "provider",
+            "think_ms": 161481,
+            "half_turns": 19,
+            "served_by": "xAI",
+            "actions_ok": 54,
+            "illegal": 0,
+            "fog_blocked": 1
+          },
+          "anthropic/claude-opus-5": {
+            "usd": 2.125315,
+            "cost_source": "provider",
+            "think_ms": 34417,
+            "half_turns": 19,
+            "served_by": "Anthropic",
+            "actions_ok": 51,
+            "illegal": 3,
+            "fog_blocked": 0
+          }
+        },
+        "source": "replay"
+      },
+      {
+        "match_id": "ladder_opening_openai-gpt-5.6-sol_vs_moonshotai-kimi-k3_leg1",
+        "a": "openai/gpt-5.6-sol",
+        "b": "moonshotai/kimi-k3",
+        "a_side": 0,
+        "outcome": "a",
+        "victory_type": "nuclear",
+        "turns": 25,
+        "date": "2026-08-15T12:23:14.248252+00:00",
+        "usd": 3.5585,
+        "perf": {
+          "openai/gpt-5.6-sol": {
+            "usd": 1.831075,
+            "cost_source": "provider",
+            "think_ms": 36555,
+            "half_turns": 25,
+            "served_by": "OpenAI",
+            "actions_ok": 68,
+            "illegal": 3,
+            "fog_blocked": 0
+          },
+          "moonshotai/kimi-k3": {
+            "usd": 1.727401,
+            "cost_source": "provider",
+            "think_ms": 104346,
+            "half_turns": 25,
+            "served_by": "Moonshot AI",
+            "actions_ok": 73,
+            "illegal": 1,
+            "fog_blocked": 0
+          }
+        },
+        "source": "replay"
+      },
+      {
+        "match_id": "ladder_opening_openai-gpt-5.6-sol_vs_moonshotai-kimi-k3_leg2",
+        "a": "openai/gpt-5.6-sol",
+        "b": "moonshotai/kimi-k3",
+        "a_side": 1,
+        "outcome": "a",
+        "victory_type": "nuclear",
+        "turns": 21,
+        "date": "2026-08-15T13:08:52.762151+00:00",
+        "usd": 2.7319,
+        "perf": {
+          "moonshotai/kimi-k3": {
+            "usd": 1.330445,
+            "cost_source": "provider",
+            "think_ms": 98208,
+            "half_turns": 21,
+            "served_by": "Moonshot AI",
+            "actions_ok": 60,
+            "illegal": 0,
+            "fog_blocked": 0
+          },
+          "openai/gpt-5.6-sol": {
+            "usd": 1.401443,
+            "cost_source": "provider",
+            "think_ms": 32108,
+            "half_turns": 21,
+            "served_by": "OpenAI",
+            "actions_ok": 56,
+            "illegal": 4,
+            "fog_blocked": 0
+          }
+        },
+        "source": "replay"
+      },
+      {
+        "match_id": "ladder_opening_openai-gpt-5.6-sol_vs_x-ai-grok-4.6_leg1",
+        "a": "openai/gpt-5.6-sol",
+        "b": "x-ai/grok-4.6",
+        "a_side": 0,
+        "outcome": "b",
+        "victory_type": "nuclear",
+        "turns": 21,
+        "date": "2026-08-15T14:07:42.995334+00:00",
+        "usd": 2.3777,
+        "perf": {
+          "openai/gpt-5.6-sol": {
+            "usd": 1.096129,
+            "cost_source": "provider",
+            "think_ms": 26181,
+            "half_turns": 21,
+            "served_by": "OpenAI",
+            "actions_ok": 57,
+            "illegal": 1,
+            "fog_blocked": 0
+          },
+          "x-ai/grok-4.6": {
+            "usd": 1.28155,
+            "cost_source": "provider",
+            "think_ms": 141848,
+            "half_turns": 21,
+            "served_by": "xAI",
+            "actions_ok": 60,
+            "illegal": 0,
+            "fog_blocked": 0
+          }
+        },
+        "source": "replay"
+      },
+      {
+        "match_id": "ladder_opening_openai-gpt-5.6-sol_vs_x-ai-grok-4.6_leg2",
+        "a": "openai/gpt-5.6-sol",
+        "b": "x-ai/grok-4.6",
+        "a_side": 1,
+        "outcome": "a",
+        "victory_type": "nuclear",
+        "turns": 22,
+        "date": "2026-08-15T15:24:48.698047+00:00",
+        "usd": 2.9825,
+        "perf": {
+          "x-ai/grok-4.6": {
+            "usd": 1.595174,
+            "cost_source": "provider",
+            "think_ms": 177474,
+            "half_turns": 22,
+            "served_by": "xAI",
+            "actions_ok": 62,
+            "illegal": 2,
+            "fog_blocked": 0
+          },
+          "openai/gpt-5.6-sol": {
+            "usd": 1.387277,
+            "cost_source": "provider",
+            "think_ms": 32714,
+            "half_turns": 22,
+            "served_by": "OpenAI",
+            "actions_ok": 62,
+            "illegal": 3,
+            "fog_blocked": 0
+          }
+        },
+        "source": "replay"
+      },
+      {
+        "match_id": "ladder_opening_moonshotai-kimi-k3_vs_x-ai-grok-4.6_leg1",
+        "a": "moonshotai/kimi-k3",
+        "b": "x-ai/grok-4.6",
+        "a_side": 0,
+        "outcome": "b",
+        "victory_type": "nuclear",
+        "turns": 21,
+        "date": "2026-08-15T16:51:07.796534+00:00",
+        "usd": 2.626,
+        "perf": {
+          "moonshotai/kimi-k3": {
+            "usd": 1.307071,
+            "cost_source": "provider",
+            "think_ms": 101951,
+            "half_turns": 21,
+            "served_by": "Moonshot AI",
+            "actions_ok": 60,
+            "illegal": 0,
+            "fog_blocked": 1
+          },
+          "x-ai/grok-4.6": {
+            "usd": 1.318954,
+            "cost_source": "provider",
+            "think_ms": 144609,
+            "half_turns": 21,
+            "served_by": "xAI",
+            "actions_ok": 60,
+            "illegal": 3,
+            "fog_blocked": 0
+          }
+        },
+        "source": "replay"
+      },
+      {
+        "match_id": "ladder_opening_moonshotai-kimi-k3_vs_x-ai-grok-4.6_leg2",
+        "a": "moonshotai/kimi-k3",
+        "b": "x-ai/grok-4.6",
+        "a_side": 1,
+        "outcome": "a",
+        "victory_type": "nuclear",
+        "turns": 25,
+        "date": "2026-08-15T18:39:42.591163+00:00",
+        "usd": 3.3115,
+        "perf": {
+          "x-ai/grok-4.6": {
+            "usd": 1.764574,
+            "cost_source": "provider",
+            "think_ms": 157577,
+            "half_turns": 25,
+            "served_by": "xAI",
+            "actions_ok": 72,
+            "illegal": 1,
+            "fog_blocked": 0
+          },
+          "moonshotai/kimi-k3": {
+            "usd": 1.546928,
+            "cost_source": "provider",
+            "think_ms": 102945,
+            "half_turns": 25,
+            "served_by": "Moonshot AI",
+            "actions_ok": 69,
+            "illegal": 1,
+            "fog_blocked": 0
+          }
+        },
+        "source": "replay"
+      }
+    ],
+    "table": [
+      {
+        "model": "x-ai/grok-4.6",
+        "display_name": "Grok 4.6",
+        "reasoning_effort": "high",
+        "quantization": "unknown",
+        "pts": 12.0,
+        "w": 4,
+        "d": 0,
+        "l": 2,
+        "played": 6,
+        "tiebreak": "turns to win",
+        "rank": 1,
+        "avg_win_turns": 21.0,
+        "avg_loss_turns": 23.5
+      },
+      {
+        "model": "openai/gpt-5.6-sol",
+        "display_name": "GPT-5.6 Sol",
+        "reasoning_effort": "high",
+        "quantization": "unknown",
+        "pts": 12.0,
+        "w": 4,
+        "d": 0,
+        "l": 2,
+        "played": 6,
+        "tiebreak": "turns to win",
+        "rank": 2,
+        "avg_win_turns": 22.5,
+        "avg_loss_turns": 21.5
+      },
+      {
+        "model": "anthropic/claude-opus-5",
+        "display_name": "Claude Opus 5",
+        "reasoning_effort": "high",
+        "quantization": "unknown",
+        "pts": 6.0,
+        "w": 2,
+        "d": 0,
+        "l": 4,
+        "played": 6,
+        "tiebreak": "turns to win",
+        "rank": 3,
+        "avg_win_turns": 21.0,
+        "avg_loss_turns": 22.0
+      },
+      {
+        "model": "moonshotai/kimi-k3",
+        "display_name": "Kimi K3",
+        "reasoning_effort": "high",
+        "quantization": "mxfp4",
+        "pts": 6.0,
+        "w": 2,
+        "d": 0,
+        "l": 4,
+        "played": 6,
+        "tiebreak": "turns to win",
+        "rank": 4,
+        "avg_win_turns": 24.5,
+        "avg_loss_turns": 21.8
+      }
+    ]
+  },
+  "ladder": [
+    {
+      "model": "x-ai/grok-4.6",
+      "display_name": "Grok 4.6",
+      "reasoning_effort": "high",
+      "quantization": "unknown",
+      "entered_at": "2026-08-15",
+      "defences": 0,
+      "holds": 0,
+      "climbed": 0,
+      "seeded": false,
+      "via": "opening",
+      "rank": 1
+    },
+    {
+      "model": "openai/gpt-5.6-sol",
+      "display_name": "GPT-5.6 Sol",
+      "reasoning_effort": "high",
+      "quantization": "unknown",
+      "entered_at": "2026-08-15",
+      "defences": 0,
+      "holds": 0,
+      "climbed": 0,
+      "seeded": false,
+      "via": "opening",
+      "rank": 2
+    },
+    {
+      "model": "anthropic/claude-opus-5",
+      "display_name": "Claude Opus 5",
+      "reasoning_effort": "high",
+      "quantization": "unknown",
+      "entered_at": "2026-08-15",
+      "defences": 0,
+      "holds": 0,
+      "climbed": 0,
+      "seeded": false,
+      "via": "opening",
+      "rank": 3
+    },
+    {
+      "model": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3",
+      "reasoning_effort": "high",
+      "quantization": "mxfp4",
+      "entered_at": "2026-08-15",
+      "defences": 0,
+      "holds": 0,
+      "climbed": 0,
+      "seeded": false,
+      "via": "opening",
+      "rank": 4
+    }
+  ],
+  "challenges": [],
+  "reigns": [
+    {
+      "model": "x-ai/grok-4.6",
+      "display_name": "Grok 4.6",
+      "from": "2026-08-15",
+      "to": null,
+      "defences": 0,
+      "seeded": false
+    }
+  ]
+}

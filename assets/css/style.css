@@ -745,3 +745,327 @@ table.lb tbody tr.lb-archive-toggle td {
   .matches { grid-template-columns: 1fr; gap: 10px; width: 100%; }
   .match-card { margin: 0; width: 100%; min-width: 0; box-sizing: border-box; }
 }
+
+/* ============================================================
+   LADDER  (ladder.html)
+   The standing top-N, the climb of each challenger, the reigns.
+   ============================================================ */
+
+/* Preview banner — amber, not red: this is "not a result yet", not an alarm. */
+.preview-banner {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 12px 16px; margin-bottom: 22px;
+  background: rgba(224, 168, 46, 0.10);
+  border: 1px solid rgba(224, 168, 46, 0.45);
+  border-radius: var(--radius);
+  color: #f0d79a; font-size: 13px; line-height: 1.5;
+}
+.preview-banner .pb-tag {
+  flex: none; font-family: var(--mono); font-size: 11px; font-weight: 700;
+  letter-spacing: 1px; padding: 3px 8px; border-radius: 4px;
+  background: var(--amber); color: #1a1305;
+}
+
+.lad-rules { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 8px; }
+.lad-rule {
+  font-family: var(--mono); font-size: 11px; color: var(--text-dim);
+  background: #151c26; border: 1px solid var(--border-soft);
+  padding: 4px 9px; border-radius: 4px;
+}
+
+/* ---------- throne ---------- */
+.throne {
+  display: flex; align-items: center; gap: 18px;
+  padding: 20px 22px; border-radius: var(--radius);
+  background: linear-gradient(135deg, rgba(212,175,55,0.13), rgba(212,175,55,0.03) 60%, transparent);
+  border: 1px solid rgba(212, 175, 55, 0.42);
+}
+.throne-crown { font-size: 34px; line-height: 1; flex: none; }
+.throne-main { min-width: 0; flex: 1; }
+.throne-name {
+  font-size: 24px; font-weight: 800; letter-spacing: .3px;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.throne-sub { color: var(--text-dim); font-size: 13px; margin-top: 4px; }
+.throne-stats { display: flex; gap: 26px; flex: none; }
+.throne-stats .ts { text-align: right; }
+.throne-stats .ts b {
+  display: block; font-family: var(--mono); font-size: 22px;
+  font-weight: 700; color: var(--gold);
+}
+.throne-stats .ts span {
+  font-size: 11px; color: var(--text-faint);
+  text-transform: uppercase; letter-spacing: .8px;
+}
+
+/* ---------- standing ---------- */
+.lad-board { display: flex; flex-direction: column; gap: 8px; }
+/* One row = one line. The meta strip may drop below on a narrow screen, but the
+   model line never wraps: when it did, the multi-line flex container stretched
+   every badge to the full row height and each entry took four lines. */
+.lad-row {
+  display: flex; align-items: center; gap: 8px 12px; flex-wrap: wrap;
+  padding: 8px 14px; border-radius: var(--radius);
+  background: var(--panel-solid); border: 1px solid var(--border-soft);
+  border-left: 3px solid var(--border);
+}
+.lad-row.rank-1 { border-left-color: var(--gold); }
+.lad-row.rank-2 { border-left-color: #9fb0c2; }
+.lad-row.rank-3 { border-left-color: #b07d4a; }
+.lad-rank {
+  font-family: var(--mono); font-size: 17px; font-weight: 700;
+  color: var(--text-faint); width: 34px; flex: none;
+}
+.lad-row.rank-1 .lad-rank { color: var(--gold); }
+/* 0 1 auto, not 1 1 200px: growing to fill the row pushed the meta strip onto a
+   second line on every entry, whatever the screen width. */
+.lad-model {
+  flex: 0 1 auto; min-width: 0; font-size: 15px; font-weight: 600;
+  display: flex; align-items: center; gap: 6px;
+  flex-wrap: nowrap; white-space: nowrap; overflow: hidden;
+}
+/* The name yields first: badges stay legible, a long name gets an ellipsis. */
+.lad-model > .lad-name { flex: 0 1 auto; overflow: hidden; text-overflow: ellipsis; min-width: 7em; }
+.lad-model > :not(.lad-name) { flex: none; }
+/* flex-basis 100% puts the strip on its own line, always. Letting it sit inline
+   when it happens to fit made rows ragged: the fog-blocked badge only exists for
+   models that actually hit one, so two entries wrapped and two did not. Every
+   row is now the same two lines — name above, measurements below, left-aligned. */
+.lad-meta {
+  display: flex; gap: 5px; flex: 1 1 100%; flex-wrap: wrap;
+  align-items: center; justify-content: flex-start;
+  font-size: 12px; color: var(--text-faint); font-family: var(--mono);
+}
+.lad-badge {
+  font-family: var(--mono); font-size: 10px; font-weight: 700;
+  letter-spacing: .6px; padding: 2px 6px; border-radius: 3px;
+}
+.lad-badge.seeded { background: #232c38; color: var(--text-faint); }
+.lad-badge.climbed { background: rgba(57,255,119,0.12); color: var(--accent); }
+
+/* ---------- a challenge ---------- */
+.chal {
+  border: 1px solid var(--border-soft); border-radius: var(--radius);
+  background: var(--panel-solid); margin-bottom: 10px; overflow: hidden;
+}
+.chal-head {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  padding: 12px 16px; cursor: pointer; user-select: none;
+}
+.chal-head:hover { background: #131a24; }
+.chal-date { font-family: var(--mono); font-size: 12px; color: var(--text-faint); flex: none; }
+.chal-name { font-weight: 700; font-size: 15px; }
+.chal-verdict {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .7px;
+  padding: 3px 9px; border-radius: 4px;
+}
+.chal-verdict.takes-throne { background: rgba(212,175,55,0.18); color: var(--gold); }
+.chal-verdict.enters { background: rgba(57,255,119,0.12); color: var(--accent); }
+.chal-verdict.fails { background: rgba(120,130,140,0.14); color: var(--text-dim); }
+.chal-displaced { font-size: 12px; color: var(--text-faint); }
+.chal-count { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--text-faint); }
+.chal-chevron { color: var(--text-faint); transition: transform .15s ease; flex: none; }
+.chal.open .chal-chevron { transform: rotate(180deg); }
+.chal-body { display: none; padding: 4px 16px 16px; }
+.chal.open .chal-body { display: block; }
+
+/* The climb: lowest rung on the left, the ladder is read upwards. */
+.climb { display: flex; align-items: stretch; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
+.climb-arrow { align-self: center; color: var(--text-faint); flex: none; font-size: 15px; }
+.step {
+  flex: 1 1 0; min-width: 210px;
+  border: 1px solid var(--border-soft); border-radius: 6px;
+  padding: 11px 12px; background: #10161f;
+}
+.step.won { border-color: rgba(57,255,119,0.32); }
+.step.lost { border-color: rgba(255,93,108,0.32); }
+.step-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+.step-rank { font-family: var(--mono); font-size: 12px; color: var(--text-faint); }
+.step-opp { font-weight: 600; font-size: 13px; flex: 1; min-width: 0; }
+.step-score { font-family: var(--mono); font-size: 14px; font-weight: 700; }
+.step.won .step-score { color: var(--accent); }
+.step.lost .step-score { color: var(--p1); }
+.step-note { display: block; font-size: 11px; color: var(--amber); margin-bottom: 7px; }
+.step-legs { display: flex; flex-direction: column; gap: 5px; }
+
+.leg {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 12px; color: var(--text-dim);
+  padding: 5px 8px; border-radius: 4px;
+  background: #161d27; border: 1px solid transparent;
+}
+a.leg:hover { background: #1d2733; color: var(--text); border-color: var(--border); }
+.leg .leg-w { color: var(--accent); font-weight: 600; }
+.leg .leg-l { color: var(--p1); font-weight: 600; }
+.leg .leg-d { color: var(--text-dim); font-weight: 600; }
+.leg .leg-play { margin-left: auto; color: var(--p0); font-size: 11px; }
+.leg.sim { border-style: dashed; border-color: #333d4a; opacity: .72; }
+.leg .leg-sim {
+  margin-left: auto; font-family: var(--mono); font-size: 9px; font-weight: 700;
+  letter-spacing: .8px; color: var(--amber);
+  border: 1px solid rgba(224,168,46,0.4); border-radius: 3px; padding: 0 4px;
+}
+
+/* ---------- reigns ---------- */
+.lad-reigns { display: flex; flex-direction: column; gap: 7px; }
+.reign { display: flex; align-items: center; gap: 12px; }
+.reign-name {
+  width: 190px; flex: none; font-size: 13px; font-weight: 600;
+  display: flex; align-items: center; gap: 6px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.reign-track {
+  position: relative; flex: 1; height: 16px;
+  background: #131a24; border-radius: 3px; border: 1px solid var(--border-soft);
+}
+.reign-bar {
+  position: absolute; top: 0; bottom: 0;
+  background: rgba(212,175,55,0.35); border-radius: 2px;
+}
+.reign-bar.current { background: var(--gold); }
+.reign-days {
+  width: 92px; flex: none; text-align: right;
+  font-family: var(--mono); font-size: 11px; color: var(--text-faint);
+}
+
+@media (max-width: 760px) {
+  .throne { flex-wrap: wrap; gap: 12px; }
+  .throne-stats { width: 100%; justify-content: space-between; gap: 12px; }
+  .throne-stats .ts { text-align: left; }
+  .lad-row { flex-wrap: wrap; }
+  .lad-meta { width: 100%; padding-left: 48px; }
+  /* The climb becomes a vertical stack — still read bottom rung first. */
+  .climb { flex-direction: column; }
+  .climb-arrow { transform: rotate(90deg); }
+  .step { min-width: 0; }
+  .reign-name { width: 120px; font-size: 12px; }
+  .reign-days { width: 68px; }
+}
+
+/* ---------- opening round-robin (seeds the ladder) ---------- */
+.opening {
+  border: 1px solid var(--border-soft); border-radius: var(--radius);
+  background: var(--panel-solid); padding: 16px 18px;
+}
+.opening.pending { border-style: dashed; }
+.opening-lead { font-size: 14px; color: var(--text-dim); line-height: 1.6; max-width: 70ch; }
+.opening-lead b { color: var(--text); }
+.opening-models { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.opening-model {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 14px; font-weight: 600;
+  padding: 7px 12px; border-radius: 6px;
+  background: #151c26; border: 1px solid var(--border-soft);
+}
+table.lb.opening-table { font-size: 13px; }
+table.lb.opening-table th, table.lb.opening-table td { padding: 8px 12px; }
+.opening-legs {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 6px; margin-top: 14px;
+}
+/* Renamed from .lad-badge.opening: that second class also matched the .opening
+   SECTION rule below, which gave the badge 16px of padding and a panel border,
+   turning a 10px chip into a block that set the whole row's height. */
+.lad-badge.from-opening { background: rgba(77,166,255,0.14); color: var(--p0); }
+
+/* ---------- v1 archive notice (index.html) ---------- */
+.v1-notice {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 13px 16px; margin-bottom: 22px;
+  background: rgba(120, 130, 140, 0.08);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--text-faint);
+  border-radius: var(--radius);
+  font-size: 13px; line-height: 1.6; color: var(--text-dim);
+}
+.v1-notice .v1-tag {
+  flex: none; font-family: var(--mono); font-size: 11px; font-weight: 700;
+  letter-spacing: 1px; padding: 3px 8px; border-radius: 4px;
+  background: #2a333f; color: var(--text-dim);
+}
+.v1-notice a { color: var(--p0); }
+.v1-notice a:hover { text-decoration: underline; }
+.v1-notice strong { color: var(--text); }
+
+/* Effort levels above "high" — OpenRouter's max / xhigh allocate ~95 % of the
+   token budget to reasoning, so they get the strongest colour on the scale. */
+.effort-max { color: #ff6b6b; border-color: rgba(255,107,107,.5); background: rgba(255,107,107,.12); font-weight: 700; }
+.effort-xhigh { color: #ff8360; border-color: rgba(255,131,96,.48); background: rgba(255,131,96,.11); }
+.effort-minimal { color: #9fb0c2; border-color: rgba(159,176,194,.35); background: rgba(159,176,194,.08); }
+
+/* Second header chip: the site/tooling version next to the engine version, or
+   the engine range on the archive. Deliberately dimmer than .lb-ver — the
+   engine number is the one that decides whether matches are comparable. */
+.lb-header .lb-eng {
+  font-family: var(--mono); font-size: 11px; color: var(--text-faint);
+  border: 1px dashed var(--border-soft); border-radius: 4px; padding: 2px 6px;
+  align-self: center; opacity: .85;
+}
+
+/* Link to the frozen V1 leaderboard, sitting under the ladder's rules blurb —
+   the moment a reader who has just understood the format asks "and the old
+   one?". Muted on purpose: it points at an archive, not at a competing ranking. */
+.v1-link {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  margin: 0 0 22px; padding: 10px 14px;
+  border: 1px solid var(--border-soft); border-left: 3px solid var(--text-faint);
+  border-radius: var(--radius);
+  background: rgba(120, 130, 140, 0.06);
+  color: var(--text-dim); font-size: 13px; font-weight: 600;
+  transition: background .12s ease, color .12s ease;
+}
+.v1-link:hover { background: rgba(120, 130, 140, 0.12); color: var(--text); }
+.v1-link .v1-link-ico { color: var(--text-faint); }
+.v1-link .v1-link-note {
+  font-family: var(--mono); font-size: 11px; font-weight: 400;
+  color: var(--text-faint);
+}
+.v1-link .v1-link-arrow { margin-left: auto; color: var(--text-faint); }
+@media (max-width: 640px) { .v1-link .v1-link-arrow { display: none; } }
+
+/* A finished opening collapses to one line at the bottom of the page. */
+.opening.done { padding: 0; border: none; background: none; }
+.opening-toggle {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap; width: 100%;
+  padding: 11px 14px; text-align: left;
+  border: 1px solid var(--border-soft); border-radius: var(--radius);
+  background: var(--panel-solid); color: var(--text-dim);
+  font-size: 13px; font-weight: 600;
+}
+.opening-toggle:hover { background: #131a24; color: var(--text); }
+.opening-chevron { color: var(--text-faint); }
+.opening-summary {
+  margin-left: auto; font-family: var(--mono); font-size: 11px;
+  font-weight: 400; color: var(--text-faint);
+}
+.opening-detail { display: none; padding: 14px 2px 0; }
+.opening-detail.open { display: block; }
+
+/* Measured per-model figures on a ladder row: latency, real cost, endpoint. */
+.lad-stat {
+  font-family: var(--mono); font-size: 11px; color: var(--text-faint);
+  background: #151c26; border: 1px solid var(--border-soft);
+  padding: 2px 7px; border-radius: 4px; white-space: nowrap;
+}
+.lad-stat.estimated { border-style: dashed; }
+/* Shown, but visibly not held against the model — see perfCells() in ladder.js. */
+.lad-stat.muted { color: var(--text-faint); background: transparent; border-style: dotted; opacity: .75; }
+.lad-stat.prov { color: var(--text-dim); background: transparent; border-color: transparent; }
+.lad-stat.prov.warn { color: var(--amber); border-color: rgba(224,168,46,.45); background: rgba(224,168,46,.08); }
+
+/* Numeric precision of the pinned endpoint. */
+.lad-quant {
+  font-family: var(--mono); font-size: 10px; font-weight: 600; letter-spacing: .4px;
+  padding: 2px 6px; border-radius: 3px; margin-left: 4px;
+  color: #b98cff; border: 1px solid rgba(185,140,255,.4); background: rgba(185,140,255,.10);
+}
+.lad-quant.unknown { color: var(--text-faint); border-color: var(--border-soft); background: transparent; font-weight: 400; }
+
+/* Which criterion settled a tied row in the opening table. Empty when points
+   alone decided it; amber when the cascade ran out and the order is arbitrary. */
+.opening-table td.tiebreak { font-size: 11px; color: var(--text-faint); white-space: nowrap; }
+.opening-table td.tiebreak.warn { color: var(--amber); }
+
+/* Win-loss record in the standing: a link into the match list, not just a stat. */
+.lad-stat.rec { color: var(--text-dim); border-color: var(--border); }
+.lad-stat.rec:hover { color: var(--text); background: #1c2531; }
