@@ -1,4 +1,4 @@
-# Age of LLM™ — Benchmark · site v0.17.1 · game engine v0.17.0
+# Age of LLM™ — Benchmark · site v0.17.1 · game engine v0.18.0
 
 ![Age of LLM — Benchmark cover](assets/images/Cover.png)
 
@@ -37,7 +37,8 @@ Every `What's new` section below states which of the two it moved. Releases up t
 0.16.2 predate the split, when one number covered both — and 0.16.1/0.16.2 bumped
 the engine number with no rules behind it, which is what prompted separating them.
 
-**Every ladder match is played on game engine 0.17.0.** The frozen V1 archive
+**The 12 opening matches were played on game engine 0.17.0; every challenge
+from now on runs on 0.18.0.** The frozen V1 archive
 spans 0.9.2 → 0.15.0, which is why it is kept whole rather than continued.
 
 If the rules ever change while the ladder is standing: every challenge is still
@@ -45,6 +46,32 @@ played live, both sides on the same engine, so no single tie mixes versions — 
 an incumbent's *place* was earned under the engine in force when it won it. When a
 change could plausibly reorder the standing, the opening is replayed; when it
 could not, the standing carries over and the release notes say so.
+
+---
+
+## What's new in **game engine v0.18.0** — the prompt denied a mechanic the engine implements
+
+> **Scope: RULES (prompt text) + replay schema. No game behaviour changed.**
+> Game engine `0.17.0` → **`0.18.0`**. Site stays `0.17.1`.
+
+Since engine `0.15.0`, a player with an enemy silo in view is told when that enemy
+launches, and can fire back the same turn to force mutual destruction instead of
+defeat. The system prompt said the opposite — that the opponent "cannot
+consciously react" and that "there is no manual retaliation". A model that
+believed it had no reason to look for the signal.
+
+The prompt now documents it: when it can fire, that only the player moving second
+in a turn can receive it, and that it still says nothing about whether the enemy
+*can* launch. **The mechanic is unchanged — only its description was wrong.**
+
+**Replays now record it.** `players_state[].knowledge.enemy_launch_detected`
+stores what the player was told before deciding, and the viewer marks it in the
+reasoning panel — separating *"it knew and did not fire back"* from *"it never
+knew"*.
+
+The 12 opening matches keep their `0.17.0` stamp and are not replayed. Across all
+66 replays the warning fired 3 times and was never actionable: the detecting
+player always lacked the uranium or the silo to answer.
 
 ---
 
@@ -298,7 +325,7 @@ To pit a **named** model against the Champion (e.g. GPT-5.5) without editing
 ```
 
 ```bash
-.venv/bin/python run_queue.py --queue queue_gpt_vs_champion.json
+.venv/bin/python archive/measurement/run_queue.py --queue queue_gpt_vs_champion.json
 ```
 
 > **Reliability.** A single match is **not** enough for a meaningful result.
@@ -526,8 +553,6 @@ modern-war-v2/
 ├── run_queue.py               # match queue: runs specific 1v1 matches from queue.json
 ├── run_tournament.py          # 3-round tournament: random → split → split (winners vs winners)
 ├── tournament_models.example.json  # model list template (copy to tournament_models.json)
-├── test_models_poe.py         # smoke-test: all Poe models across all reasoning modes
-├── test_model_venice.py       # smoke-test: Venice models across all reasoning modes
 │
 ├── viewer.html                # ── VIEWER (Web) ──
 ├── index.html                 # leaderboard page
@@ -636,7 +661,7 @@ python3 -m http.server 8765
 ### Regenerating the leaderboard after new matches
 
 ```bash
-python3 generate_stats.py     # re-reads replays/*.json -> data/ + replays/index.json
+python3 scripts/generate_stats.py     # re-reads replays/*.json -> data/ + replays/index.json
 ```
 
 ---
@@ -809,9 +834,10 @@ clear the Fighters with **SAMs**; the opponent destroys the SAMs with their
 | **Central Uranium Mine** | 4 C | 3 | +1 U/turn, on the column-6 central deposit |
 | **Silo** | 5 C | 3 | Required to launch the bomb (own territory only) |
 
-> **Mine cost (v0.10.0):** mines were made **slightly pricier** (1 → **2 C**,
-> central 2 → **3 C**) but **not tougher** (HP unchanged, still 1-2 tank hits) so
-> the center stops looping on near-free destroy/rebuild while matches stay short.
+> **Mine cost:** mines were made **pricier but not tougher** so the centre stops
+> looping on near-free destroy/rebuild while matches stay short. Ordinary mines
+> went 1 → **2 C** in v0.10.0; the central mine went 2 → 3 C in v0.10.0, then
+> 3 → **4 C** in v0.12.0. HP is unchanged throughout (still 1-2 tank hits).
 
 > **Mine enemy-side deposits (v0.10.0):** mines are **no longer restricted to your
 > own territory**. You may build your own mine on **any matching deposit that is
@@ -1406,8 +1432,6 @@ avoid confusing it with a health gauge).
 | `run_game.py` | Single match (default: LLM vs LLM). Starting point for everything. |
 | `run_queue.py` | **Match queue**: run a list of specific 1v1 matches from `queue.json`, one after another. Supports `--resume` and `--reset`. |
 | `run_tournament.py` | **3-round tournament**: random draw → winners vs winners → split again. Each model plays exactly 3 matches. |
-| `test_models_poe.py` | Smoke-test all Poe models across all reasoning modes (poe_native, responses_api, deep_thinking, plain). Reports the best mode per model. |
-| `test_model_venice.py` | Smoke-test Venice models across all reasoning modes. Pass a model ID or `--all` to test all known Venice models. |
 | `tournament_models.example.json` | Model list template (copy to `tournament_models.json`). |
 | `generate_stats.py` | Re-reads `replays/*.json` → `data/leaderboard.json` + `replays/index.json`. |
 | `update_site.sh` | `generate_stats.py` then `git add data/ replays/ && commit && push` (private repo). |
@@ -1417,18 +1441,15 @@ avoid confusing it with a health gauge).
 ```bash
 .venv/bin/python run_game.py                              # single LLM vs LLM match
 python3 run_game.py --p0 greedy --p1 greedy --seed 42 -v  # single heuristic match
-.venv/bin/python run_queue.py                             # run all matches in queue.json
-.venv/bin/python run_queue.py --resume                    # continue interrupted queue
-.venv/bin/python run_queue.py --reset                     # restart queue from match 1
-.venv/bin/python test_models_poe.py                       # check all Poe models (all modes)
-.venv/bin/python test_model_venice.py kimi-k2-6           # check a Venice model
-.venv/bin/python test_model_venice.py --all               # check all known Venice models
-.venv/bin/python run_tournament.py                        # 3-round tournament
-.venv/bin/python run_tournament.py --resume               # continue interrupted tournament
-.venv/bin/python run_tournament.py --reset                # restart from scratch
-python3 generate_stats.py
-./update_site.sh "New replays"                            # update private repo
-./update_viewer.sh "New replays"                          # update public viewer repo
+.venv/bin/python archive/measurement/run_queue.py                             # run all matches in queue.json
+.venv/bin/python archive/measurement/run_queue.py --resume                    # continue interrupted queue
+.venv/bin/python archive/measurement/run_queue.py --reset                     # restart queue from match 1
+.venv/bin/python archive/tournament/run_tournament.py                        # 3-round tournament
+.venv/bin/python archive/tournament/run_tournament.py --resume               # continue interrupted tournament
+.venv/bin/python archive/tournament/run_tournament.py --reset                # restart from scratch
+python3 scripts/generate_stats.py
+./scripts/update_site.sh "New replays"                            # update private repo
+./scripts/update_viewer.sh "New replays"                          # update public viewer repo
 .venv/bin/python scripts/convert_webp.py --delete         # PNG -> WebP
 ```
 
@@ -1468,11 +1489,11 @@ Each player slot supports: `name`, `model`, `provider`, `thinking`,
 **2. Run the queue:**
 
 ```bash
-.venv/bin/python run_queue.py                 # run all matches in queue.json
-.venv/bin/python run_queue.py --resume        # continue after an interruption
-.venv/bin/python run_queue.py --reset         # wipe state and restart from match 1
-.venv/bin/python run_queue.py --stats         # regen leaderboard after each match
-.venv/bin/python run_queue.py --queue my.json # use a different queue file
+.venv/bin/python archive/measurement/run_queue.py                 # run all matches in queue.json
+.venv/bin/python archive/measurement/run_queue.py --resume        # continue after an interruption
+.venv/bin/python archive/measurement/run_queue.py --reset         # wipe state and restart from match 1
+.venv/bin/python archive/measurement/run_queue.py --stats         # regen leaderboard after each match
+.venv/bin/python archive/measurement/run_queue.py --queue my.json # use a different queue file
 ```
 
 **Key behaviours:**
@@ -1498,9 +1519,9 @@ The tournament uses a **3-round fixed format** optimised for 8 models (each play
 
 ```bash
 cp tournament_models.example.json tournament_models.json  # edit with your models
-.venv/bin/python run_tournament.py
-.venv/bin/python run_tournament.py --resume               # continue if interrupted
-.venv/bin/python run_tournament.py --reset                # restart from scratch
+.venv/bin/python archive/tournament/run_tournament.py
+.venv/bin/python archive/tournament/run_tournament.py --resume               # continue if interrupted
+.venv/bin/python archive/tournament/run_tournament.py --reset                # restart from scratch
 ```
 
 **Key behaviours:**
@@ -1533,25 +1554,21 @@ The same key as `[poe]` in `.config.ini` is used automatically — no separate c
 > Token counts for `poe_native` are **estimated** (≈ chars / 4) since the native SDK does
 > not expose exact counts. All other providers report exact counts from the API.
 
-#### Verifying models before a long run
+#### Verifying a model before a long run
 
 ```bash
-.venv/bin/python test_models_poe.py                        # all Poe models, all modes
-.venv/bin/python test_model_venice.py kimi-k2-6            # single Venice model
-.venv/bin/python test_model_venice.py --all                # all known Venice models
+.venv/bin/python scripts/test_thinking.py                  # the slot in [player1]
+.venv/bin/python scripts/test_thinking.py --player 2 --effort high
 ```
 
-`test_models_poe.py` tries **all reasoning modes** for each model (in order:
-`poe_native + thinking_budget`, `poe + responses_api`, `poe + deep_thinking`,
-`poe + plain`) and reports the best mode found — content OK + reasoning OK wins,
-then content OK alone. Results are merged into `models_validated.json`.
+One real `decide()` call against the configured provider/model: the reply parses
+as JSON with an `actions` list, `thinking=true` returns non-empty reasoning, and
+`thinking=false` costs fewer tokens. Run it before a multi-hour campaign to catch
+a broken key or a wrong model id while it still costs one call.
 
-`test_model_venice.py` tries `thinking=high → medium → plain` for a Venice model
-and reports the best mode. Pass `--all` to test all models listed in `VENICE_MODELS`
-inside the script. With `--all`, results are merged into `models_validated.json`.
-
-Run these before launching a multi-hour queue or tournament to catch broken API
-keys, unsupported model names, or missing reasoning support early.
+> **Gone:** `test_models_poe.py` and `test_model_venice.py`, which swept every
+> reasoning mode of a provider into a `models_validated.json`. The **providers
+> are still supported** — only the sweep helpers went.
 
 ---
 
@@ -1600,7 +1617,7 @@ hosts only the static site needed by GitHub Pages.
 
 ### What v0.10.0 brings to the public viewer
 
-When you publish the next update (`./update_viewer.sh`), the viewer reflects these
+When you publish the next update (`./scripts/update_viewer.sh`), the viewer reflects these
 rule changes — the legend and replays now show **dynamic seed-driven terrain**
 (central barrier + scattered mountains vary per match), **line-of-sight** blocked
 by mountains and buildings, **mine-able enemy-side deposits** (no instant
@@ -1625,7 +1642,7 @@ README.md
 | File / folder | Reason |
 |---|---|
 | `engine/` | Game engine source code |
-| `run_game.py`, `run_queue.py`, `run_tournament.py`, `test_models_poe.py`, `test_model_venice.py` | Backend runners |
+| `run_game.py`, `run_ladder.py`, `match_runner.py` | Backend runners (`run_queue.py` / `run_tournament.py` retired to `archive/`) |
 | `generate_stats.py`, `update_site.sh`, `update_viewer.sh` | Build/deploy scripts |
 | `.config.ini` | API keys — git-ignored, never committed anywhere |
 | `config.example.ini` | Config template |
@@ -1639,7 +1656,7 @@ README.md
 After new matches are completed, run from this directory:
 
 ```bash
-./update_viewer.sh "Round 3 results"
+./scripts/update_viewer.sh "Round 3 results"
 ```
 
 This single command: regenerates stats → copies replays + leaderboard to the
