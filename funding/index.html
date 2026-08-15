@@ -69,7 +69,11 @@
     <div class="lb-header">
       <a href="../"><img src="../assets/images/Logo_AOL.png" alt="Age of LLM" class="header-logo" /></a>
       <h1>Age of LLM™ <span class="lb-tag">· Funding</span></h1>
-      <span class="lb-ver">site v0.17.1 · game engine v0.18.0</span>
+      <!-- Filled from ../data/ladder.json, the same file the standing reads, so
+           the two chips can never disagree. Hard-coding it here meant a bump on
+           one page and not the other read as a bug. The text below is only the
+           fallback shown if that file cannot be fetched. -->
+      <span class="lb-ver" id="fund-ver">site v0.17.1 · game engine v0.17.0</span>
     </div>
 
     <div class="doc">
@@ -125,8 +129,8 @@
         Since 15 August 2026 the board is a <strong>ladder</strong>, and that changed
         what a fair test costs. A new model no longer needs a long run against the whole
         field: it challenges in at the bottom and plays <strong>two matches per place</strong>,
-        one from each side of the map, stopping at the first place it fails to take. Two
-        matches if it fails immediately, eight if it goes all the way to first.
+        one from each side of the map, and the climb stops as soon as it fails to take a
+        place. Two matches if it fails immediately, eight if it goes all the way to first.
       </p>
       <p>
         Every figure below is the <strong>amount the provider actually billed</strong>,
@@ -251,5 +255,22 @@
       <span class="foot-copy">© 2026 Rymentz · Age of LLM™ · All rights reserved</span>
     </footer>
   </div>
+
+  <script>
+    // Single source of truth for both chips: the standing's own JSON. If it
+    // cannot be read we leave the hard-coded fallback in place rather than
+    // blanking the badge — a missing version reads worse than a stale one.
+    fetch('../data/ladder.json', { cache: 'no-cache' })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => {
+        if (!d) return;
+        const el = document.getElementById('fund-ver');
+        const bits = [];
+        if (d.site_version) bits.push('site v' + d.site_version);
+        if (d.engine_version) bits.push('game engine v' + d.engine_version);
+        if (el && bits.length) el.textContent = bits.join(' · ');
+      })
+      .catch(() => {});
+  </script>
 </body>
 </html>
