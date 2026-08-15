@@ -69,6 +69,13 @@ stores what the player was told before deciding, and the viewer marks it in the
 reasoning panel — separating *"it knew and did not fire back"* from *"it never
 knew"*.
 
+**Diplomatic state left the chat.** A ceasefire in force, and an offer still
+awaiting an answer, now show as badges under the model names instead of being
+readable only inside the diplomacy panel. Replays carry `ceasefire_until` so the
+viewer reads the engine's own window rather than re-deriving it; older replays
+are inferred from the accepted offer. It is not a rare case: **6 of the 12
+opening matches spent time under a ceasefire**, one of them for 22 half-turns.
+
 The 12 opening matches keep their `0.17.0` stamp and are not replayed. Across all
 66 replays the warning fired 3 times and was never actionable: the detecting
 player always lacked the uranium or the silo to answer.
