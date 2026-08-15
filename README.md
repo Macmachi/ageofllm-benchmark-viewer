@@ -1,4 +1,4 @@
-# Age of LLM™ — Benchmark · v0.16.2
+# Age of LLM™ — Benchmark · site v0.17.1 · game engine v0.17.0
 
 ![Age of LLM — Benchmark cover](assets/images/Cover.png)
 
@@ -26,7 +26,93 @@ rendering.
 
 ---
 
-## What's new in v0.16.2
+## Two version numbers
+
+| | What it means | When it moves |
+|---|---|---|
+| **game engine** | **The rules.** Stamped into every replay; the only thing that decides whether two matches are comparable. | Only when a change could make a match go differently: rules, system prompt, observation, action validation. |
+| **site** | Pages, runners, stats, ladder format, docs. | Freely. It never enters a replay. |
+
+Every `What's new` section below states which of the two it moved. Releases up to
+0.16.2 predate the split, when one number covered both — and 0.16.1/0.16.2 bumped
+the engine number with no rules behind it, which is what prompted separating them.
+
+**Every ladder match is played on game engine 0.17.0.** The frozen V1 archive
+spans 0.9.2 → 0.15.0, which is why it is kept whole rather than continued.
+
+If the rules ever change while the ladder is standing: every challenge is still
+played live, both sides on the same engine, so no single tie mixes versions — but
+an incumbent's *place* was earned under the engine in force when it won it. When a
+change could plausibly reorder the standing, the opening is replayed; when it
+could not, the standing carries over and the release notes say so.
+
+---
+
+## What's new in **game engine v0.17.0** — three defects found by auditing the corpus
+
+> **Scope: RULES.** Game engine `0.16.0` → **`0.17.0`**, shipped alongside site
+> `0.17.1`. The ladder starts from zero on this version.
+
+The 54 archived replays were re-read before the first ladder match: of the **300
+actions the engine rejected over 2 036 half-turns, how many could the model
+actually have avoided?** Three answers came back, all three the engine's fault.
+
+- **Units now deploy.** The prompt promised a new unit could act the same turn,
+  but the engine assigns its id and spawn cell only *after* the model has
+  submitted its actions. All 60 `Unit not found` rejections in the corpus, across
+  19 models, came from that — a unit now acts from its owner's next turn, and its
+  id is read from the next observation instead of guessed.
+- **Fog is tested first when building.** "Cell already has a building" used to be
+  checked before fog, so aiming into the dark confirmed an undiscovered enemy
+  building — a failed build bought a free map probe. It now returns only "scout
+  it first".
+- **Rejections caused by the unseen are no longer counted as illegal.** Bumping
+  into a unit you cannot see is how a fog game reveals its board. The engine tags
+  those `cause="fog"` and they are reported apart from illegal actions.
+
+Left alone on purpose: building blind into fog, the largest category, *is* the
+model's mistake — computing your own field of view is a skill worth measuring.
+
+The system prompt was also audited: seven pieces of strategic advice had crept
+into a prompt that claims to give none. Every payoff and mechanic they carried is
+still stated; only the imperative was cut.
+
+---
+
+## What's new in **site v0.17.0** — the Ladder replaces the leaderboard
+
+> **Scope: SITE only.** Site `0.16.2` → **`0.17.0`**. Game engine untouched — and
+> `ENGINE_VERSION` corrected here from a phantom `0.16.2` back to `0.16.0`.
+
+**The point-table ranking is closed and replaced by a standing top-4 that models
+challenge into.** A newly released model does not join the ladder: it meets **#4**
+first and climbs until it loses. Every tie is played **home and away with the
+sides swapped**. If the two legs are level, the model that won its own leg in
+fewer turns takes the place — the same speed rule that settles the opening table,
+compared inside that tie rather than over careers.
+
+- **`index.html`** — the ladder is now the home page (the frozen V1 leaderboard
+  moved to `v1.html`; the domain used to land on the archive): the standing, the throne, the challenge
+  log and the reigns timeline, with each model's measured latency, real
+  provider-billed cost, pinned endpoint and quantization.
+- **The V1 leaderboard is frozen, not deleted.** Its 54 matches span game engine
+  0.9.2 → 0.15.0, none of them the current rules, so it is kept whole and read
+  only — every match, every replay, every figure — behind an ARCHIVE banner.
+- **Nothing is placed by decree**: the first four models play a home-and-away
+  round robin, and that table seeds the ladder.
+- **Real costs, not estimates.** Prices × tokens cannot see prompt caching and
+  read high; the provider-reported figure is now what gets published.
+- **Latency is a published metric**, which it could not honestly be before every
+  model was pinned to a single endpoint.
+
+---
+
+## What's new in **v0.16.2** — side-bias audit
+
+> **Scope: SITE only.** Game engine unchanged at `0.16.0`. This release bumped
+> `ENGINE_VERSION` to 0.16.2 with no rules behind it; corrected in site 0.17.0.
+>
+> *Released before the two version numbers were separated, when a single version covered both.*
 
 **The side-bias question is settled: the engine favours neither slot.**
 
@@ -48,7 +134,12 @@ stronger models were written into the p2 field — and not from the game itself.
   `slot_bias.mirror`, each with its Wilson interval, so no consumer reads a rate
   without its uncertainty.
 
-## What's new in v0.16.1
+## What's new in **v0.16.1** — leaderboard aggregation
+
+> **Scope: SITE only.** Game engine unchanged at `0.16.0`. Same phantom bump,
+> corrected in site 0.17.0.
+>
+> *Released before the two version numbers were separated, when a single version covered both.*
 
 Patch release: **leaderboard tooling only — no change to the rules, the system
 prompt or engine behaviour.** Version bumped **0.16.0 → 0.16.1**. Replays are
@@ -79,7 +170,11 @@ untouched and the ranking order is unchanged.
   rather than hidden; isolating it requires mirror matches (identical model on
   both sides), which is the next step.
 
-## What's new in v0.16.0
+## What's new in **game engine v0.16.0** — the prompt made rule-only
+
+> **Scope: RULES.** Game engine `0.15.0` → **`0.16.0`**.
+>
+> *Released before the two version numbers were separated, when a single version covered both.*
 
 This release makes the system prompt **fully rule-only**. Engine bumped **0.15.0 → 0.16.0**.
 
@@ -93,7 +188,11 @@ This release makes the system prompt **fully rule-only**. Engine bumped **0.15.0
   the v0.9.2–v0.15.0 corpus (the 54 matches analysed in the papers) is unaffected
   and remains as collected, with the seed phrases present.
 
-## What's new in v0.15.0
+## What's new in **game engine v0.15.0** — nuclear early warning
+
+> **Scope: RULES.** Game engine `0.14.0` → **`0.15.0`**.
+>
+> *Released before the two version numbers were separated, when a single version covered both.*
 
 This release adds a **nuclear early-warning signal**. Engine bumped
 **0.14.0 → 0.15.0**.
@@ -105,7 +204,11 @@ This release adds a **nuclear early-warning signal**. Engine bumped
   one-turn window to **retaliate** (launch their own bomb the same turn → mutual
   destruction instead of a clean nuclear defeat).
 
-## What's new in v0.14.0
+## What's new in **game engine v0.14.0** — fog-of-war gap on deposits
+
+> **Scope: RULES.** Game engine `0.13.0` → **`0.14.0`**.
+>
+> *Released before the two version numbers were separated, when a single version covered both.*
 
 - **Fog of war — enemy-side deposits are now remembered.** A resource deposit
   (gisement) scouted on the enemy side is exposed to the model and **kept in
@@ -116,7 +219,11 @@ This release adds a **nuclear early-warning signal**. Engine bumped
   requires the cell to be in your **current** field of view (the enemy may have
   built on it since), and an exhausted deposit is dropped from memory.
 
-## What's new in v0.13.0
+## What's new in **game engine v0.13.0** — the Champion reference opponent
+
+> **Scope: RULES.** Game engine `0.12.0` → **`0.13.0`**.
+>
+> *Released before the two version numbers were separated, when a single version covered both.*
 
 This release adds **ChampionAgent**, a strong **fully deterministic** scripted
 opponent meant to serve as a **fixed reference opponent**: in a "LLM vs Champion"
@@ -198,7 +305,11 @@ To pit a **named** model against the Champion (e.g. GPT-5.5) without editing
 > Use **~10 minimum**, **20-30 recommended**, played with the LLM in **both
 > slots** to cancel the mirror slot bias.
 
-## What's new in v0.12.0
+## What's new in **game engine v0.12.0** — balance: SAM, central mine, map fairness
+
+> **Scope: RULES.** Game engine `0.11.0` → **`0.12.0`**.
+>
+> *Released before the two version numbers were separated, when a single version covered both.*
 
 This release improves **central-mine contention** and **map fairness** across
 seeds, with four targeted balance changes:
@@ -226,7 +337,11 @@ seeds, with four targeted balance changes:
 > **Note — no strategic advice:** as always, the prompt describes ONLY the rules
 > and the action schema. The models receive no hints on how to play.
 
-## What's new in v0.11.0
+## What's new in **game engine v0.11.0** — balance: base HP 8 → 4
+
+> **Scope: RULES.** Game engine `0.10.0` → **`0.11.0`**.
+>
+> *Released before the two version numbers were separated, when a single version covered both.*
 
 This release rebalances the two win paths so **military conquest competes
 head-to-head with the nuclear rush**, and clarifies the rules shown to the models:
@@ -270,7 +385,11 @@ head-to-head with the nuclear rush**, and clarifies the rules shown to the model
 > **Note — no strategic advice:** as always, the prompt describes ONLY the rules and
 > the action schema. The models receive no hints on how to play.
 
-## What's new in v0.10.0
+## What's new in **game engine v0.10.0** — map rework and line of sight
+
+> **Scope: RULES.** Game engine `0.9.4` → **`0.10.0`**.
+>
+> *Released before the two version numbers were separated, when a single version covered both.*
 
 This release reworks the **map and the central deadlock** so matches stop looping
 on destroy/rebuild at the center, while keeping games short:
@@ -317,7 +436,11 @@ on destroy/rebuild at the center, while keeping games short:
 
 ---
 
-## What's new in v0.9.4
+## What's new in **game engine v0.9.4** — accepted ultimatum scores 0.5
+
+> **Scope: RULES.** Game engine `0.9.3` → **`0.9.4`**.
+>
+> *Released before the two version numbers were separated, when a single version covered both.*
 
 - **Ultimatum consolation (rule change):** the player who **accepts** an
   ultimatum now scores **0.5 points** instead of 0 — surrendering a lost
@@ -632,6 +755,10 @@ Credits = everything (units, mines, silo). Uranium = the bomb only.
 **Key rules:**
 - Each unit does **at most 1 Move + 1 Attack per turn** (2 actions max on the
   same unit). It can Move **then** Attack the same turn.
+- **Deployment delay (game engine 0.17.0):** a unit produced this turn cannot
+  Move or Attack until its owner's **next** turn — the same one-turn delay that
+  governs buildings. Its id and spawn cell are chosen by the engine and appear in
+  the next observation, so they are read rather than guessed.
 - **Only the Tank destroys buildings** (2 damage/attack). The pivot of the
   counter-play.
 - Ground units cross column 6 only through its passages.

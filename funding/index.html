@@ -69,14 +69,14 @@
     <div class="lb-header">
       <a href="../"><img src="../assets/images/Logo_AOL.png" alt="Age of LLM" class="header-logo" /></a>
       <h1>Age of LLM™ <span class="lb-tag">· Funding</span></h1>
-      <span class="lb-ver">v0.16.2</span>
+      <span class="lb-ver">site v0.17.1 · game engine v0.17.0</span>
     </div>
 
     <div class="doc">
-      <a class="backlink" href="../">← Back to the leaderboard</a>
+      <a class="backlink" href="../">← Back to the standing</a>
 
       <h1 class="doc-title">Funding &amp; independence</h1>
-      <div class="updated">Last updated 2026-08-12</div>
+      <div class="updated">Last updated 2026-08-15</div>
 
       <p class="lede">
         Age of LLM accepts API credits and compute from model providers, inference
@@ -122,32 +122,41 @@
 
       <h2>What a fair test costs</h2>
       <p>
-        The threshold for a non-provisional ranking is <strong>20 matches per
-        model</strong>. Below that, a position on the board is an anecdote. The figures
-        below are measured from the actual token usage of the published corpus, not
-        estimated.
+        Since 15 August 2026 the board is a <strong>ladder</strong>, and that changed
+        what a fair test costs. A new model no longer needs a long run against the whole
+        field: it challenges in at the bottom and plays <strong>two matches per place</strong>,
+        one from each side of the map, stopping at the first place it fails to take. Two
+        matches if it fails immediately, eight if it goes all the way to first.
+      </p>
+      <p>
+        Every figure below is the <strong>amount the provider actually billed</strong>,
+        read back out of each replay — not a price × token estimate. The distinction is
+        not cosmetic: prompt caching made one model 22&nbsp;% cheaper than its estimate
+        in the opening, so the estimate was a number we knew to be wrong.
       </p>
       <table>
         <thead>
           <tr><th>Item</th><th class="num">Cost</th></tr>
         </thead>
         <tbody>
-          <tr><td>Screening a new model (6 matches)</td><td class="num">$10</td></tr>
-          <tr><td>Ranking a new model properly (20 matches)</td><td class="num">$34</td></tr>
-          <tr><td>Completing the current corpus at 20 matches per model</td><td class="num">$172</td></tr>
-          <tr><td>Day-one coverage of every new release, per year</td><td class="num">$1,000&ndash;1,500</td></tr>
+          <tr><td>One match, both sides (measured mean over the opening)</td><td class="num">$3.42</td></tr>
+          <tr><td>A challenger that fails to take the bottom place (2 matches)</td><td class="num">~$7</td></tr>
+          <tr><td>A challenger that climbs to first (8 matches)</td><td class="num">~$27</td></tr>
+          <tr><td>Opening a fresh ladder &mdash; 4 models, 12 matches (measured)</td><td class="num">$41.08</td></tr>
+          <tr><td>Day-one coverage of every new release, per year</td><td class="num">$700&ndash;1,200</td></tr>
         </tbody>
       </table>
       <div class="note">
-        <strong>Why 20 and not 200.</strong> Simulated over a full round-robin with a
-        Bradley-Terry fit, the global ordering converges fast while separating
-        <em>neighbouring</em> models converges very slowly: at 28 matches per model the
-        overall ranking is already near-perfect (Spearman ρ = 0.97) but barely 3
-        adjacent pairs in 5 are ordered correctly, and 14× more compute still misses 1
-        adjacent pair in 25. Twenty matches is not the point where the ranking becomes
-        exact. It is the point where the marginal return collapses. The board therefore
-        supports "this model is in the top tier", and it does not support "this model
-        is 1st and that one is 2nd".
+        <strong>Why a ladder is cheaper than a table, and says more.</strong> Simulated
+        over a full round-robin with a Bradley-Terry fit, a global ordering converges
+        fast but separating <em>neighbouring</em> models converges very slowly: at 28
+        matches per model the overall ranking is already near-perfect (Spearman ρ =
+        0.97) while barely 3 adjacent pairs in 5 are ordered correctly, and 14× more
+        compute still misses 1 adjacent pair in 25. Spending to rank a model 4th rather
+        than 5th buys almost nothing. A ladder spends the compute on the one comparison
+        that is actually decidable &mdash; <em>can this model beat the one above it,
+        twice, from both sides?</em> &mdash; and answers it with two matches instead of
+        twenty.
       </div>
 
       <h2>What independence has already cost us</h2>
@@ -167,9 +176,37 @@
         correcting and every A-vs-B match had been a fair fight. Matches are now
         side-swapped by default.
       </p>
+      <p>
+        <strong>August 2026, again: the engine was penalising the models for its own
+        defects.</strong> Before the first ladder match we re-read all 54 archived
+        replays and asked what had never been asked of them &mdash; of the 300 actions
+        the engine rejected, how many could the model actually have avoided? Three
+        answers came back and all three were ours. Every one of the 60 "unit not found"
+        rejections, across 19 models, came from the engine assigning a new unit's id
+        only <em>after</em> the model had already submitted its turn: unguessable by
+        construction. Aiming a building into unscouted territory answered "there is
+        already a building here", which handed out a free map probe. And bumping into a
+        unit you cannot see &mdash; how a fog-of-war game reveals its board &mdash; was
+        being counted in the published illegal-action column, penalising the very
+        probing the fog exists to require. All three are fixed in game engine 0.17.0,
+        and the illegal-action rate on the new corpus is 2.1&nbsp;% against 5.3&nbsp;%
+        on the old one.
+      </p>
+      <p>
+        <strong>And one question still open.</strong> Across the 12 opening matches the
+        right-hand side of the map won 10. The design is slot-balanced &mdash; every
+        model played three matches from each side &mdash; so model strength cannot
+        explain it, and the exact binomial reads p&nbsp;=&nbsp;0.039. But we noticed the
+        pattern <em>during</em> the campaign and tested it on the same 12 matches, which
+        is the weakest form of evidence there is, and the 57-match mirror experiment
+        above found nothing of the kind on an earlier engine. The standing itself is not
+        affected: every duel is played from both sides, so a side advantage cancels
+        inside it. We are reporting an anomaly we have not yet resolved rather than
+        waiting until it is comfortable.
+      </p>
       <p class="muted">
-        We publish this because a benchmark that never reports a problem with itself is
-        not a benchmark that has none. Full method and figures are in the
+        We publish all of this because a benchmark that never reports a problem with
+        itself is not a benchmark that has none. Full method and figures are in the
         <a class="inline" href="https://github.com/Macmachi/ageofllm-benchmark-viewer#readme" target="_blank" rel="noopener">README</a>.
       </p>
 
@@ -206,7 +243,7 @@
     </div>
 
     <footer class="site-footer">
-      <a class="foot-link" href="../">← Leaderboard</a>
+      <a class="foot-link" href="../">← The Ladder</a>
       <a class="foot-link" href="https://youtu.be/Ec-CV1uzyVY" target="_blank" rel="noopener" title="Presentation video">▶ Presentation ↗</a>
       <a class="foot-link" href="https://github.com/Macmachi/ageofllm-benchmark-viewer" target="_blank" rel="noopener" title="Star on GitHub">⭐ Star on GitHub</a>
       <a class="foot-link" href="https://x.com/ageofllm" target="_blank" rel="noopener" title="Follow on X">𝕏 Follow @ageofllm</a>
