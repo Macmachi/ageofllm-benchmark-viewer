@@ -69,6 +69,12 @@ stores what the player was told before deciding, and the viewer marks it in the
 reasoning panel — separating *"it knew and did not fire back"* from *"it never
 knew"*.
 
+**The bomb never costs 13U.** A systematic pass over the prompt — every claim run
+against the engine rather than compared to a constant — found one more slip, with
+no incidence on any match played. The pressure starts *on* turn 40, not after,
+and the 13U floor is only reached on turn 90, so a standard 80-turn match bottoms
+at 15U. The prompt now lists the schedule outright.
+
 **A ceasefire lasts 4 turns, not 3.** Accepted on turn T, it is active on T, T+1,
 T+2 and T+3 — while the prompt said *"3 turns"* in three places. The wording was
 corrected rather than the engine: changing the value would be a rules change, and
