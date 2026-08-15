@@ -1069,3 +1069,7 @@ table.lb.opening-table th, table.lb.opening-table td { padding: 8px 12px; }
 /* Win-loss record in the standing: a link into the match list, not just a stat. */
 .lad-stat.rec { color: var(--text-dim); border-color: var(--border); }
 .lad-stat.rec:hover { color: var(--text); background: #1c2531; }
+
+/* The tie rules, set apart from the climb: two distinct ideas that read as one
+   run-on sentence when they share a paragraph. */
+.lb-sub-tie { display: block; margin-top: 8px; }
