@@ -203,7 +203,9 @@
       'split 1–1 → the faster win takes it',
       // Not "one defeat": run_ladder breaks on any result that is not a win, so
       // failing to take a place ends the run exactly as a defeat does.
-      'the run ends at the first place not taken',
+      // Never phrase this as "the first place ..." — in English that reads as
+      // 1st place, the throne, which is the opposite of what the rule says.
+      'fail to take a place and the climb stops there',
       'one pinned endpoint per model',
     ];
     document.getElementById('lad-rules').innerHTML =
