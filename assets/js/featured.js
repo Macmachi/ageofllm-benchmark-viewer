@@ -12,13 +12,14 @@
 (function () {
   'use strict';
 
-  const HOLD_MS = 1600;   // pause on the final position before looping
-  const STEP_MS = 520;    // one half-turn
+  const HOLD_MS = 1900;   // pause on the final position before looping
+  const STEP_MS = 780;    // one half-turn — slow enough to follow the arrows
+  const BLAST_MS = 1250;  // the detonation, animated frame by frame
 
   const css = (n, fb) =>
     getComputedStyle(document.documentElement).getPropertyValue(n).trim() || fb;
 
-  function draw(cv, data, idx) {
+  function draw(cv, data, idx, blast) {
     const [gw, gh] = data.grid || [13, 7];
     const dpr = window.devicePixelRatio || 1;
     const w = cv.clientWidth || 480;
@@ -34,7 +35,6 @@
     g.clearRect(0, 0, w, h);
 
     const P0 = css('--p0', '#4da6ff'), P1 = css('--p1', '#ff5d6c');
-    const URA = css('--uranium', '#5fd95f'), GOLD = css('--gold', '#d4af37');
     const own = (o) => (o === 0 ? P0 : P1);
 
     // ground
@@ -86,6 +86,18 @@
       g.globalAlpha = 1;
     }
 
+    // Moves made since the previous half-turn, matched by unit id. Drawn under
+    // the units so the dots stay readable on top of their own trail.
+    const prev = data.frames[idx - 1];
+    if (prev) {
+      const was = new Map((prev.units || []).map((u) => [u.id, u.pos]));
+      for (const u of f.units || []) {
+        const from = was.get(u.id);
+        if (!from || (from[0] === u.pos[0] && from[1] === u.pos[1])) continue;
+        arrow(g, cell, from, u.pos, own(u.owner));
+      }
+    }
+
     for (const u of f.units || []) {
       const [x, y] = u.pos;
       const air = u.type === 'drone' || u.type === 'fighter';
@@ -98,10 +110,92 @@
       }
     }
 
-    // the nuke that ends the match: a wash over the board on the last frame
-    const nuked = (f.events || []).some((e) => e.by === 'nuke');
-    if (nuked) {
-      g.fillStyle = 'rgba(255,255,255,.14)';
+    // The nuke that ends the match, seen from above, centred on the base it
+    // destroyed. `blast` runs 0 -> 1; null means no detonation on this frame.
+    if (blast !== null && blast !== undefined) {
+      const at = nukeCell(data, idx);
+      if (at) drawBlast(g, w, h, cell, at, blast);
+    }
+  }
+
+  // One move, cell centre to cell centre. Stops short of the destination so the
+  // head does not disappear under the unit's own dot.
+  function arrow(g, cell, from, to, color) {
+    const x0 = (from[0] + 0.5) * cell, y0 = (from[1] + 0.5) * cell;
+    const x1 = (to[0] + 0.5) * cell, y1 = (to[1] + 0.5) * cell;
+    const a = Math.atan2(y1 - y0, x1 - x0);
+    const gap = cell * 0.3;
+    const ex = x1 - Math.cos(a) * gap, ey = y1 - Math.sin(a) * gap;
+
+    g.globalAlpha = 0.55;
+    g.strokeStyle = color;
+    g.lineWidth = Math.max(1, cell * 0.055);
+    g.lineCap = 'round';
+    g.beginPath();
+    g.moveTo(x0 + Math.cos(a) * gap * 0.7, y0 + Math.sin(a) * gap * 0.7);
+    g.lineTo(ex, ey);
+    g.stroke();
+
+    const head = cell * 0.2, spread = 0.42;
+    g.beginPath();
+    g.moveTo(ex, ey);
+    g.lineTo(ex - Math.cos(a - spread) * head, ey - Math.sin(a - spread) * head);
+    g.lineTo(ex - Math.cos(a + spread) * head, ey - Math.sin(a + spread) * head);
+    g.closePath();
+    g.fillStyle = color;
+    g.fill();
+    g.globalAlpha = 1;
+  }
+
+  // Where the bomb landed: the base of the player the nuke event names.
+  function nukeCell(data, idx) {
+    const f = data.frames[idx];
+    const ev = (f.events || []).find((e) => e.by === 'nuke');
+    if (!ev) return null;
+    const base = (f.buildings || []).find(
+      (b) => b.type === 'base' && b.owner === ev.owner);
+    return base ? base.pos : null;
+  }
+
+  function drawBlast(g, w, h, cell, [bx, by], p) {
+    const cx = (bx + 0.5) * cell, cy = (by + 0.5) * cell;
+    const ease = 1 - Math.pow(1 - p, 3);          // fast out, slow settle
+    const fade = Math.max(0, 1 - p);
+
+    // crater: stays for the whole hold, so a still frame still reads as a hit
+    g.beginPath();
+    g.arc(cx, cy, cell * 1.15, 0, Math.PI * 2);
+    g.fillStyle = 'rgba(0,0,0,.55)';
+    g.fill();
+
+    // shockwave, two rings offset in time
+    for (const [delay, width] of [[0, 2.5], [0.18, 1.2]]) {
+      const q = (p - delay) / (1 - delay);
+      if (q <= 0) continue;
+      const qe = 1 - Math.pow(1 - Math.min(1, q), 2);
+      g.beginPath();
+      g.arc(cx, cy, cell * 0.6 + qe * cell * 5.5, 0, Math.PI * 2);
+      g.strokeStyle = 'rgba(255,214,150,' + (0.55 * (1 - qe)).toFixed(3) + ')';
+      g.lineWidth = width;
+      g.stroke();
+    }
+
+    // fireball: white core bleeding to orange, collapsing as it fades
+    const r = cell * (0.35 + ease * 2.1);
+    const grad = g.createRadialGradient(cx, cy, 0, cx, cy, r);
+    grad.addColorStop(0, 'rgba(255,255,245,' + (0.95 * fade).toFixed(3) + ')');
+    grad.addColorStop(0.35, 'rgba(255,196,92,' + (0.75 * fade).toFixed(3) + ')');
+    grad.addColorStop(0.7, 'rgba(226,106,32,' + (0.4 * fade).toFixed(3) + ')');
+    grad.addColorStop(1, 'rgba(226,106,32,0)');
+    g.beginPath();
+    g.arc(cx, cy, r, 0, Math.PI * 2);
+    g.fillStyle = grad;
+    g.fill();
+
+    // whole-board flash, front-loaded
+    const flash = Math.max(0, 0.42 - p * 0.85);
+    if (flash > 0) {
+      g.fillStyle = 'rgba(255,255,255,' + flash.toFixed(3) + ')';
       g.fillRect(0, 0, w, h);
     }
   }
@@ -111,8 +205,14 @@
     const p0 = data.players.find((p) => p.slot === 0) || {};
     const p1 = data.players.find((p) => p.slot === 1) || {};
     const nameOf = (p) => (p.name || '—');
-    const mark = (p) =>
-      data.winner === p.slot ? '<span class="ft-win">▲</span>' : '';
+    // A draw (winner -1) marks neither side: a crown with no skull opposite
+    // would read as a win that never happened.
+    const mark = (p) => {
+      if (data.winner === -1 || data.winner === undefined) return '';
+      const won = data.winner === p.slot;
+      return '<span class="ft-mark" title="' + (won ? 'Winner' : 'Defeated') +
+        '">' + (won ? '👑' : '💀') + '</span>';
+    };
     const vt = (data.victory_type || '').replace(/_/g, ' ');
     const when = (data.date || '').slice(0, 10);
 
@@ -137,18 +237,36 @@
     const last = data.frames.length - 1;
 
     if (still || data.frames.length < 2) {     // no motion: show the finish
-      const render = () => draw(cv, data, last);
+      const render = () => draw(cv, data, last, nukeCell(data, last) ? 1 : undefined);
       render();
       window.addEventListener('resize', render);
       return;
     }
 
+    const raf = (fn) => (window.requestAnimationFrame
+      ? window.requestAnimationFrame(fn) : setTimeout(fn, 16));
+    const now = () => (typeof performance !== 'undefined' ? performance.now() : Date.now());
+
     let i = 0, timer = null, running = false;
     const tick = () => {
+      const isLast = i === last;
+      if (isLast && nukeCell(data, i)) { detonate(); return; }
       draw(cv, data, i);
-      const wait = i === last ? HOLD_MS : STEP_MS;
-      i = i === last ? 0 : i + 1;
+      const wait = isLast ? HOLD_MS : STEP_MS;
+      i = isLast ? 0 : i + 1;
       timer = setTimeout(tick, wait);
+    };
+    // The detonation is the one moment worth animating between half-turns.
+    const detonate = () => {
+      const t0 = now();
+      const frame = () => {
+        if (!running) return;
+        const p = Math.min(1, (now() - t0) / BLAST_MS);
+        draw(cv, data, last, p);
+        if (p < 1) raf(frame);
+        else { i = 0; timer = setTimeout(tick, HOLD_MS); }
+      };
+      frame();
     };
     const start = () => { if (!running) { running = true; tick(); } };
     const stop = () => { running = false; clearTimeout(timer); timer = null; };

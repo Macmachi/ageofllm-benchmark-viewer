@@ -1114,7 +1114,7 @@ table.lb.opening-table th, table.lb.opening-table td { padding: 8px 12px; }
 .ft-p { display: inline-flex; align-items: center; gap: 5px; min-width: 0; }
 .ft-p0 { color: var(--p0); }
 .ft-p1 { color: var(--p1); }
-.ft-win { font-size: 9px; opacity: .9; }
+.ft-mark { font-size: 13px; line-height: 1; }
 .ft-vs { color: var(--text-faint); font-size: 11px; font-weight: 600; }
 .ft-canvas { display: block; width: 100%; border-radius: 5px; background: var(--bg-2); }
 .ft-cta {
