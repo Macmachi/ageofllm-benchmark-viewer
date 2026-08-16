@@ -54,7 +54,13 @@
     <div class="lb-section-title">The throne</div>
     <div id="throne"></div>
 
-    <div class="lb-section-title">Standing</div>
+    <!-- The note is not decoration. The board prints a rank and a W-L record
+         side by side, and they routinely disagree — Kimi K3 holds #4 on 3W-5L.
+         Without this line a reader assumes a league table and reads the order
+         as a bug. -->
+    <div class="lb-section-title">Standing
+      <span class="lb-title-note" title="A place is not a score. It says only that no challenger has beaten that model at that rung: places change hands when a challenger wins the two-leg tie played for it, and never because of a points total. The W–L record shown beside each model is aggregated from its matches for information — it is never compared across the board, which is why a model can hold a place on a losing record.">(not a points table — a place is held until a challenger wins the tie for it)</span>
+    </div>
     <div class="lad-board" id="lad-board"></div>
 
     <div class="lb-section-title">Latest challenge</div>

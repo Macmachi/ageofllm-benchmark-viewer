@@ -573,6 +573,19 @@ table.lb tbody tr.lb-separator td {
 }
 .lb-rank-note { color: var(--text-faint); font-size: 12px; align-self: center; }
 
+/* A caption sitting inside an .lb-section-title. The title is uppercase with
+   wide tracking; the note must not inherit either, or a sentence set in caps
+   competes with the heading it is meant to qualify. */
+.lb-title-note {
+  text-transform: none; letter-spacing: 0; font-weight: 400;
+  font-size: 12px; color: var(--text-faint); opacity: .85;
+  margin-left: 6px; cursor: help; border-bottom: 1px dotted var(--border);
+}
+@media (max-width: 640px) {
+  /* Its own line on a narrow screen rather than a ragged wrap under the title. */
+  .lb-title-note { display: block; margin: 4px 0 0; }
+}
+
 /* archived models */
 table.lb tbody tr.archived { opacity: 0.45; filter: saturate(0.3); }
 table.lb tbody tr.archived-hidden { display: none; }
