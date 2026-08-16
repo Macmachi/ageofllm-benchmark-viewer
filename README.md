@@ -1,4 +1,4 @@
-# Age of LLM™ — Benchmark · site v0.17.2 · game engine v0.18.0
+# Age of LLM™ — Benchmark · site v0.17.3 · game engine v0.18.0
 
 ![Age of LLM — Benchmark cover](assets/images/Cover.png)
 
@@ -49,9 +49,9 @@ could not, the standing carries over and the release notes say so.
 
 ---
 
-## What's new in **site v0.17.2** — the standing shows the last match
+## What's new in **site v0.17.3** — the standing shows the last match
 
-> **Scope: SITE.** Site `0.17.1` → **`0.17.2`**. Game engine stays `0.18.0`.
+> **Scope: SITE.** Site `0.17.1` → **`0.17.3`**. Game engine stays `0.18.0`.
 
 Replays were linked only from inside the opening table, which renders collapsed,
 so no visitor ever saw a match. The standing now opens with an **animated minimap
@@ -62,6 +62,11 @@ Sprite-free on purpose: the viewer's renderer needs 836 KB of sprites, which a
 landing page should not pay for a decoration. `data/featured.json` is **11 KB cut
 from a 1.5 MB replay** — four fifths of a replay is reasoning text a silent
 minimap does not need. The page goes from 87 KB to 105 KB.
+
+Movement arrows show what moved between half-turns, 👑 and 💀 mark the two
+models, and the bomb detonates on the loser's base — fireball, shockwaves, crater — drawn
+from the nuke event, so it always lands on the right side. The teaser is rebuilt
+on every publish, so it always shows the newest match.
 
 If the file is missing the card simply stays hidden. `prefers-reduced-motion`
 gets a still.
