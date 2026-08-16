@@ -51,7 +51,7 @@ could not, the standing carries over and the release notes say so.
 
 ## Contents
 
-This repository publishes what changes the **benchmark**: every game-engine release, plus the move from a leaderboard to a ladder. Site and tooling changes are tracked in the private repository — they cannot change how a match was played.
+This repository publishes what changes the **benchmark**: every game-engine release, plus the rare site change that alters what is measured or how it is ranked. Ordinary site and tooling changes are tracked in the private repository — they cannot change how a match was played.
 
 - [Two version numbers](#two-version-numbers) — which number moves when, and why it matters
 - [Releases](#releases) — 12 entries, newest first
@@ -73,7 +73,9 @@ This repository publishes what changes the **benchmark**: every game-engine rele
 
 ## Releases
 
-Every entry says whether it moved the **game engine** (the rules, stamped into each replay) or the **site**. Only a game-engine change can make two matches non-comparable.
+**These are the benchmark's releases, not the site's.** Every game-engine release is here — the rules, stamped into each replay — because only a game-engine change can make two matches non-comparable. Site and tooling releases are not: they live in the private repository.
+
+Two site entries appear anyway, and both earn their place by changing what the benchmark **claims**, not how it looks: the move from a leaderboard to a ladder (`site 0.17.0`), and the side-bias audit that had to establish the engine favours neither slot (`0.16.2`). A redesign, a faster page, a fixed tooltip or a missing badge on a card will never appear here.
 
 ### What's new in **game engine v0.18.0** — the prompt denied a mechanic the engine implements
 
