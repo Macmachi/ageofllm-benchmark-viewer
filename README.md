@@ -74,6 +74,52 @@ This repository publishes what changes the **benchmark**: every game-engine rele
 
 Every entry says whether it moved the **game engine** (the rules, stamped into each replay) or the **site**. Only a game-engine change can make two matches non-comparable.
 
+### What's new in **site v0.17.5** — the first challenger, and a tie rule that was wrong
+
+> **Scope: SITE only.** Site `0.17.4` → **`0.17.5`**. Game engine stays
+> `0.18.0` — no rule of play changed, so every match remains comparable.
+
+**Qwen3.8 27B challenged and did not enter.** Kimi K3 holds **#4**, 3-0. Leg 1
+to Kimi by nuclear launch on turn 19; in leg 2, **both models launched on the
+same turn** — mutual destruction on turn 25. The standing is unchanged: Grok
+4.6, GPT-5.6 Sol, Claude Opus 5, Kimi K3.
+
+**How a tie is scored — stated here for the first time.** Each of the two legs
+pays the same points used everywhere else in the project, and the tie is the
+sum:
+
+| Leg result | Points |
+|---|---|
+| Win | **3** |
+| Draw — peace or turn limit | **1** each |
+| Loss | **0** |
+| Loss by accepted ultimatum | **0.5** |
+| **Mutual destruction** | **0 each — both lose, it is not a draw** |
+
+**That last line was scored 1-1 until this release, and it was a bug.** The
+ladder had no branch for mutual destruction, so every result without a winner
+was treated as a draw — while the leaderboard had scored it 0-0 from the start.
+The incentive is why it matters: at 1 point, a model that is losing turns a
+certain 0 into a certain 1 by launching, which makes launching-when-behind
+strictly dominant and empties **nuclear deterrence**, one of the three pillars
+this benchmark measures, of any meaning.
+
+Corrected while it was free — **one mutual destruction in 68 replays**, and the
+only tie it touches keeps its result: Qwen vs Kimi goes from 1-4 to 0-3, Kimi
+retains either way. The challenge log now reads *"both lost"* on such a leg
+rather than *"drew"*.
+
+**A challenger pinned to an endpoint its own lab does not serve.** The rule is
+"each model plays on the endpoint its maker serves" — Qwen serves none on
+OpenRouter, so a second rule takes over: pin to the highest precision offered
+(AkashML `bf16` over Chutes `fp8`). Both pins held for the whole tie, one
+endpoint per model on both legs. **Read latency and cost accordingly**: for a
+third-party pin they describe that host's hardware and margin, not the lab's.
+Qwen cost **$0.74** across the tie against Kimi's **$3.43** for a near-identical
+token count.
+
+---
+
 ### What's new in **game engine v0.18.0** — the prompt denied a mechanic the engine implements
 
 > **Scope: RULES (prompt text) + replay schema. No game behaviour changed.**
@@ -175,7 +221,10 @@ compared inside that tie rather than over careers.
 - **Real costs, not estimates.** Prices × tokens cannot see prompt caching and
   read high; the provider-reported figure is now what gets published.
 - **Latency is a published metric**, which it could not honestly be before every
-  model was pinned to a single endpoint.
+  model was pinned to a single endpoint. It measures **that one deployment** —
+  the lab's own where the lab serves one, a third party's hardware and queue
+  where it does not. Each model's endpoint is published next to its latency, so
+  which case applies is visible rather than assumed.
 
 ---
 
@@ -1267,9 +1316,11 @@ schema point:
 
 Each model entry therefore carries a `reasoning_effort` field (`"high" | "medium"
 | "low" | "off" | "NA"`) alongside `model`, plus `wins`, `losses`, `draws`,
-`total`, `points` (3/1/0 cumulative), `points_per_match` (average points per
-match — the primary ranking key), `win_rate`, the win buckets (`nuclear_wins`,
-`military_wins`, `diplomatic_wins`, `mutual_destructions`) and the benchmark
+`total`, `points` (3 / 1 / 0.5 / 0 cumulative — **mutual destruction scores 0
+and counts as a loss for both**, it is not a draw), `points_per_match` (average
+points per match — the primary ranking key), `win_rate`, the outcome buckets
+(`nuclear_wins`, `military_wins`, `diplomatic_wins`, and `mutual_destructions`,
+which is not a win bucket) and the benchmark
 performance fields (`avg_think_ms`, `avg_tokens_per_turn`, `invalid_actions`,
 `invalid_action_rate`, the retry counters `retries_timeout` / `retries_api_error`
 / `retries_malformed` / `retries_total`, and the estimated cost
