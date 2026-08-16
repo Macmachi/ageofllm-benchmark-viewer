@@ -1053,6 +1053,30 @@ be read into its position than that. Precision accumulates where it is worth
 having: models near the top defend repeatedly and build a record, while the
 bottom of the board stays thin — and says so.
 
+**A rank is not a record, and the board is not a points table.** A place says
+exactly one thing: *nobody has beaten this model here*. The W–L record printed
+next to each model is information — it never enters the position, and no total
+is ever compared across the board. A rung changes hands only when a challenger
+wins the tie played for it.
+
+So a model can hold a place with a losing record, and one does: after the first
+challenge, **Kimi K3 sits at `#4` on 3W–5L**. That is not a contradiction to be
+fixed, it is the format working. Reading the standing as a league table is the
+one mistake it invites, which is why the record is shown at all — hiding it
+would make the board look like a ranking it is not.
+
+**Mutual destruction can never cost an incumbent its place.** It scores 0 for
+both sides, so it moves no gap: a tie of two mutual destructions is 0-0 and the
+incumbent keeps the rung, and a mutual destruction next to a leg the incumbent
+won is 0-3, same outcome. Only a challenger winning more legs than the incumbent
+takes a rung.
+
+That is the exact reverse of the **opening table**, where a mutual destruction
+costs both participants a point against the models that were not involved — and
+can therefore drop one of them below the cut. Penalising in the opening, neutral
+in a defence, from one rule: a round-robin ranks models against a field, while
+the ladder only ever records a duel.
+
 The ladder also assumes **transitivity**: a model placed `#3` never played `#1`.
 That assumption is at its most exposed on day one, which is exactly why the
 opening was a fully connected round-robin rather than a seeding by decree.
