@@ -71,6 +71,7 @@
         const a = acc[model] || (acc[model] = {
           usd: 0, matches: 0, thinkSum: 0, thinkN: 0, providers: new Set(),
           reported: 0, ok: 0, illegal: 0, fog: 0, winTurns: [], lossTurns: [],
+          w: 0, l: 0, d: 0,
         });
         if (typeof p.usd === 'number') { a.usd += p.usd; a.matches += 1; }
         if (p.cost_source === 'provider') a.reported += 1;
@@ -86,11 +87,28 @@
         a.fog += p.fog_blocked || 0;
         if (p.served_by) [].concat(p.served_by).forEach((x) => a.providers.add(x));
       }
-      // Turns to win / to lose. The winning model is named differently by the
-      // two leg shapes — the opening says "a"/"b", a challenge says
-      // "challenger"/"incumbent" — so the caller resolves it and passes the
-      // slugs in. Draws count for neither: nobody closed the match out.
-      if (typeof leg.turns === 'number' && win && lose) {
+      // THE RECORD. Counted separately from the turns below, because the two
+      // ask different questions and used to share one answer: wins and losses
+      // were read off the LENGTH of the turn arrays, so any match without a
+      // winner counted for neither side and a model that had played two matches
+      // could show "0W-1L".
+      //
+      // Mutual destruction is a LOSS FOR BOTH — the same rule ladder_core.py
+      // and generate_stats.py apply. It is the one outcome with no winner that
+      // is nonetheless nobody's draw.
+      const mutual = leg.victory_type === 'mutual_destruction';
+      for (const model of Object.keys(leg.perf || {})) {
+        const a = acc[model];
+        if (!a) continue;
+        if (mutual) a.l += 1;
+        else if (model === win) a.w += 1;
+        else if (model === lose) a.l += 1;
+        else a.d += 1;
+      }
+      // Turns to win / to lose, for the tempo tiebreak only. A match nobody
+      // closed out has no time to contribute — including a mutual destruction,
+      // where "how fast was it annihilated" measures nothing.
+      if (typeof leg.turns === 'number' && win && lose && !mutual) {
         (acc[win] || {}).winTurns?.push(leg.turns);
         (acc[lose] || {}).lossTurns?.push(leg.turns);
       }
@@ -120,8 +138,10 @@
         illegalRate: (a.ok + a.illegal) ? a.illegal / (a.ok + a.illegal) : null,
         winTurns: a.winTurns.length
           ? a.winTurns.reduce((s, x) => s + x, 0) / a.winTurns.length : null,
-        wins: a.winTurns.length,
-        losses: a.lossTurns.length,
+        wonMatches: a.winTurns.length,      // decisive wins, for the tempo label
+        wins: a.w,
+        losses: a.l,
+        draws: a.d,
       };
     }
   }
@@ -135,12 +155,12 @@
     // says "nobody has beaten me at this rung", which on day one — when the
     // opening is the only thing that happened — tells the reader nothing about
     // how the four got there. The record does, and it links to the matches.
-    const rec = (p.wins + p.losses)
-      ? `<a class="lad-stat rec" href="#opening-history" title="Record across every match played on this ladder. Click to open the match list and the replays.">▤ ${p.wins}W–${p.losses}L</a>` : '';
+    const rec = (p.wins + p.losses + p.draws)
+      ? `<a class="lad-stat rec" href="#opening-history" title="Record across every match played on this ladder — W–L–D, and it always sums to the ${p.matches} match(es) played. A mutual destruction counts as a loss for both sides, not a draw. Click to open the match list and the replays.">▤ ${p.wins}W–${p.losses}L${p.draws ? `–${p.draws}D` : ''}</a>` : '';
     // Tempo. It settles the opening table when points, wins and head-to-head
     // are all level, and since site 0.17.1 it settles a level challenge too.
     const tempo = p.winTurns != null
-      ? `<span class="lad-stat" title="Mean turns taken in the ${p.wins} match(es) this model won. Career figure, shown as information — a challenge is settled on the speed inside that duel, not on this average.">⚔ wins in ${p.winTurns.toFixed(0)}</span>` : '';
+      ? `<span class="lad-stat" title="Mean turns taken in the ${p.wonMatches} match(es) this model won. Career figure, shown as information — a challenge is settled on the speed inside that duel, not on this average.">⚔ wins in ${p.winTurns.toFixed(0)}</span>` : '';
     const cost = p.usdPerMatch != null
       ? `<span class="lad-stat${p.allReported ? '' : ' estimated'}" title="${p.allReported
           ? 'Average USD per match, as charged by the provider'
