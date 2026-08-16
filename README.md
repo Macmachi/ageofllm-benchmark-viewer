@@ -49,40 +49,32 @@ could not, the standing carries over and the release notes say so.
 
 ---
 
-## What's new in **site v0.17.4** — paging, and the archive moved to the bottom
+## Contents
 
-> **Scope: SITE.** Site `0.17.3` → **`0.17.4`**. Game engine stays `0.18.0`.
+This repository publishes what changes the **benchmark**: every game-engine release, plus the move from a leaderboard to a ladder. Site and tooling changes are tracked in the private repository — they cannot change how a match was played.
 
-The opening legs (12/page) and the challenge log (8/page) get pages — the opening
-grows as *n(n-1)* legs, the log never stops growing. No pager is drawn below the
-threshold. Reigns stay whole: that list is a timeline on a shared axis.
+- [Two version numbers](#two-version-numbers) — which number moves when, and why it matters
+- [Releases](#releases) — 12 entries, newest first
+- [1. Overview & architecture](#1-overview--architecture)
+- [2. Quick start](#2-quick-start)
+- [3. Game rules (complete)](#3-game-rules-complete)
+- [4. The Python engine (`engine/`)](#4-the-python-engine-engine)
+- [5. The replay JSON schema](#5-the-replay-json-schema)
+- [5b. The leaderboard (`data/leaderboard.json`)](#5b-the-leaderboard-dataleaderboardjson)
+- [6. The web viewer](#6-the-web-viewer)
+- [7. Scripts & tools](#7-scripts--tools)
+- [8. Important conventions & invariants](#8-important-conventions--invariants)
+- [9. Two-repo architecture](#9-two-repo-architecture)
+- [License & Copyright](#license--copyright)
+- [Links](#links)
 
-The V1 archive link moved above the footer; it was sitting between the format
-blurb and the standing.
+---
 
-## What's new in **site v0.17.3** — the standing shows the last match
+## Releases
 
-> **Scope: SITE.** Site `0.17.1` → **`0.17.3`**. Game engine stays `0.18.0`.
+Every entry says whether it moved the **game engine** (the rules, stamped into each replay) or the **site**. Only a game-engine change can make two matches non-comparable.
 
-Replays were linked only from inside the opening table, which renders collapsed,
-so no visitor ever saw a match. The standing now opens with an **animated minimap
-of the most recent one** — the closing half-turns on a loop, a click away from
-the full viewer.
-
-Sprite-free on purpose: the viewer's renderer needs 836 KB of sprites, which a
-landing page should not pay for a decoration. `data/featured.json` is **11 KB cut
-from a 1.5 MB replay** — four fifths of a replay is reasoning text a silent
-minimap does not need. The page goes from 87 KB to 105 KB.
-
-Movement arrows show what moved between half-turns, 👑 and 💀 mark the two
-models, and the bomb detonates on the loser's base — fireball, shockwaves, crater — drawn
-from the nuke event, so it always lands on the right side. The teaser is rebuilt
-on every publish, so it always shows the newest match.
-
-If the file is missing the card simply stays hidden. `prefers-reduced-motion`
-gets a still.
-
-## What's new in **game engine v0.18.0** — the prompt denied a mechanic the engine implements
+### What's new in **game engine v0.18.0** — the prompt denied a mechanic the engine implements
 
 > **Scope: RULES (prompt text) + replay schema. No game behaviour changed.**
 > Game engine `0.17.0` → **`0.18.0`**. Site stays `0.17.1`.
@@ -127,7 +119,8 @@ player always lacked the uranium or the silo to answer.
 
 ---
 
-## What's new in **game engine v0.17.0** — three defects found by auditing the corpus
+
+### What's new in **game engine v0.17.0** — three defects found by auditing the corpus
 
 > **Scope: RULES.** Game engine `0.16.0` → **`0.17.0`**, shipped alongside site
 > `0.17.1`. The ladder starts from zero on this version.
@@ -158,7 +151,7 @@ still stated; only the imperative was cut.
 
 ---
 
-## What's new in **site v0.17.0** — the Ladder replaces the leaderboard
+### What's new in **site v0.17.0** — the Ladder replaces the leaderboard
 
 > **Scope: SITE only.** Site `0.16.2` → **`0.17.0`**. Game engine untouched — and
 > `ENGINE_VERSION` corrected here from a phantom `0.16.2` back to `0.16.0`.
@@ -186,7 +179,10 @@ compared inside that tie rather than over careers.
 
 ---
 
-## What's new in **v0.16.2** — side-bias audit
+<details>
+<summary><b>Older releases</b> — 9 more, game engine 0.9.4 &rarr; 0.16.0</summary>
+
+### What's new in **v0.16.2** — side-bias audit
 
 > **Scope: SITE only.** Game engine unchanged at `0.16.0`. This release bumped
 > `ENGINE_VERSION` to 0.16.2 with no rules behind it; corrected in site 0.17.0.
@@ -213,43 +209,7 @@ stronger models were written into the p2 field — and not from the game itself.
   `slot_bias.mirror`, each with its Wilson interval, so no consumer reads a rate
   without its uncertainty.
 
-## What's new in **v0.16.1** — leaderboard aggregation
-
-> **Scope: SITE only.** Game engine unchanged at `0.16.0`. Same phantom bump,
-> corrected in site 0.17.0.
->
-> *Released before the two version numbers were separated, when a single version covered both.*
-
-Patch release: **leaderboard tooling only — no change to the rules, the system
-prompt or engine behaviour.** Version bumped **0.16.0 → 0.16.1**. Replays are
-untouched and the ranking order is unchanged.
-
-- **Head-to-head tiebreak fixed for aliased models.** Matches played under a
-  provider alias (e.g. `openai/gpt-5.5`) recorded their head-to-head under a key
-  the tiebreak never read, silently returning 0 instead of the real result. It
-  had never fired yet — no two models are currently tied on both points/match
-  and win rate — so no ranking moves.
-- **Two aggregation bugs fixed**: `zai-org-glm-5-1` was missing from the alias
-  table and could have produced two separate "GLM 5.1" rows; and the retry
-  counters were overwriting the turn loop variable.
-- **Silent failures made loud**: replays written into a nested `replays/`
-  sub-folder (unsanitized `/` in `match_id`) used to disappear from the
-  leaderboard without an error, and a decisive match with a corrupted `winner`
-  was counted as a draw without warning. Both now report.
-- **`data/leaderboard.json` publishes its caveats.** New `min_matches_ranked`
-  and per-model `provisional` fields — the minimum-match threshold used to exist
-  only in the website's JavaScript, so anyone reading the raw JSON saw models
-  ranked on 3 matches with nothing marking them as preliminary.
-- **Side-bias audit published.** New `slot_bias` block and per-model
-  `matches_as_p0` / `matches_as_p1`. Player 1 wins **38 of 53 decisive matches
-  (71.7 %, p ≈ 0.002)** while only **2 of 50 pairings were played in both
-  directions**, so side and model identity are currently confounded. It is not a
-  first-move effect — the board is mirrored, the opening player is drawn from the
-  seed and alternates each turn, and the opener wins 24 against 29. Published
-  rather than hidden; isolating it requires mirror matches (identical model on
-  both sides), which is the next step.
-
-## What's new in **game engine v0.16.0** — the prompt made rule-only
+### What's new in **game engine v0.16.0** — the prompt made rule-only
 
 > **Scope: RULES.** Game engine `0.15.0` → **`0.16.0`**.
 >
@@ -267,7 +227,7 @@ This release makes the system prompt **fully rule-only**. Engine bumped **0.15.0
   the v0.9.2–v0.15.0 corpus (the 54 matches analysed in the papers) is unaffected
   and remains as collected, with the seed phrases present.
 
-## What's new in **game engine v0.15.0** — nuclear early warning
+### What's new in **game engine v0.15.0** — nuclear early warning
 
 > **Scope: RULES.** Game engine `0.14.0` → **`0.15.0`**.
 >
@@ -283,7 +243,7 @@ This release adds a **nuclear early-warning signal**. Engine bumped
   one-turn window to **retaliate** (launch their own bomb the same turn → mutual
   destruction instead of a clean nuclear defeat).
 
-## What's new in **game engine v0.14.0** — fog-of-war gap on deposits
+### What's new in **game engine v0.14.0** — fog-of-war gap on deposits
 
 > **Scope: RULES.** Game engine `0.13.0` → **`0.14.0`**.
 >
@@ -298,7 +258,7 @@ This release adds a **nuclear early-warning signal**. Engine bumped
   requires the cell to be in your **current** field of view (the enemy may have
   built on it since), and an exhausted deposit is dropped from memory.
 
-## What's new in **game engine v0.13.0** — the Champion reference opponent
+### What's new in **game engine v0.13.0** — the Champion reference opponent
 
 > **Scope: RULES.** Game engine `0.12.0` → **`0.13.0`**.
 >
@@ -384,7 +344,7 @@ To pit a **named** model against the Champion (e.g. GPT-5.5) without editing
 > Use **~10 minimum**, **20-30 recommended**, played with the LLM in **both
 > slots** to cancel the mirror slot bias.
 
-## What's new in **game engine v0.12.0** — balance: SAM, central mine, map fairness
+### What's new in **game engine v0.12.0** — balance: SAM, central mine, map fairness
 
 > **Scope: RULES.** Game engine `0.11.0` → **`0.12.0`**.
 >
@@ -416,7 +376,7 @@ seeds, with four targeted balance changes:
 > **Note — no strategic advice:** as always, the prompt describes ONLY the rules
 > and the action schema. The models receive no hints on how to play.
 
-## What's new in **game engine v0.11.0** — balance: base HP 8 → 4
+### What's new in **game engine v0.11.0** — balance: base HP 8 → 4
 
 > **Scope: RULES.** Game engine `0.10.0` → **`0.11.0`**.
 >
@@ -464,7 +424,7 @@ head-to-head with the nuclear rush**, and clarifies the rules shown to the model
 > **Note — no strategic advice:** as always, the prompt describes ONLY the rules and
 > the action schema. The models receive no hints on how to play.
 
-## What's new in **game engine v0.10.0** — map rework and line of sight
+### What's new in **game engine v0.10.0** — map rework and line of sight
 
 > **Scope: RULES.** Game engine `0.9.4` → **`0.10.0`**.
 >
@@ -515,7 +475,7 @@ on destroy/rebuild at the center, while keeping games short:
 
 ---
 
-## What's new in **game engine v0.9.4** — accepted ultimatum scores 0.5
+### What's new in **game engine v0.9.4** — accepted ultimatum scores 0.5
 
 > **Scope: RULES.** Game engine `0.9.3` → **`0.9.4`**.
 >
@@ -542,19 +502,8 @@ on destroy/rebuild at the center, while keeping games short:
 
 ---
 
-## Contents
 
-1. [Overview & architecture](#1-overview--architecture)
-2. [Quick start](#2-quick-start)
-3. [Game rules (complete)](#3-game-rules-complete)
-4. [The Python engine (`engine/`)](#4-the-python-engine-engine)
-5. [The replay JSON schema](#5-the-replay-json-schema)
-6. [The web viewer (`assets/`, `viewer.html`, `index.html`)](#6-the-web-viewer)
-7. [Scripts & tools](#7-scripts--tools)
-8. [Important conventions & invariants](#8-important-conventions--invariants)
-9. [Notes](#9-notes)
-
----
+</details>
 
 ## 1. Overview & architecture
 
