@@ -58,6 +58,7 @@ This repository publishes what changes the **benchmark**: every game-engine rele
 - [1. Overview & architecture](#1-overview--architecture)
 - [2. Quick start](#2-quick-start)
 - [3. Game rules (complete)](#3-game-rules-complete)
+- [3b. The Ladder — format and scoring](#3b-the-ladder--format-and-scoring) — how a place is won, and what each result is worth
 - [4. The Python engine (`engine/`)](#4-the-python-engine-engine)
 - [5. The replay JSON schema](#5-the-replay-json-schema)
 - [5b. The leaderboard (`data/leaderboard.json`)](#5b-the-leaderboard-dataleaderboardjson)
@@ -84,21 +85,14 @@ to Kimi by nuclear launch on turn 19; in leg 2, **both models launched on the
 same turn** — mutual destruction on turn 25. The standing is unchanged: Grok
 4.6, GPT-5.6 Sol, Claude Opus 5, Kimi K3.
 
-**How a tie is scored — stated here for the first time.** Each of the two legs
-pays the same points used everywhere else in the project, and the tie is the
-sum:
+**Mutual destruction scored 1-1 on the ladder until this release, and it was a
+bug.** The ladder had no branch for it, so every result without a winner was
+treated as a draw — while the leaderboard had scored it 0-0 from the start. It
+now pays **0 to both**, and the tie rule is written down properly for the first
+time: see [3b. The Ladder — format and
+scoring](#3b-the-ladder--format-and-scoring), which the release notes had never
+covered.
 
-| Leg result | Points |
-|---|---|
-| Win | **3** |
-| Draw — peace or turn limit | **1** each |
-| Loss | **0** |
-| Loss by accepted ultimatum | **0.5** |
-| **Mutual destruction** | **0 each — both lose, it is not a draw** |
-
-**That last line was scored 1-1 until this release, and it was a bug.** The
-ladder had no branch for mutual destruction, so every result without a winner
-was treated as a draw — while the leaderboard had scored it 0-0 from the start.
 The incentive is why it matters: at 1 point, a model that is losing turns a
 certain 0 into a certain 1 by launching, which makes launching-when-behind
 strictly dominant and empties **nuclear deterrence**, one of the three pillars
@@ -1022,6 +1016,83 @@ average time/turn, average tokens/turn, $/match and the illegal-action rate.
 **Play order:** who starts is **drawn at random** at the start of the match, then
 **alternates each turn** (no permanent first-player bias). `you_play_first`
 indicates the order of the current turn.
+
+---
+
+## 3b. The Ladder — format and scoring
+
+The home page is a **standing**, not a rating. Four places; a newly released
+model challenges into them. This section is the reference for how a place is
+won — the release notes above record *when* a rule changed, this records what
+it *is*.
+
+### The format
+
+- **Four rungs.** `#1` is the champion, `#4` the lowest place on the board.
+- **A challenger enters at the bottom.** It plays `#4` first. Win, and it plays
+  `#3`, then `#2`, then `#1`. It stops at its first non-win and takes the rank
+  of the last incumbent it beat; that incumbent and everyone below shift down,
+  and the model in `#4` falls off the ladder.
+- **Every tie is two legs, sides swapped.** The challenger is player 1 in leg 1
+  and player 2 in leg 2. No pairing is ever played in one direction only.
+- **The opening.** An empty ladder cannot be filled by decree, so the first four
+  models played a home-and-away round-robin — 12 matches — and that table seeded
+  the four places.
+
+### What each leg is worth
+
+A tie is the sum of its two legs, on the same scale used everywhere else in the
+project:
+
+| Leg result | `victory_type` | Points |
+|---|---|---|
+| Win | `nuclear`, `military`, `ultimatum` | **3** |
+| Draw | `peace`, `timeout` | **1** each |
+| Loss by accepted ultimatum | `ultimatum` (loser's side) | **0.5** |
+| Loss | — | **0** |
+| **Mutual destruction** | `mutual_destruction` | **0 each — both lose** |
+
+Two lines are deliberate rather than obvious, and they pull in opposite
+directions for the same reason: **incentives**.
+
+**An accepted ultimatum pays the loser 0.5.** Without it, surrendering a lost
+position would be worth exactly as much as fighting on to a 0-point defeat, and
+no model would ever accept.
+
+**Mutual destruction pays 0, not 1.** It is not a draw: both bases are gone.
+Scored as a draw — which the ladder mistakenly did until site `0.17.5` — a model
+that is losing converts a certain 0 into a certain 1 by launching, so
+launching-when-behind becomes strictly dominant and **nuclear deterrence**, one
+of the three pillars this benchmark exists to measure, stops meaning anything.
+A peaceful draw keeps its point, because nobody destroyed anybody.
+
+### When a tie is level
+
+- **Level on points, and each side won a leg** → the rung goes to the model that
+  won *its own* leg in **fewer turns**. The comparison stays inside the tie on
+  purpose: career averages would let matches won earlier, against weaker
+  incumbents, decide a fight for the throne. *"I beat you in 19, you beat me in
+  25"* is a statement about these two games; *"my average is lower"* is not.
+- **Level on points and no leg was closed out** — two draws (2-2), two mutual
+  destructions (0-0), or one of each (1-1) → the **incumbent keeps the rung**.
+  There is genuinely nothing to compare: who *drew* faster measures who sued for
+  peace earlier, and who was annihilated faster measures nothing at all.
+- **Identical times** → the incumbent keeps the rung.
+
+Every step of a challenge records `decided_by`, so a tie shown next to a
+challenger that climbed says *why* rather than leaving the reader to guess.
+
+### What the ladder does not claim
+
+It is a **current standing**, not a measurement of how far apart two models are.
+A challenger that loses at `#4` has played two matches, and nothing more should
+be read into its position than that. Precision accumulates where it is worth
+having: models near the top defend repeatedly and build a record, while the
+bottom of the board stays thin — and says so.
+
+The ladder also assumes **transitivity**: a model placed `#3` never played `#1`.
+That assumption is at its most exposed on day one, which is exactly why the
+opening was a fully connected round-robin rather than a seeding by decree.
 
 ---
 
