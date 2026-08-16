@@ -1,4 +1,4 @@
-# Age of LLM™ — Benchmark · site v0.17.3 · game engine v0.18.0
+# Age of LLM™ — Benchmark · site v0.17.4 · game engine v0.18.0
 
 ![Age of LLM — Benchmark cover](assets/images/Cover.png)
 
@@ -48,6 +48,17 @@ change could plausibly reorder the standing, the opening is replayed; when it
 could not, the standing carries over and the release notes say so.
 
 ---
+
+## What's new in **site v0.17.4** — paging, and the archive moved to the bottom
+
+> **Scope: SITE.** Site `0.17.3` → **`0.17.4`**. Game engine stays `0.18.0`.
+
+The opening legs (12/page) and the challenge log (8/page) get pages — the opening
+grows as *n(n-1)* legs, the log never stops growing. No pager is drawn below the
+threshold. Reigns stay whole: that list is a timeline on a shared axis.
+
+The V1 archive link moved above the footer; it was sitting between the format
+blurb and the standing.
 
 ## What's new in **site v0.17.3** — the standing shows the last match
 
