@@ -35,6 +35,7 @@ window.MODEL_META = {
   'openai/gpt-5.6-sol':                { flag: '🇺🇸', author: 'OpenAI', isNew: true },
   'x-ai/grok-4.6':                     { flag: '🇺🇸', author: 'xAI', isNew: true },
   'moonshotai/kimi-k3':                { flag: '🇨🇳', author: 'Moonshot', isNew: true },
+  'qwen/qwen3.8-27b':                  { flag: '🇨🇳', author: 'Alibaba', isNew: true },
   'z-ai/glm-5.2':                      { flag: '🇨🇳', author: 'Zhipu' },
   'z-ai/glm-5.3':                      { flag: '🇨🇳', author: 'Zhipu', isNew: true },
 };

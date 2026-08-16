@@ -461,13 +461,20 @@
     return `<div class="chal ${expanded ? 'open' : ''}">
       <div class="chal-head">
         <span class="chal-date">${fmtDate(c.date)}</span>
-        <span class="chal-name">${flag(c.challenger.model)}${esc(c.challenger.display_name)} ${effortBadge(c.challenger.reasoning_effort)}</span>
+        <span class="chal-name">${flag(c.challenger.model)}${esc(c.challenger.display_name)} ${effortBadge(c.challenger.reasoning_effort)}${quantBadge(c.challenger.quantization)}</span>
         <span class="chal-verdict ${verdictClass}">${verdict}</span>
         ${displaced}
         <span class="chal-count">${legs} match${legs === 1 ? '' : 'es'}</span>
         <span class="chal-chevron">▾</span>
       </div>
       <div class="chal-body">
+        <!-- A challenger that fails to enter appears ONLY here: it never
+             reaches the standing list, which is the other place that prints
+             quantization, endpoint, latency and cost. Without this row those
+             figures existed in the data and were shown nowhere, and the claim
+             that every model's endpoint is published next to it was false for
+             precisely the models most likely to be pinned to a third party. -->
+        <div class="chal-perf">${perfCells(c.challenger.model)}</div>
         <div class="climb">${c.steps.map(stepCard).join('<div class="climb-arrow">→</div>')}</div>
       </div>
     </div>`;
