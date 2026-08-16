@@ -1115,6 +1115,20 @@ table.lb.opening-table th, table.lb.opening-table td { padding: 8px 12px; }
 .ft-p0 { color: var(--p0); }
 .ft-p1 { color: var(--p1); }
 .ft-mark { font-size: 13px; line-height: 1; }
+
+/* ── paging (opening legs, challenge log) ────────────────────────────────── */
+.pager {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin: 10px 0 2px;
+}
+.pg-btn {
+  background: var(--panel); color: var(--text); cursor: pointer;
+  border: 1px solid var(--border); border-radius: 5px;
+  font: 600 14px/1 var(--sans); padding: 5px 11px;
+}
+.pg-btn:hover:not(:disabled) { border-color: var(--p0); color: var(--p0); }
+.pg-btn:disabled { opacity: .35; cursor: default; }
+.pg-info { font-family: var(--mono); font-size: 11px; color: var(--text-dim); }
 .ft-vs { color: var(--text-faint); font-size: 11px; font-weight: 600; }
 .ft-canvas { display: block; width: 100%; border-radius: 5px; background: var(--bg-2); }
 .ft-cta {

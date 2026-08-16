@@ -20,6 +20,9 @@
 
   let data = null;
   let logFilter = '';
+  // null until the first render, then whatever the reader last chose. Kept out
+  // of the DOM so paging the legs can re-render without closing the panel.
+  let openingOpen = null;
   let perfByModel = {};      // model -> aggregated cost / latency / provider
 
   async function init() {
@@ -217,6 +220,55 @@
   // finished there is no standing to show, and the page says so rather than
   // rendering an empty board.
 
+  // ── paging ────────────────────────────────────────────────────────────────
+  // The opening grows as n(n-1) legs and the challenge log never stops growing,
+  // so both get pages. Below the threshold nothing is drawn: a pager under nine
+  // items is chrome for its own sake. Reigns stay whole on purpose — that list
+  // is a timeline whose bars are positioned against a shared start and end, and
+  // slicing it would silently rescale the axis.
+  const PAGE = { legs: 12, log: 8 };
+  const pageAt = {};                                  // key -> current page
+
+  function pageSlice(key, items) {
+    const size = PAGE[key];
+    if (!size || items.length <= size) { pageAt[key] = 0; return items; }
+    const pages = Math.ceil(items.length / size);
+    const p = Math.min(Math.max(0, pageAt[key] || 0), pages - 1);
+    pageAt[key] = p;
+    return items.slice(p * size, (p + 1) * size);
+  }
+
+  function pagerBar(key, total) {
+    const size = PAGE[key];
+    if (!size || total <= size) return '';
+    const pages = Math.ceil(total / size);
+    const p = Math.min(Math.max(0, pageAt[key] || 0), pages - 1);
+    const from = p * size + 1, to = Math.min(total, (p + 1) * size);
+    return `<div class="pager" data-pager="${key}">
+              <button class="pg-btn" data-pg="prev"${p === 0 ? ' disabled' : ''}
+                      aria-label="Previous page">‹</button>
+              <span class="pg-info">${from}–${to} of ${total}</span>
+              <button class="pg-btn" data-pg="next"${p >= pages - 1 ? ' disabled' : ''}
+                      aria-label="Next page">›</button>
+            </div>`;
+  }
+
+  function bindPager(root, rerender) {
+    root.querySelectorAll('[data-pager]').forEach((bar) => {
+      const key = bar.getAttribute('data-pager');
+      bar.querySelectorAll('.pg-btn').forEach((b) => {
+        b.addEventListener('click', (e) => {
+          // The opening pager sits inside a <button>-toggled panel; without this
+          // a page change would also collapse the panel it lives in.
+          e.preventDefault(); e.stopPropagation();
+          if (b.disabled) return;
+          pageAt[key] = (pageAt[key] || 0) + (b.getAttribute('data-pg') === 'next' ? 1 : -1);
+          rerender();
+        });
+      });
+    });
+  }
+
   function renderOpening() {
     // Pending, the opening IS the page — nothing else has happened yet, so it
     // sits at the top. Once played it becomes the ladder's origin story: it
@@ -255,16 +307,18 @@
     // then it is the ONLY thing that has happened, and hiding it leaves a reader
     // with four names and no evidence, so it opens by default.
     const firstDay = !((data.challenges || []).length);
+    // Re-rendering for a page change must not close the panel.
+    if (openingOpen === null) openingOpen = firstDay;
     el.innerHTML =
       `<div class="lb-section-title">Opening</div>
        <div class="opening done">
-         <button class="opening-toggle" aria-expanded="${firstDay}">
-           <span class="opening-chevron">${firstDay ? '▼' : '▶'}</span>
+         <button class="opening-toggle" aria-expanded="${openingOpen}">
+           <span class="opening-chevron">${openingOpen ? '▼' : '▶'}</span>
            <span>How the ladder started</span>
            <span class="opening-summary">${fmtDate(op.date)} · ${(op.legs || []).length} matches
              · ${champion ? esc(champion.display_name) + ' took #1' : ''}</span>
          </button>
-         <div class="opening-detail${firstDay ? ' open' : ''}">
+         <div class="opening-detail${openingOpen ? ' open' : ''}">
          <table class="lb opening-table">
            <thead><tr><th>#</th><th>Model</th><th class="num">Pts</th>
              <th class="num">W</th><th class="num">D</th><th class="num">L</th>
@@ -281,16 +335,19 @@
                   <td class="tiebreak${r.tiebreak && r.tiebreak.indexOf('unresolved') === 0 ? ' warn' : ''}">${r.tiebreak ? esc(r.tiebreak) : ''}</td>
               </tr>`).join('')}</tbody>
          </table>
-         <div class="opening-legs">${(op.legs || []).map(openingLeg).join('')}</div>
+         <div class="opening-legs">${pageSlice('legs', op.legs || []).map(openingLeg).join('')}</div>
+         ${pagerBar('legs', (op.legs || []).length)}
          </div>
        </div>`;
     const btn = el.querySelector('.opening-toggle');
     if (btn) btn.addEventListener('click', () => {
       const open = btn.getAttribute('aria-expanded') === 'true';
+      openingOpen = !open;
       btn.setAttribute('aria-expanded', String(!open));
       btn.querySelector('.opening-chevron').textContent = open ? '▶' : '▼';
       el.querySelector('.opening-detail').classList.toggle('open', !open);
     });
+    bindPager(el, renderOpening);
   }
 
   function openingLeg(l) {
@@ -386,7 +443,9 @@
       return hay.includes(logFilter);
     });
     if (!list.length) { el.innerHTML = '<div class="empty-state">No challenge matches.</div>'; return; }
-    el.innerHTML = list.map((c) => challengeCard(c, false)).join('');
+    el.innerHTML = pageSlice('log', list).map((c) => challengeCard(c, false)).join('')
+      + pagerBar('log', list.length);
+    bindPager(el, renderLog);
     el.querySelectorAll('.chal-head').forEach((h) => {
       h.addEventListener('click', () => {
         const card = h.closest('.chal');
