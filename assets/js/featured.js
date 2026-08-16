@@ -99,9 +99,10 @@
 
     // The nuke that ends the match, seen from above, centred on the base it
     // destroyed. `blast` runs 0 -> 1; null means no detonation on this frame.
+    // There can be TWO of them: mutual destruction resolves both launches in
+    // the same frame and destroys both bases.
     if (blast !== null && blast !== undefined) {
-      const at = nukeCell(data, idx);
-      if (at) drawBlast(g, w, h, cell, at, blast);
+      for (const at of nukeCells(data, idx)) drawBlast(g, w, h, cell, at, blast);
     }
   }
 
@@ -252,14 +253,24 @@
     g.globalAlpha = 1;
   }
 
-  // Where the bomb landed: the base of the player the nuke event names.
-  function nukeCell(data, idx) {
+  // Where the bombs landed: the base of every player a nuke event names.
+  //
+  // Returns a LIST, and that is the whole point. This used to `find` the first
+  // nuke event and draw one blast, which is right for a nuclear victory and
+  // silently wrong for a mutual destruction — both launches resolve in the same
+  // frame, both bases are destroyed, and the teaser drew only whichever event
+  // the engine happened to emit first. The home page showed one side of the
+  // board being annihilated and the other apparently untouched, which is the
+  // opposite of what the match meant.
+  function nukeCells(data, idx) {
     const f = data.frames[idx];
-    const ev = (f.events || []).find((e) => e.by === 'nuke');
-    if (!ev) return null;
-    const base = (f.buildings || []).find(
-      (b) => b.type === 'base' && b.owner === ev.owner);
-    return base ? base.pos : null;
+    const out = [];
+    for (const ev of (f.events || []).filter((e) => e.by === 'nuke')) {
+      const base = (f.buildings || []).find(
+        (b) => b.type === 'base' && b.owner === ev.owner);
+      if (base) out.push(base.pos);
+    }
+    return out;
   }
 
   function drawBlast(g, w, h, cell, [bx, by], p) {
@@ -342,7 +353,7 @@
     const last = data.frames.length - 1;
 
     if (still || data.frames.length < 2) {     // no motion: show the finish
-      const render = () => draw(cv, data, last, nukeCell(data, last) ? 1 : undefined);
+      const render = () => draw(cv, data, last, nukeCells(data, last).length ? 1 : undefined);
       render();
       window.addEventListener('resize', render);
       return;
@@ -355,7 +366,7 @@
     let i = 0, timer = null, running = false;
     const tick = () => {
       const isLast = i === last;
-      if (isLast && nukeCell(data, i)) { detonate(); return; }
+      if (isLast && nukeCells(data, i).length) { detonate(); return; }
       draw(cv, data, i);
       const wait = isLast ? HOLD_MS : STEP_MS;
       i = isLast ? 0 : i + 1;
