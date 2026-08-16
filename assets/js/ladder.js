@@ -446,6 +446,18 @@
       return;
     }
     el.innerHTML = challengeCard(c, true);
+    // Open by default — it is the headline — but still closable. This card
+    // draws the same .chal-chevron as the log's, so leaving it inert made the
+    // page show an affordance that did nothing.
+    bindChalToggle(el);
+  }
+
+  // Shared by the latest-challenge card and the log. One function on purpose:
+  // the two used to bind separately, and only one of them ever did.
+  function bindChalToggle(root) {
+    root.querySelectorAll('.chal-head').forEach((h) => {
+      h.addEventListener('click', () => h.closest('.chal').classList.toggle('open'));
+    });
   }
 
   function renderLog() {
@@ -460,12 +472,7 @@
     el.innerHTML = pageSlice('log', list).map((c) => challengeCard(c, false)).join('')
       + pagerBar('log', list.length);
     bindPager(el, renderLog);
-    el.querySelectorAll('.chal-head').forEach((h) => {
-      h.addEventListener('click', () => {
-        const card = h.closest('.chal');
-        card.classList.toggle('open');
-      });
-    });
+    bindChalToggle(el);
   }
 
   function challengeCard(c, expanded) {
