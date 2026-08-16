@@ -47,7 +47,6 @@
 
     aggregatePerf();
     renderBanner();
-    renderRules();
     renderOpening();
     renderThrone();
     renderBoard();
@@ -194,27 +193,6 @@
        </div>`;
   }
 
-  function renderRules() {
-    const r = data.rules || {};
-    // Plain words only. "tie", "leg" and "home and away" all read as jargon to
-    // anyone who has not read the README, and two of them mean something else
-    // in ordinary English.
-    const bits = [
-      `${r.rungs || 4} places`,
-      'challengers enter at the bottom',
-      `${r.legs_per_tie || 2} matches per place, one from each side`,
-      'split 1–1 → the faster win takes it',
-      // Not "one defeat": run_ladder breaks on any result that is not a win, so
-      // failing to take a place ends the run exactly as a defeat does.
-      // Never phrase this as "the first place ..." — in English that reads as
-      // 1st place, the throne, which is the opposite of what the rule says.
-      'fail to take a place and the climb stops there',
-      'one pinned endpoint per model',
-    ];
-    document.getElementById('lad-rules').innerHTML =
-      bits.map((b) => `<span class="lad-rule">${esc(b)}</span>`).join('');
-  }
-
   // ── the opening ──────────────────────────────────────────────────────────
   // The four places are played for, not decreed. Until that round-robin is
   // finished there is no standing to show, and the page says so rather than
@@ -226,11 +204,17 @@
   // items is chrome for its own sake. Reigns stay whole on purpose — that list
   // is a timeline whose bars are positioned against a shared start and end, and
   // slicing it would silently rescale the axis.
-  const PAGE = { legs: 12, log: 8 };
+  // Halved on a narrow screen: a page that takes four thumb-scrolls to reach its
+  // own pager is not a page. Read at call time, so a rotation re-pages.
+  const PAGE_WIDE = { legs: 12, log: 8 };
+  const PAGE_NARROW = { legs: 6, log: 3 };
+  const narrow = () => (typeof window !== 'undefined' && window.innerWidth
+    ? window.innerWidth <= 640 : false);
+  const pageSize = (key) => (narrow() ? PAGE_NARROW : PAGE_WIDE)[key];
   const pageAt = {};                                  // key -> current page
 
   function pageSlice(key, items) {
-    const size = PAGE[key];
+    const size = pageSize(key);
     if (!size || items.length <= size) { pageAt[key] = 0; return items; }
     const pages = Math.ceil(items.length / size);
     const p = Math.min(Math.max(0, pageAt[key] || 0), pages - 1);
@@ -239,7 +223,7 @@
   }
 
   function pagerBar(key, total) {
-    const size = PAGE[key];
+    const size = pageSize(key);
     if (!size || total <= size) return '';
     const pages = Math.ceil(total / size);
     const p = Math.min(Math.max(0, pageAt[key] || 0), pages - 1);

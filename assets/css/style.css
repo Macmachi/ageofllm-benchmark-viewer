@@ -786,13 +786,6 @@ table.lb tbody tr.lb-archive-toggle td {
   background: var(--amber); color: #1a1305;
 }
 
-.lad-rules { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 8px; }
-.lad-rule {
-  font-family: var(--mono); font-size: 11px; color: var(--text-dim);
-  background: #151c26; border: 1px solid var(--border-soft);
-  padding: 4px 9px; border-radius: 4px;
-}
-
 /* ---------- throne ---------- */
 .throne {
   display: flex; align-items: center; gap: 18px;
@@ -1129,6 +1122,10 @@ table.lb.opening-table th, table.lb.opening-table td { padding: 8px 12px; }
 .pg-btn:hover:not(:disabled) { border-color: var(--p0); color: var(--p0); }
 .pg-btn:disabled { opacity: .35; cursor: default; }
 .pg-info { font-family: var(--mono); font-size: 11px; color: var(--text-dim); }
+
+/* The archive card follows the match list directly; without this it reads as
+   the last row of that list rather than as a separate destination. */
+.v1-link { margin-top: 26px; }
 .ft-vs { color: var(--text-faint); font-size: 11px; font-weight: 600; }
 .ft-canvas { display: block; width: 100%; border-radius: 5px; background: var(--bg-2); }
 .ft-cta {

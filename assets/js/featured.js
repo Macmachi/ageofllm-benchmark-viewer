@@ -72,17 +72,8 @@
 
     for (const b of f.buildings || []) {
       const [x, y] = b.pos;
-      const isBase = b.type === 'base';
-      const dead = b.hp <= 0;
-      const inset = isBase ? cell * 0.14 : cell * 0.26;
-      g.globalAlpha = dead ? 0.25 : 1;
-      box(x, y, inset, own(b.owner));
-      if (isBase && !dead) {
-        g.globalAlpha = 1;
-        g.strokeStyle = 'rgba(255,255,255,.55)';
-        g.lineWidth = 1.5;
-        g.strokeRect(x * cell + inset, y * cell + inset, cell - inset * 2, cell - inset * 2);
-      }
+      g.globalAlpha = b.hp <= 0 ? 0.22 : 1;      // rubble stays, faded
+      buildingGlyph(g, cell, (x + 0.5) * cell, (y + 0.5) * cell, b.type, own(b.owner));
       g.globalAlpha = 1;
     }
 
@@ -100,14 +91,10 @@
 
     for (const u of f.units || []) {
       const [x, y] = u.pos;
-      const air = u.type === 'drone' || u.type === 'fighter';
-      dot(x, y, cell * (air ? 0.17 : 0.21), own(u.owner));
-      if (air) {                       // ring = it flies
-        g.beginPath();
-        g.arc((x + 0.5) * cell, (y + 0.5) * cell, cell * 0.27, 0, Math.PI * 2);
-        g.strokeStyle = own(u.owner); g.lineWidth = 1; g.globalAlpha = 0.5;
-        g.stroke(); g.globalAlpha = 1;
-      }
+      // Player 1 sits on the left of the map, player 2 on the right, so each
+      // side's hardware points at the other.
+      unitGlyph(g, cell, (x + 0.5) * cell, (y + 0.5) * cell,
+                u.type, own(u.owner), u.owner === 0 ? 1 : -1);
     }
 
     // The nuke that ends the match, seen from above, centred on the base it
@@ -115,6 +102,124 @@
     if (blast !== null && blast !== undefined) {
       const at = nukeCell(data, idx);
       if (at) drawBlast(g, w, h, cell, at, blast);
+    }
+  }
+
+  // ── glyphs ────────────────────────────────────────────────────────────────
+  // Top-down silhouettes rather than dots, so the four unit types and the five
+  // building types are told apart at a glance. Drawn as paths, not sprites: the
+  // whole point of this card is that it costs no image budget.
+  //
+  // `f` is the facing: +1 for the left-hand player, -1 for the right-hand one,
+  // so tanks point their barrel and aircraft their nose at the enemy.
+
+  function outline(g, color) {
+    g.fillStyle = color;
+    g.strokeStyle = 'rgba(0,0,0,.55)';
+    g.lineWidth = 1;
+    g.fill();
+    g.stroke();
+  }
+
+  function unitGlyph(g, cell, cx, cy, type, color, f) {
+    const s = cell * 0.30;
+    if (type === 'tank') {
+      g.beginPath();                                   // hull
+      g.rect(cx - s * 0.85, cy - s * 0.62, s * 1.7, s * 1.24);
+      outline(g, color);
+      g.beginPath();                                   // barrel
+      g.moveTo(cx, cy);
+      g.lineTo(cx + f * s * 1.5, cy);
+      g.strokeStyle = color;
+      g.lineWidth = Math.max(1.5, cell * 0.06);
+      g.lineCap = 'butt';
+      g.stroke();
+      g.beginPath();                                   // turret
+      g.arc(cx, cy, s * 0.42, 0, Math.PI * 2);
+      outline(g, color);
+      return;
+    }
+    if (type === 'fighter') {
+      g.beginPath();                                   // delta wing
+      g.moveTo(cx + f * s * 1.35, cy);
+      g.lineTo(cx - f * s * 0.55, cy - s * 0.95);
+      g.lineTo(cx - f * s * 0.15, cy);
+      g.lineTo(cx - f * s * 0.55, cy + s * 0.95);
+      g.closePath();
+      outline(g, color);
+      return;
+    }
+    if (type === 'drone') {
+      g.beginPath();                                   // quadcopter, four rotors
+      g.arc(cx, cy, s * 0.34, 0, Math.PI * 2);
+      outline(g, color);
+      for (const [dx, dy] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {
+        g.beginPath();
+        g.arc(cx + dx * s * 0.78, cy + dy * s * 0.78, s * 0.26, 0, Math.PI * 2);
+        g.fillStyle = color; g.globalAlpha = 0.8; g.fill(); g.globalAlpha = 1;
+      }
+      return;
+    }
+    // sam: launcher box with two raised tubes
+    g.beginPath();
+    g.moveTo(cx - s * 0.9, cy + s * 0.7);
+    g.lineTo(cx + s * 0.9, cy + s * 0.7);
+    g.lineTo(cx + s * 0.6, cy - s * 0.1);
+    g.lineTo(cx - s * 0.6, cy - s * 0.1);
+    g.closePath();
+    outline(g, color);
+    g.strokeStyle = color;
+    g.lineWidth = Math.max(1.4, cell * 0.05);
+    for (const t of [-0.35, 0.35]) {
+      g.beginPath();
+      g.moveTo(cx + t * s, cy - s * 0.1);
+      g.lineTo(cx + t * s * 1.5, cy - s * 1.05);
+      g.stroke();
+    }
+  }
+
+  function buildingGlyph(g, cell, cx, cy, type, color) {
+    const s = cell * 0.34;
+    if (type === 'base') {
+      g.beginPath();                                   // keep
+      g.rect(cx - s * 0.8, cy - s * 0.8, s * 1.6, s * 1.6);
+      outline(g, color);
+      for (const [dx, dy] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {   // bastions
+        g.beginPath();
+        g.rect(cx + dx * s * 0.95 - s * 0.3, cy + dy * s * 0.95 - s * 0.3, s * 0.6, s * 0.6);
+        outline(g, color);
+      }
+      return;
+    }
+    if (type === 'silo') {
+      g.beginPath();                                   // hatch
+      g.arc(cx, cy, s * 0.95, 0, Math.PI * 2);
+      outline(g, color);
+      g.strokeStyle = 'rgba(0,0,0,.6)';
+      g.lineWidth = Math.max(1, cell * 0.04);
+      g.beginPath();                                   // the split doors
+      g.moveTo(cx, cy - s * 0.95); g.lineTo(cx, cy + s * 0.95);
+      g.stroke();
+      return;
+    }
+    // mines read as a works: shed plus two stacks, tinted by what they pull up
+    const accent = type === 'credit_mine' ? '#d4af37' : '#5fd95f';
+    g.beginPath();
+    g.rect(cx - s * 0.95, cy - s * 0.25, s * 1.9, s * 1.1);
+    outline(g, color);
+    for (const dx of [-0.45, 0.25]) {
+      g.beginPath();
+      g.rect(cx + dx * s, cy - s * 0.95, s * 0.36, s * 0.72);
+      outline(g, color);
+    }
+    g.beginPath();                                     // what it produces
+    g.arc(cx + s * 0.62, cy - s * 0.72, s * 0.3, 0, Math.PI * 2);
+    g.fillStyle = accent; g.fill();
+    if (type === 'uranium_mine_central') {             // the contested one
+      g.beginPath();
+      g.arc(cx, cy + s * 0.1, s * 1.35, 0, Math.PI * 2);
+      g.strokeStyle = accent; g.lineWidth = 1; g.globalAlpha = 0.7;
+      g.stroke(); g.globalAlpha = 1;
     }
   }
 
