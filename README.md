@@ -1053,17 +1053,26 @@ be read into its position than that. Precision accumulates where it is worth
 having: models near the top defend repeatedly and build a record, while the
 bottom of the board stays thin — and says so.
 
-**A rank is not a record, and the board is not a points table.** A place says
-exactly one thing: *nobody has beaten this model here*. The W–L record printed
-next to each model is information — it never enters the position, and no total
-is ever compared across the board. A rung changes hands only when a challenger
-wins the tie played for it.
+**Points set this order once, and have not touched it since.** The distinction
+is easy to get wrong in both directions, so to be exact:
 
-So a model can hold a place with a losing record, and one does: after the first
-challenge, **Kimi K3 sits at `#4` on 3W–5L**. That is not a contradiction to be
-fixed, it is the format working. Reading the standing as a league table is the
-one mistake it invites, which is why the record is shown at all — hiding it
-would make the board look like a ranking it is not.
+- **The opening round-robin was a points table**, and it is what put these four
+  in this order — 12 / 12 / 6 / 6, top four take the places. Saying the standing
+  "is not a points table" would be false about its own origin.
+- **Nothing has been scored across the board since.** A place changes hands only
+  when a challenger wins the two-leg tie played for it. No total is compared
+  between two models that have not just played each other.
+
+**A rank is therefore not a record.** Past the opening, a place says one thing:
+*nobody has beaten this model here*. The W–L record printed next to each model
+is aggregated from its matches for the reader and is never an input.
+
+So a model can hold a place on a losing record, and one does: after the first
+challenge, **Kimi K3 sits at `#4` on 3W–5L** — seeded there by the opening, held
+there by a defence. That is not a contradiction to be fixed, it is the format
+working. Reading the board as a live league table is the one mistake it invites,
+which is why the record is shown at all: hiding it would make the standing look
+like a ranking that is still being computed.
 
 **Mutual destruction can never cost an incumbent its place.** It scores 0 for
 both sides, so it moves no gap: a tie of two mutual destructions is 0-0 and the
