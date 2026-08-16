@@ -162,15 +162,20 @@
   }
 
   // Quantization is published because it is not equal across the field and
-  // cannot be made equal: three of four models are closed and report "unknown".
-  // Hiding that would let a reader assume a level playing field that does not
-  // exist. "unknown" is rendered as a fact, not as a gap.
+  // cannot be made equal: the closed models report "unknown". Hiding that would
+  // let a reader assume a level playing field that does not exist. "unknown" is
+  // rendered as a fact, not as a gap.
+  //
+  // The tooltip says "the endpoint it is pinned to", never "its own lab": the
+  // pin is first-party only when the lab serves one, and Qwen3.8 27B is served
+  // by no first-party endpoint at all. The endpoint that answered is published
+  // next to the model, so the reader can see which case this is.
   function quantBadge(q) {
     if (!q) return '';
     const unknown = q === 'unknown';
     const title = unknown
       ? 'The provider does not publish the numeric precision it serves. Normal for a closed model — it can be neither chosen nor verified.'
-      : `Numeric precision of the pinned endpoint. Lower precision costs capability, and this model plays at ${q} because that is what its own lab serves.`;
+      : `Numeric precision of the pinned endpoint. Lower precision costs capability, and this model plays at ${q} because that is what the endpoint it is pinned to serves — shown next to its record.`;
     return `<span class="lad-quant${unknown ? ' unknown' : ''}" title="${esc(title)}">${esc(q)}</span>`;
   }
 
@@ -339,8 +344,13 @@
       const row = (data.opening.models || []).find((x) => x.model === m);
       return row ? row.display_name : m;
     };
+    // "drew" is wrong for mutual destruction, which scores 0 a side like a
+    // double loss. The page publishes that scale, so it must not describe the
+    // one leg type where the reader is most likely to assume a draw as a draw.
     const label = l.outcome === 'draw'
-      ? `${esc(name(l.a))} — ${esc(name(l.b))} drew`
+      ? (l.victory_type === 'mutual_destruction'
+        ? `${esc(name(l.a))} and ${esc(name(l.b))} destroyed each other`
+        : `${esc(name(l.a))} — ${esc(name(l.b))} drew`)
       : `${esc(name(l.outcome === 'a' ? l.a : l.b))} beat ${esc(name(l.outcome === 'a' ? l.b : l.a))}`;
     const vt = `<span class="vt vt-${esc(l.victory_type)}">${VT_LABEL[l.victory_type] || esc(l.victory_type)}</span>`;
     if (!l.match_id) {
@@ -488,7 +498,9 @@
       : '<span class="badge-p1" title="Challenger played player 2">P2</span>';
     const res = l.outcome === 'challenger' ? '<span class="leg-w">won</span>'
       : l.outcome === 'incumbent' ? '<span class="leg-l">lost</span>'
-        : '<span class="leg-d">drew</span>';
+        : l.victory_type === 'mutual_destruction'
+          ? '<span class="leg-l" title="Mutual destruction scores 0 for both, like a loss — it is not a draw">both lost</span>'
+          : '<span class="leg-d">drew</span>';
     const vt = `<span class="vt vt-${esc(l.victory_type)}">${VT_LABEL[l.victory_type] || esc(l.victory_type)}</span>`;
     const turns = l.turns ? `${l.turns}t` : '';
     const body = `${side} ${res} · ${vt} ${turns}`;

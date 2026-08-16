@@ -857,6 +857,32 @@
       "winner": 1,
       "victory_type": "nuclear",
       "total_turns": 25
+    },
+    {
+      "match_id": "ladder_2026-08_qwen-qwen3.8-27b_r4_leg1",
+      "date": "2026-08-16T17:12:34.660793+00:00",
+      "p1_model": "qwen/qwen3.8-27b",
+      "p2_model": "moonshotai/kimi-k3",
+      "p1_display_name": "qwen/qwen3.8-27b",
+      "p2_display_name": "moonshotai/kimi-k3",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 19
+    },
+    {
+      "match_id": "ladder_2026-08_qwen-qwen3.8-27b_r4_leg2",
+      "date": "2026-08-16T18:56:46.403609+00:00",
+      "p1_model": "moonshotai/kimi-k3",
+      "p2_model": "qwen/qwen3.8-27b",
+      "p1_display_name": "moonshotai/kimi-k3",
+      "p2_display_name": "qwen/qwen3.8-27b",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": -1,
+      "victory_type": "mutual_destruction",
+      "total_turns": 25
     }
   ]
 }

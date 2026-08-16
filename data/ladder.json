@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-15T18:39:42.596530+00:00",
-  "engine_version": "0.17.0",
-  "site_version": "0.17.1",
+  "generated_at": "2026-08-16T19:45:37.472614+00:00",
+  "engine_version": "0.18.0",
+  "site_version": "0.17.5",
   "preview": false,
   "note": "",
   "rules": {
@@ -12,7 +12,8 @@
       "win": 3.0,
       "draw": 1.0,
       "ultimatum_loss": 0.5,
-      "loss": 0.0
+      "loss": 0.0,
+      "mutual_destruction": 0.0
     }
   },
   "started_at": "2026-08-15",
@@ -565,14 +566,109 @@
       "quantization": "mxfp4",
       "entered_at": "2026-08-15",
       "defences": 0,
-      "holds": 0,
+      "holds": 1,
       "climbed": 0,
       "seeded": false,
       "via": "opening",
       "rank": 4
     }
   ],
-  "challenges": [],
+  "challenges": [
+    {
+      "id": "2026-08_qwen-qwen3.8-27b",
+      "challenger": {
+        "model": "qwen/qwen3.8-27b",
+        "display_name": "Qwen3.8 27B",
+        "reasoning_effort": "high",
+        "quantization": "bf16"
+      },
+      "date": "2026-08-16",
+      "steps": [
+        {
+          "rank": 4,
+          "opponent": {
+            "model": "moonshotai/kimi-k3",
+            "display_name": "Kimi K3",
+            "reasoning_effort": "high"
+          },
+          "legs": [
+            {
+              "match_id": "ladder_2026-08_qwen-qwen3.8-27b_r4_leg1",
+              "challenger_side": 0,
+              "outcome": "incumbent",
+              "victory_type": "nuclear",
+              "turns": 19,
+              "date": "2026-08-16T17:12:34.786215+00:00",
+              "usd": 1.5799,
+              "perf": {
+                "qwen/qwen3.8-27b": {
+                  "usd": 0.311322,
+                  "cost_source": "provider",
+                  "think_ms": 130415,
+                  "half_turns": 19,
+                  "served_by": "AkashML",
+                  "actions_ok": 53,
+                  "illegal": 2,
+                  "fog_blocked": 0
+                },
+                "moonshotai/kimi-k3": {
+                  "usd": 1.268588,
+                  "cost_source": "provider",
+                  "think_ms": 92619,
+                  "half_turns": 19,
+                  "served_by": "Moonshot AI",
+                  "actions_ok": 47,
+                  "illegal": 2,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            },
+            {
+              "match_id": "ladder_2026-08_qwen-qwen3.8-27b_r4_leg2",
+              "challenger_side": 1,
+              "outcome": "draw",
+              "victory_type": "mutual_destruction",
+              "turns": 25,
+              "date": "2026-08-16T18:56:46.527977+00:00",
+              "usd": 2.5899,
+              "perf": {
+                "moonshotai/kimi-k3": {
+                  "usd": 2.158772,
+                  "cost_source": "provider",
+                  "think_ms": 118378,
+                  "half_turns": 25,
+                  "served_by": "Moonshot AI",
+                  "actions_ok": 66,
+                  "illegal": 5,
+                  "fog_blocked": 0
+                },
+                "qwen/qwen3.8-27b": {
+                  "usd": 0.43108,
+                  "cost_source": "provider",
+                  "think_ms": 131611,
+                  "half_turns": 25,
+                  "served_by": "AkashML",
+                  "actions_ok": 71,
+                  "illegal": 1,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            }
+          ],
+          "pts": [
+            0.0,
+            3.0
+          ],
+          "result": "hold",
+          "decided_by": "points"
+        }
+      ],
+      "final_rank": null,
+      "displaced": null
+    }
+  ],
   "reigns": [
     {
       "model": "x-ai/grok-4.6",
