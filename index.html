@@ -45,6 +45,11 @@
 
     <div class="lad-rules" id="lad-rules"></div>
 
+    <!-- Animated teaser of the most recent match. Stays hidden until
+         data/featured.json loads, so a fresh install shows nothing rather than
+         an empty frame. Sprite-free by design — see assets/js/featured.js. -->
+    <div class="featured" id="featured-match" hidden></div>
+
     <div id="opening-section"></div>
 
     <div class="lb-section-title">The throne</div>
@@ -83,5 +88,6 @@
 
   <script src="assets/js/model-meta.js"></script>
   <script src="assets/js/ladder.js"></script>
+  <script src="assets/js/featured.js"></script>
 </body>
 </html>

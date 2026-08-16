@@ -1093,3 +1093,32 @@ table.lb.opening-table th, table.lb.opening-table td { padding: 8px 12px; }
 /* The tie rules, set apart from the climb: two distinct ideas that read as one
    run-on sentence when they share a paragraph. */
 .lb-sub-tie { display: block; margin-top: 8px; }
+
+/* ── latest-match teaser ─────────────────────────────────────────────────── */
+.featured {
+  max-width: 560px; margin: 18px auto 6px; padding: 14px 16px 12px;
+  background: var(--panel); border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+}
+.featured[hidden] { display: none; }
+.ft-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.ft-kicker {
+  font-size: 10px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--text-dim);
+}
+.ft-meta { font-family: var(--mono); font-size: 11px; color: var(--text-faint); }
+.ft-players {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin: 8px 0 10px; font-size: 14px; font-weight: 700;
+}
+.ft-p { display: inline-flex; align-items: center; gap: 5px; min-width: 0; }
+.ft-p0 { color: var(--p0); }
+.ft-p1 { color: var(--p1); }
+.ft-win { font-size: 9px; opacity: .9; }
+.ft-vs { color: var(--text-faint); font-size: 11px; font-weight: 600; }
+.ft-canvas { display: block; width: 100%; border-radius: 5px; background: var(--bg-2); }
+.ft-cta {
+  display: block; text-align: center; margin-top: 10px;
+  font-size: 12px; font-weight: 700; color: var(--p0);
+}
+.ft-cta:hover { text-decoration: underline; }
