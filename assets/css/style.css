@@ -497,9 +497,20 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .cta-btn.snapshot { color: var(--text-dim); border: 1px solid var(--border); background: var(--panel-solid); cursor: pointer; font-size: 13px; }
 .cta-btn.snapshot:hover { border-color: var(--text); color: var(--text); }
 .cta-btn.snapshot:disabled { opacity: .5; cursor: wait; }
+/* Deliberately the quietest button in the row — it points at a frozen archive,
+   not at a second ranking someone could mistake for the live one. */
+.cta-btn.v1 {
+  color: var(--text-dim); border: 1px solid var(--border-soft);
+  border-left: 3px solid var(--text-faint); background: rgba(120, 130, 140, 0.06);
+}
+.cta-btn.v1:hover { background: rgba(120, 130, 140, 0.12); color: var(--text); }
+.cta-btn .cta-note {
+  font-family: var(--mono); font-size: 11px; font-weight: 400; color: var(--text-faint);
+}
 @media (max-width: 640px) {
   .lb-header .present-link { margin-left: 0; }
   .cta-btn { font-size: 12px; padding: 7px 11px; }
+  .cta-btn .cta-note { display: none; }
 }
 
 .lb-section-title { font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-faint); margin: 30px 0 12px; }
@@ -1039,27 +1050,6 @@ table.lb.opening-table th, table.lb.opening-table td { padding: 8px 12px; }
   align-self: center; opacity: .85;
 }
 
-/* Link to the frozen V1 leaderboard, sitting under the ladder's rules blurb —
-   the moment a reader who has just understood the format asks "and the old
-   one?". Muted on purpose: it points at an archive, not at a competing ranking. */
-.v1-link {
-  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-  margin: 0 0 22px; padding: 10px 14px;
-  border: 1px solid var(--border-soft); border-left: 3px solid var(--text-faint);
-  border-radius: var(--radius);
-  background: rgba(120, 130, 140, 0.06);
-  color: var(--text-dim); font-size: 13px; font-weight: 600;
-  transition: background .12s ease, color .12s ease;
-}
-.v1-link:hover { background: rgba(120, 130, 140, 0.12); color: var(--text); }
-.v1-link .v1-link-ico { color: var(--text-faint); }
-.v1-link .v1-link-note {
-  font-family: var(--mono); font-size: 11px; font-weight: 400;
-  color: var(--text-faint);
-}
-.v1-link .v1-link-arrow { margin-left: auto; color: var(--text-faint); }
-@media (max-width: 640px) { .v1-link .v1-link-arrow { display: none; } }
-
 /* A finished opening collapses to one line at the bottom of the page. */
 .opening.done { padding: 0; border: none; background: none; }
 .opening-toggle {
@@ -1147,9 +1137,6 @@ table.lb.opening-table th, table.lb.opening-table td { padding: 8px 12px; }
 .pg-btn:disabled { opacity: .35; cursor: default; }
 .pg-info { font-family: var(--mono); font-size: 11px; color: var(--text-dim); }
 
-/* The archive card follows the match list directly; without this it reads as
-   the last row of that list rather than as a separate destination. */
-.v1-link { margin-top: 26px; }
 .ft-vs { color: var(--text-faint); font-size: 11px; font-weight: 600; }
 .ft-canvas { display: block; width: 100%; border-radius: 5px; background: var(--bg-2); }
 .ft-cta {
