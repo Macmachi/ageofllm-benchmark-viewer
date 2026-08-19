@@ -23,6 +23,7 @@
   // null until the first render, then whatever the reader last chose. Kept out
   // of the DOM so paging the legs can re-render without closing the panel.
   let openingOpen = null;
+  let droppedOpen = false;   // collapsed: the board is the news, this is its past
   let perfByModel = {};      // model -> aggregated cost / latency / provider
 
   async function init() {
@@ -48,6 +49,7 @@
     aggregatePerf();
     renderBanner();
     renderOpening();
+    renderDropped();
     renderThrone();
     renderBoard();
     renderLatest();
@@ -357,6 +359,59 @@
       el.querySelector('.opening-detail').classList.toggle('open', !open);
     });
     bindPager(el, renderOpening);
+  }
+
+
+  // ── models pushed off the board ──────────────────────────────────────────
+  // A ladder that renders only its current four erases every model that earned
+  // a place and then lost it, which is most of what a standing is a record OF.
+  // Kimi K3 held #4 from the opening, survived one challenge, and vanished from
+  // the page entirely the moment GLM 5.3 pushed it off.
+  function renderDropped() {
+    const el = document.getElementById('dropped-history');
+    if (!el) return;
+    const list = data.dropped || [];
+    if (!list.length) { el.innerHTML = ''; return; }   // nothing to explain yet
+    el.innerHTML =
+      `<div class="lb-section-title">Dropped off the ladder</div>
+       <div class="opening done">
+         <button class="opening-toggle" aria-expanded="${droppedOpen}">
+           <span class="opening-chevron">${droppedOpen ? '▼' : '▶'}</span>
+           <span>Held a place, then lost it</span>
+           <span class="opening-summary">${list.length} model${list.length === 1 ? '' : 's'}
+             · most recent first</span>
+         </button>
+         <div class="opening-detail${droppedOpen ? ' open' : ''}">
+           ${list.map(droppedRow).join('')}
+         </div>
+       </div>`;
+    const btn = el.querySelector('.opening-toggle');
+    if (btn) btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') === 'true';
+      droppedOpen = !open;
+      btn.setAttribute('aria-expanded', String(!open));
+      btn.querySelector('.opening-chevron').textContent = open ? '▶' : '▼';
+      el.querySelector('.opening-detail').classList.toggle('open', !open);
+    });
+  }
+
+  function droppedRow(e) {
+    const held = e.entered_at && e.left_at
+      ? `<span title="How long it held a place">${esc(e.entered_at)} → ${esc(e.left_at)}</span>` : '';
+    const by = e.displaced_by
+      ? `<span title="The challenger that pushed it off">pushed off by ${esc(e.displaced_by)}</span>` : '';
+    const from = e.left_from_rank
+      ? `<span class="lad-rank" title="The rung it was holding when it left">#${e.left_from_rank}</span>` : '';
+    return `<div class="lad-row dropped-row">
+              ${from}
+              <div class="lad-model"><span class="lad-name">${flag(e.model)}${esc(e.display_name)}</span>${effortBadge(e.reasoning_effort)}${quantBadge(e.quantization)}</div>
+              <div class="lad-meta">
+                ${perfCells(e.model)}
+                ${held}
+                <span title="Challenges survived before it left">${e.holds} hold${e.holds === 1 ? '' : 's'}</span>
+                ${by}
+              </div>
+            </div>`;
   }
 
   function openingLeg(l) {

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19T07:10:54.419321+00:00",
+  "generated_at": "2026-08-19T08:34:41.016921+00:00",
   "engine_version": "0.18.0",
   "site_version": "0.17.5",
   "preview": false,
@@ -921,6 +921,23 @@
       ],
       "final_rank": null,
       "displaced": null
+    }
+  ],
+  "dropped": [
+    {
+      "model": "moonshotai/kimi-k3",
+      "display_name": "Kimi K3",
+      "reasoning_effort": "high",
+      "quantization": "mxfp4",
+      "entered_at": "2026-08-15",
+      "defences": 0,
+      "holds": 1,
+      "climbed": 0,
+      "seeded": false,
+      "via": "opening",
+      "left_at": "2026-08-19",
+      "displaced_by": "GLM 5.3",
+      "left_from_rank": 4
     }
   ],
   "reigns": [

@@ -1144,3 +1144,14 @@ table.lb.opening-table th, table.lb.opening-table td { padding: 8px 12px; }
   font-size: 12px; font-weight: 700; color: var(--p0);
 }
 .ft-cta:hover { text-decoration: underline; }
+
+/* A model that held a place and lost it. Muted rather than styled like the
+   board: it reads as history at a glance, without a legend explaining that
+   these four rows are not the standing. */
+.dropped-row {
+  opacity: .62;
+  border-left: 2px solid var(--border);
+  background: transparent;
+}
+.dropped-row:hover { opacity: 1; }
+.dropped-row .lad-rank { color: var(--text-faint); font-weight: 500; }
