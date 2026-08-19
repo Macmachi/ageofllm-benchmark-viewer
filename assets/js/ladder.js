@@ -404,7 +404,7 @@
       ? `<span class="lad-rank" title="The rung it was holding when it left">#${e.left_from_rank}</span>` : '';
     return `<div class="lad-row dropped-row">
               ${from}
-              <div class="lad-model"><span class="lad-name">${flag(e.model)}${esc(e.display_name)}</span>${effortBadge(e.reasoning_effort)}${quantBadge(e.quantization)}</div>
+              <div class="lad-model"><span class="lad-name">${flag(e.model)}${esc(e.display_name)}</span>${effortBadge(e.reasoning_effort)}${quantBadge(e.quantization)}${originBadge(e)}</div>
               <div class="lad-meta">
                 ${perfCells(e.model)}
                 ${held}
@@ -467,6 +467,20 @@
 
   // ── the standing ─────────────────────────────────────────────────────────
 
+  // How a model got its place. Shared by the standing and by the dropped list:
+  // the two printed different things for the same entry, so a model that won
+  // its place in the opening lost that fact the moment it was pushed off — and
+  // "came in through the opening" is the most interesting thing about it.
+  function originBadge(e) {
+    if (e.via === 'opening') {
+      return '<span class="lad-badge from-opening" title="Place won in the opening round-robin, not by challenging in">OPENING</span>';
+    }
+    if (e.seeded) {
+      return '<span class="lad-badge seeded" title="Placed when the ladder was created — not won on the board">SEEDED</span>';
+    }
+    return `<span class="lad-badge climbed" title="Rungs won on the way in">▲ ${e.climbed}</span>`;
+  }
+
   function renderBoard() {
     const el = document.getElementById('lad-board');
     if (!(data.ladder || []).length) {
@@ -474,14 +488,9 @@
       return;
     }
     el.innerHTML = (data.ladder || []).map((e) => {
-      const badge = e.via === 'opening'
-        ? '<span class="lad-badge from-opening" title="Place won in the opening round-robin">OPENING</span>'
-        : e.seeded
-          ? '<span class="lad-badge seeded" title="Placed when the ladder was created — not won on the board">SEEDED</span>'
-          : `<span class="lad-badge climbed" title="Rungs won on the way in">▲ ${e.climbed}</span>`;
       return `<div class="lad-row rank-${e.rank}">
                 <div class="lad-rank">#${e.rank}</div>
-                <div class="lad-model"><span class="lad-name">${flag(e.model)}${esc(e.display_name)}</span>${effortBadge(e.reasoning_effort)}${quantBadge(e.quantization)}${badge}</div>
+                <div class="lad-model"><span class="lad-name">${flag(e.model)}${esc(e.display_name)}</span>${effortBadge(e.reasoning_effort)}${quantBadge(e.quantization)}${originBadge(e)}</div>
                 <div class="lad-meta">
                   ${perfCells(e.model)}
                   <span title="Date this model took the place">${e.seeded ? 'seeded ' : 'entered '}${fmtDate(e.entered_at)}</span>
@@ -538,6 +547,9 @@
       : rank ? `enters at #${rank}` : 'fails to enter';
     const displaced = c.displaced
       ? `<span class="chal-displaced">${esc(c.displaced)} drops off</span>` : '';
+    // Count both: the body draws one card per RUNG, each holding its two legs.
+    // Printing only "6 matches" above three cards read as three missing ones.
+    const rungs = c.steps.length;
     const legs = c.steps.reduce((n, s) => n + s.legs.length, 0);
 
     return `<div class="chal ${expanded ? 'open' : ''}">
@@ -546,7 +558,7 @@
         <span class="chal-name">${flag(c.challenger.model)}${esc(c.challenger.display_name)} ${effortBadge(c.challenger.reasoning_effort)}${quantBadge(c.challenger.quantization)}</span>
         <span class="chal-verdict ${verdictClass}">${verdict}</span>
         ${displaced}
-        <span class="chal-count">${legs} match${legs === 1 ? '' : 'es'}</span>
+        <span class="chal-count" title="One card per rung challenged. Every rung is a two-leg tie — the same pair, sides swapped — so ${rungs} rungs means ${legs} matches.">${rungs} rung${rungs === 1 ? '' : 's'} · ${legs} match${legs === 1 ? '' : 'es'}</span>
         <span class="chal-chevron">▾</span>
       </div>
       <div class="chal-body">
