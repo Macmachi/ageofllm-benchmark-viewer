@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-16T19:45:37.472614+00:00",
+  "generated_at": "2026-08-19T07:10:54.419321+00:00",
   "engine_version": "0.18.0",
   "site_version": "0.17.5",
   "preview": false,
@@ -540,11 +540,24 @@
       "quantization": "unknown",
       "entered_at": "2026-08-15",
       "defences": 0,
-      "holds": 0,
+      "holds": 1,
       "climbed": 0,
       "seeded": false,
       "via": "opening",
       "rank": 2
+    },
+    {
+      "model": "z-ai/glm-5.3",
+      "display_name": "GLM 5.3",
+      "reasoning_effort": "high",
+      "quantization": "fp8",
+      "entered_at": "2026-08-19",
+      "defences": 0,
+      "holds": 0,
+      "climbed": 2,
+      "seeded": false,
+      "via": "climb",
+      "rank": 3
     },
     {
       "model": "anthropic/claude-opus-5",
@@ -557,23 +570,264 @@
       "climbed": 0,
       "seeded": false,
       "via": "opening",
-      "rank": 3
-    },
-    {
-      "model": "moonshotai/kimi-k3",
-      "display_name": "Kimi K3",
-      "reasoning_effort": "high",
-      "quantization": "mxfp4",
-      "entered_at": "2026-08-15",
-      "defences": 0,
-      "holds": 1,
-      "climbed": 0,
-      "seeded": false,
-      "via": "opening",
       "rank": 4
     }
   ],
   "challenges": [
+    {
+      "id": "2026-08_z-ai-glm-5.3",
+      "challenger": {
+        "model": "z-ai/glm-5.3",
+        "display_name": "GLM 5.3",
+        "reasoning_effort": "high",
+        "quantization": "fp8"
+      },
+      "date": "2026-08-19",
+      "steps": [
+        {
+          "rank": 4,
+          "opponent": {
+            "model": "moonshotai/kimi-k3",
+            "display_name": "Kimi K3",
+            "reasoning_effort": "high"
+          },
+          "legs": [
+            {
+              "match_id": "ladder_2026-08_z-ai-glm-5.3_r4_leg1",
+              "challenger_side": 0,
+              "outcome": "incumbent",
+              "victory_type": "nuclear",
+              "turns": 23,
+              "date": "2026-08-19T02:25:24.236860+00:00",
+              "usd": 2.1088,
+              "perf": {
+                "z-ai/glm-5.3": {
+                  "usd": 0.59251,
+                  "cost_source": "provider",
+                  "think_ms": 110233,
+                  "half_turns": 23,
+                  "served_by": "Z.AI",
+                  "actions_ok": 61,
+                  "illegal": 4,
+                  "fog_blocked": 1
+                },
+                "moonshotai/kimi-k3": {
+                  "usd": 1.516297,
+                  "cost_source": "provider",
+                  "think_ms": 183907,
+                  "half_turns": 23,
+                  "served_by": "Moonshot AI",
+                  "actions_ok": 58,
+                  "illegal": 3,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            },
+            {
+              "match_id": "ladder_2026-08_z-ai-glm-5.3_r4_leg2",
+              "challenger_side": 1,
+              "outcome": "challenger",
+              "victory_type": "nuclear",
+              "turns": 16,
+              "date": "2026-08-19T03:35:54.746290+00:00",
+              "usd": 1.4834,
+              "perf": {
+                "moonshotai/kimi-k3": {
+                  "usd": 1.105029,
+                  "cost_source": "provider",
+                  "think_ms": 133387,
+                  "half_turns": 16,
+                  "served_by": "Moonshot AI",
+                  "actions_ok": 45,
+                  "illegal": 0,
+                  "fog_blocked": 0
+                },
+                "z-ai/glm-5.3": {
+                  "usd": 0.378354,
+                  "cost_source": "provider",
+                  "think_ms": 130989,
+                  "half_turns": 16,
+                  "served_by": "Z.AI",
+                  "actions_ok": 44,
+                  "illegal": 0,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            }
+          ],
+          "pts": [
+            3.0,
+            3.0
+          ],
+          "result": "win",
+          "decided_by": "level on points, won faster (16 vs 23 turns)"
+        },
+        {
+          "rank": 3,
+          "opponent": {
+            "model": "anthropic/claude-opus-5",
+            "display_name": "Claude Opus 5",
+            "reasoning_effort": "high"
+          },
+          "legs": [
+            {
+              "match_id": "ladder_2026-08_z-ai-glm-5.3_r3_leg1",
+              "challenger_side": 0,
+              "outcome": "challenger",
+              "victory_type": "nuclear",
+              "turns": 21,
+              "date": "2026-08-19T04:42:57.814359+00:00",
+              "usd": 3.6382,
+              "perf": {
+                "z-ai/glm-5.3": {
+                  "usd": 0.650524,
+                  "cost_source": "provider",
+                  "think_ms": 144210,
+                  "half_turns": 21,
+                  "served_by": "Z.AI",
+                  "actions_ok": 55,
+                  "illegal": 6,
+                  "fog_blocked": 0
+                },
+                "anthropic/claude-opus-5": {
+                  "usd": 2.987715,
+                  "cost_source": "provider",
+                  "think_ms": 47325,
+                  "half_turns": 21,
+                  "served_by": "Anthropic",
+                  "actions_ok": 57,
+                  "illegal": 2,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            },
+            {
+              "match_id": "ladder_2026-08_z-ai-glm-5.3_r3_leg2",
+              "challenger_side": 1,
+              "outcome": "challenger",
+              "victory_type": "nuclear",
+              "turns": 21,
+              "date": "2026-08-19T05:42:39.940515+00:00",
+              "usd": 3.6609,
+              "perf": {
+                "anthropic/claude-opus-5": {
+                  "usd": 3.093975,
+                  "cost_source": "provider",
+                  "think_ms": 51335,
+                  "half_turns": 21,
+                  "served_by": "Anthropic",
+                  "actions_ok": 59,
+                  "illegal": 2,
+                  "fog_blocked": 0
+                },
+                "z-ai/glm-5.3": {
+                  "usd": 0.566973,
+                  "cost_source": "provider",
+                  "think_ms": 119205,
+                  "half_turns": 21,
+                  "served_by": "Z.AI",
+                  "actions_ok": 51,
+                  "illegal": 3,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            }
+          ],
+          "pts": [
+            6.0,
+            0.0
+          ],
+          "result": "win",
+          "decided_by": "points"
+        },
+        {
+          "rank": 2,
+          "opponent": {
+            "model": "openai/gpt-5.6-sol",
+            "display_name": "GPT-5.6 Sol",
+            "reasoning_effort": "high"
+          },
+          "legs": [
+            {
+              "match_id": "ladder_2026-08_z-ai-glm-5.3_r2_leg1",
+              "challenger_side": 0,
+              "outcome": "incumbent",
+              "victory_type": "military",
+              "turns": 17,
+              "date": "2026-08-19T06:12:58.683587+00:00",
+              "usd": 0.8091,
+              "perf": {
+                "z-ai/glm-5.3": {
+                  "usd": 0.267872,
+                  "cost_source": "provider",
+                  "think_ms": 77472,
+                  "half_turns": 16,
+                  "served_by": "Z.AI",
+                  "actions_ok": 41,
+                  "illegal": 5,
+                  "fog_blocked": 0
+                },
+                "openai/gpt-5.6-sol": {
+                  "usd": 0.541274,
+                  "cost_source": "provider",
+                  "think_ms": 34042,
+                  "half_turns": 17,
+                  "served_by": "OpenAI",
+                  "actions_ok": 46,
+                  "illegal": 3,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            },
+            {
+              "match_id": "ladder_2026-08_z-ai-glm-5.3_r2_leg2",
+              "challenger_side": 1,
+              "outcome": "challenger",
+              "victory_type": "nuclear",
+              "turns": 20,
+              "date": "2026-08-19T07:10:54.415669+00:00",
+              "usd": 1.2563,
+              "perf": {
+                "openai/gpt-5.6-sol": {
+                  "usd": 0.760444,
+                  "cost_source": "provider",
+                  "think_ms": 44052,
+                  "half_turns": 20,
+                  "served_by": "OpenAI",
+                  "actions_ok": 54,
+                  "illegal": 2,
+                  "fog_blocked": 0
+                },
+                "z-ai/glm-5.3": {
+                  "usd": 0.495886,
+                  "cost_source": "provider",
+                  "think_ms": 129702,
+                  "half_turns": 20,
+                  "served_by": "Z.AI",
+                  "actions_ok": 57,
+                  "illegal": 2,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            }
+          ],
+          "pts": [
+            3.0,
+            3.0
+          ],
+          "result": "hold",
+          "decided_by": "level on points, incumbent won faster (17 vs 20 turns)"
+        }
+      ],
+      "final_rank": 3,
+      "displaced": "Kimi K3"
+    },
     {
       "id": "2026-08_qwen-qwen3.8-27b",
       "challenger": {
