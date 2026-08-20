@@ -150,6 +150,8 @@
           Win by destroying the enemy base before the turn limit (default 80) — by <b>nuclear bomb</b> or
           <b>military conquest</b> (tanks reduce the base to 0 HP) — or by an accepted <b>ultimatum</b>.
           A <b>peace</b> or the turn limit ends in a draw. Fog of war hides the enemy half: you must scout.</p>
+          <p class="lg-p lg-small">Who plays first is drawn at random on turn 1, then <b>alternates</b> every
+          turn. Each side starts with <b>5◆ and 0☢</b> and earns <b>+1◆/turn passively</b>, on top of its mines.</p>
 
           <div class="lg-sec">Victory conditions</div>
           <table class="lg-table">
@@ -177,7 +179,12 @@
           <p class="lg-p lg-small">Triangle: Fighter &gt; Tank/Drone/Fighter · Tank &gt; SAM/Tank/buildings ·
           SAM &gt; air units. Only the Tank can hit buildings (2 HP/hit). Attacker survives (mirror rule).
           <b>Line of sight:</b> a ground attack (tank/sam) is blocked by a <b>mountain or building</b>
-          between shooter and target — flank around cover. The fighter (air) ignores obstacles.</p>
+          between shooter and target — flank around cover. The fighter (air) ignores obstacles.
+          Ground movement needs a clear <b>path</b>: mountains <i>and</i> buildings block it, so being in
+          range is not enough.</p>
+          <p class="lg-p lg-small"><b>Deployment:</b> units roll off the base onto a free adjacent cell the
+          engine picks (production fails if none is free), and a unit produced this turn cannot move or
+          attack until its owner's next turn — the same one-turn delay as a building.</p>
 
           <div class="lg-sec">Buildings <span class="lg-hint">(have HP)</span></div>
           <table class="lg-table">
@@ -199,22 +206,31 @@
           mine and respawns elsewhere on the same side (central on column 6).</p>
 
           <div class="lg-sec">Nuclear bomb</div>
-          <p class="lg-p lg-small">Cost 25☢ (drops after T40, floor 13). Requires an operational silo +
+          <p class="lg-p lg-small">Cost 25☢, dropping 2☢ <b>on</b> turn 40 and every 10 turns after:
+          23☢ from T40, 21☢ from 50, 19☢ from 60, 17☢ from 70, 15☢ from 80. The engine floor of 13☢ is only
+          reached on turn 90, so a standard 80-turn match never goes below 15☢. Requires an operational silo +
           uranium ≥ cost + enemy base discovered. Launches are <b>secret &amp; simultaneous</b>: resolved at
           end of turn — a double launch = mutual destruction.</p>
+          <p class="lg-p lg-small"><b>Early warning:</b> a bomb cannot be intercepted; the only answer is to
+          fire back the same turn. A player is told of an enemy launch only if an <b>enemy silo is in its
+          field of view</b> at that moment — so only the player acting <i>second</i> that turn can ever be
+          warned. Without that line of sight the launch stays secret.</p>
 
           <div class="lg-sec">Diplomacy <span class="lg-hint">(free, off the action quota)</span></div>
           <table class="lg-table">
             <thead><tr><th>Type</th><th>When</th><th>Effect</th></tr></thead>
             <tbody>
               <tr><td>💬 Message</td><td>always</td><td>Free text read by the opponent next turn</td></tr>
-              <tr><td>🤝 Ceasefire</td><td>turn 10+</td><td>No attacks for 3 turns (+6☢ bomb penalty)</td></tr>
+              <tr><td>🤝 Ceasefire</td><td>turn 10+</td><td>No attacks for 4 turns (+6☢ bomb penalty)</td></tr>
               <tr><td>🕊 Peace</td><td>turn 15+</td><td>Immediate draw if accepted</td></tr>
               <tr><td>📜 Ultimatum</td><td>turn 10+</td><td>"Surrender by turn X" — if accepted, proposer wins (accepter gets 0.5 pt)</td></tr>
             </tbody>
           </table>
           <p class="lg-p lg-small">Proposals are <b>binding only if accepted</b>; a promise in a message is not.
-          During a ceasefire, attacks are forbidden but launching the bomb is still allowed (with a penalty).</p>
+          A ceasefire accepted on turn T is active on <b>T, T+1, T+2 and T+3</b> — attacks are forbidden for both
+          sides and resume on T+4. It cannot be broken early by a conventional attack; the one thing it does not
+          stop is the bomb, which may still be launched (with the +6☢ penalty). Peace and ultimatum stay open
+          during it. An ultimatum's deadline must fall within the next 3 turns, and refusing one costs nothing.</p>
 
           <div class="lg-sec">Map</div>
           <p class="lg-p lg-small">The central barrier (column 6), the in-territory mountains and all
