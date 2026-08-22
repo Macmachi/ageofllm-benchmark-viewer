@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-19T08:34:41.016921+00:00",
+  "generated_at": "2026-08-22T17:30:15.562514+00:00",
   "engine_version": "0.18.0",
   "site_version": "0.17.5",
   "preview": false,
@@ -14,6 +14,49 @@
       "ultimatum_loss": 0.5,
       "loss": 0.0,
       "mutual_destruction": 0.0
+    }
+  },
+  "pricing_today": {
+    "anthropic/claude-opus-5": {
+      "input": 5.0,
+      "output": 25.0,
+      "endpoint": "anthropic"
+    },
+    "openai/gpt-5.6-sol": {
+      "input": 2.0,
+      "output": 10.0,
+      "endpoint": "openai",
+      "discount": 0.5,
+      "list_input": 4.0,
+      "list_output": 20.0
+    },
+    "moonshotai/kimi-k3": {
+      "input": 3.0,
+      "output": 15.0,
+      "endpoint": "moonshotai"
+    },
+    "x-ai/grok-4.6": {
+      "input": 2.0,
+      "output": 6.0,
+      "endpoint": "xai"
+    },
+    "qwen/qwen3.8-27b": {
+      "input": 0.45,
+      "output": 3.2,
+      "endpoint": "akashml"
+    },
+    "z-ai/glm-5.3": {
+      "input": 1.4,
+      "output": 4.4,
+      "endpoint": "z-ai"
+    },
+    "google/gemini-3.7-flash": {
+      "input": 0.375,
+      "output": 1.875,
+      "endpoint": "google-vertex/global",
+      "discount": 0.75,
+      "list_input": 1.5,
+      "list_output": 7.5
     }
   },
   "started_at": "2026-08-15",
@@ -60,6 +103,7 @@
         "perf": {
           "anthropic/claude-opus-5": {
             "usd": 2.72759,
+            "usd_today": 2.72759,
             "cost_source": "provider",
             "think_ms": 41253,
             "half_turns": 22,
@@ -70,6 +114,7 @@
           },
           "openai/gpt-5.6-sol": {
             "usd": 1.416208,
+            "usd_today": 0.511657,
             "cost_source": "provider",
             "think_ms": 37007,
             "half_turns": 22,
@@ -94,6 +139,7 @@
         "perf": {
           "openai/gpt-5.6-sol": {
             "usd": 1.649924,
+            "usd_today": 0.591419,
             "cost_source": "provider",
             "think_ms": 43103,
             "half_turns": 22,
@@ -104,6 +150,7 @@
           },
           "anthropic/claude-opus-5": {
             "usd": 2.493495,
+            "usd_today": 2.493495,
             "cost_source": "provider",
             "think_ms": 33556,
             "half_turns": 22,
@@ -128,6 +175,7 @@
         "perf": {
           "anthropic/claude-opus-5": {
             "usd": 2.57993,
+            "usd_today": 2.57993,
             "cost_source": "provider",
             "think_ms": 29260,
             "half_turns": 24,
@@ -138,6 +186,7 @@
           },
           "moonshotai/kimi-k3": {
             "usd": 1.566839,
+            "usd_today": 1.566839,
             "cost_source": "provider",
             "think_ms": 98603,
             "half_turns": 24,
@@ -162,6 +211,7 @@
         "perf": {
           "moonshotai/kimi-k3": {
             "usd": 1.407018,
+            "usd_today": 1.407018,
             "cost_source": "provider",
             "think_ms": 114701,
             "half_turns": 20,
@@ -172,6 +222,7 @@
           },
           "anthropic/claude-opus-5": {
             "usd": 1.755345,
+            "usd_today": 1.755345,
             "cost_source": "provider",
             "think_ms": 20918,
             "half_turns": 20,
@@ -196,6 +247,7 @@
         "perf": {
           "anthropic/claude-opus-5": {
             "usd": 2.81054,
+            "usd_today": 2.81054,
             "cost_source": "provider",
             "think_ms": 39654,
             "half_turns": 23,
@@ -206,6 +258,7 @@
           },
           "x-ai/grok-4.6": {
             "usd": 1.64563,
+            "usd_today": 1.64563,
             "cost_source": "provider",
             "think_ms": 172005,
             "half_turns": 23,
@@ -230,6 +283,7 @@
         "perf": {
           "x-ai/grok-4.6": {
             "usd": 1.315184,
+            "usd_today": 1.315184,
             "cost_source": "provider",
             "think_ms": 161481,
             "half_turns": 19,
@@ -240,6 +294,7 @@
           },
           "anthropic/claude-opus-5": {
             "usd": 2.125315,
+            "usd_today": 2.125315,
             "cost_source": "provider",
             "think_ms": 34417,
             "half_turns": 19,
@@ -264,6 +319,7 @@
         "perf": {
           "openai/gpt-5.6-sol": {
             "usd": 1.831075,
+            "usd_today": 0.656053,
             "cost_source": "provider",
             "think_ms": 36555,
             "half_turns": 25,
@@ -274,6 +330,7 @@
           },
           "moonshotai/kimi-k3": {
             "usd": 1.727401,
+            "usd_today": 1.727401,
             "cost_source": "provider",
             "think_ms": 104346,
             "half_turns": 25,
@@ -298,6 +355,7 @@
         "perf": {
           "moonshotai/kimi-k3": {
             "usd": 1.330445,
+            "usd_today": 1.330445,
             "cost_source": "provider",
             "think_ms": 98208,
             "half_turns": 21,
@@ -308,6 +366,7 @@
           },
           "openai/gpt-5.6-sol": {
             "usd": 1.401443,
+            "usd_today": 0.503791,
             "cost_source": "provider",
             "think_ms": 32108,
             "half_turns": 21,
@@ -332,6 +391,7 @@
         "perf": {
           "openai/gpt-5.6-sol": {
             "usd": 1.096129,
+            "usd_today": 0.396498,
             "cost_source": "provider",
             "think_ms": 26181,
             "half_turns": 21,
@@ -342,6 +402,7 @@
           },
           "x-ai/grok-4.6": {
             "usd": 1.28155,
+            "usd_today": 1.28155,
             "cost_source": "provider",
             "think_ms": 141848,
             "half_turns": 21,
@@ -366,6 +427,7 @@
         "perf": {
           "x-ai/grok-4.6": {
             "usd": 1.595174,
+            "usd_today": 1.595174,
             "cost_source": "provider",
             "think_ms": 177474,
             "half_turns": 22,
@@ -376,6 +438,7 @@
           },
           "openai/gpt-5.6-sol": {
             "usd": 1.387277,
+            "usd_today": 0.497794,
             "cost_source": "provider",
             "think_ms": 32714,
             "half_turns": 22,
@@ -400,6 +463,7 @@
         "perf": {
           "moonshotai/kimi-k3": {
             "usd": 1.307071,
+            "usd_today": 1.307071,
             "cost_source": "provider",
             "think_ms": 101951,
             "half_turns": 21,
@@ -410,6 +474,7 @@
           },
           "x-ai/grok-4.6": {
             "usd": 1.318954,
+            "usd_today": 1.318954,
             "cost_source": "provider",
             "think_ms": 144609,
             "half_turns": 21,
@@ -434,6 +499,7 @@
         "perf": {
           "x-ai/grok-4.6": {
             "usd": 1.764574,
+            "usd_today": 1.764574,
             "cost_source": "provider",
             "think_ms": 157577,
             "half_turns": 25,
@@ -444,6 +510,7 @@
           },
           "moonshotai/kimi-k3": {
             "usd": 1.546928,
+            "usd_today": 1.546928,
             "cost_source": "provider",
             "think_ms": 102945,
             "half_turns": 25,
@@ -521,6 +588,19 @@
   },
   "ladder": [
     {
+      "model": "google/gemini-3.7-flash",
+      "display_name": "Gemini 3.7 Flash",
+      "reasoning_effort": "high",
+      "quantization": "unknown",
+      "entered_at": "2026-08-22",
+      "defences": 0,
+      "holds": 0,
+      "climbed": 4,
+      "seeded": false,
+      "via": "climb",
+      "rank": 1
+    },
+    {
       "model": "x-ai/grok-4.6",
       "display_name": "Grok 4.6",
       "reasoning_effort": "high",
@@ -531,7 +611,7 @@
       "climbed": 0,
       "seeded": false,
       "via": "opening",
-      "rank": 1
+      "rank": 2
     },
     {
       "model": "openai/gpt-5.6-sol",
@@ -544,7 +624,7 @@
       "climbed": 0,
       "seeded": false,
       "via": "opening",
-      "rank": 2
+      "rank": 3
     },
     {
       "model": "z-ai/glm-5.3",
@@ -557,23 +637,360 @@
       "climbed": 2,
       "seeded": false,
       "via": "climb",
-      "rank": 3
-    },
-    {
-      "model": "anthropic/claude-opus-5",
-      "display_name": "Claude Opus 5",
-      "reasoning_effort": "high",
-      "quantization": "unknown",
-      "entered_at": "2026-08-15",
-      "defences": 0,
-      "holds": 0,
-      "climbed": 0,
-      "seeded": false,
-      "via": "opening",
       "rank": 4
     }
   ],
   "challenges": [
+    {
+      "id": "2026-08_google-gemini-3.7-flash",
+      "challenger": {
+        "model": "google/gemini-3.7-flash",
+        "display_name": "Gemini 3.7 Flash",
+        "reasoning_effort": "high",
+        "quantization": "unknown"
+      },
+      "date": "2026-08-22",
+      "steps": [
+        {
+          "rank": 4,
+          "opponent": {
+            "model": "anthropic/claude-opus-5",
+            "display_name": "Claude Opus 5",
+            "reasoning_effort": "high"
+          },
+          "legs": [
+            {
+              "match_id": "ladder_2026-08_google-gemini-3.7-flash_r4_leg1",
+              "challenger_side": 0,
+              "outcome": "challenger",
+              "victory_type": "nuclear",
+              "turns": 20,
+              "date": "2026-08-22T10:51:33.482907+00:00",
+              "usd": 2.4321,
+              "perf": {
+                "google/gemini-3.7-flash": {
+                  "usd": 0.312743,
+                  "usd_today": 0.312743,
+                  "cost_source": "provider",
+                  "think_ms": 43000,
+                  "half_turns": 20,
+                  "served_by": "Google",
+                  "actions_ok": 56,
+                  "illegal": 1,
+                  "fog_blocked": 0
+                },
+                "anthropic/claude-opus-5": {
+                  "usd": 2.119365,
+                  "usd_today": 2.119365,
+                  "cost_source": "provider",
+                  "think_ms": 30320,
+                  "half_turns": 20,
+                  "served_by": "Anthropic",
+                  "actions_ok": 55,
+                  "illegal": 2,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            },
+            {
+              "match_id": "ladder_2026-08_google-gemini-3.7-flash_r4_leg2",
+              "challenger_side": 1,
+              "outcome": "challenger",
+              "victory_type": "military",
+              "turns": 14,
+              "date": "2026-08-22T11:07:41.836279+00:00",
+              "usd": 1.4496,
+              "perf": {
+                "anthropic/claude-opus-5": {
+                  "usd": 1.205485,
+                  "usd_today": 1.205485,
+                  "cost_source": "provider",
+                  "think_ms": 25715,
+                  "half_turns": 13,
+                  "served_by": "Anthropic",
+                  "actions_ok": 32,
+                  "illegal": 2,
+                  "fog_blocked": 0
+                },
+                "google/gemini-3.7-flash": {
+                  "usd": 0.24411,
+                  "usd_today": 0.24411,
+                  "cost_source": "provider",
+                  "think_ms": 45262,
+                  "half_turns": 14,
+                  "served_by": "Google",
+                  "actions_ok": 37,
+                  "illegal": 1,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            }
+          ],
+          "pts": [
+            6.0,
+            0.0
+          ],
+          "result": "win",
+          "decided_by": "points"
+        },
+        {
+          "rank": 3,
+          "opponent": {
+            "model": "z-ai/glm-5.3",
+            "display_name": "GLM 5.3",
+            "reasoning_effort": "high"
+          },
+          "legs": [
+            {
+              "match_id": "ladder_2026-08_google-gemini-3.7-flash_r3_leg1",
+              "challenger_side": 0,
+              "outcome": "incumbent",
+              "victory_type": "ultimatum",
+              "turns": 20,
+              "date": "2026-08-22T12:24:23.065724+00:00",
+              "usd": 1.3016,
+              "perf": {
+                "google/gemini-3.7-flash": {
+                  "usd": 0.339613,
+                  "usd_today": 0.339613,
+                  "cost_source": "provider",
+                  "think_ms": 44316,
+                  "half_turns": 20,
+                  "served_by": "Google",
+                  "actions_ok": 56,
+                  "illegal": 0,
+                  "fog_blocked": 0
+                },
+                "z-ai/glm-5.3": {
+                  "usd": 0.961973,
+                  "usd_today": 0.961973,
+                  "cost_source": "provider",
+                  "think_ms": 185708,
+                  "half_turns": 20,
+                  "served_by": "Z.AI",
+                  "actions_ok": 49,
+                  "illegal": 3,
+                  "fog_blocked": 2
+                }
+              },
+              "source": "replay"
+            },
+            {
+              "match_id": "ladder_2026-08_google-gemini-3.7-flash_r3_leg2",
+              "challenger_side": 1,
+              "outcome": "challenger",
+              "victory_type": "nuclear",
+              "turns": 15,
+              "date": "2026-08-22T13:04:10.619100+00:00",
+              "usd": 0.6885,
+              "perf": {
+                "z-ai/glm-5.3": {
+                  "usd": 0.471115,
+                  "usd_today": 0.471115,
+                  "cost_source": "provider",
+                  "think_ms": 122573,
+                  "half_turns": 15,
+                  "served_by": "Z.AI",
+                  "actions_ok": 37,
+                  "illegal": 4,
+                  "fog_blocked": 0
+                },
+                "google/gemini-3.7-flash": {
+                  "usd": 0.217427,
+                  "usd_today": 0.217427,
+                  "cost_source": "provider",
+                  "think_ms": 36568,
+                  "half_turns": 15,
+                  "served_by": "Google",
+                  "actions_ok": 41,
+                  "illegal": 0,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            }
+          ],
+          "pts": [
+            3.5,
+            3.0
+          ],
+          "result": "win",
+          "decided_by": "points"
+        },
+        {
+          "rank": 2,
+          "opponent": {
+            "model": "openai/gpt-5.6-sol",
+            "display_name": "GPT-5.6 Sol",
+            "reasoning_effort": "high"
+          },
+          "legs": [
+            {
+              "match_id": "ladder_2026-08_google-gemini-3.7-flash_r2_leg1",
+              "challenger_side": 0,
+              "outcome": "incumbent",
+              "victory_type": "nuclear",
+              "turns": 19,
+              "date": "2026-08-22T13:29:21.027031+00:00",
+              "usd": 0.7474,
+              "perf": {
+                "google/gemini-3.7-flash": {
+                  "usd": 0.311001,
+                  "usd_today": 0.311001,
+                  "cost_source": "provider",
+                  "think_ms": 44191,
+                  "half_turns": 19,
+                  "served_by": "Google",
+                  "actions_ok": 53,
+                  "illegal": 1,
+                  "fog_blocked": 0
+                },
+                "openai/gpt-5.6-sol": {
+                  "usd": 0.436424,
+                  "usd_today": 0.436424,
+                  "cost_source": "provider",
+                  "think_ms": 35277,
+                  "half_turns": 19,
+                  "served_by": "OpenAI",
+                  "actions_ok": 52,
+                  "illegal": 1,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            },
+            {
+              "match_id": "ladder_2026-08_google-gemini-3.7-flash_r2_leg2",
+              "challenger_side": 1,
+              "outcome": "challenger",
+              "victory_type": "nuclear",
+              "turns": 17,
+              "date": "2026-08-22T13:49:01.979405+00:00",
+              "usd": 0.5404,
+              "perf": {
+                "openai/gpt-5.6-sol": {
+                  "usd": 0.268902,
+                  "usd_today": 0.268902,
+                  "cost_source": "provider",
+                  "think_ms": 27229,
+                  "half_turns": 17,
+                  "served_by": "OpenAI",
+                  "actions_ok": 41,
+                  "illegal": 5,
+                  "fog_blocked": 0
+                },
+                "google/gemini-3.7-flash": {
+                  "usd": 0.271526,
+                  "usd_today": 0.271526,
+                  "cost_source": "provider",
+                  "think_ms": 42211,
+                  "half_turns": 17,
+                  "served_by": "Google",
+                  "actions_ok": 48,
+                  "illegal": 1,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            }
+          ],
+          "pts": [
+            3.0,
+            3.0
+          ],
+          "result": "win",
+          "decided_by": "level on points, won faster (17 vs 19 turns)"
+        },
+        {
+          "rank": 1,
+          "opponent": {
+            "model": "x-ai/grok-4.6",
+            "display_name": "Grok 4.6",
+            "reasoning_effort": "high"
+          },
+          "legs": [
+            {
+              "match_id": "ladder_2026-08_google-gemini-3.7-flash_r1_leg1",
+              "challenger_side": 0,
+              "outcome": "draw",
+              "victory_type": "mutual_destruction",
+              "turns": 26,
+              "date": "2026-08-22T15:21:55.269141+00:00",
+              "usd": 2.176,
+              "perf": {
+                "google/gemini-3.7-flash": {
+                  "usd": 0.437628,
+                  "usd_today": 0.437628,
+                  "cost_source": "provider",
+                  "think_ms": 47345,
+                  "half_turns": 26,
+                  "served_by": "Google",
+                  "actions_ok": 75,
+                  "illegal": 1,
+                  "fog_blocked": 0
+                },
+                "x-ai/grok-4.6": {
+                  "usd": 1.73837,
+                  "usd_today": 1.73837,
+                  "cost_source": "provider",
+                  "think_ms": 166981,
+                  "half_turns": 26,
+                  "served_by": "xAI",
+                  "actions_ok": 73,
+                  "illegal": 0,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            },
+            {
+              "match_id": "ladder_2026-08_google-gemini-3.7-flash_r1_leg2",
+              "challenger_side": 1,
+              "outcome": "challenger",
+              "victory_type": "nuclear",
+              "turns": 19,
+              "date": "2026-08-22T16:23:14.789855+00:00",
+              "usd": 1.4656,
+              "perf": {
+                "x-ai/grok-4.6": {
+                  "usd": 1.131856,
+                  "usd_today": 1.131856,
+                  "cost_source": "provider",
+                  "think_ms": 143494,
+                  "half_turns": 19,
+                  "served_by": "xAI",
+                  "actions_ok": 55,
+                  "illegal": 0,
+                  "fog_blocked": 0
+                },
+                "google/gemini-3.7-flash": {
+                  "usd": 0.333776,
+                  "usd_today": 0.333776,
+                  "cost_source": "provider",
+                  "think_ms": 50138,
+                  "half_turns": 19,
+                  "served_by": "Google",
+                  "actions_ok": 52,
+                  "illegal": 1,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            }
+          ],
+          "pts": [
+            3.0,
+            0.0
+          ],
+          "result": "win",
+          "decided_by": "points"
+        }
+      ],
+      "final_rank": 1,
+      "displaced": "Claude Opus 5"
+    },
     {
       "id": "2026-08_z-ai-glm-5.3",
       "challenger": {
@@ -603,6 +1020,7 @@
               "perf": {
                 "z-ai/glm-5.3": {
                   "usd": 0.59251,
+                  "usd_today": 0.59251,
                   "cost_source": "provider",
                   "think_ms": 110233,
                   "half_turns": 23,
@@ -613,6 +1031,7 @@
                 },
                 "moonshotai/kimi-k3": {
                   "usd": 1.516297,
+                  "usd_today": 1.516297,
                   "cost_source": "provider",
                   "think_ms": 183907,
                   "half_turns": 23,
@@ -635,6 +1054,7 @@
               "perf": {
                 "moonshotai/kimi-k3": {
                   "usd": 1.105029,
+                  "usd_today": 1.105029,
                   "cost_source": "provider",
                   "think_ms": 133387,
                   "half_turns": 16,
@@ -645,6 +1065,7 @@
                 },
                 "z-ai/glm-5.3": {
                   "usd": 0.378354,
+                  "usd_today": 0.378354,
                   "cost_source": "provider",
                   "think_ms": 130989,
                   "half_turns": 16,
@@ -683,6 +1104,7 @@
               "perf": {
                 "z-ai/glm-5.3": {
                   "usd": 0.650524,
+                  "usd_today": 0.650524,
                   "cost_source": "provider",
                   "think_ms": 144210,
                   "half_turns": 21,
@@ -693,6 +1115,7 @@
                 },
                 "anthropic/claude-opus-5": {
                   "usd": 2.987715,
+                  "usd_today": 2.987715,
                   "cost_source": "provider",
                   "think_ms": 47325,
                   "half_turns": 21,
@@ -715,6 +1138,7 @@
               "perf": {
                 "anthropic/claude-opus-5": {
                   "usd": 3.093975,
+                  "usd_today": 3.093975,
                   "cost_source": "provider",
                   "think_ms": 51335,
                   "half_turns": 21,
@@ -725,6 +1149,7 @@
                 },
                 "z-ai/glm-5.3": {
                   "usd": 0.566973,
+                  "usd_today": 0.566973,
                   "cost_source": "provider",
                   "think_ms": 119205,
                   "half_turns": 21,
@@ -763,6 +1188,7 @@
               "perf": {
                 "z-ai/glm-5.3": {
                   "usd": 0.267872,
+                  "usd_today": 0.267872,
                   "cost_source": "provider",
                   "think_ms": 77472,
                   "half_turns": 16,
@@ -773,6 +1199,7 @@
                 },
                 "openai/gpt-5.6-sol": {
                   "usd": 0.541274,
+                  "usd_today": 0.194739,
                   "cost_source": "provider",
                   "think_ms": 34042,
                   "half_turns": 17,
@@ -795,6 +1222,7 @@
               "perf": {
                 "openai/gpt-5.6-sol": {
                   "usd": 0.760444,
+                  "usd_today": 0.270958,
                   "cost_source": "provider",
                   "think_ms": 44052,
                   "half_turns": 20,
@@ -805,6 +1233,7 @@
                 },
                 "z-ai/glm-5.3": {
                   "usd": 0.495886,
+                  "usd_today": 0.495886,
                   "cost_source": "provider",
                   "think_ms": 129702,
                   "half_turns": 20,
@@ -857,6 +1286,7 @@
               "perf": {
                 "qwen/qwen3.8-27b": {
                   "usd": 0.311322,
+                  "usd_today": 0.311322,
                   "cost_source": "provider",
                   "think_ms": 130415,
                   "half_turns": 19,
@@ -867,6 +1297,7 @@
                 },
                 "moonshotai/kimi-k3": {
                   "usd": 1.268588,
+                  "usd_today": 1.268588,
                   "cost_source": "provider",
                   "think_ms": 92619,
                   "half_turns": 19,
@@ -889,6 +1320,7 @@
               "perf": {
                 "moonshotai/kimi-k3": {
                   "usd": 2.158772,
+                  "usd_today": 2.158772,
                   "cost_source": "provider",
                   "think_ms": 118378,
                   "half_turns": 25,
@@ -899,6 +1331,7 @@
                 },
                 "qwen/qwen3.8-27b": {
                   "usd": 0.43108,
+                  "usd_today": 0.43108,
                   "cost_source": "provider",
                   "think_ms": 131611,
                   "half_turns": 25,
@@ -925,6 +1358,21 @@
   ],
   "dropped": [
     {
+      "model": "anthropic/claude-opus-5",
+      "display_name": "Claude Opus 5",
+      "reasoning_effort": "high",
+      "quantization": "unknown",
+      "entered_at": "2026-08-15",
+      "defences": 0,
+      "holds": 0,
+      "climbed": 0,
+      "seeded": false,
+      "via": "opening",
+      "left_at": "2026-08-22",
+      "displaced_by": "Gemini 3.7 Flash",
+      "left_from_rank": 4
+    },
+    {
       "model": "moonshotai/kimi-k3",
       "display_name": "Kimi K3",
       "reasoning_effort": "high",
@@ -945,6 +1393,14 @@
       "model": "x-ai/grok-4.6",
       "display_name": "Grok 4.6",
       "from": "2026-08-15",
+      "to": "2026-08-22",
+      "defences": 0,
+      "seeded": false
+    },
+    {
+      "model": "google/gemini-3.7-flash",
+      "display_name": "Gemini 3.7 Flash",
+      "from": "2026-08-22",
       "to": null,
       "defences": 0,
       "seeded": false

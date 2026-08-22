@@ -1155,3 +1155,16 @@ table.lb.opening-table th, table.lb.opening-table td { padding: 8px 12px; }
 }
 .dropped-row:hover { opacity: 1; }
 .dropped-row .lad-rank { color: var(--text-faint); font-weight: 500; }
+
+/* The same matches at today's prices, shown only when the provider moved its
+   rate enough to matter. Muted: the figure it follows is what was really paid,
+   and this one is a comparison aid, not a second claim about the past. */
+.lad-now { color: var(--text-faint); font-size: 11px; white-space: nowrap; }
+
+/* A promotion is not a price. Amber rather than muted: unlike the re-priced
+   figure beside it, this one is a caveat the reader needs before comparing. */
+.lad-promo {
+  font-size: 10px; font-weight: 700; letter-spacing: .04em;
+  color: var(--amber); border: 1px solid rgba(255,184,77,0.35);
+  border-radius: 3px; padding: 0 4px; white-space: nowrap;
+}

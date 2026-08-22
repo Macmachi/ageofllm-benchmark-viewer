@@ -71,11 +71,15 @@
       if (!perf) return;
       for (const [model, p] of Object.entries(perf)) {
         const a = acc[model] || (acc[model] = {
-          usd: 0, matches: 0, thinkSum: 0, thinkN: 0, providers: new Set(),
+          usd: 0, usdToday: 0, usdTodayN: 0,
+          matches: 0, thinkSum: 0, thinkN: 0, providers: new Set(),
           reported: 0, ok: 0, illegal: 0, fog: 0, winTurns: [], lossTurns: [],
           w: 0, l: 0, d: 0,
         });
         if (typeof p.usd === 'number') { a.usd += p.usd; a.matches += 1; }
+        // The same match at today's prices. Counted separately so a partial
+        // set never averages into a figure that looks complete.
+        if (typeof p.usd_today === 'number') { a.usdToday += p.usd_today; a.usdTodayN += 1; }
         if (p.cost_source === 'provider') a.reported += 1;
         if (typeof p.think_ms === 'number' && p.half_turns) {
           a.thinkSum += p.think_ms * p.half_turns;
@@ -130,6 +134,10 @@
     for (const [model, a] of Object.entries(acc)) {
       perfByModel[model] = {
         usdPerMatch: a.matches ? a.usd / a.matches : null,
+        // Only when EVERY match could be re-priced. A mix of re-priced and
+        // as-played legs would be a third number meaning neither thing.
+        usdPerMatchToday: (a.matches && a.usdTodayN === a.matches)
+          ? a.usdToday / a.matches : null,
         thinkMs: a.thinkN ? a.thinkSum / a.thinkN : null,
         matches: a.matches,
         // More than one provider means the pin failed somewhere in the season.
@@ -163,10 +171,29 @@
     // are all level, and since site 0.17.1 it settles a level challenge too.
     const tempo = p.winTurns != null
       ? `<span class="lad-stat" title="Mean turns taken in the ${p.wonMatches} match(es) this model won. Career figure, shown as information — a challenge is settled on the speed inside that duel, not on this average.">⚔ wins in ${p.winTurns.toFixed(0)}</span>` : '';
+    // Cost is a PRICE EPOCH, not a constant. A model that played before a price
+    // cut carries the old rate in its average for ever, and comparing it to one
+    // benchmarked this week compares two eras. So when re-pricing the same
+    // matches at today's rates moves the figure by more than 5%, both are
+    // shown: what it cost, then what it would cost now.
+    const today = p.usdPerMatchToday;
+    const drift = (today != null && p.usdPerMatch)
+      ? Math.abs(today - p.usdPerMatch) / p.usdPerMatch : 0;
+    const nowCell = drift > 0.05
+      ? ` <span class="lad-now" title="The same matches re-priced at the rates in force today, keeping the discount each match actually received (prompt caching included). The provider moved its price after these matches were played; the figure on the left is what was really paid.">→ ${fmtUsd(today)} today</span>` : '';
+    // A launch discount is a date, not a price. OpenRouter publishes it, so the
+    // page can say so instead of presenting a sale as what a model costs:
+    // Gemini 3.7 Flash arrived at -75%, which is the difference between
+    // cheapest on the board and fourth cheapest.
+    const pt = (data.pricing_today || {})[model] || {};
+    const listPerMatch = (pt.discount && (today != null || p.usdPerMatch != null))
+      ? (today != null ? today : p.usdPerMatch) / (1 - pt.discount) : null;
+    const promo = pt.discount
+      ? ` <span class="lad-promo" title="This model's pinned endpoint is on a promotion right now: $${pt.input}/$${pt.output} per 1M against a list price of $${pt.list_input}/$${pt.list_output}. At list price these same matches average ${fmtUsd(listPerMatch)}. The discount is a date, not a price — it expires.">PROMO −${Math.round(pt.discount * 100)}%</span>` : '';
     const cost = p.usdPerMatch != null
       ? `<span class="lad-stat${p.allReported ? '' : ' estimated'}" title="${p.allReported
-          ? 'Average USD per match, as charged by the provider'
-          : 'Average USD per match — at least one match had no provider-reported cost and fell back to an estimate'}">💲 ${fmtUsd(p.usdPerMatch)}</span>` : '';
+          ? 'Average USD per match, as charged by the provider on the day it was played'
+          : 'Average USD per match — at least one match had no provider-reported cost and fell back to an estimate'}">💲 ${fmtUsd(p.usdPerMatch)}${nowCell}${promo}</span>` : '';
     const prov = p.providers.length === 1
       ? `<span class="lad-stat prov" title="Every call was served by this endpoint">${esc(p.providers[0])}</span>`
       : p.providers.length > 1
