@@ -176,7 +176,15 @@ compared inside that tie rather than over careers.
 - **Nothing is placed by decree**: the first four models play a home-and-away
   round robin, and that table seeds the ladder.
 - **Real costs, not estimates.** Prices × tokens cannot see prompt caching and
-  read high; the provider-reported figure is now what gets published.
+  read high; the provider-reported figure is what gets published.
+- **A cost is a price epoch, not a constant.** Providers cut prices, and a model
+  that played before a cut would carry the old rate in its average for ever —
+  GPT-5.6 Sol's own replays show its billed rate halving mid-season. So beside
+  what a model's matches cost, the page shows what the *same* matches would cost
+  at today's rates, keeping the prompt-cache discount each one actually
+  received: `💲 $1.05 → $0.41 today`. The second figure appears only when it
+  moves the first by more than 5%. What was paid stays the primary claim; the
+  re-price exists so two models benchmarked months apart can be compared at all.
 - **Latency is a published metric**, which it could not honestly be before every
   model was pinned to a single endpoint. It measures **that one deployment** —
   the lab's own where the lab serves one, a third party's hardware and queue
