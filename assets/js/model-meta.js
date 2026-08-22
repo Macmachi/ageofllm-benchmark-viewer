@@ -38,6 +38,7 @@ window.MODEL_META = {
   'qwen/qwen3.8-27b':                  { flag: '🇨🇳', author: 'Alibaba', isNew: true },
   'z-ai/glm-5.2':                      { flag: '🇨🇳', author: 'Zhipu' },
   'z-ai/glm-5.3':                      { flag: '🇨🇳', author: 'Zhipu', isNew: true },
+  'google/gemini-3.7-flash':           { flag: '🇺🇸', author: 'Google', isNew: true },
 };
 
 /* Reasoning-effort badge, shared by the leaderboard and the ladder.
