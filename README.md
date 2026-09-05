@@ -1,4 +1,4 @@
-# Age of LLM™ — Benchmark · site v0.17.4 · game engine v0.18.0
+# Age of LLM™ — Benchmark · site v0.18.0 · game engine v0.18.0
 
 ![Age of LLM — Benchmark cover](assets/images/Cover.png)
 
@@ -41,11 +41,11 @@ the engine number with no rules behind it, which is what prompted separating the
 from now on runs on 0.18.0.** The frozen V1 archive
 spans 0.9.2 → 0.15.0, which is why it is kept whole rather than continued.
 
-If the rules ever change while the ladder is standing: every challenge is still
+If the rules ever change while a champion is standing: every challenge is still
 played live, both sides on the same engine, so no single tie mixes versions — but
-an incumbent's *place* was earned under the engine in force when it won it. When a
-change could plausibly reorder the standing, the opening is replayed; when it
-could not, the standing carries over and the release notes say so.
+the champion's *crown* was won under the engine in force when it took it. When a
+change could plausibly have gone the other way, the opening is replayed; when it
+could not, the crown carries over and the release notes say so.
 
 ---
 
@@ -58,7 +58,7 @@ This repository publishes what changes the **benchmark**: every game-engine rele
 - [1. Overview & architecture](#1-overview--architecture)
 - [2. Quick start](#2-quick-start)
 - [3. Game rules (complete)](#3-game-rules-complete)
-- [3b. The Ladder — format and scoring](#3b-the-ladder--format-and-scoring) — how a place is won, and what each result is worth
+- [3b. The Throne — format and scoring](#3b-the-throne--format-and-scoring) — how the crown is won, and what each result is worth
 - [4. The Python engine (`engine/`)](#4-the-python-engine-engine)
 - [5. The replay JSON schema](#5-the-replay-json-schema)
 - [5b. The leaderboard (`data/leaderboard.json`)](#5b-the-leaderboard-dataleaderboardjson)
@@ -997,25 +997,32 @@ indicates the order of the current turn.
 
 ---
 
-## 3b. The Ladder — format and scoring
+## 3b. The Throne — format and scoring
 
-The home page is a **standing**, not a rating. Four places; a newly released
-model challenges into them. This section is the reference for how a place is
-won — the release notes above record *when* a rule changed, this records what
-it *is*.
+The home page is a **champion and the line behind it**, not a rating and not a
+ranking. This section is the reference for how the crown is won — the release
+notes above record *when* a rule changed, this records what it *is*.
 
 ### The format
 
-- **Four rungs.** `#1` is the champion, `#4` the lowest place on the board.
-- **A challenger enters at the bottom.** It plays `#4` first. Win, and it plays
-  `#3`, then `#2`, then `#1`. It stops at its first non-win and takes the rank
-  of the last incumbent it beat; that incumbent and everyone below shift down,
-  and the model in `#4` falls off the ladder.
+- **There is one seat to win.** A newly released model plays the reigning
+  champion and nobody else: one tie, **two matches**, and either it takes the
+  crown or nothing on the board moves.
 - **Every tie is two legs, sides swapped.** The challenger is player 1 in leg 1
   and player 2 in leg 2. No pairing is ever played in one direction only.
-- **The opening.** An empty ladder cannot be filled by decree, so the first four
-  models played a home-and-away round-robin — 12 matches — and that table seeded
-  the four places.
+- **A new champion is inserted at the top**, everyone below shifts down one, and
+  the last name falls off the end of the line.
+- **The opening.** An empty board cannot be filled by decree, so the first four
+  models played a home-and-away round-robin — 12 matches — and that table
+  produced the first champion and the first three seats behind it.
+
+> **Until August 2026 the format was a climb**: a challenger entered at `#4` and
+> moved up one place per tie won, keeping the highest place it took. It was
+> replaced because its cost fell hardest on its best results — eight matches to
+> reach `#1` against two to be eliminated, so the challenges worth watching were
+> the ones the benchmark could least afford. Challenges played under the climb
+> are still shown as climbs, and `data/ladder.json` records the format each one
+> was played under.
 
 ### What each leg is worth
 
@@ -1046,64 +1053,81 @@ A peaceful draw keeps its point, because nobody destroyed anybody.
 
 ### When a tie is level
 
-- **Level on points, and each side won a leg** → the rung goes to the model that
+- **Level on points, and each side won a leg** → the crown goes to the model that
   won *its own* leg in **fewer turns**. The comparison stays inside the tie on
-  purpose: career averages would let matches won earlier, against weaker
-  incumbents, decide a fight for the throne. *"I beat you in 19, you beat me in
+  purpose: career averages would let matches won earlier, against entirely
+  different opponents, decide a fight for the throne. *"I beat you in 19, you beat me in
   25"* is a statement about these two games; *"my average is lower"* is not.
 - **Level on points and no leg was closed out** — two draws (2-2), two mutual
-  destructions (0-0), or one of each (1-1) → the **incumbent keeps the rung**.
+  destructions (0-0), or one of each (1-1) → the **champion keeps the crown**.
   There is genuinely nothing to compare: who *drew* faster measures who sued for
   peace earlier, and who was annihilated faster measures nothing at all.
-- **Identical times** → the incumbent keeps the rung.
+- **Identical times** → the champion keeps the crown.
 
 Every step of a challenge records `decided_by`, so a tie shown next to a
-challenger that climbed says *why* rather than leaving the reader to guess.
+challenger that took the crown says *why* rather than leaving the reader to
+guess.
 
-### What the ladder does not claim
+### What the throne does not claim
 
-It is a **current standing**, not a measurement of how far apart two models are.
-A challenger that loses at `#4` has played two matches, and nothing more should
-be read into its position than that. Precision accumulates where it is worth
-having: models near the top defend repeatedly and build a record, while the
-bottom of the board stays thin — and says so.
+**The line below the champion is not a ranking, and not a top 4.** This is the
+claim the format gave up when the climb was retired, and it is worth being
+blunt about it:
+only the first seat is ever played for. A challenger that loses to the champion
+earns no seat at all, however close it came — and no model in the line has ever
+played any other model in the line for its position. Ordering those names by
+strength would be a claim no match on this site supports.
 
-**Points set this order once, and have not touched it since.** The distinction
-is easy to get wrong in both directions, so to be exact:
+What the line *is*: the champion, then whoever came before it, most recent
+first — the succession. A seat says either *this model held the crown*, or
+*this model won a seat under the climb that ran until August 2026*, and the page
+prints which, per row.
 
-- **The opening round-robin was a points table**, and it is what put these four
-  in this order — 12 / 12 / 6 / 6, top four take the places. Saying the standing
-  "is not a points table" would be false about its own origin.
-- **Nothing has been scored across the board since.** A place changes hands only
-  when a challenger wins the two-leg tie played for it. No total is compared
-  between two models that have not just played each other.
+It is therefore **not a measurement of how far apart two models are** either. A
+challenger that loses the throne match has played two matches, and the only
+thing they establish is that it did not take the crown. Precision accumulates in
+exactly one place — the throne, where the champion defends repeatedly and builds
+a record. Nothing else on the board is being measured at all.
 
-**A rank is therefore not a record.** Past the opening, a place says one thing:
-*nobody has beaten this model here*. The W–L record printed next to each model
-is aggregated from its matches for the reader and is never an input.
+**Points decided the first champion and have not been compared across the board
+since.** The distinction is easy to get wrong in both directions, so to be
+exact:
 
-So a model can hold a place on a losing record, and one does: after the first
-challenge, **Kimi K3 sits at `#4` on 3W–5L** — seeded there by the opening, held
-there by a defence. That is not a contradiction to be fixed, it is the format
-working. Reading the board as a live league table is the one mistake it invites,
-which is why the record is shown at all: hiding it would make the standing look
-like a ranking that is still being computed.
+- **The opening round-robin was a points table**, and it is what produced the
+  first champion and the first line — 12 / 12 / 6 / 6. Saying the page "is not a
+  points table" would be false about its own origin.
+- **Nothing has been scored across the board since.** The crown changes hands
+  only when a challenger wins the two-leg tie played for it. No total is ever
+  compared between two models that have not just played each other.
 
-**Mutual destruction can never cost an incumbent its place.** It scores 0 for
+**A seat is therefore not a record.** The crown says one thing — *nobody has
+beaten this model for it*. The W–L record printed next to each model is
+aggregated from its matches for the reader and is never an input.
+
+So a model can sit in the line on a losing record, and one does: **Grok 4.6
+held the throne for a week on 4W–4L**. That is not a contradiction to be fixed,
+it is the format working. Reading the page as a live league table is the one
+mistake it invites, which is why the record is shown at all: hiding it would
+make the line look like a ranking that is still being computed.
+
+**Mutual destruction can never cost a champion its crown.** It scores 0 for
 both sides, so it moves no gap: a tie of two mutual destructions is 0-0 and the
-incumbent keeps the rung, and a mutual destruction next to a leg the incumbent
-won is 0-3, same outcome. Only a challenger winning more legs than the incumbent
-takes a rung.
+champion keeps the crown, and a mutual destruction next to a leg the champion
+won is 0-3, same outcome. Only a challenger winning more legs than the champion
+takes the crown.
 
 That is the exact reverse of the **opening table**, where a mutual destruction
 costs both participants a point against the models that were not involved — and
 can therefore drop one of them below the cut. Penalising in the opening, neutral
 in a defence, from one rule: a round-robin ranks models against a field, while
-the ladder only ever records a duel.
+the throne only ever records a duel.
 
-The ladder also assumes **transitivity**: a model placed `#3` never played `#1`.
-That assumption is at its most exposed on day one, which is exactly why the
-opening was a fully connected round-robin rather than a seeding by decree.
+The climb that ran until August 2026 also assumed **transitivity**: a model
+placed `#3` had never played `#1`. The throne format makes no such assumption
+because it makes no such claim — after the opening, the only thing anyone plays
+for is the crown. The opening is still a fully connected round-robin rather than
+a seeding by decree, for the one moment that needs it: picking the first champion
+out of a field nobody has beaten head-to-head yet.
 
 ---
 
