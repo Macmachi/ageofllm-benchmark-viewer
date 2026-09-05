@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-05T08:58:22.360384+00:00",
+  "generated_at": "2026-09-05T11:20:09.456419+00:00",
   "engine_version": "0.18.0",
   "site_version": "0.18.0",
   "preview": false,
@@ -71,6 +71,14 @@
       "input": 10.0,
       "output": 50.0,
       "endpoint": "openai"
+    },
+    "google/gemini-3.8-flash": {
+      "input": 0.75,
+      "output": 3.75,
+      "endpoint": "google-vertex/global",
+      "discount": 0.5,
+      "list_input": 1.5,
+      "list_output": 7.5
     }
   },
   "started_at": "2026-08-15",
@@ -128,7 +136,7 @@
           },
           "openai/gpt-5.6-sol": {
             "usd": 1.416208,
-            "usd_today": 0.511657,
+            "usd_today": 1.023315,
             "cost_source": "provider",
             "think_ms": 37007,
             "half_turns": 22,
@@ -153,7 +161,7 @@
         "perf": {
           "openai/gpt-5.6-sol": {
             "usd": 1.649924,
-            "usd_today": 0.591419,
+            "usd_today": 1.182839,
             "cost_source": "provider",
             "think_ms": 43103,
             "half_turns": 22,
@@ -333,7 +341,7 @@
         "perf": {
           "openai/gpt-5.6-sol": {
             "usd": 1.831075,
-            "usd_today": 0.656053,
+            "usd_today": 1.312106,
             "cost_source": "provider",
             "think_ms": 36555,
             "half_turns": 25,
@@ -380,7 +388,7 @@
           },
           "openai/gpt-5.6-sol": {
             "usd": 1.401443,
-            "usd_today": 0.503791,
+            "usd_today": 1.007583,
             "cost_source": "provider",
             "think_ms": 32108,
             "half_turns": 21,
@@ -405,7 +413,7 @@
         "perf": {
           "openai/gpt-5.6-sol": {
             "usd": 1.096129,
-            "usd_today": 0.396498,
+            "usd_today": 0.792997,
             "cost_source": "provider",
             "think_ms": 26181,
             "half_turns": 21,
@@ -452,7 +460,7 @@
           },
           "openai/gpt-5.6-sol": {
             "usd": 1.387277,
-            "usd_today": 0.497794,
+            "usd_today": 0.995588,
             "cost_source": "provider",
             "think_ms": 32714,
             "half_turns": 22,
@@ -602,6 +610,19 @@
   },
   "ladder": [
     {
+      "model": "google/gemini-3.8-flash",
+      "display_name": "Gemini 3.8 Flash",
+      "reasoning_effort": "high",
+      "quantization": "unknown",
+      "entered_at": "2026-09-05",
+      "defences": 0,
+      "holds": 0,
+      "climbed": 1,
+      "seeded": false,
+      "via": "throne",
+      "rank": 1
+    },
+    {
       "model": "openai/gpt-6-astra",
       "display_name": "GPT-6 Astra",
       "reasoning_effort": "high",
@@ -612,7 +633,7 @@
       "climbed": 1,
       "seeded": false,
       "via": "throne",
-      "rank": 1
+      "rank": 2
     },
     {
       "model": "google/gemini-3.7-flash",
@@ -625,7 +646,7 @@
       "climbed": 4,
       "seeded": false,
       "via": "climb",
-      "rank": 2
+      "rank": 3
     },
     {
       "model": "x-ai/grok-4.6",
@@ -638,23 +659,109 @@
       "climbed": 0,
       "seeded": false,
       "via": "opening",
-      "rank": 3
-    },
-    {
-      "model": "openai/gpt-5.6-sol",
-      "display_name": "GPT-5.6 Sol",
-      "reasoning_effort": "high",
-      "quantization": "unknown",
-      "entered_at": "2026-08-15",
-      "defences": 0,
-      "holds": 1,
-      "climbed": 0,
-      "seeded": false,
-      "via": "opening",
       "rank": 4
     }
   ],
   "challenges": [
+    {
+      "id": "2026-09_google-gemini-3.8-flash",
+      "format": "throne",
+      "challenger": {
+        "model": "google/gemini-3.8-flash",
+        "display_name": "Gemini 3.8 Flash",
+        "reasoning_effort": "high",
+        "quantization": "unknown"
+      },
+      "date": "2026-09-05",
+      "steps": [
+        {
+          "rank": 1,
+          "opponent": {
+            "model": "openai/gpt-6-astra",
+            "display_name": "GPT-6 Astra",
+            "reasoning_effort": "high"
+          },
+          "legs": [
+            {
+              "match_id": "ladder_2026-09_google-gemini-3.8-flash_r1_leg1",
+              "challenger_side": 0,
+              "outcome": "incumbent",
+              "victory_type": "nuclear",
+              "turns": 26,
+              "date": "2026-09-05T10:22:41.567168+00:00",
+              "usd": 4.0162,
+              "perf": {
+                "google/gemini-3.8-flash": {
+                  "usd": 2.161228,
+                  "usd_today": 2.161228,
+                  "cost_source": "provider",
+                  "think_ms": 123013,
+                  "half_turns": 26,
+                  "served_by": "Google",
+                  "actions_ok": 73,
+                  "illegal": 1,
+                  "fog_blocked": 1
+                },
+                "openai/gpt-6-astra": {
+                  "usd": 1.85498,
+                  "usd_today": 1.85498,
+                  "cost_source": "provider",
+                  "think_ms": 21196,
+                  "half_turns": 26,
+                  "served_by": "OpenAI",
+                  "actions_ok": 72,
+                  "illegal": 2,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            },
+            {
+              "match_id": "ladder_2026-09_google-gemini-3.8-flash_r1_leg2",
+              "challenger_side": 1,
+              "outcome": "challenger",
+              "victory_type": "nuclear",
+              "turns": 24,
+              "date": "2026-09-05T11:19:43.647825+00:00",
+              "usd": 3.8846,
+              "perf": {
+                "openai/gpt-6-astra": {
+                  "usd": 1.807982,
+                  "usd_today": 1.807982,
+                  "cost_source": "provider",
+                  "think_ms": 23289,
+                  "half_turns": 24,
+                  "served_by": "OpenAI",
+                  "actions_ok": 66,
+                  "illegal": 2,
+                  "fog_blocked": 0
+                },
+                "google/gemini-3.8-flash": {
+                  "usd": 2.076641,
+                  "usd_today": 2.076641,
+                  "cost_source": "provider",
+                  "think_ms": 119265,
+                  "half_turns": 24,
+                  "served_by": "Google",
+                  "actions_ok": 61,
+                  "illegal": 5,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            }
+          ],
+          "pts": [
+            3.0,
+            3.0
+          ],
+          "result": "win",
+          "decided_by": "level on points, won faster (24 vs 26 turns)"
+        }
+      ],
+      "final_rank": 1,
+      "displaced": "GPT-5.6 Sol"
+    },
     {
       "id": "2026-09_openai-gpt-6-astra",
       "format": "throne",
@@ -696,7 +803,7 @@
                 },
                 "google/gemini-3.7-flash": {
                   "usd": 0.705796,
-                  "usd_today": 1.411592,
+                  "usd_today": 2.823183,
                   "cost_source": "provider",
                   "think_ms": 47812,
                   "half_turns": 22,
@@ -719,7 +826,7 @@
               "perf": {
                 "google/gemini-3.7-flash": {
                   "usd": 0.685964,
-                  "usd_today": 1.371928,
+                  "usd_today": 2.743857,
                   "cost_source": "provider",
                   "think_ms": 53659,
                   "half_turns": 19,
@@ -783,7 +890,7 @@
               "perf": {
                 "z-ai/glm-5.3-flash": {
                   "usd": 0.020386,
-                  "usd_today": 0.020386,
+                  "usd_today": 0.040771,
                   "cost_source": "provider",
                   "think_ms": 60485,
                   "half_turns": 22,
@@ -828,7 +935,7 @@
                 },
                 "z-ai/glm-5.3-flash": {
                   "usd": 0.022739,
-                  "usd_today": 0.022739,
+                  "usd_today": 0.045478,
                   "cost_source": "provider",
                   "think_ms": 67557,
                   "half_turns": 24,
@@ -881,7 +988,7 @@
               "perf": {
                 "google/gemini-3.7-flash": {
                   "usd": 0.312743,
-                  "usd_today": 0.625486,
+                  "usd_today": 1.250973,
                   "cost_source": "provider",
                   "think_ms": 43000,
                   "half_turns": 20,
@@ -926,7 +1033,7 @@
                 },
                 "google/gemini-3.7-flash": {
                   "usd": 0.24411,
-                  "usd_today": 0.48822,
+                  "usd_today": 0.97644,
                   "cost_source": "provider",
                   "think_ms": 45262,
                   "half_turns": 14,
@@ -965,7 +1072,7 @@
               "perf": {
                 "google/gemini-3.7-flash": {
                   "usd": 0.339613,
-                  "usd_today": 0.679226,
+                  "usd_today": 1.358452,
                   "cost_source": "provider",
                   "think_ms": 44316,
                   "half_turns": 20,
@@ -1010,7 +1117,7 @@
                 },
                 "google/gemini-3.7-flash": {
                   "usd": 0.217427,
-                  "usd_today": 0.434855,
+                  "usd_today": 0.869709,
                   "cost_source": "provider",
                   "think_ms": 36568,
                   "half_turns": 15,
@@ -1049,7 +1156,7 @@
               "perf": {
                 "google/gemini-3.7-flash": {
                   "usd": 0.311001,
-                  "usd_today": 0.622001,
+                  "usd_today": 1.244003,
                   "cost_source": "provider",
                   "think_ms": 44191,
                   "half_turns": 19,
@@ -1060,7 +1167,7 @@
                 },
                 "openai/gpt-5.6-sol": {
                   "usd": 0.436424,
-                  "usd_today": 0.436424,
+                  "usd_today": 0.872848,
                   "cost_source": "provider",
                   "think_ms": 35277,
                   "half_turns": 19,
@@ -1083,7 +1190,7 @@
               "perf": {
                 "openai/gpt-5.6-sol": {
                   "usd": 0.268902,
-                  "usd_today": 0.268902,
+                  "usd_today": 0.537804,
                   "cost_source": "provider",
                   "think_ms": 27229,
                   "half_turns": 17,
@@ -1094,7 +1201,7 @@
                 },
                 "google/gemini-3.7-flash": {
                   "usd": 0.271526,
-                  "usd_today": 0.543052,
+                  "usd_today": 1.086104,
                   "cost_source": "provider",
                   "think_ms": 42211,
                   "half_turns": 17,
@@ -1133,7 +1240,7 @@
               "perf": {
                 "google/gemini-3.7-flash": {
                   "usd": 0.437628,
-                  "usd_today": 0.875256,
+                  "usd_today": 1.750512,
                   "cost_source": "provider",
                   "think_ms": 47345,
                   "half_turns": 26,
@@ -1178,7 +1285,7 @@
                 },
                 "google/gemini-3.7-flash": {
                   "usd": 0.333776,
-                  "usd_today": 0.667551,
+                  "usd_today": 1.335102,
                   "cost_source": "provider",
                   "think_ms": 50138,
                   "half_turns": 19,
@@ -1410,7 +1517,7 @@
                 },
                 "openai/gpt-5.6-sol": {
                   "usd": 0.541274,
-                  "usd_today": 0.194739,
+                  "usd_today": 0.389478,
                   "cost_source": "provider",
                   "think_ms": 34042,
                   "half_turns": 17,
@@ -1433,7 +1540,7 @@
               "perf": {
                 "openai/gpt-5.6-sol": {
                   "usd": 0.760444,
-                  "usd_today": 0.270958,
+                  "usd_today": 0.541916,
                   "cost_source": "provider",
                   "think_ms": 44052,
                   "half_turns": 20,
@@ -1569,6 +1676,21 @@
   ],
   "dropped": [
     {
+      "model": "openai/gpt-5.6-sol",
+      "display_name": "GPT-5.6 Sol",
+      "reasoning_effort": "high",
+      "quantization": "unknown",
+      "entered_at": "2026-08-15",
+      "defences": 0,
+      "holds": 1,
+      "climbed": 0,
+      "seeded": false,
+      "via": "opening",
+      "left_at": "2026-09-05",
+      "displaced_by": "Gemini 3.8 Flash",
+      "left_from_rank": 4
+    },
+    {
       "model": "z-ai/glm-5.3",
       "display_name": "GLM 5.3",
       "reasoning_effort": "high",
@@ -1634,6 +1756,14 @@
     {
       "model": "openai/gpt-6-astra",
       "display_name": "GPT-6 Astra",
+      "from": "2026-09-05",
+      "to": "2026-09-05",
+      "defences": 0,
+      "seeded": false
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "display_name": "Gemini 3.8 Flash",
       "from": "2026-09-05",
       "to": null,
       "defences": 0,
