@@ -188,10 +188,11 @@ compared inside that tie rather than over careers.
 - **A promotion is a date, not a price.** A model can arrive on a launch
   discount, and reading that as what it costs would flatter it for as long as
   the offer lasts. Where the pinned endpoint is on sale the board says so —
-  `PROMO −75%` — with the list price and the at-list cost per match on hover.
-  It matters: at list price the current `#1` costs roughly four times what its
-  promotional rate suggests, which moves it from cheapest on the board to
-  fourth.
+  `PROMO −50%` — with the list price and the at-list cost per match on hover.
+  Gemini 3.7 Flash is why the rule is stated rather than a number trusted: it
+  arrived at −75% and sits at −50% eight weeks later, having not changed. The
+  cost figures published here are therefore built on **list** prices, so a
+  model is never credited with an offer that expires.
 - **Latency is a published metric**, which it could not honestly be before every
   model was pinned to a single endpoint. It measures **that one deployment** —
   the lab's own where the lab serves one, a third party's hardware and queue
