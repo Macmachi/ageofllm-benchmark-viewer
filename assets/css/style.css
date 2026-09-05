@@ -834,6 +834,35 @@ table.lb tbody tr.lb-archive-toggle td {
   font-size: 11px; color: var(--text-faint);
   text-transform: uppercase; letter-spacing: .8px;
 }
+/* The "dethroned" tile holds a model NAME where the others hold a number, and
+   22px mono turns "Gemini 3.7 Flash" into two ragged lines beside two tidy
+   figures. Smaller, proportional, and allowed to wrap once. */
+.throne-stats .ts.wide { max-width: 12em; }
+.throne-stats .ts.wide b {
+  font-family: inherit; font-size: 15px; line-height: 1.25;
+  white-space: normal;
+}
+
+/* ---------- the line of succession (throne format) ----------
+   Deliberately flat. .lad-row.rank-1/2/3 paint a gold/silver/bronze left border
+   and .lad-rank prints a big mono "#2" — a podium, and podiums are the claim
+   this format cannot make: nothing below the champion was ever played for. The
+   line reuses the row geometry and drops every rank signal from it. */
+.lad-row.line-row { border-left-color: var(--border-soft); }
+.line-dot {
+  font-family: var(--mono); font-size: 17px; font-weight: 700;
+  color: var(--border); width: 34px; flex: none; text-align: center;
+}
+.line-what { color: var(--text-dim); }
+/* Holding the throne is the one thing on this page that has to be won, so it is
+   the one label in the line that gets any colour at all. */
+.line-what.held { color: var(--gold); }
+/* Sits under a section title and, unlike .lb-title-note, is always visible:
+   a list of four model names reads as a ranking to anyone who does not hover. */
+.lb-note {
+  font-size: 13px; color: var(--text-dim); line-height: 1.5;
+  margin: -6px 0 12px; max-width: 70ch;
+}
 
 /* ---------- standing ---------- */
 .lad-board { display: flex; flex-direction: column; gap: 8px; }
@@ -879,6 +908,7 @@ table.lb tbody tr.lb-archive-toggle td {
 }
 .lad-badge.seeded { background: #232c38; color: var(--text-faint); }
 .lad-badge.climbed { background: rgba(57,255,119,0.12); color: var(--accent); }
+.lad-badge.throne { background: rgba(212,175,55,0.16); color: var(--gold); }
 
 /* ---------- a challenge ---------- */
 .chal {
@@ -899,6 +929,9 @@ table.lb tbody tr.lb-archive-toggle td {
 .chal-verdict.takes-throne { background: rgba(212,175,55,0.18); color: var(--gold); }
 .chal-verdict.enters { background: rgba(57,255,119,0.12); color: var(--accent); }
 .chal-verdict.fails { background: rgba(120,130,140,0.14); color: var(--text-dim); }
+/* A challenger that lost to the CHAMPION, which is not the same result as one
+   that could not beat the bottom rung — so not the same chip either. */
+.chal-verdict.held { background: rgba(212,175,55,0.10); color: #b9a45a; }
 .chal-displaced { font-size: 12px; color: var(--text-faint); }
 .chal-count { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--text-faint); }
 .chal-chevron { color: var(--text-faint); transition: transform .15s ease; flex: none; }
@@ -1155,6 +1188,9 @@ table.lb.opening-table th, table.lb.opening-table td { padding: 8px 12px; }
 }
 .dropped-row:hover { opacity: 1; }
 .dropped-row .lad-rank { color: var(--text-faint); font-weight: 500; }
+/* The step chip carries a crown instead of a rung number under the throne
+   format: there is one seat to play for and it has a name, not an index. */
+.step-rank.crown { font-family: inherit; }
 
 /* The same matches at today's prices, shown only when the provider moved its
    rate enough to matter. Muted: the figure it follows is what was really paid,

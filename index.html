@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Age of LLM™ — The Ladder · Current standing</title>
+  <title>Age of LLM™ — The Throne · Current champion</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
@@ -20,19 +20,24 @@
 
     <div class="lb-header">
       <img src="assets/images/Logo_AOL.png" alt="Age of LLM" class="header-logo" />
-      <h1>Age of LLM™ <span class="lb-tag">— The Ladder</span></h1>
-      <span class="lb-ver" id="lad-ver" title="The game-engine (rules) version stamped when this standing was last written. It is not necessarily the version every match here was played on, nor the one in force today: each replay carries the version its own match ran under."></span>
+      <h1>Age of LLM™ <span class="lb-tag">— The Throne</span></h1>
+      <span class="lb-ver" id="lad-ver" title="The game-engine (rules) version stamped when this page was last written. It is not necessarily the version every match here was played on, nor the one in force today: each replay carries the version its own match ran under."></span>
       <span class="lb-eng" id="lad-site" title="Site / tooling version. Never stamped into a replay — it cannot change how a match was played."></span>
     </div>
-    <div class="lb-tagline">The current standing — four places, held until someone takes them</div>
-    <div class="lb-sub">
-      Four places. A new model does not join the ladder — it challenges in at the
-      bottom: <strong>two matches against #4, one from each side of the map</strong>.
-      Win both and it moves up to face #3, then #2, then #1. As soon as it fails
-      to take a place, the climb stops there and it keeps the last place it won.
-      <span class="lb-sub-tie"><strong>One win each</strong> — the place goes to
-      whichever model won in fewer turns. <strong>Two draws</strong> — the model
-      already there keeps its place.</span>
+    <!-- Both of these are rewritten by ladder.js from rules.format in
+         data/ladder.json, so an archived gauntlet season or a preview built
+         with --format gauntlet describes ITSELF rather than inheriting the
+         wording that happened to be typed here. What is written here is the
+         current format, so a reader without JS still reads the truth. -->
+    <div class="lb-tagline" id="lb-tagline">One champion. Beat it over two matches and the crown is yours.</div>
+    <div class="lb-sub" id="lb-sub">
+      There is one thing to win here: <strong>the throne</strong>. A new model
+      does not join a standing and it does not climb — it plays the reigning
+      champion, <strong>two matches, one from each side of the map</strong>, and
+      either takes the crown or goes home.
+      <span class="lb-sub-tie"><strong>One win each</strong> — the crown goes to
+      whichever model won in fewer turns. <strong>Two draws</strong> — the
+      champion keeps it.</span>
     </div>
 
     <!-- Same two calls to action as the V1 leaderboard carried. They replace the
@@ -60,16 +65,14 @@
     <div class="lb-section-title">The throne</div>
     <div id="throne"></div>
 
-    <!-- The note is not decoration. The board prints a rank and a W-L record
-         side by side, and they routinely disagree — Kimi K3 holds #4 on 3W-5L.
-         Without this line a reader assumes a league table and reads the order
-         as a bug.
-         It must NOT say "not a points table": the opening round-robin IS one,
-         and it is what put these four in this order. Points seeded the board
-         once; they have decided nothing since. -->
-    <div class="lb-section-title">Standing
-      <span class="lb-title-note" title="Points set this order once and do not touch it again. The opening round-robin — 12 matches, every pair home and away — was scored on points, and its top 4 became these places. From then on a place changes hands only when a challenger wins the two-leg tie played for it; no points total is ever compared across the board again. The W–L record beside each model is aggregated from its matches for information and is never an input, which is why a model can hold a place on a losing record.">(seeded once by the opening table, then held until a challenger wins the tie for it)</span>
-    </div>
+    <!-- Title AND note come from ladder.js, because they say different things
+         under the two formats and getting it wrong here is the single most
+         misleading thing this page could do. Under `throne` this list is a line
+         of succession and the note says so in the open, not in a tooltip: a
+         vertical list of four model names IS a ranking to anyone who does not
+         read the small print, and the small print is what nobody reads. -->
+    <div class="lb-section-title" id="board-title">The line</div>
+    <div class="lb-note" id="board-note"></div>
     <div class="lad-board" id="lad-board"></div>
 
     <div class="lb-section-title">Latest challenge</div>
@@ -85,9 +88,9 @@
     <div class="lb-section-title">Reigns</div>
     <div class="lad-reigns" id="lad-reigns"></div>
 
-    <!-- Models that held a place and lost it. Above the opening because it is
-         the more recent history of the two, collapsed for the same reason: a
-         standing shows who is on the board now. Empty until someone drops. -->
+    <!-- Models that held a seat and lost it. Above the opening because it is
+         the more recent history of the two, collapsed for the same reason: the
+         page is about who wears the crown now. Empty until someone drops. -->
     <div id="dropped-history"></div>
 
     <!-- Once played, the opening is provenance, not news: it renders here,

@@ -1,6 +1,14 @@
 /*
- * ladder.js — renders data/ladder.json: the standing top-N, the climb of each
- * challenger, and the succession of reigns.
+ * ladder.js — renders data/ladder.json: the champion, the line behind it, every
+ * challenge played for the throne, and the succession of reigns.
+ *
+ * TWO FORMATS, and `rules.format` in the JSON is what says which. Under
+ * `throne` a challenger plays the champion and only the champion, so the seats
+ * below the first were never played for and this page must NOT draw them as a
+ * ranking: no rank numbers, no podium colours, no "climbed" badge. They are a
+ * line of succession. Under `gauntlet` — the first season, and every challenge
+ * record written before site 0.18.0 — the challenger climbed rung by rung and
+ * the standing IS an order, so that wording is kept for those.
  *
  * The file is written by run_ladder.py (real matches) or by
  * scripts/preview_ladder.py (fabricated preview). When it carries
@@ -20,11 +28,91 @@
 
   let data = null;
   let logFilter = '';
+
+  // The season's format. Read, never inferred: a gauntlet season in which every
+  // challenger lost its opening tie leaves a challenge log shaped exactly like
+  // a throne season's, and guessing wrong relabels history.
+  const isThrone = () => (((data || {}).rules) || {}).format === 'throne';
+
+  // Per CHALLENGE, because the log outlives the format it was played under. No
+  // `format` key means it predates site 0.18.0, and everything before that was
+  // a gauntlet climb.
+  const chalThrone = (c) => (c.format || 'gauntlet') === 'throne';
   // null until the first render, then whatever the reader last chose. Kept out
   // of the DOM so paging the legs can re-render without closing the panel.
   let openingOpen = null;
   let droppedOpen = false;   // collapsed: the board is the news, this is its past
   let perfByModel = {};      // model -> aggregated cost / latency / provider
+
+  // The reign this model held, if it ever held one. Under `throne` this is the
+  // only thing a seat below the first can honestly be labelled with.
+  function reignOf(model) {
+    return (data.reigns || []).filter((r) => r.model === model).pop() || null;
+  }
+
+  // Whoever the current champion took the crown from, or null if it won the
+  // opening and there was nobody to take it from.
+  function predecessor() {
+    const rs = data.reigns || [];
+    return rs.length > 1 ? rs[rs.length - 2].display_name : null;
+  }
+
+  // The page explains its own format in three places. Both variants live here
+  // rather than in index.html so that a preview built with --format gauntlet,
+  // or the archived first season, describes itself correctly instead of
+  // inheriting whatever the static page happened to be written for.
+  const COPY = {
+    throne: {
+      tagline: 'One champion. Beat it over two matches and the crown is yours.',
+      sub: 'There is one thing to win here: <strong>the throne</strong>. A new '
+        + 'model does not join a standing and it does not climb — it plays the '
+        + 'reigning champion, <strong>two matches, one from each side of the '
+        + 'map</strong>, and either takes the crown or goes home. '
+        + '<span class="lb-sub-tie"><strong>One win each</strong> — the crown '
+        + 'goes to whichever model won in fewer turns. <strong>Two draws</strong> '
+        + '— the champion keeps it.</span>',
+      boardTitle: 'The line',
+      boardNote: 'Not a ranking, and not a top 4. Only the first seat is ever '
+        + 'played for, so nothing here means "better than the name under it" — '
+        + 'this is who came before the champion, most recent first.',
+      boardNoteTitle: 'Under the throne format a challenger meets the champion '
+        + 'and nobody else. A model that loses that tie earns no seat at all, '
+        + 'and no seat below the first has ever been contested. Ordering these '
+        + 'names by strength would be a claim no match on this site supports.',
+    },
+    gauntlet: {
+      tagline: 'The current standing — four places, held until someone takes them',
+      sub: 'Four places. A new model does not join the ladder — it challenges in '
+        + 'at the bottom: <strong>two matches against #4, one from each side of '
+        + 'the map</strong>. Win both and it moves up to face #3, then #2, then '
+        + '#1. As soon as it fails to take a place, the climb stops there and it '
+        + 'keeps the last place it won. <span class="lb-sub-tie"><strong>One win '
+        + 'each</strong> — the place goes to whichever model won in fewer turns. '
+        + '<strong>Two draws</strong> — the model already there keeps its place.'
+        + '</span>',
+      boardTitle: 'Standing',
+      boardNote: 'Seeded once by the opening table, then held until a challenger '
+        + 'wins the tie for it.',
+      boardNoteTitle: 'Points set this order once and do not touch it again. The '
+        + 'opening round-robin was scored on points and its top 4 became these '
+        + 'places; from then on a place changes hands only when a challenger '
+        + 'wins the two-leg tie played for it.',
+    },
+  };
+
+  function renderCopy() {
+    const c = COPY[isThrone() ? 'throne' : 'gauntlet'];
+    const set = (id, html, title) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.innerHTML = html;
+      if (title) el.setAttribute('title', title);
+    };
+    set('lb-tagline', c.tagline);
+    set('lb-sub', c.sub);
+    set('board-title', c.boardTitle);
+    set('board-note', c.boardNote, c.boardNoteTitle);
+  }
 
   async function init() {
     try {
@@ -47,6 +135,7 @@
     if (site && data.site_version) site.textContent = 'site v' + data.site_version;
 
     aggregatePerf();
+    renderCopy();
     renderBanner();
     renderOpening();
     renderDropped();
@@ -399,12 +488,17 @@
     if (!el) return;
     const list = data.dropped || [];
     if (!list.length) { el.innerHTML = ''; return; }   // nothing to explain yet
+    const title = isThrone() ? 'Fell off the end of the line'
+      : 'Dropped off the ladder';
+    const blurb = isThrone()
+      ? 'Held a seat, then a new champion pushed it past the last one'
+      : 'Held a place, then lost it';
     el.innerHTML =
-      `<div class="lb-section-title">Dropped off the ladder</div>
+      `<div class="lb-section-title">${title}</div>
        <div class="opening done">
          <button class="opening-toggle" aria-expanded="${droppedOpen}">
            <span class="opening-chevron">${droppedOpen ? '▼' : '▶'}</span>
-           <span>Held a place, then lost it</span>
+           <span>${blurb}</span>
            <span class="opening-summary">${list.length} model${list.length === 1 ? '' : 's'}
              · most recent first</span>
          </button>
@@ -427,8 +521,12 @@
       ? `<span title="How long it held a place">${esc(e.entered_at)} → ${esc(e.left_at)}</span>` : '';
     const by = e.displaced_by
       ? `<span title="The challenger that pushed it off">pushed off by ${esc(e.displaced_by)}</span>` : '';
-    const from = e.left_from_rank
-      ? `<span class="lad-rank" title="The rung it was holding when it left">#${e.left_from_rank}</span>` : '';
+    // The rung number is a gauntlet fact. Under the throne format the seat it
+    // fell from was never contested, so printing "#4" would revive exactly the
+    // ranking the line of succession stopped claiming.
+    const from = (e.left_from_rank && !isThrone())
+      ? `<span class="lad-rank" title="The rung it was holding when it left">#${e.left_from_rank}</span>`
+      : '<span class="line-dot" aria-hidden="true">·</span>';
     return `<div class="lad-row dropped-row">
               ${from}
               <div class="lad-model"><span class="lad-name">${flag(e.model)}${esc(e.display_name)}</span>${effortBadge(e.reasoning_effort)}${quantBadge(e.quantization)}${originBadge(e)}</div>
@@ -487,9 +585,25 @@
          <div class="throne-stats">
            <div class="ts"><b>${days}</b><span>days held</span></div>
            <div class="ts"><b>${reign ? reign.defences : 0}</b><span>defence${(reign && reign.defences) === 1 ? '' : 's'}</span></div>
-           <div class="ts"><b>${top.seeded ? '—' : top.climbed}</b><span>places climbed</span></div>
+           ${thirdTile(top)}
          </div>
        </div>`;
+  }
+
+  // "places climbed" is a gauntlet fact: under the throne format every champion
+  // climbed exactly one place, so the tile would print 1 for everyone forever.
+  // What a reader wants there instead is who it took the crown FROM.
+  function thirdTile(top) {
+    if (!isThrone()) {
+      return `<div class="ts"><b>${top.seeded ? '—' : top.climbed}</b>` +
+             `<span>places climbed</span></div>`;
+    }
+    const prev = predecessor();
+    return prev
+      ? `<div class="ts wide" title="The champion this model beat to take the crown">` +
+        `<b>${esc(prev)}</b><span>dethroned</span></div>`
+      : `<div class="ts wide" title="No predecessor — this model won the opening round-robin">` +
+        `<b>—</b><span>won the opening</span></div>`;
   }
 
   // ── the standing ─────────────────────────────────────────────────────────
@@ -505,15 +619,20 @@
     if (e.seeded) {
       return '<span class="lad-badge seeded" title="Placed when the ladder was created — not won on the board">SEEDED</span>';
     }
+    if (e.via === 'throne') {
+      return '<span class="lad-badge throne" title="Won the crown by beating the ' +
+        'reigning champion over two matches — the only way onto this page">👑 TOOK THE THRONE</span>';
+    }
     return `<span class="lad-badge climbed" title="Rungs won on the way in">▲ ${e.climbed}</span>`;
   }
 
   function renderBoard() {
     const el = document.getElementById('lad-board');
     if (!(data.ladder || []).length) {
-      el.innerHTML = '<div class="empty-state">The ladder is empty until the opening is played.</div>';
+      el.innerHTML = '<div class="empty-state">The board is empty until the opening is played.</div>';
       return;
     }
+    if (isThrone()) return renderLine(el);
     el.innerHTML = (data.ladder || []).map((e) => {
       return `<div class="lad-row rank-${e.rank}">
                 <div class="lad-rank">#${e.rank}</div>
@@ -527,13 +646,62 @@
     }).join('');
   }
 
+  // ── the line of succession ───────────────────────────────────────────────
+  // Everything the standing used to draw and this must not: no rank number, no
+  // gold/silver/bronze border, no ordering claim. The champion is skipped — it
+  // has its own card directly above, and printing it twice, once at the top of
+  // a list, is exactly the ranking this section exists to stop implying.
+
+  function renderLine(el) {
+    const rest = (data.ladder || []).slice(1);
+    if (!rest.length) {
+      el.innerHTML = '<div class="empty-state">Nobody has come before the ' +
+        'current champion yet.</div>';
+      return;
+    }
+    el.innerHTML = rest.map(lineRow).join('');
+  }
+
+  function lineRow(e) {
+    const r = reignOf(e.model);
+    // What the seat MEANS. A held reign is the strong statement and the only
+    // one the throne format can produce on its own; the others are inherited
+    // from the season played before it and say so.
+    const what = r
+      ? `<span class="line-what held" title="It held the throne — the one thing on this page that has to be won">` +
+        `held the throne ${fmtDate(r.from)} → ${r.to ? fmtDate(r.to) : 'today'}</span>`
+      : e.via === 'opening'
+        ? `<span class="line-what" title="Took a seat in the opening round-robin, before the throne format. It never played for the crown.">` +
+          `seat won in the opening</span>`
+        : e.seeded
+          ? `<span class="line-what" title="Placed when the board was created — not won on the board">seeded onto the board</span>`
+          : `<span class="line-what" title="Won a seat under the gauntlet format, by climbing. It never played the champion.">` +
+            `climbed in ${fmtDate(e.entered_at)}</span>`;
+    const holds = e.holds
+      ? `<span title="Challenges survived while it held a seat">${e.holds} hold${e.holds === 1 ? '' : 's'}</span>` : '';
+    return `<div class="lad-row line-row">
+              <div class="line-dot" aria-hidden="true">·</div>
+              <!-- No originBadge here. It prints OPENING / SEEDED / "▲ 2 rungs
+                   won on the way in", which the sentence below already says in
+                   words — and "▲ 2" in particular re-poses this list as a climb
+                   with a score attached, which is the reading the section is
+                   built to prevent. -->
+              <div class="lad-model"><span class="lad-name">${flag(e.model)}${esc(e.display_name)}</span>${effortBadge(e.reasoning_effort)}${quantBadge(e.quantization)}</div>
+              <div class="lad-meta">
+                ${perfCells(e.model)}
+                ${what}
+                ${holds}
+              </div>
+            </div>`;
+  }
+
   // ── challenges ───────────────────────────────────────────────────────────
 
   function renderLatest() {
     const el = document.getElementById('latest-challenge');
     const c = (data.challenges || [])[0];
     if (!c) {
-      el.innerHTML = '<div class="empty-state">No challenge yet — the queue starts once the ladder exists.</div>';
+      el.innerHTML = '<div class="empty-state">No challenge yet — the queue starts once there is a champion to play.</div>';
       return;
     }
     el.innerHTML = challengeCard(c, true);
@@ -568,16 +736,27 @@
 
   function challengeCard(c, expanded) {
     const rank = c.final_rank;
-    const verdictClass = rank === 1 ? 'takes-throne' : rank ? 'enters' : 'fails';
+    const throne = chalThrone(c);
+    // "fails to enter" is a gauntlet verdict: it means the challenger could not
+    // beat the bottom rung. Under the throne format the same word would be
+    // applied to a model that lost to the CHAMPION, which is a different result
+    // and a much harder one — there is no lower bar it also failed.
+    const verdictClass = rank === 1 ? 'takes-throne'
+      : rank ? 'enters' : throne ? 'held' : 'fails';
     const verdict = rank === 1
       ? 'takes the throne'
-      : rank ? `enters at #${rank}` : 'fails to enter';
+      : rank ? `enters at #${rank}` : throne ? 'the champion holds' : 'fails to enter';
     const displaced = c.displaced
       ? `<span class="chal-displaced">${esc(c.displaced)} drops off</span>` : '';
-    // Count both: the body draws one card per RUNG, each holding its two legs.
+    // Count both: the body draws one card per TIE, each holding its two legs.
     // Printing only "6 matches" above three cards read as three missing ones.
+    // Under the throne format there is only ever one tie, so the tie count adds
+    // nothing and the line says what the two matches ARE instead.
     const rungs = c.steps.length;
     const legs = c.steps.reduce((n, s) => n + s.legs.length, 0);
+    const count = throne
+      ? `<span class="chal-count" title="A throne challenge is one two-leg tie against the champion — the same pair, sides swapped. Win it and the crown changes hands; lose it and nothing on the board moves.">${legs} match${legs === 1 ? '' : 'es'} · one from each side</span>`
+      : `<span class="chal-count" title="One card per rung challenged. Every rung is a two-leg tie — the same pair, sides swapped — so ${rungs} rungs means ${legs} matches.">${rungs} rung${rungs === 1 ? '' : 's'} · ${legs} match${legs === 1 ? '' : 'es'}</span>`;
 
     return `<div class="chal ${expanded ? 'open' : ''}">
       <div class="chal-head">
@@ -585,7 +764,7 @@
         <span class="chal-name">${flag(c.challenger.model)}${esc(c.challenger.display_name)} ${effortBadge(c.challenger.reasoning_effort)}${quantBadge(c.challenger.quantization)}</span>
         <span class="chal-verdict ${verdictClass}">${verdict}</span>
         ${displaced}
-        <span class="chal-count" title="One card per rung challenged. Every rung is a two-leg tie — the same pair, sides swapped — so ${rungs} rungs means ${legs} matches.">${rungs} rung${rungs === 1 ? '' : 's'} · ${legs} match${legs === 1 ? '' : 'es'}</span>
+        ${count}
         <span class="chal-chevron">▾</span>
       </div>
       <div class="chal-body">
@@ -596,12 +775,12 @@
              that every model's endpoint is published next to it was false for
              precisely the models most likely to be pinned to a third party. -->
         <div class="chal-perf">${perfCells(c.challenger.model)}</div>
-        <div class="climb">${c.steps.map(stepCard).join('<div class="climb-arrow">→</div>')}</div>
+        <div class="climb">${c.steps.map((st) => stepCard(st, throne)).join('<div class="climb-arrow">→</div>')}</div>
       </div>
     </div>`;
   }
 
-  function stepCard(s) {
+  function stepCard(s, throne) {
     const won = s.result === 'win';
     const [pc, pi] = s.pts;
     // Why a rung changed hands, or did not. A 3-3 next to a challenger that
@@ -611,7 +790,7 @@
       ? `<span class="step-note">${esc(s.decided_by)}</span>` : '';
     return `<div class="step ${won ? 'won' : 'lost'}">
       <div class="step-head">
-        <span class="step-rank">#${s.rank}</span>
+        <span class="step-rank${throne ? ' crown' : ''}" title="${throne ? 'The reigning champion — the only seat a challenger plays for' : 'The rung this tie was played for'}">${throne ? '👑' : '#' + s.rank}</span>
         <span class="step-opp">${flag(s.opponent.model)}${esc(s.opponent.display_name)}</span>
         <span class="step-score">${fmtPts(pc)}–${fmtPts(pi)}</span>
       </div>

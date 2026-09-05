@@ -1,4 +1,4 @@
-/* featured.js — the animated "latest match" card on the standing.
+/* featured.js — the animated "latest match" card on the throne page.
  *
  * Draws the closing half-turns of the most recent match as a flat minimap and
  * loops them. Deliberately sprite-free: the viewer's isometric renderer needs
