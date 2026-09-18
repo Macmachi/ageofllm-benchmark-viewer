@@ -757,11 +757,14 @@
     const count = throne
       ? `<span class="chal-count" title="A throne challenge is one two-leg tie against the champion — the same pair, sides swapped. Win it and the crown changes hands; lose it and nothing on the board moves.">${legs} match${legs === 1 ? '' : 'es'} · one from each side</span>`
       : `<span class="chal-count" title="One card per rung challenged. Every rung is a two-leg tie — the same pair, sides swapped — so ${rungs} rungs means ${legs} matches.">${rungs} rung${rungs === 1 ? '' : 's'} · ${legs} match${legs === 1 ? '' : 'es'}</span>`;
+    const decisionBadge = c.challenger.decision_interface?.kind === 'choice'
+      ? `<span class="effort effort-na" title="Typed choices (${esc(c.challenger.decision_interface.protocol || 'choice')})">CHOICE</span>`
+      : effortBadge(c.challenger.reasoning_effort);
 
     return `<div class="chal ${expanded ? 'open' : ''}">
       <div class="chal-head">
         <span class="chal-date">${fmtDate(c.date)}</span>
-        <span class="chal-name">${flag(c.challenger.model)}${esc(c.challenger.display_name)} ${effortBadge(c.challenger.reasoning_effort)}${quantBadge(c.challenger.quantization)}</span>
+        <span class="chal-name">${flag(c.challenger.model)}${esc(c.challenger.display_name)} ${decisionBadge}${quantBadge(c.challenger.quantization)}</span>
         <span class="chal-verdict ${verdictClass}">${verdict}</span>
         ${displaced}
         ${count}

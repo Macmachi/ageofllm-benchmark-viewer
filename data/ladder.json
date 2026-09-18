@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-05T11:20:09.456419+00:00",
+  "generated_at": "2026-09-18T13:48:14.234232+00:00",
   "engine_version": "0.18.0",
-  "site_version": "0.18.1",
+  "site_version": "0.18.2",
   "preview": false,
   "note": "",
   "rules": {
@@ -615,8 +615,8 @@
       "reasoning_effort": "high",
       "quantization": "unknown",
       "entered_at": "2026-09-05",
-      "defences": 0,
-      "holds": 0,
+      "defences": 1,
+      "holds": 1,
       "climbed": 1,
       "seeded": false,
       "via": "throne",
@@ -663,6 +663,119 @@
     }
   ],
   "challenges": [
+    {
+      "id": "2026-09_jev-1.13.0",
+      "format": "throne",
+      "challenger": {
+        "model": "jev-1.13.0",
+        "display_name": "Jev 1.13",
+        "reasoning_effort": "NA",
+        "quantization": "unknown",
+        "decision_interface": {
+          "kind": "choice",
+          "protocol": "choice-v2",
+          "provider": "typesafe",
+          "legality_filter": false,
+          "free_text_messages": false,
+          "models_seen": [
+            "jev-1.13.0"
+          ],
+          "max_calls_per_attempt": 10
+        }
+      },
+      "date": "2026-09-18",
+      "steps": [
+        {
+          "rank": 1,
+          "opponent": {
+            "model": "google/gemini-3.8-flash",
+            "display_name": "Gemini 3.8 Flash",
+            "reasoning_effort": "high"
+          },
+          "legs": [
+            {
+              "match_id": "jev_choice-v2_seed3031_slot0",
+              "challenger_side": 0,
+              "outcome": "incumbent",
+              "victory_type": "military",
+              "turns": 11,
+              "date": "2026-09-18T13:16:51.733703+00:00",
+              "seed": 3031,
+              "usd": 0.7557,
+              "perf": {
+                "jev-1.13.0": {
+                  "usd": 0.012127,
+                  "usd_today": 0.012127,
+                  "cost_source": "estimated",
+                  "think_ms": 5046,
+                  "half_turns": 10,
+                  "served_by": "typesafe",
+                  "actions_ok": 5,
+                  "illegal": 5,
+                  "fog_blocked": 0
+                },
+                "google/gemini-3.8-flash": {
+                  "usd": 0.743616,
+                  "usd_today": 0.743616,
+                  "cost_source": "provider",
+                  "think_ms": 109346,
+                  "half_turns": 11,
+                  "served_by": "Google",
+                  "actions_ok": 27,
+                  "illegal": 1,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            },
+            {
+              "match_id": "jev_choice-v2_seed3031_slot1",
+              "challenger_side": 1,
+              "outcome": "incumbent",
+              "victory_type": "military",
+              "turns": 10,
+              "date": "2026-09-18T13:13:48.398873+00:00",
+              "seed": 3031,
+              "usd": 0.6975,
+              "perf": {
+                "google/gemini-3.8-flash": {
+                  "usd": 0.687404,
+                  "usd_today": 0.687404,
+                  "cost_source": "provider",
+                  "think_ms": 102211,
+                  "half_turns": 10,
+                  "served_by": "Google",
+                  "actions_ok": 25,
+                  "illegal": 0,
+                  "fog_blocked": 0
+                },
+                "jev-1.13.0": {
+                  "usd": 0.01007,
+                  "usd_today": 0.01007,
+                  "cost_source": "estimated",
+                  "think_ms": 5028,
+                  "half_turns": 9,
+                  "served_by": "typesafe",
+                  "actions_ok": 4,
+                  "illegal": 5,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            }
+          ],
+          "pts": [
+            0.0,
+            6.0
+          ],
+          "result": "hold",
+          "decided_by": "points"
+        }
+      ],
+      "final_rank": null,
+      "displaced": null,
+      "seed_policy": "same_seed_swapped_sides"
+    },
     {
       "id": "2026-09_google-gemini-3.8-flash",
       "format": "throne",
@@ -1766,7 +1879,7 @@
       "display_name": "Gemini 3.8 Flash",
       "from": "2026-09-05",
       "to": null,
-      "defences": 0,
+      "defences": 1,
       "seeded": false
     }
   ]
