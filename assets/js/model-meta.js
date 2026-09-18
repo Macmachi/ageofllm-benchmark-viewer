@@ -1,10 +1,10 @@
 /*
  * model-meta.js — per-model presentation metadata: flag, author, "new" badge.
  *
- * Loaded before leaderboard.js and ladder.js. Kept in ONE place on purpose:
+ * Loaded before leaderboard.js, ladder.js and viewer.js. Kept in ONE place:
  * two pages holding two copies of this table is exactly how "GLM 5.1" ended up
  * rendered under two keys in v0.16.1. Add a single entry here when a new model
- * is benchmarked and both pages pick it up.
+ * is benchmarked and all pages pick it up.
  */
 
 window.MODEL_META = {
@@ -33,13 +33,33 @@ window.MODEL_META = {
   //    that is the id the ladder runner records in data/ladder.json.
   'anthropic/claude-opus-5':           { flag: '🇺🇸', author: 'Anthropic', isNew: true },
   'openai/gpt-5.6-sol':                { flag: '🇺🇸', author: 'OpenAI', isNew: true },
+  'openai/gpt-6-astra':                { flag: '🇺🇸', author: 'OpenAI', isNew: true },
   'x-ai/grok-4.6':                     { flag: '🇺🇸', author: 'xAI', isNew: true },
   'moonshotai/kimi-k3':                { flag: '🇨🇳', author: 'Moonshot', isNew: true },
   'qwen/qwen3.8-27b':                  { flag: '🇨🇳', author: 'Alibaba', isNew: true },
   'z-ai/glm-5.2':                      { flag: '🇨🇳', author: 'Zhipu' },
   'z-ai/glm-5.3':                      { flag: '🇨🇳', author: 'Zhipu', isNew: true },
+  'z-ai/glm-5.3-flash':                { flag: '🇨🇳', author: 'Zhipu', isNew: true },
   'google/gemini-3.7-flash':           { flag: '🇺🇸', author: 'Google', isNew: true },
+  'google/gemini-3.8-flash':           { flag: '🇺🇸', author: 'Google', isNew: true },
+  // TypeSafe's company address: https://typesafe.ai/legal/terms
+  'jev-1.13.0':                       { flag: '🇺🇸', author: 'TypeSafe AI', isNew: true },
 };
+
+// Older replays sometimes keep the provider-qualified ID or a legacy spelling.
+// Reuse presentation metadata so their flags/authors match the archived tables.
+Object.entries({
+  'deepseek/deepseek-v4-pro': 'deepseek-v4-pro-e',
+  'z-ai/glm-5.1': 'glm-5.1-fw',
+  'openai/gpt-5.5': 'gpt-5.5',
+  'google/gemini-3.5-flash': 'gemini-3.5-flash',
+  'minimax/minimax-m3': 'minimax-m3',
+  'nvidia/nemotron-3-ultra-550b-a55b': 'nvidia-nemotron-3-ultra-550b-a55b',
+  'moonshotai/kimi-k2.6': 'kimi-k2.6',
+  'moonshotai/kimi-k2.7-code': 'kimi-k2.7-code',
+  'kimi-k2-6': 'kimi-k2.6',
+  'minimax-m3-el': 'minimax-m3',
+}).forEach(([id, canonical]) => { window.MODEL_META[id] = window.MODEL_META[canonical]; });
 
 /* Reasoning-effort badge, shared by the leaderboard and the ladder.
    Levels are OpenRouter's, strongest first: max / xhigh / high / medium / low /

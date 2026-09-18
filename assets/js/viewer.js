@@ -226,14 +226,25 @@
   }
 
   // ---------- HUD ----------
+  function playerDisplayName(player) {
+    const flag = window.MODEL_META?.[player.model]?.flag;
+    return `${flag ? flag + ' ' : ''}${player.name || player.model}`;
+  }
+
   function renderStaticHeader() {
     const [a, b] = replay.meta.players;
-    $('name0').textContent = a.name; $('model0').textContent = a.model;
-    $('name1').textContent = b.name; $('model1').textContent = b.model;
+    $('name0').textContent = playerDisplayName(a); $('model0').textContent = a.model;
+    $('name1').textContent = playerDisplayName(b); $('model1').textContent = b.model;
     for (let i = 0; i < 2; i++) {
       const p = replay.meta.players[i];
       const el = $(`effort${i}`);
       if (!el) continue;
+      if (p.decision_interface?.kind === 'choice') {
+        el.textContent = 'CHOICE';
+        el.className = 'peffort effort-na';
+        el.title = `Typed choices (${p.decision_interface.protocol}); no legal-action filtering or free-text messages`;
+        continue;
+      }
       const { label, cls } = effortLabel(p.reasoning_effort);
       el.textContent = label;
       el.className = `peffort effort-${cls}`;
@@ -585,7 +596,7 @@
     els.vbolt.textContent = info.bolt;
     if (meta.winner === 0 || meta.winner === 1) {
       const w = meta.players[meta.winner];
-      els.vsub.textContent = `${w.name} · ${w.model}`;
+      els.vsub.textContent = `${playerDisplayName(w)} · ${w.model}`;
     } else {
       els.vsub.textContent = 'No winner';
     }
