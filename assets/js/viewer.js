@@ -242,7 +242,7 @@
       if (p.decision_interface?.kind === 'choice') {
         el.textContent = 'CHOICE';
         el.className = 'peffort effort-na';
-        el.title = `Typed choices (${p.decision_interface.protocol}); no legal-action filtering or free-text messages`;
+        el.title = window.choiceInterfaceTitle(p.decision_interface);
         continue;
       }
       const { label, cls } = effortLabel(p.reasoning_effort);

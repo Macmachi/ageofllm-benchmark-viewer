@@ -77,3 +77,20 @@ window.effortBadge = function (effort) {
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   return `<span class="effort effort-${safe(e)}" title="Reasoning effort">${safe(label)}</span>`;
 };
+
+// Describe the recorded adapter, including historical replays with no filter.
+window.choiceInterfaceTitle = function (decision) {
+  const details = [`Typed choices (${decision.protocol || 'choice'})`];
+  if (decision.legality_filter_source === 'model_judgments') {
+    details.push('plans filtered by the model\'s own judgments');
+  } else if (decision.legality_filter) {
+    details.push('plan filtering enabled');
+  } else {
+    details.push('no plan filtering');
+  }
+  if (decision.engine_legality_filter === false || !decision.legality_filter) {
+    details.push('no engine legality oracle');
+  }
+  if (decision.free_text_messages === false) details.push('no free-text messages');
+  return details.join('; ');
+};

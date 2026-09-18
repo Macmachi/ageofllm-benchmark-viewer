@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-18T13:48:14.234232+00:00",
+  "generated_at": "2026-09-18T16:58:04.008116+00:00",
   "engine_version": "0.18.0",
-  "site_version": "0.18.2",
+  "site_version": "0.18.3",
   "preview": false,
   "note": "",
   "rules": {
@@ -141,7 +141,7 @@
             "think_ms": 37007,
             "half_turns": 22,
             "served_by": "OpenAI",
-            "actions_ok": 63,
+            "actions_ok": 62,
             "illegal": 2,
             "fog_blocked": 0
           }
@@ -177,7 +177,7 @@
             "think_ms": 33556,
             "half_turns": 22,
             "served_by": "Anthropic",
-            "actions_ok": 58,
+            "actions_ok": 57,
             "illegal": 2,
             "fog_blocked": 0
           }
@@ -213,7 +213,7 @@
             "think_ms": 98603,
             "half_turns": 24,
             "served_by": "Moonshot AI",
-            "actions_ok": 63,
+            "actions_ok": 62,
             "illegal": 1,
             "fog_blocked": 0
           }
@@ -249,7 +249,7 @@
             "think_ms": 20918,
             "half_turns": 20,
             "served_by": "Anthropic",
-            "actions_ok": 52,
+            "actions_ok": 51,
             "illegal": 2,
             "fog_blocked": 0
           }
@@ -285,7 +285,7 @@
             "think_ms": 172005,
             "half_turns": 23,
             "served_by": "xAI",
-            "actions_ok": 64,
+            "actions_ok": 63,
             "illegal": 1,
             "fog_blocked": 0
           }
@@ -310,7 +310,7 @@
             "think_ms": 161481,
             "half_turns": 19,
             "served_by": "xAI",
-            "actions_ok": 54,
+            "actions_ok": 53,
             "illegal": 0,
             "fog_blocked": 1
           },
@@ -346,7 +346,7 @@
             "think_ms": 36555,
             "half_turns": 25,
             "served_by": "OpenAI",
-            "actions_ok": 68,
+            "actions_ok": 67,
             "illegal": 3,
             "fog_blocked": 0
           },
@@ -393,7 +393,7 @@
             "think_ms": 32108,
             "half_turns": 21,
             "served_by": "OpenAI",
-            "actions_ok": 56,
+            "actions_ok": 55,
             "illegal": 4,
             "fog_blocked": 0
           }
@@ -429,7 +429,7 @@
             "think_ms": 141848,
             "half_turns": 21,
             "served_by": "xAI",
-            "actions_ok": 60,
+            "actions_ok": 59,
             "illegal": 0,
             "fog_blocked": 0
           }
@@ -465,7 +465,7 @@
             "think_ms": 32714,
             "half_turns": 22,
             "served_by": "OpenAI",
-            "actions_ok": 62,
+            "actions_ok": 61,
             "illegal": 3,
             "fog_blocked": 0
           }
@@ -501,7 +501,7 @@
             "think_ms": 144609,
             "half_turns": 21,
             "served_by": "xAI",
-            "actions_ok": 60,
+            "actions_ok": 59,
             "illegal": 3,
             "fog_blocked": 0
           }
@@ -537,7 +537,7 @@
             "think_ms": 102945,
             "half_turns": 25,
             "served_by": "Moonshot AI",
-            "actions_ok": 69,
+            "actions_ok": 68,
             "illegal": 1,
             "fog_blocked": 0
           }
@@ -664,7 +664,7 @@
   ],
   "challenges": [
     {
-      "id": "2026-09_jev-1.13.0",
+      "id": "2026-09_jev-1.13.0_choice-search-v2",
       "format": "throne",
       "challenger": {
         "model": "jev-1.13.0",
@@ -673,14 +673,34 @@
         "quantization": "unknown",
         "decision_interface": {
           "kind": "choice",
-          "protocol": "choice-v2",
+          "protocol": "choice-search-v2",
           "provider": "typesafe",
-          "legality_filter": false,
+          "legality_filter": true,
           "free_text_messages": false,
           "models_seen": [
             "jev-1.13.0"
           ],
-          "max_calls_per_attempt": 10
+          "strategy": "atomic_model_gated_beam",
+          "engine_simulation": false,
+          "max_actions": 3,
+          "choice_beam_width": 3,
+          "choice_branch_factor": 2,
+          "choice_max_calls": 32,
+          "choice_max_input_tokens": 500000,
+          "max_questions_per_batch": 64,
+          "max_request_bytes": 120000,
+          "budget_scope": "decision_including_agent_retries",
+          "legality_filter_source": "model_judgments",
+          "engine_legality_filter": false,
+          "judgment_options": [
+            "yes",
+            "no",
+            "unknown"
+          ],
+          "unknown_reviews": 1,
+          "unresolved_policy": "exclude_plan",
+          "cache_scope": "same_pending_decision",
+          "retry_policy": "common_llm_loop_with_cached_answers"
         }
       },
       "date": "2026-09-18",
@@ -694,70 +714,70 @@
           },
           "legs": [
             {
-              "match_id": "jev_choice-v2_seed3031_slot0",
+              "match_id": "jev_choice-search-v2_seed3031_slot0",
               "challenger_side": 0,
               "outcome": "incumbent",
               "victory_type": "military",
               "turns": 11,
-              "date": "2026-09-18T13:16:51.733703+00:00",
+              "date": "2026-09-18T16:39:45.920467+00:00",
               "seed": 3031,
-              "usd": 0.7557,
+              "usd": 0.8789,
               "perf": {
                 "jev-1.13.0": {
-                  "usd": 0.012127,
-                  "usd_today": 0.012127,
+                  "usd": 0.102199,
+                  "usd_today": 0.102199,
                   "cost_source": "estimated",
-                  "think_ms": 5046,
+                  "think_ms": 27116,
                   "half_turns": 10,
                   "served_by": "typesafe",
-                  "actions_ok": 5,
-                  "illegal": 5,
+                  "actions_ok": 8,
+                  "illegal": 11,
                   "fog_blocked": 0
                 },
                 "google/gemini-3.8-flash": {
-                  "usd": 0.743616,
-                  "usd_today": 0.743616,
+                  "usd": 0.77672,
+                  "usd_today": 0.77672,
                   "cost_source": "provider",
-                  "think_ms": 109346,
+                  "think_ms": 111273,
                   "half_turns": 11,
                   "served_by": "Google",
-                  "actions_ok": 27,
-                  "illegal": 1,
+                  "actions_ok": 28,
+                  "illegal": 0,
                   "fog_blocked": 0
                 }
               },
               "source": "replay"
             },
             {
-              "match_id": "jev_choice-v2_seed3031_slot1",
+              "match_id": "jev_choice-search-v2_seed3031_slot1",
               "challenger_side": 1,
               "outcome": "incumbent",
-              "victory_type": "military",
-              "turns": 10,
-              "date": "2026-09-18T13:13:48.398873+00:00",
+              "victory_type": "nuclear",
+              "turns": 14,
+              "date": "2026-09-18T16:54:20.059210+00:00",
               "seed": 3031,
-              "usd": 0.6975,
+              "usd": 1.2087,
               "perf": {
                 "google/gemini-3.8-flash": {
-                  "usd": 0.687404,
-                  "usd_today": 0.687404,
+                  "usd": 1.047989,
+                  "usd_today": 1.047989,
                   "cost_source": "provider",
-                  "think_ms": 102211,
-                  "half_turns": 10,
+                  "think_ms": 138414,
+                  "half_turns": 14,
                   "served_by": "Google",
-                  "actions_ok": 25,
+                  "actions_ok": 39,
                   "illegal": 0,
                   "fog_blocked": 0
                 },
                 "jev-1.13.0": {
-                  "usd": 0.01007,
-                  "usd_today": 0.01007,
+                  "usd": 0.160696,
+                  "usd_today": 0.160696,
                   "cost_source": "estimated",
-                  "think_ms": 5028,
-                  "half_turns": 9,
+                  "think_ms": 29742,
+                  "half_turns": 14,
                   "served_by": "typesafe",
-                  "actions_ok": 4,
-                  "illegal": 5,
+                  "actions_ok": 17,
+                  "illegal": 15,
                   "fog_blocked": 0
                 }
               },
@@ -774,7 +794,16 @@
       ],
       "final_rank": null,
       "displaced": null,
-      "seed_policy": "same_seed_swapped_sides"
+      "seed_policy": "same_seed_swapped_sides",
+      "superseded_match_ids": [
+        "jev_choice-v2_seed3031_slot0",
+        "jev_choice-v2_seed3031_slot1"
+      ],
+      "supersedes": {
+        "challenge_id": "2026-09_jev-1.13.0",
+        "protocol": "choice-v2",
+        "reason": "Replayed both legs with choice-search-v2 at the owner's request."
+      }
     },
     {
       "id": "2026-09_google-gemini-3.8-flash",
@@ -822,7 +851,7 @@
                   "think_ms": 21196,
                   "half_turns": 26,
                   "served_by": "OpenAI",
-                  "actions_ok": 72,
+                  "actions_ok": 71,
                   "illegal": 2,
                   "fog_blocked": 0
                 }
@@ -856,7 +885,7 @@
                   "think_ms": 119265,
                   "half_turns": 24,
                   "served_by": "Google",
-                  "actions_ok": 61,
+                  "actions_ok": 60,
                   "illegal": 5,
                   "fog_blocked": 0
                 }
@@ -910,7 +939,7 @@
                   "think_ms": 24462,
                   "half_turns": 22,
                   "served_by": "OpenAI",
-                  "actions_ok": 58,
+                  "actions_ok": 57,
                   "illegal": 2,
                   "fog_blocked": 0
                 },
@@ -1019,7 +1048,7 @@
                   "think_ms": 112783,
                   "half_turns": 22,
                   "served_by": "Z.AI",
-                  "actions_ok": 56,
+                  "actions_ok": 55,
                   "illegal": 2,
                   "fog_blocked": 0
                 }
@@ -1042,7 +1071,7 @@
                   "think_ms": 153594,
                   "half_turns": 24,
                   "served_by": "Z.AI",
-                  "actions_ok": 68,
+                  "actions_ok": 67,
                   "illegal": 2,
                   "fog_blocked": 0
                 },
@@ -1106,7 +1135,7 @@
                   "think_ms": 43000,
                   "half_turns": 20,
                   "served_by": "Google",
-                  "actions_ok": 56,
+                  "actions_ok": 55,
                   "illegal": 1,
                   "fog_blocked": 0
                 },
@@ -1235,7 +1264,7 @@
                   "think_ms": 36568,
                   "half_turns": 15,
                   "served_by": "Google",
-                  "actions_ok": 41,
+                  "actions_ok": 40,
                   "illegal": 0,
                   "fog_blocked": 0
                 }
@@ -1285,7 +1314,7 @@
                   "think_ms": 35277,
                   "half_turns": 19,
                   "served_by": "OpenAI",
-                  "actions_ok": 52,
+                  "actions_ok": 51,
                   "illegal": 1,
                   "fog_blocked": 0
                 }
@@ -1319,7 +1348,7 @@
                   "think_ms": 42211,
                   "half_turns": 17,
                   "served_by": "Google",
-                  "actions_ok": 48,
+                  "actions_ok": 47,
                   "illegal": 1,
                   "fog_blocked": 0
                 }
@@ -1358,7 +1387,7 @@
                   "think_ms": 47345,
                   "half_turns": 26,
                   "served_by": "Google",
-                  "actions_ok": 75,
+                  "actions_ok": 74,
                   "illegal": 1,
                   "fog_blocked": 0
                 },
@@ -1403,7 +1432,7 @@
                   "think_ms": 50138,
                   "half_turns": 19,
                   "served_by": "Google",
-                  "actions_ok": 52,
+                  "actions_ok": 51,
                   "illegal": 1,
                   "fog_blocked": 0
                 }
@@ -1467,7 +1496,7 @@
                   "think_ms": 183907,
                   "half_turns": 23,
                   "served_by": "Moonshot AI",
-                  "actions_ok": 58,
+                  "actions_ok": 57,
                   "illegal": 3,
                   "fog_blocked": 0
                 }
@@ -1501,7 +1530,7 @@
                   "think_ms": 130989,
                   "half_turns": 16,
                   "served_by": "Z.AI",
-                  "actions_ok": 44,
+                  "actions_ok": 43,
                   "illegal": 0,
                   "fog_blocked": 0
                 }
@@ -1540,7 +1569,7 @@
                   "think_ms": 144210,
                   "half_turns": 21,
                   "served_by": "Z.AI",
-                  "actions_ok": 55,
+                  "actions_ok": 54,
                   "illegal": 6,
                   "fog_blocked": 0
                 },
@@ -1585,7 +1614,7 @@
                   "think_ms": 119205,
                   "half_turns": 21,
                   "served_by": "Z.AI",
-                  "actions_ok": 51,
+                  "actions_ok": 50,
                   "illegal": 3,
                   "fog_blocked": 0
                 }
@@ -1669,7 +1698,7 @@
                   "think_ms": 129702,
                   "half_turns": 20,
                   "served_by": "Z.AI",
-                  "actions_ok": 57,
+                  "actions_ok": 56,
                   "illegal": 2,
                   "fog_blocked": 0
                 }
@@ -1733,7 +1762,7 @@
                   "think_ms": 92619,
                   "half_turns": 19,
                   "served_by": "Moonshot AI",
-                  "actions_ok": 47,
+                  "actions_ok": 46,
                   "illegal": 2,
                   "fog_blocked": 0
                 }
@@ -1756,7 +1785,7 @@
                   "think_ms": 118378,
                   "half_turns": 25,
                   "served_by": "Moonshot AI",
-                  "actions_ok": 66,
+                  "actions_ok": 65,
                   "illegal": 5,
                   "fog_blocked": 0
                 },
