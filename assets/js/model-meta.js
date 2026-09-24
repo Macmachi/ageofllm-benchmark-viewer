@@ -32,6 +32,7 @@ window.MODEL_META = {
   // ── Ladder era (V2): models are keyed by their full provider slug, because
   //    that is the id the ladder runner records in data/ladder.json.
   'anthropic/claude-opus-5':           { flag: '🇺🇸', author: 'Anthropic', isNew: true },
+  'anthropic/claude-opus-5.5':         { flag: '🇺🇸', author: 'Anthropic', isNew: true },
   'openai/gpt-5.6-sol':                { flag: '🇺🇸', author: 'OpenAI', isNew: true },
   'openai/gpt-6-astra':                { flag: '🇺🇸', author: 'OpenAI', isNew: true },
   'x-ai/grok-4.6':                     { flag: '🇺🇸', author: 'xAI', isNew: true },
