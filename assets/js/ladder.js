@@ -1,6 +1,8 @@
 /*
- * ladder.js — renders data/ladder.json: the champion, the line behind it, every
- * challenge played for the throne, and the succession of reigns.
+ * ladder.js — renders data/ladder.json: the champion, every model ever tested
+ * with its matches, every challenge played for the throne, and the succession
+ * of reigns. The frozen V1 corpus joins the model list read-only, from
+ * data/leaderboard_v1.json and replays/index_v1.json.
  *
  * TWO FORMATS, and `rules.format` in the JSON is what says which. Under
  * `throne` a challenger plays the champion and only the champion, so the seats
@@ -27,7 +29,10 @@
   };
 
   let data = null;
+  let v1 = null;             // { lb, idx } once the frozen V1 corpus has loaded
   let logFilter = '';
+  let modelFilter = '';
+  const openModels = new Set();   // model ids whose match list is unfolded
 
   // The season's format. Read, never inferred: a gauntlet season in which every
   // challenger lost its opening tie leaves a challenge log shaped exactly like
@@ -43,12 +48,6 @@
   let openingOpen = null;
   let droppedOpen = false;   // collapsed: the board is the news, this is its past
   let perfByModel = {};      // model -> aggregated cost / latency / provider
-
-  // The reign this model held, if it ever held one. Under `throne` this is the
-  // only thing a seat below the first can honestly be labelled with.
-  function reignOf(model) {
-    return (data.reigns || []).filter((r) => r.model === model).pop() || null;
-  }
 
   // Whoever the current champion took the crown from, or null if it won the
   // opening and there was nobody to take it from.
@@ -71,14 +70,17 @@
         + '<span class="lb-sub-tie"><strong>One win each</strong> — the crown '
         + 'goes to whichever model won in fewer turns. <strong>Two draws</strong> '
         + '— the champion keeps it.</span>',
-      boardTitle: 'The line',
-      boardNote: 'Not a ranking, and not a top 4. Only the first seat is ever '
-        + 'played for, so nothing here means "better than the name under it" — '
-        + 'this is who came before the champion, most recent first.',
-      boardNoteTitle: 'Under the throne format a challenger meets the champion '
-        + 'and nobody else. A model that loses that tie earns no seat at all, '
-        + 'and no seat below the first has ever been contested. Ordering these '
-        + 'names by strength would be a claim no match on this site supports.',
+      boardTitle: 'Every model tested',
+      boardNote: 'The champion, then every former champion by time on the '
+        + 'throne, then every other model, most recently tested first. '
+        + '<strong>Not a ranking</strong> — only the throne is played for. '
+        + '<strong>Open a model to see each of its matches and watch the '
+        + 'replays.</strong>',
+      boardNoteTitle: 'Models did not play the same number of matches: the '
+        + 'opening four played each other, a challenger plays the champion '
+        + 'twice. Their records are shown for what they are, and none of them '
+        + 'is compared with another. The V1 models at the end were played on an '
+        + 'older game engine and are kept frozen.',
     },
     gauntlet: {
       tagline: 'The current standing — four places, held until someone takes them',
@@ -134,6 +136,9 @@
     const site = document.getElementById('lad-site');
     if (site && data.site_version) site.textContent = 'site v' + data.site_version;
 
+    // Fetched alongside the rest: the V1 rows join the model list once they
+    // arrive, and a missing archive leaves the list complete for the ladder.
+    const v1Loading = loadV1();
     aggregatePerf();
     renderCopy();
     renderBanner();
@@ -145,6 +150,22 @@
     renderLog();
     renderReigns();
     bindFilter();
+    v1 = await v1Loading;
+    if (v1) { renderBoard(); renderReigns(); }
+  }
+
+  async function loadV1() {
+    try {
+      const get = (url) => fetch(url).then((r) => {
+        if (!r.ok) throw new Error(r.status);
+        return r.json();
+      });
+      const [lb, idx] = await Promise.all([
+        get('data/leaderboard_v1.json'), get('replays/index_v1.json')]);
+      return { lb, idx };
+    } catch (e) {
+      return null;
+    }
   }
 
   // ── measured per-model figures ───────────────────────────────────────────
@@ -245,7 +266,9 @@
     }
   }
 
-  function perfCells(model) {
+  // `record: false` where the caller prints the record itself — the model list
+  // shows it as a tile and lists the matches right under it.
+  function perfCells(model, opts) {
     const p = perfByModel[model];
     if (!p) return '';
     const lat = p.thinkMs != null
@@ -254,8 +277,9 @@
     // says "nobody has beaten me at this rung", which on day one — when the
     // opening is the only thing that happened — tells the reader nothing about
     // how the four got there. The record does, and it links to the matches.
-    const rec = (p.wins + p.losses + p.draws)
-      ? `<a class="lad-stat rec" href="#opening-history" title="Record across every match played on this ladder — W–L–D, and it always sums to the ${p.matches} match(es) played. A mutual destruction counts as a loss for both sides, not a draw. Click to open the match list and the replays.">▤ ${p.wins}W–${p.losses}L${p.draws ? `–${p.draws}D` : ''}</a>` : '';
+    const rec = (opts && opts.record === false) ? ''
+      : (p.wins + p.losses + p.draws)
+      ? `<a class="lad-stat rec" href="#board-title" data-model="${esc(model)}" title="Record across every match played on this ladder — W–L–D, and it always sums to the ${p.matches} match(es) played. A mutual destruction counts as a loss for both sides, not a draw. Click to open its matches and replays in the model list.">▤ ${p.wins}W–${p.losses}L${p.draws ? `–${p.draws}D` : ''}</a>` : '';
     // Tempo. It settles the opening table when points, wins and head-to-head
     // are all level, and since site 0.17.1 it settles a level challenge too.
     const tempo = p.winTurns != null
@@ -349,8 +373,8 @@
   // slicing it would silently rescale the axis.
   // Halved on a narrow screen: a page that takes four thumb-scrolls to reach its
   // own pager is not a page. Read at call time, so a rotation re-pages.
-  const PAGE_WIDE = { legs: 12, log: 8 };
-  const PAGE_NARROW = { legs: 6, log: 3 };
+  const PAGE_WIDE = { legs: 12, log: 8, models: 10 };
+  const PAGE_NARROW = { legs: 6, log: 3, models: 6 };
   const narrow = () => (typeof window !== 'undefined' && window.innerWidth
     ? window.innerWidth <= 640 : false);
   const pageSize = (key) => (narrow() ? PAGE_NARROW : PAGE_WIDE)[key];
@@ -429,6 +453,12 @@
       return;
     }
 
+    // Under the throne a played opening has nothing left to show: each of its
+    // matches is under its two models in the model list, marked "Opening", and
+    // the first champion's row says how it won it. A second home for the same
+    // twelve matches, speaking of "#1", only blurred which seat is played for.
+    if (isThrone()) return;
+
     const champion = (op.table || [])[0];
     // Collapsed once challenges exist — the opening is then provenance. Until
     // then it is the ONLY thing that has happened, and hiding it leaves a reader
@@ -487,7 +517,9 @@
     const el = document.getElementById('dropped-history');
     if (!el) return;
     const list = data.dropped || [];
-    if (!list.length) { el.innerHTML = ''; return; }   // nothing to explain yet
+    // Under the throne every one of these is a row of the model list, with its
+    // matches; a second list of the same names would only repeat it.
+    if (!list.length || isThrone()) { el.innerHTML = ''; return; }
     const title = isThrone() ? 'Fell off the end of the line'
       : 'Dropped off the ladder';
     const blurb = isThrone()
@@ -632,7 +664,7 @@
       el.innerHTML = '<div class="empty-state">The board is empty until the opening is played.</div>';
       return;
     }
-    if (isThrone()) return renderLine(el);
+    if (isThrone()) return renderModels(el);
     el.innerHTML = (data.ladder || []).map((e) => {
       return `<div class="lad-row rank-${e.rank}">
                 <div class="lad-rank">#${e.rank}</div>
@@ -646,53 +678,353 @@
     }).join('');
   }
 
-  // ── the line of succession ───────────────────────────────────────────────
-  // Everything the standing used to draw and this must not: no rank number, no
-  // gold/silver/bronze border, no ordering claim. The champion is skipped — it
-  // has its own card directly above, and printing it twice, once at the top of
-  // a list, is exactly the ranking this section exists to stop implying.
+  // ── every model tested ───────────────────────────────────────────────────
+  // One list for every model this site has played, each row unfolding into its
+  // own matches. It replaces the line of succession and the list of models that
+  // fell off it: neither seat was ever played for, and together they hid every
+  // challenger that lost to the champion inside the challenge log.
+  //
+  // The order is the only claim the list makes, and the note above it says
+  // what it is: the champion, former champions by time on the throne, then
+  // everyone else by the date they were tested. Records are printed, never
+  // compared — the opening four played each other, a challenger plays twice.
+  //
+  // The frozen V1 corpus closes the list. It keeps its own published order
+  // (points per match, at least three matches) because V1 WAS a ranking, and
+  // never gets a time on the throne, because no throne existed then.
 
-  function renderLine(el) {
-    const rest = (data.ladder || []).slice(1);
-    if (!rest.length) {
-      el.innerHTML = '<div class="empty-state">Nobody has come before the ' +
-        'current champion yet.</div>';
-      return;
-    }
-    el.innerHTML = rest.map(lineRow).join('');
+  const V1_ENGINES = '0.9.2 – 0.15.0';
+
+  function nameOf(model) {
+    const hit = [].concat(
+      (data.opening || {}).models || [], data.ladder || [], data.dropped || [],
+      ...(data.challenges || []).map((c) =>
+        [c.challenger].concat(c.steps.map((s) => s.opponent))),
+    ).find((m) => m && m.model === model);
+    return hit ? hit.display_name : model;
   }
 
-  function lineRow(e) {
-    const r = reignOf(e.model);
-    // What the seat MEANS. A held reign is the strong statement and the only
-    // one the throne format can produce on its own; the others are inherited
-    // from the season played before it and say so.
-    const what = r
-      ? `<span class="line-what held" title="It held the throne — the one thing on this page that has to be won">` +
-        `held the throne ${fmtDate(r.from)} → ${r.to ? fmtDate(r.to) : 'today'}</span>`
-      : e.via === 'opening'
-        ? `<span class="line-what" title="Took a seat in the opening round-robin, before the throne format. It never played for the crown.">` +
-          `seat won in the opening</span>`
-        : e.seeded
-          ? `<span class="line-what" title="Placed when the board was created — not won on the board">seeded onto the board</span>`
-          : `<span class="line-what" title="Won a seat under the gauntlet format, by climbing. It never played the champion.">` +
-            `climbed in ${fmtDate(e.entered_at)}</span>`;
-    const holds = e.holds
-      ? `<span title="Challenges survived while it held a seat">${e.holds} hold${e.holds === 1 ? '' : 's'}</span>` : '';
-    return `<div class="lad-row line-row">
-              <div class="line-dot" aria-hidden="true">·</div>
-              <!-- No originBadge here. It prints OPENING / SEEDED / "▲ 2 rungs
-                   won on the way in", which the sentence below already says in
-                   words — and "▲ 2" in particular re-poses this list as a climb
-                   with a score attached, which is the reading the section is
-                   built to prevent. -->
-              <div class="lad-model"><span class="lad-name">${flag(e.model)}${esc(e.display_name)}</span>${effortBadge(e.reasoning_effort)}${quantBadge(e.quantization)}</div>
-              <div class="lad-meta">
-                ${perfCells(e.model)}
-                ${what}
-                ${holds}
-              </div>
-            </div>`;
+  function resultFor(me, winner, vt) {
+    if (vt === 'mutual_destruction') return 'md';   // a loss for both sides
+    if (!winner) return 'd';
+    return winner === me ? 'w' : 'l';
+  }
+
+  // Seat 1 of a gauntlet climb was the throne too, so it is named the same way.
+  function ctxLabel(rank, role, throne) {
+    if (throne || rank === 1) return role === 'challenger' ? 'Throne challenge' : 'Throne defence';
+    return role === 'challenger' ? `Climb · #${rank}` : `Defence · #${rank}`;
+  }
+
+  function ladderMatches() {
+    const by = {};
+    const push = (model, m) => (by[model] = by[model] || []).push(m);
+    const op = data.opening || {};
+    (op.legs || []).forEach((l) => {
+      const winner = l.outcome === 'a' ? l.a : l.outcome === 'b' ? l.b : null;
+      const base = { id: l.match_id, date: l.date || op.date, vt: l.victory_type,
+        turns: l.turns, sim: !l.match_id, ctx: 'Opening' };
+      push(l.a, { ...base, opp: l.b, side: l.a_side, res: resultFor(l.a, winner, l.victory_type) });
+      push(l.b, { ...base, opp: l.a, side: 1 - l.a_side, res: resultFor(l.b, winner, l.victory_type) });
+    });
+    (data.challenges || []).forEach((c) => {
+      const throne = chalThrone(c);
+      c.steps.forEach((st) => st.legs.forEach((l) => {
+        const ch = c.challenger.model, inc = st.opponent.model;
+        const winner = l.outcome === 'challenger' ? ch : l.outcome === 'incumbent' ? inc : null;
+        const base = { id: l.match_id, date: l.date || c.date, vt: l.victory_type,
+          turns: l.turns, sim: l.source === 'simulated' };
+        push(ch, { ...base, ctx: ctxLabel(st.rank, 'challenger', throne), opp: inc,
+          side: l.challenger_side, res: resultFor(ch, winner, l.victory_type) });
+        push(inc, { ...base, ctx: ctxLabel(st.rank, 'incumbent', throne), opp: ch,
+          side: 1 - l.challenger_side, res: resultFor(inc, winner, l.victory_type) });
+      }));
+    });
+    return by;
+  }
+
+  // The moment a crown changed hands: when the deciding match of the tie
+  // finished. Dates alone cannot tell a two-hour reign from a one-day one, and
+  // GPT-6 Astra's lasted from 08:57 to 11:19 UTC on the same day.
+  function crowning(r) {
+    const c = (data.challenges || []).find((x) =>
+      x.challenger.model === r.model && x.final_rank === 1 && x.date === r.from);
+    if (c) {
+      const legs = c.steps[c.steps.length - 1].legs;
+      const leg = legs[legs.length - 1];
+      return { at: leg.date || c.date, leg };
+    }
+    const dates = ((data.opening || {}).legs || []).map((l) => l.date).filter(Boolean).sort();
+    return { at: dates.length ? dates[dates.length - 1] : r.from, leg: null, opening: true };
+  }
+
+  function reignSpan(r) {
+    const rs = data.reigns || [];
+    const next = rs[rs.indexOf(r) + 1] || null;
+    const start = new Date(crowning(r).at).getTime();
+    const end = next ? new Date(crowning(next).at).getTime() : Date.now();
+    const days = daysBetween(r.from, r.to || todayISO());
+    return { days, ms: Math.max(0, end - start), next };
+  }
+
+  function fmtSpan(s) {
+    if (s.days >= 1) return `${s.days} day${s.days === 1 ? '' : 's'}`;
+    const h = s.ms / 3600000;
+    return h >= 1 ? `${Math.round(h)} h` : '< 1 h';
+  }
+
+  function ladderModels() {
+    const matches = ladderMatches();
+    const rs = data.reigns || [];
+    const op = data.opening || {};
+    return Object.keys(matches).map((model) => {
+      const list = matches[model].slice().sort((a, b) => String(b.date).localeCompare(String(a.date)));
+      const reigns = rs.filter((r) => r.model === model);
+      const spans = reigns.map(reignSpan);
+      const current = reigns.some((r) => r.to === null);
+      const asChallenger = (data.challenges || []).filter((c) => c.challenger.model === model);
+      const opRow = (op.table || []).find((t) => t.model === model);
+      const firstTested = opRow ? op.date
+        : asChallenger.map((c) => c.date).sort()[0] || list[list.length - 1].date;
+      const chal = asChallenger[0];
+      return {
+        id: model, era: 'ladder', name: nameOf(model), list,
+        effort: (opRow || (chal && chal.challenger) || {}).reasoning_effort
+          || ((data.ladder || []).concat(data.dropped || []).find((e) => e.model === model) || {}).reasoning_effort,
+        quant: ((chal && chal.challenger) || (op.models || []).find((m) => m.model === model) || {}).quantization,
+        decision: chal && chal.challenger.decision_interface,
+        current, reigns, spans,
+        throneMs: spans.reduce((s, x) => s + x.ms, 0),
+        throneDays: spans.reduce((s, x) => s + x.days, 0),
+        firstTested: String(firstTested).slice(0, 10),
+        status: ladderStatus(model, reigns, spans, chal, opRow),
+      };
+    });
+  }
+
+  function ladderStatus(model, reigns, spans, chal, opRow) {
+    const last = reigns[reigns.length - 1];
+    if (last && last.to === null) {
+      return `<span class="mdl-what king">Champion since ${fmtDate(last.from)}` +
+        ` · ${last.defences} defence${last.defences === 1 ? '' : 's'}</span>`;
+    }
+    if (last) {
+      const s = spans[spans.length - 1];
+      const when = last.from === last.to
+        ? `for ${fmtSpan(s)} on ${fmtDate(last.from)}`
+        : `${fmtDay(last.from)} → ${fmtDate(last.to)}`;
+      const opened = crowning(last).opening ? 'Won the opening · c' : 'C';
+      return `<span class="mdl-what held"${crowning(last).opening ? ` title="${esc(openingWin(model))}"` : ''}>${opened}hampion ${when}` +
+        `${s.next ? `, dethroned by ${esc(s.next.display_name)}` : ''}</span>`;
+    }
+    if (chal) {
+      const st = chal.steps[chal.steps.length - 1];
+      if (chalThrone(chal)) {
+        const [pc, pi] = st.pts;
+        const speed = st.decided_by && /faster/.test(st.decided_by) ? ' on speed' : '';
+        return `<span class="mdl-what">Challenged ${esc(st.opponent.display_name)} on ` +
+          `${fmtDate(chal.date)} · lost the tie ${fmtPts(pc)}–${fmtPts(pi)}${speed}</span>`;
+      }
+      const how = 'The first season\'s gauntlet: a challenger entered at #4 and '
+        + 'climbed one two-leg tie at a time, before the throne format';
+      return chal.final_rank
+        ? `<span class="mdl-what" title="${how}">Gauntlet, ${fmtDate(chal.date)} · ` +
+          `climbed to #${chal.final_rank}</span>`
+        : `<span class="mdl-what" title="${how}">Gauntlet, ${fmtDate(chal.date)} · ` +
+          `lost its tie at #${st.rank}</span>`;
+    }
+    if (opRow) {
+      return `<span class="mdl-what">Opening round-robin, ${fmtDate((data.opening || {}).date)}` +
+        ` · finished #${opRow.rank} of ${(data.opening.table || []).length}</span>`;
+    }
+    return '';
+  }
+
+  // How the first champion won the opening round-robin, in one sentence: it
+  // took the throne without a duel, so this is the only evidence for its reign.
+  function openingWin(model) {
+    const t = ((data.opening || {}).table || []);
+    const me = t.find((r) => r.model === model);
+    if (!me) return '';
+    const level = t.filter((r) => r !== me && r.pts === me.pts);
+    return `Finished first of the opening round-robin on ${fmtDate(data.opening.date)}: ` +
+      `${fmtPts(me.pts)} points, ${me.w}W–${me.l}L` +
+      (level.length && me.tiebreak
+        ? `, level on points with ${level.map((r) => r.display_name).join(', ')} and ahead on ${me.tiebreak}.`
+        : '.');
+  }
+
+  function v1Models() {
+    if (!v1) return [];
+    const reps = (v1.idx && v1.idx.replays) || [];
+    const lb = (v1.lb && v1.lb.models) || [];
+    const min = (v1.lb && v1.lb.min_matches_ranked) || 0;
+    // The published V1 order, recomputed the way v1.html computes it: archived
+    // models out, qualified first, points per match. Rank numbers belong to the
+    // qualified rows only, as they do on that page.
+    const byPpm = (a, b) => (b.points_per_match || 0) - (a.points_per_match || 0);
+    const active = lb.filter((m) => !m.archived);
+    const ordered = active.filter((m) => m.total >= min).sort(byPpm)
+      .concat(active.filter((m) => m.total < min).sort(byPpm))
+      .concat(lb.filter((m) => m.archived).sort(byPpm));
+    return ordered.map((m, i) => {
+      const ranked = !m.archived && m.total >= min;
+      const list = reps.filter((r) => r.p1_model === m.model || r.p2_model === m.model)
+        .map((r) => {
+          const me = r.p1_model === m.model ? 0 : 1;
+          const winner = r.winner === 0 ? r.p1_model : r.winner === 1 ? r.p2_model : null;
+          return { id: r.match_id, date: r.date, ctx: 'V1', side: me,
+            opp: me === 0 ? r.p2_model : r.p1_model,
+            oppName: me === 0 ? r.p2_display_name : r.p1_display_name,
+            res: resultFor(m.model, winner, r.victory_type), vt: r.victory_type,
+            turns: r.total_turns };
+        })
+        .sort((a, b) => String(b.date).localeCompare(String(a.date)));
+      const dates = list.map((x) => String(x.date).slice(0, 10)).sort();
+      return {
+        id: 'v1:' + m.model, model: m.model, era: 'v1', name: m.display_name, list,
+        effort: m.reasoning_effort, v1Rank: ranked ? i + 1 : null,
+        v1: m, firstTested: dates[0] || '',
+        status: `<span class="mdl-what" title="Played on game engine ${V1_ENGINES}, before the throne existed. Frozen on 14 Aug 2026 and still published unchanged on the V1 page.">` +
+          `V1 · ${list.length} matches, ${fmtDay(dates[0])} → ${fmtDate(dates[dates.length - 1])}` +
+          `${m.archived ? ' · archived' : ''}</span>`,
+      };
+    });
+  }
+
+  function allModels() {
+    const lad = ladderModels();
+    const kings = lad.filter((m) => m.reigns.length)
+      .sort((a, b) => (b.current - a.current) || (b.throneMs - a.throneMs));
+    const others = lad.filter((m) => !m.reigns.length)
+      .sort((a, b) => b.firstTested.localeCompare(a.firstTested)
+        || String(b.list[0].date).localeCompare(String(a.list[0].date))
+        || a.name.localeCompare(b.name));
+    return kings.concat(others, v1Models());
+  }
+
+  function renderModels(el) {
+    const all = allModels();
+    const list = modelFilter
+      ? all.filter((m) => m.name.toLowerCase().includes(modelFilter)) : all;
+    if (!list.length) {
+      el.innerHTML = '<div class="empty-state">No model matches.</div>';
+      return;
+    }
+    const page = pageSlice('models', list);
+    el.innerHTML = page.map((m, i) => {
+      const divider = m.era === 'v1' && (i === 0 || page[i - 1].era !== 'v1')
+        ? `<div class="mdl-divider">
+             <b>V1 archive — frozen.</b> Played on game engine ${V1_ENGINES}, under
+             rules and a system prompt the current engine no longer uses, and before
+             the throne existed. Shown in the order the
+             <a href="v1.html">V1 leaderboard</a> still publishes.
+           </div>` : '';
+      return divider + modelRow(m);
+    }).join('') + pagerBar('models', list.length);
+    bindPager(el, () => renderModels(el));
+    el.querySelectorAll('.mdl-head').forEach((h) => {
+      h.addEventListener('click', () => {
+        const row = h.closest('.mdl');
+        const id = row.getAttribute('data-id');
+        const open = !row.classList.contains('open');
+        if (open) openModels.add(id); else openModels.delete(id);
+        row.classList.toggle('open', open);
+        h.setAttribute('aria-expanded', String(open));
+        const label = row.querySelector('.mdl-toggle-label');
+        if (label) label.textContent = toggleLabel(row.getAttribute('data-n'), open);
+      });
+    });
+  }
+
+  // Opens one model's row wherever it sits in the paged list, and scrolls to
+  // it. Reached from a record chip in a challenge card.
+  function openModel(id) {
+    modelFilter = '';
+    const fm = document.getElementById('f-model');
+    if (fm) fm.value = '';
+    const i = allModels().findIndex((m) => m.id === id);
+    if (i < 0) return;
+    pageAt.models = Math.floor(i / pageSize('models'));
+    openModels.add(id);
+    renderBoard();
+    const row = [...document.querySelectorAll('.mdl')].find((r) => r.getAttribute('data-id') === id);
+    if (row) row.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function toggleLabel(n, open) {
+    return open ? 'Hide matches' : `Show its ${n} match${Number(n) === 1 ? '' : 'es'}`;
+  }
+
+  function modelRow(m) {
+    const open = openModels.has(m.id);
+    const n = m.list.length;
+    const w = m.list.filter((x) => x.res === 'w').length;
+    const l = m.list.filter((x) => x.res === 'l' || x.res === 'md').length;
+    const d = m.list.filter((x) => x.res === 'd').length;
+    const mark = m.current ? '👑' : m.era === 'ladder' && m.reigns.length ? '★' : '·';
+    const badge = m.era === 'v1'
+      ? (m.v1Rank === 1
+        ? '<span class="lad-badge v1-top" title="#1 of the frozen V1 leaderboard, on points per match">👑 V1 #1</span>'
+        : m.v1Rank
+          ? `<span class="lad-badge v1" title="Rank on the frozen V1 leaderboard, on points per match">V1 #${m.v1Rank}</span>`
+          : '<span class="lad-badge v1" title="Not ranked on the V1 leaderboard">V1</span>')
+      : '';
+    const decision = m.decision && m.decision.kind === 'choice'
+      ? `<span class="effort effort-na" title="${esc(window.choiceInterfaceTitle(m.decision))}">CHOICE</span>`
+      : effortBadge(m.effort);
+    const throne = m.era === 'v1'
+      ? '<div class="mdl-tile muted" title="V1 was played before the throne existed"><b>—</b><span>before the throne</span></div>'
+      : m.reigns.length
+        ? `<div class="mdl-tile gold" title="${m.spans.map((s, i) => `${fmtDate(m.reigns[i].from)} → ${m.reigns[i].to ? fmtDate(m.reigns[i].to) : 'today'}`).join(', ')}"><b>${fmtSpan({ days: m.throneDays, ms: m.throneMs })}</b><span>on the throne</span></div>`
+        : '<div class="mdl-tile muted"><b>—</b><span>never champion</span></div>';
+    const rec = `<div class="mdl-tile" title="Wins–losses${d ? '–draws' : ''} over its ${n} match${n === 1 ? '' : 'es'}. A mutual destruction counts as a loss for both sides."><b>${w}W–${l}L${d ? `–${d}D` : ''}</b><span>${n} match${n === 1 ? '' : 'es'}</span></div>`;
+    const perf = m.era === 'v1' ? v1Perf(m.v1) : perfCells(m.id, { record: false });
+    const cls = m.current ? ' king' : m.era === 'ladder' && m.reigns.length ? ' held' : '';
+    return `<div class="mdl${cls}${m.era === 'v1' ? ' v1' : ''}${open ? ' open' : ''}" data-id="${esc(m.id)}" data-n="${n}">
+      <div class="mdl-head" role="button" tabindex="0" aria-expanded="${open}">
+        <div class="mdl-mark" aria-hidden="true">${mark}</div>
+        <div class="mdl-main">
+          <div class="lad-model"><span class="lad-name">${flag(m.model || m.id)}${esc(m.name)}</span>${decision}${quantBadge(m.quant)}${badge}</div>
+          <div class="mdl-status">${m.status}</div>
+        </div>
+        <div class="mdl-tiles">${throne}${rec}</div>
+        <div class="mdl-toggle"><span class="mdl-toggle-label">${toggleLabel(n, open)}</span><span class="mdl-chevron">▾</span></div>
+      </div>
+      <div class="mdl-body">
+        ${perf ? `<div class="chal-perf">${perf}</div>` : ''}
+        <div class="mdl-legs">${m.list.map(modelLeg).join('')}</div>
+      </div>
+    </div>`;
+  }
+
+  function v1Perf(m) {
+    const cells = [];
+    if (m.avg_think_ms) cells.push(`<span class="lad-stat" title="Mean thinking time per turn, V1 corpus">⏱ ${fmtMs(m.avg_think_ms)}</span>`);
+    if (m.avg_cost_per_match) cells.push(`<span class="lad-stat estimated" title="Average USD per match in the V1 corpus, at the prices of the day">💲 ${fmtUsd(m.avg_cost_per_match)}</span>`);
+    if (m.invalid_action_rate != null) cells.push(`<span class="lad-stat" title="Share of submitted actions the V1 engine rejected">⚠ ${(m.invalid_action_rate * 100).toFixed(1)}% invalid</span>`);
+    return cells.join('');
+  }
+
+  function modelLeg(x) {
+    const opp = x.oppName || nameOf(x.opp);
+    const side = x.side === 0
+      ? '<span class="badge-p0" title="Played player 1">P1</span>'
+      : '<span class="badge-p1" title="Played player 2">P2</span>';
+    const res = x.res === 'w' ? '<span class="leg-w">won</span>'
+      : x.res === 'l' ? '<span class="leg-l">lost</span>'
+        : x.res === 'md'
+          ? '<span class="leg-l" title="Mutual destruction scores 0 for both, like a loss — it is not a draw">both lost</span>'
+          : '<span class="leg-d">drew</span>';
+    const vt = `<span class="vt vt-${esc(x.vt)}">${VT_LABEL[x.vt] || esc(x.vt)}</span>`;
+    const body = `<span class="mleg-date">${fmtDay(x.date)}</span>
+      <span class="mleg-ctx">${esc(x.ctx)}</span>
+      <span class="mleg-opp">vs ${flag(x.opp)}${esc(opp)}</span>
+      <span class="mleg-res">${side} ${res} · ${vt} ${x.turns ? `<span class="mleg-turns">T${x.turns}</span>` : ''}</span>`;
+    if (x.sim) {
+      return `<div class="leg mleg sim" title="Fabricated for this preview — no such match was ever played">${body}<span class="leg-sim">SIM</span></div>`;
+    }
+    return `<a class="leg mleg" href="viewer.html?match=${encodeURIComponent(x.id)}" title="Watch the replay">${body}<span class="leg-play">▶ replay</span></a>`;
   }
 
   // ── challenges ───────────────────────────────────────────────────────────
@@ -836,31 +1168,69 @@
     const end = Math.max(new Date(todayISO()).getTime(), last, start + 86400000);
     const span = end - start;
 
-    el.innerHTML = rs.map((r) => {
+    el.innerHTML = v1Reign() + rs.map((r) => {
       const a = new Date(r.from).getTime();
       const b = r.to ? new Date(r.to).getTime() : end;
       const left = ((a - start) / span) * 100;
       const width = Math.max(2, ((b - a) / span) * 100);
-      const days = daysBetween(r.from, r.to || todayISO());
+      const cr = crowning(r);
+      // Where the crown was won: the deciding match, or the opening table for
+      // the first champion, which took it without beating anyone for it.
+      const how = cr.leg && cr.leg.match_id
+        ? `<a class="reign-how" href="viewer.html?match=${encodeURIComponent(cr.leg.match_id)}" title="Watch the match that won the crown">▶</a>`
+        : cr.opening ? `<a class="reign-how" href="#board-title" data-open-model="${esc(r.model)}" title="${esc(openingWin(r.model))} Open its matches.">⚑</a>` : '';
       return `<div class="reign">
-        <div class="reign-name">${flag(r.model)}${esc(r.display_name)}${r.seeded ? '<span class="lad-badge seeded">SEEDED</span>' : ''}</div>
+        <div class="reign-name">${flag(r.model)}${esc(r.display_name)}${r.seeded ? '<span class="lad-badge seeded">SEEDED</span>' : ''}${how}</div>
         <div class="reign-track">
           <div class="reign-bar ${r.to ? '' : 'current'}" style="left:${left}%;width:${width}%"
                title="${fmtDate(r.from)} → ${r.to ? fmtDate(r.to) : 'now'}"></div>
         </div>
-        <div class="reign-days">${days} d${r.defences ? ` · ${r.defences} def.` : ''}</div>
+        <div class="reign-days">${fmtSpan(reignSpan(r))}${r.defences ? ` · ${r.defences} def.` : ''}</div>
       </div>`;
     }).join('');
+  }
+
+  // What came before the first reign. V1 had no throne, so its leader gets a
+  // line above the timeline rather than a bar on it: a bar would claim days
+  // on a throne nobody played for. Filled once the V1 archive has loaded.
+  function v1Reign() {
+    const top = v1Models().find((m) => m.v1Rank === 1);
+    if (!top) return '';
+    const d = top.list.map((x) => String(x.date).slice(0, 10)).sort();
+    return `<div class="reign-before">
+      <span class="reign-before-tag">Before the throne</span>
+      ${flag(top.model)}<b>${esc(top.name)}</b> led the frozen
+      <a href="v1.html">V1 leaderboard</a> — ${top.v1.wins}W–${top.v1.losses}L,
+      ${fmtPts(top.v1.points_per_match)} points per match, ${fmtDay(d[0])} → ${fmtDate(d[d.length - 1])},
+      game engine ${V1_ENGINES}
+    </div>`;
   }
 
   // ── plumbing ─────────────────────────────────────────────────────────────
 
   function bindFilter() {
     const inp = document.getElementById('f-chal');
-    if (!inp) return;
-    inp.addEventListener('input', () => {
+    if (inp) inp.addEventListener('input', () => {
       logFilter = inp.value.trim().toLowerCase();
       renderLog();
+    });
+    const fm = document.getElementById('f-model');
+    if (fm) fm.addEventListener('input', () => {
+      modelFilter = fm.value.trim().toLowerCase();
+      pageAt.models = 0;
+      renderBoard();
+    });
+    document.addEventListener('click', (e) => {
+      const rec = e.target.closest && e.target.closest('a.rec[data-model]');
+      if (rec && isThrone()) { e.preventDefault(); openModel(rec.getAttribute('data-model')); return; }
+      const first = e.target.closest && e.target.closest('a[data-open-model]');
+      if (first) { e.preventDefault(); openModel(first.getAttribute('data-open-model')); }
+    });
+    // The model rows unfold on Enter and Space as well as on a click.
+    const board = document.getElementById('lad-board');
+    if (board) board.addEventListener('keydown', (e) => {
+      const h = e.target.closest && e.target.closest('.mdl-head');
+      if (h && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); h.click(); }
     });
   }
 
@@ -877,6 +1247,12 @@
   function daysBetween(a, b) {
     const d = (new Date(b).getTime() - new Date(a).getTime()) / 86400000;
     return Number.isFinite(d) ? Math.max(0, Math.round(d)) : 0;
+  }
+  function fmtDay(iso) {
+    if (!iso) return '';
+    try {
+      return new Date(iso).toLocaleDateString('en-GB', { day: '2-digit', month: 'short' });
+    } catch { return iso; }
   }
   function fmtDate(iso) {
     if (!iso) return '';

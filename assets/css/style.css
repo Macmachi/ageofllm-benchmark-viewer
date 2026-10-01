@@ -843,20 +843,91 @@ table.lb tbody tr.lb-archive-toggle td {
   white-space: normal;
 }
 
-/* ---------- the line of succession (throne format) ----------
-   Deliberately flat. .lad-row.rank-1/2/3 paint a gold/silver/bronze left border
-   and .lad-rank prints a big mono "#2" — a podium, and podiums are the claim
-   this format cannot make: nothing below the champion was ever played for. The
-   line reuses the row geometry and drops every rank signal from it. */
-.lad-row.line-row { border-left-color: var(--border-soft); }
+/* Placeholder for a rank number on the rows of models that left a gauntlet
+   ladder, where printing the rung they fell from would revive a ranking. */
 .line-dot {
   font-family: var(--mono); font-size: 17px; font-weight: 700;
   color: var(--border); width: 34px; flex: none; text-align: center;
 }
-.line-what { color: var(--text-dim); }
-/* Holding the throne is the one thing on this page that has to be won, so it is
-   the one label in the line that gets any colour at all. */
-.line-what.held { color: var(--gold); }
+
+/* ---------- every model tested (throne format) ----------
+   Deliberately flat, like the line it replaced: no rank number and no podium
+   colours, because the order is not a ranking. Gold marks the throne and only
+   the throne — the champion's row, and the time a former champion held it. */
+.mdl {
+  border: 1px solid var(--border-soft); border-left: 3px solid var(--border);
+  border-radius: var(--radius); background: var(--panel-solid);
+  margin-bottom: 8px; overflow: hidden;
+}
+.mdl.king { border-color: rgba(212,175,55,0.42); border-left-color: var(--gold); }
+.mdl.held { border-left-color: rgba(212,175,55,0.45); }
+.mdl.v1 { border-left-style: dashed; }
+.mdl-head {
+  display: flex; align-items: center; gap: 10px 16px;
+  padding: 10px 14px; cursor: pointer; user-select: none;
+}
+.mdl-head:hover { background: #131a24; }
+.mdl-head:focus-visible { outline: 2px solid var(--p0); outline-offset: -2px; }
+.mdl-mark {
+  width: 22px; flex: none; text-align: center;
+  font-size: 17px; font-weight: 700; color: var(--border);
+}
+.mdl.king .mdl-mark, .mdl.held .mdl-mark { color: var(--gold); }
+.mdl-main { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.mdl-status { font-size: 12px; color: var(--text-dim); }
+.mdl-what.king, .mdl-what.held { color: var(--gold); }
+.mdl-tiles { display: flex; gap: 18px; flex: none; }
+.mdl-tile { text-align: right; min-width: 78px; }
+.mdl-tile b {
+  display: block; font-family: var(--mono); font-size: 15px;
+  font-weight: 700; color: var(--text);
+}
+.mdl-tile span {
+  font-size: 10px; color: var(--text-faint);
+  text-transform: uppercase; letter-spacing: .7px;
+}
+.mdl-tile.gold b { color: var(--gold); }
+.mdl-tile.muted b { color: var(--text-faint); }
+/* The affordance is spelled out — "Show its 6 matches" — because a chevron
+   alone did not say that the replays are one click away. */
+.mdl-toggle {
+  flex: none; display: flex; align-items: center; gap: 6px;
+  font-size: 12px; font-weight: 600; color: var(--p0);
+  padding: 5px 10px; border-radius: 5px;
+  border: 1px solid rgba(77,166,255,0.35); background: rgba(77,166,255,0.08);
+}
+.mdl-head:hover .mdl-toggle { background: rgba(77,166,255,0.16); }
+.mdl-chevron { transition: transform .15s ease; }
+.mdl.open .mdl-chevron { transform: rotate(180deg); }
+.mdl-body { display: none; padding: 2px 14px 14px 52px; }
+.mdl.open .mdl-body { display: block; }
+.mdl-legs { display: flex; flex-direction: column; gap: 5px; }
+.mleg {
+  display: grid; align-items: center; gap: 10px;
+  grid-template-columns: 52px 128px minmax(0, 1fr) auto auto;
+}
+.mleg-date { font-family: var(--mono); font-size: 11px; color: var(--text-faint); }
+.mleg-ctx {
+  font-size: 10px; color: var(--text-faint); text-transform: uppercase;
+  letter-spacing: .5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.mleg-opp {
+  color: var(--text); font-weight: 600; min-width: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.mleg-res { display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+.mleg-turns { font-family: var(--mono); color: var(--text-faint); }
+.leg.mleg .leg-play { margin-left: 0; white-space: nowrap; }
+.mdl-divider {
+  margin: 18px 0 10px; padding: 10px 14px;
+  font-size: 12.5px; line-height: 1.55; color: var(--text-dim);
+  border: 1px dashed var(--border); border-radius: var(--radius);
+  background: rgba(120,130,140,0.06);
+}
+.mdl-divider b { color: var(--text); }
+.mdl-divider a, .reign-before a { color: var(--p0); }
+.lad-badge.v1 { background: #232c38; color: var(--text-dim); }
+.lad-badge.v1-top { background: rgba(212,175,55,0.16); color: var(--gold); }
 /* Sits under a section title and, unlike .lb-title-note, is always visible:
    a list of four model names reads as a ranking to anyone who does not hover. */
 .lb-note {
@@ -1004,8 +1075,20 @@ a.leg:hover { background: #1d2733; color: var(--text); border-color: var(--borde
   background: rgba(212,175,55,0.35); border-radius: 2px;
 }
 .reign-bar.current { background: var(--gold); }
+.reign-how { margin-left: 2px; flex: none; font-size: 11px; color: var(--p0); text-decoration: none; }
+.reign-how:hover { color: var(--text); }
+.reign-before {
+  margin-bottom: 8px; padding: 8px 12px; line-height: 1.5;
+  font-size: 12.5px; color: var(--text-dim);
+  border: 1px dashed var(--border); border-radius: var(--radius);
+}
+.reign-before b { color: var(--text); }
+.reign-before-tag {
+  margin-right: 6px; font-family: var(--mono); font-size: 10px; font-weight: 700;
+  letter-spacing: .6px; text-transform: uppercase; color: var(--text-faint);
+}
 .reign-days {
-  width: 92px; flex: none; text-align: right;
+  width: 128px; flex: none; text-align: right; white-space: nowrap;
   font-family: var(--mono); font-size: 11px; color: var(--text-faint);
 }
 
@@ -1020,7 +1103,18 @@ a.leg:hover { background: #1d2733; color: var(--text); border-color: var(--borde
   .climb-arrow { transform: rotate(90deg); }
   .step { min-width: 0; }
   .reign-name { width: 120px; font-size: 12px; }
-  .reign-days { width: 68px; }
+  .reign-days { width: 96px; font-size: 10px; }
+  /* A model row becomes three lines: name and status, the two tiles, then the
+     button — each match below wraps onto two lines instead of a grid. */
+  .mdl-head { flex-wrap: wrap; }
+  .mdl-main { flex: 1 1 calc(100% - 40px); }
+  .mdl-tiles { width: 100%; padding-left: 38px; gap: 22px; }
+  .mdl-tile { text-align: left; min-width: 0; }
+  .mdl-toggle { margin-left: 38px; }
+  .mdl-body { padding-left: 14px; }
+  .mleg { display: flex; flex-wrap: wrap; gap: 4px 10px; }
+  .mleg-opp { flex: 1 1 auto; }
+  .mleg-res { flex: 1 1 100%; }
 }
 
 /* ---------- opening round-robin (seeds the ladder) ---------- */

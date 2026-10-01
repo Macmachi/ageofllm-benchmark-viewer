@@ -6,7 +6,7 @@
   <title>Age of LLM™ — The Throne · Current champion</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/style.css?v=0.19.0" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png" />
@@ -67,12 +67,15 @@
 
     <!-- Title AND note come from ladder.js, because they say different things
          under the two formats and getting it wrong here is the single most
-         misleading thing this page could do. Under `throne` this list is a line
-         of succession and the note says so in the open, not in a tooltip: a
-         vertical list of four model names IS a ranking to anyone who does not
-         read the small print, and the small print is what nobody reads. -->
-    <div class="lb-section-title" id="board-title">The line</div>
+         misleading thing this page could do. Under `throne` this is every model
+         ever tested, and the note says in the open, not in a tooltip, what the
+         order is and that it is not a ranking: a vertical list of model names
+         IS a ranking to anyone who does not read the small print. -->
+    <div class="lb-section-title" id="board-title">Every model tested</div>
     <div class="lb-note" id="board-note"></div>
+    <div class="lb-filters">
+      <input type="text" id="f-model" placeholder="Filter by model…" />
+    </div>
     <div class="lad-board" id="lad-board"></div>
 
     <div class="lb-section-title">Latest challenge</div>
@@ -85,12 +88,11 @@
     </div>
     <div class="lad-log" id="lad-log"></div>
 
-    <div class="lb-section-title">Reigns</div>
+    <div class="lb-section-title">Every champion, from the beginning</div>
     <div class="lad-reigns" id="lad-reigns"></div>
 
-    <!-- Models that held a seat and lost it. Above the opening because it is
-         the more recent history of the two, collapsed for the same reason: the
-         page is about who wears the crown now. Empty until someone drops. -->
+    <!-- Models that held a seat and lost it — gauntlet seasons only. Under the
+         throne they are rows of the model list above, with their matches. -->
     <div id="dropped-history"></div>
 
     <!-- Once played, the opening is provenance, not news: it renders here,
@@ -108,8 +110,8 @@
     </footer>
   </div>
 
-  <script src="assets/js/model-meta.js?v=0.18.3"></script>
-  <script src="assets/js/ladder.js?v=0.18.3"></script>
+  <script src="assets/js/model-meta.js?v=0.19.0"></script>
+  <script src="assets/js/ladder.js?v=0.19.0"></script>
   <script src="assets/js/featured.js"></script>
 </body>
 </html>
