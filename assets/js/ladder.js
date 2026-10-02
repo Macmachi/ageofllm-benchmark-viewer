@@ -1073,13 +1073,27 @@
     // beat the bottom rung. Under the throne format the same word would be
     // applied to a model that lost to the CHAMPION, which is a different result
     // and a much harder one — there is no lower bar it also failed.
+    //
+    // On a throne page a gauntlet climb is told in the throne's terms: the only
+    // question it answers is whether the challenger reached the champion. Where
+    // it stopped is kept beside the verdict, and the GAUNTLET badge says why a
+    // challenger then had other seats to beat first. "Enters at #3" and "drops
+    // off" named seats of a line this page no longer draws.
+    const retold = !throne && isThrone();
     const verdictClass = rank === 1 ? 'takes-throne'
-      : rank ? 'enters' : throne ? 'held' : 'fails';
+      : retold ? 'fails' : rank ? 'enters' : throne ? 'held' : 'fails';
     const verdict = rank === 1
       ? 'takes the throne'
-      : rank ? `enters at #${rank}` : throne ? 'the champion holds' : 'fails to enter';
-    const displaced = c.displaced
-      ? `<span class="chal-displaced">${esc(c.displaced)} drops off</span>` : '';
+      : retold ? 'did not reach the champion'
+        : rank ? `enters at #${rank}` : throne ? 'the champion holds' : 'fails to enter';
+    const lastStep = c.steps[c.steps.length - 1];
+    const displaced = retold && rank !== 1
+      ? `<span class="chal-displaced">${rank ? `climbed to #${rank}` : `lost its tie at #${lastStep.rank}`}</span>`
+      : c.displaced && !isThrone()
+        ? `<span class="chal-displaced">${esc(c.displaced)} drops off</span>` : '';
+    const gauntlet = retold
+      ? '<span class="lad-badge gauntlet" title="Played under the first season\'s gauntlet, before 05 Sep 2026: a challenger entered at #4 and had to win one two-leg tie per seat to reach the champion at #1. Same game engine, same rules of play — only the route to the throne was longer.">GAUNTLET</span>'
+      : '';
     // Count both: the body draws one card per TIE, each holding its two legs.
     // Printing only "6 matches" above three cards read as three missing ones.
     // Under the throne format there is only ever one tie, so the tie count adds
@@ -1088,7 +1102,7 @@
     const legs = c.steps.reduce((n, s) => n + s.legs.length, 0);
     const count = throne
       ? `<span class="chal-count" title="A throne challenge is one two-leg tie against the champion — the same pair, sides swapped. Win it and the crown changes hands; lose it and nothing on the board moves.">${legs} match${legs === 1 ? '' : 'es'} · one from each side</span>`
-      : `<span class="chal-count" title="One card per rung challenged. Every rung is a two-leg tie — the same pair, sides swapped — so ${rungs} rungs means ${legs} matches.">${rungs} rung${rungs === 1 ? '' : 's'} · ${legs} match${legs === 1 ? '' : 'es'}</span>`;
+      : `<span class="chal-count" title="One card per seat challenged on the way up. Every seat is a two-leg tie — the same pair, sides swapped — so ${rungs} ties means ${legs} matches.">${rungs} ${retold ? 'tie' : 'rung'}${rungs === 1 ? '' : 's'} · ${legs} match${legs === 1 ? '' : 'es'}</span>`;
     const decisionBadge = c.challenger.decision_interface?.kind === 'choice'
       ? `<span class="effort effort-na" title="${esc(window.choiceInterfaceTitle(c.challenger.decision_interface))}">CHOICE</span>`
       : effortBadge(c.challenger.reasoning_effort);
@@ -1097,6 +1111,7 @@
       <div class="chal-head">
         <span class="chal-date">${fmtDate(c.date)}</span>
         <span class="chal-name">${flag(c.challenger.model)}${esc(c.challenger.display_name)} ${decisionBadge}${quantBadge(c.challenger.quantization)}</span>
+        ${gauntlet}
         <span class="chal-verdict ${verdictClass}">${verdict}</span>
         ${displaced}
         ${count}
@@ -1125,7 +1140,7 @@
       ? `<span class="step-note">${esc(s.decided_by)}</span>` : '';
     return `<div class="step ${won ? 'won' : 'lost'}">
       <div class="step-head">
-        <span class="step-rank${throne ? ' crown' : ''}" title="${throne ? 'The reigning champion — the only seat a challenger plays for' : 'The rung this tie was played for'}">${throne ? '👑' : '#' + s.rank}</span>
+        <span class="step-rank${throne || s.rank === 1 ? ' crown' : ''}" title="${throne || s.rank === 1 ? 'The reigning champion — the throne' : 'The seat this tie was played for, on the way up to the champion'}">${throne || s.rank === 1 ? '👑' : '#' + s.rank}</span>
         <span class="step-opp">${flag(s.opponent.model)}${esc(s.opponent.display_name)}</span>
         <span class="step-score">${fmtPts(pc)}–${fmtPts(pi)}</span>
       </div>

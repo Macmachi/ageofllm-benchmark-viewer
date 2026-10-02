@@ -980,6 +980,7 @@ table.lb tbody tr.lb-archive-toggle td {
 .lad-badge.seeded { background: #232c38; color: var(--text-faint); }
 .lad-badge.climbed { background: rgba(57,255,119,0.12); color: var(--accent); }
 .lad-badge.throne { background: rgba(212,175,55,0.16); color: var(--gold); }
+.lad-badge.gauntlet { background: #232c38; color: var(--text-dim); cursor: help; }
 
 /* ---------- a challenge ---------- */
 .chal {
