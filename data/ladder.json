@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-24T17:31:46.169995+00:00",
+  "generated_at": "2026-10-03T22:51:06.913372+00:00",
   "engine_version": "0.18.0",
   "site_version": "0.19.1",
   "preview": false,
@@ -42,9 +42,12 @@
       "endpoint": "xai"
     },
     "qwen/qwen3.8-27b": {
-      "input": 0.25,
-      "output": 2.2,
-      "endpoint": "akashml"
+      "input": 0.2025,
+      "output": 1.782,
+      "endpoint": "akashml",
+      "discount": 0.1,
+      "list_input": 0.225,
+      "list_output": 1.98
     },
     "z-ai/glm-5.3": {
       "input": 1.4,
@@ -81,6 +84,11 @@
       "input": 4.0,
       "output": 20.0,
       "endpoint": "anthropic"
+    },
+    "x-ai/grok-4.7": {
+      "input": 2.0,
+      "output": 6.0,
+      "endpoint": "xai"
     }
   },
   "started_at": "2026-08-15",
@@ -617,8 +625,8 @@
       "reasoning_effort": "high",
       "quantization": "unknown",
       "entered_at": "2026-09-05",
-      "defences": 2,
-      "holds": 2,
+      "defences": 3,
+      "holds": 3,
       "climbed": 1,
       "seeded": false,
       "via": "throne",
@@ -665,6 +673,105 @@
     }
   ],
   "challenges": [
+    {
+      "id": "2026-10_x-ai-grok-4.7",
+      "format": "throne",
+      "challenger": {
+        "model": "x-ai/grok-4.7",
+        "display_name": "Grok 4.7",
+        "reasoning_effort": "high",
+        "quantization": "unknown"
+      },
+      "date": "2026-10-03",
+      "steps": [
+        {
+          "rank": 1,
+          "opponent": {
+            "model": "google/gemini-3.8-flash",
+            "display_name": "Gemini 3.8 Flash",
+            "reasoning_effort": "high"
+          },
+          "legs": [
+            {
+              "match_id": "ladder_2026-10_x-ai-grok-4.7_r1_leg1",
+              "challenger_side": 0,
+              "outcome": "incumbent",
+              "victory_type": "military",
+              "turns": 20,
+              "date": "2026-10-03T20:32:25.080070+00:00",
+              "usd": 3.2335,
+              "perf": {
+                "x-ai/grok-4.7": {
+                  "usd": 1.668776,
+                  "usd_today": 1.668776,
+                  "cost_source": "provider",
+                  "think_ms": 164479,
+                  "half_turns": 19,
+                  "served_by": "xAI",
+                  "actions_ok": 55,
+                  "illegal": 0,
+                  "fog_blocked": 0
+                },
+                "google/gemini-3.8-flash": {
+                  "usd": 1.564769,
+                  "usd_today": 1.564769,
+                  "cost_source": "provider",
+                  "think_ms": 122800,
+                  "half_turns": 20,
+                  "served_by": "Google",
+                  "actions_ok": 53,
+                  "illegal": 2,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            },
+            {
+              "match_id": "ladder_2026-10_x-ai-grok-4.7_r1_leg2",
+              "challenger_side": 1,
+              "outcome": "challenger",
+              "victory_type": "nuclear",
+              "turns": 23,
+              "date": "2026-10-03T22:49:11.927759+00:00",
+              "usd": 3.6086,
+              "perf": {
+                "google/gemini-3.8-flash": {
+                  "usd": 1.902312,
+                  "usd_today": 1.902312,
+                  "cost_source": "provider",
+                  "think_ms": 133820,
+                  "half_turns": 22,
+                  "served_by": "Google",
+                  "actions_ok": 65,
+                  "illegal": 1,
+                  "fog_blocked": 0
+                },
+                "x-ai/grok-4.7": {
+                  "usd": 1.70625,
+                  "usd_today": 1.70625,
+                  "cost_source": "provider",
+                  "think_ms": 133201,
+                  "half_turns": 23,
+                  "served_by": "xAI",
+                  "actions_ok": 64,
+                  "illegal": 2,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            }
+          ],
+          "pts": [
+            3.0,
+            3.0
+          ],
+          "result": "hold",
+          "decided_by": "level on points, incumbent won faster (20 vs 23 turns)"
+        }
+      ],
+      "final_rank": null,
+      "displaced": null
+    },
     {
       "id": "2026-09_anthropic-claude-opus-5.5",
       "format": "throne",
@@ -2009,7 +2116,7 @@
       "display_name": "Gemini 3.8 Flash",
       "from": "2026-09-05",
       "to": null,
-      "defences": 2,
+      "defences": 3,
       "seeded": false
     }
   ]

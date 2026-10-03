@@ -1195,6 +1195,32 @@
       "winner": 1,
       "victory_type": "nuclear",
       "total_turns": 22
+    },
+    {
+      "match_id": "ladder_2026-10_x-ai-grok-4.7_r1_leg1",
+      "date": "2026-10-03T20:32:25.027356+00:00",
+      "p1_model": "x-ai/grok-4.7",
+      "p2_model": "google/gemini-3.8-flash",
+      "p1_display_name": "x-ai/grok-4.7",
+      "p2_display_name": "google/gemini-3.8-flash",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "military",
+      "total_turns": 20
+    },
+    {
+      "match_id": "ladder_2026-10_x-ai-grok-4.7_r1_leg2",
+      "date": "2026-10-03T22:49:11.873164+00:00",
+      "p1_model": "google/gemini-3.8-flash",
+      "p2_model": "x-ai/grok-4.7",
+      "p1_display_name": "google/gemini-3.8-flash",
+      "p2_display_name": "x-ai/grok-4.7",
+      "p1_reasoning_effort": "high",
+      "p2_reasoning_effort": "high",
+      "winner": 1,
+      "victory_type": "nuclear",
+      "total_turns": 23
     }
   ]
 }
