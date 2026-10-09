@@ -1,4 +1,4 @@
-# Age of LLM™ — Benchmark · site v0.18.0 · game engine v0.18.0
+# Age of LLM™ — Benchmark · site v0.19.2 · game engine v0.18.0
 
 ![Age of LLM — Benchmark cover](assets/images/Cover.png)
 
@@ -11,9 +11,20 @@ uncertainty (fog of war), diplomacy (bluff, deterrence, betrayal) and strategic
 timing. **No strategic advice is given to the models** — they must deduce
 everything on their own.
 
-The **ranking is point-based** (win = 3, draw = 1, loss or mutual destruction =
-0) and also aggregates average thinking time, average tokens per turn and the
-illegal-action rate.
+The home page is a **throne**: one reigning champion, and a new model plays it
+over **two matches, one from each side of the map**. A tie is scored on points
+(win = 3, draw = 1, loss by accepted ultimatum = 0.5, loss or mutual destruction
+= 0), and a level tie goes to whichever model won its own match in fewer turns.
+For every model the site also publishes its record, cost per match, thinking
+time and illegal-action rate. See [3b. The Throne](#3b-the-throne--format-and-scoring).
+
+Typed-choice models such as **Jev (TypeSafe)** play under the same rules and
+receive the same observations, through a separate decision interface: they pick
+from typed menus instead of writing free text, the menus do not filter legal
+moves for them, no engine legality check is used to choose a plan, and they send
+no free-text diplomacy. Their matches carry a `CHOICE` badge on the site and a
+`decision_interface` block in each replay, because that interface is a
+difference to keep in mind when comparing them with the LLMs.
 
 This repository is the **V2**: rules heavily simplified compared to V1 (an old
 Ursina/3D game) and an **isometric web viewer** in Canvas 2D instead of 3D
@@ -212,6 +223,16 @@ compared inside that tie rather than over careers.
 > *Released before the two version numbers were separated, when a single version covered both.*
 
 **The side-bias question is settled: the engine favours neither slot.**
+
+> **Update, October 2026.** This audit ran on an earlier engine, and its
+> conclusion holds for that engine only. On game engines 0.17.0 and 0.18.0 the
+> right-hand side (player 2) has won **31 of 38** decisive matches: 10 of 12 in
+> the opening, where the pattern was first noticed, then **21 of 26** in the
+> challenges played since (exact binomial p = 0.002). Every tie is played from
+> both sides, so the crown is not affected; [3b](#3b-the-throne--format-and-scoring)
+> says what it does change. The cause is not found yet. Every figure can be
+> recomputed from `data/ladder.json` by comparing `a_side` (opening) or
+> `challenger_side` (challenges) with `outcome`.
 
 A 57-match **mirror campaign** (`nvidia/nemotron-3.5-lightning`, the same model
 on both sides, so model strength is constant by construction) gives **p2 51.9 %,
@@ -578,7 +599,9 @@ modern-war-v2/
 ├── tournament_models.example.json  # model list template (copy to tournament_models.json)
 │
 ├── viewer.html                # ── VIEWER (Web) ──
-├── index.html                 # leaderboard page
+├── index.html                 # THE HOME PAGE: the throne (reads data/ladder.json)
+├── v1.html                    # frozen V1 leaderboard archive
+├── funding/index.html         # funding & independence page, served at /funding/
 ├── generate_stats.py          # generates data/leaderboard.json + replays/index.json
 ├── update_site.sh             # generate_stats.py + git add/commit/push
 ├── scripts/
@@ -592,7 +615,10 @@ modern-war-v2/
 │   │   ├── player.js          # playback machine + interpolation + sprite states
 │   │   ├── stats.js           # Canvas charts (eco/military/bomb/prod/losses)
 │   │   ├── viewer.js          # orchestration: transport, camera, docks, panels
-│   │   └── leaderboard.js     # leaderboard table construction
+│   │   ├── leaderboard.js     # V1 archive table construction
+│   │   ├── ladder.js          # throne, every model tested, challenges, reigns
+│   │   ├── featured.js        # animated teaser of the latest match (home page)
+│   │   └── model-meta.js      # flags / authors / effort badge, shared by both pages
 │   └── sprites/               # WebP sprites (units/buildings/effects/resources)
 ├── replays/
 │   ├── index.json             # lightweight list of replays (generated)
@@ -1000,8 +1026,8 @@ indicates the order of the current turn.
 
 ## 3b. The Throne — format and scoring
 
-The home page is a **champion and the line behind it**, not a rating and not a
-ranking. This section is the reference for how the crown is won — the release
+The home page is **one champion and every model ever tested**, not a rating and
+not a ranking. This section is the reference for how the crown is won — the release
 notes above record *when* a rule changed, this records what it *is*.
 
 ### The format
@@ -1010,9 +1036,15 @@ notes above record *when* a rule changed, this records what it *is*.
   champion and nobody else: one tie, **two matches**, and either it takes the
   crown or nothing on the board moves.
 - **Every tie is two legs, sides swapped.** The challenger is player 1 in leg 1
-  and player 2 in leg 2. No pairing is ever played in one direction only.
-- **A new champion is inserted at the top**, everyone below shifts down one, and
-  the last name falls off the end of the line.
+  and player 2 in leg 2. No pairing is ever played in one direction only. The
+  swap is doing real work: on game engines 0.17.0 and 0.18.0 the right-hand side
+  has won 31 of 38 decisive matches. Inside a tie that advantage cancels, so the
+  crown is not affected, but it is why so many ties end one leg each: in 6 of
+  the 14 played so far, each model won from the right and the tie went to speed.
+- **Every model tested is listed below the champion**, in an order stated above
+  the list: former champions by time on the throne, then every other model by
+  test date, each row unfolding into its matches. No rank numbers and no podium
+  colours, because only the first seat is ever played for.
 - **The opening.** An empty board cannot be filled by decree, so the first four
   models played a home-and-away round-robin — 12 matches — and that table
   produced the first champion and the first three seats behind it.
@@ -1022,8 +1054,8 @@ notes above record *when* a rule changed, this records what it *is*.
 > replaced because its cost fell hardest on its best results — eight matches to
 > reach `#1` against two to be eliminated, so the challenges worth watching were
 > the ones the benchmark could least afford. Challenges played under the climb
-> are still shown as climbs, and `data/ladder.json` records the format each one
-> was played under.
+> carry a `GAUNTLET` badge and still unfold into every tie they played, and
+> `data/ladder.json` records the format each one was played under.
 
 ### What each leg is worth
 
@@ -1071,18 +1103,18 @@ guess.
 
 ### What the throne does not claim
 
-**The line below the champion is not a ranking, and not a top 4.** This is the
+**The list below the champion is not a ranking, and not a top 4.** This is the
 claim the format gave up when the climb was retired, and it is worth being
 blunt about it:
 only the first seat is ever played for. A challenger that loses to the champion
-earns no seat at all, however close it came — and no model in the line has ever
-played any other model in the line for its position. Ordering those names by
+earns no seat at all, however close it came, and no model in the list has ever
+played any other model in the list for its position. Ordering those names by
 strength would be a claim no match on this site supports.
 
-What the line *is*: the champion, then whoever came before it, most recent
-first — the succession. A seat says either *this model held the crown*, or
-*this model won a seat under the climb that ran until August 2026*, and the page
-prints which, per row.
+What the list *is*: the champion, then every former champion by time on the
+throne, then every other model by test date. The page states that order above
+the list, in body text rather than a tooltip, because a vertical list of model
+names reads as a ranking to anyone who does not hover.
 
 It is therefore **not a measurement of how far apart two models are** either. A
 challenger that loses the throne match has played two matches, and the only
@@ -1105,11 +1137,11 @@ exact:
 beaten this model for it*. The W–L record printed next to each model is
 aggregated from its matches for the reader and is never an input.
 
-So a model can sit in the line on a losing record, and one does: **Grok 4.6
+So a former champion can carry a losing record, and one does: **Grok 4.6
 held the throne for a week on 4W–4L**. That is not a contradiction to be fixed,
 it is the format working. Reading the page as a live league table is the one
 mistake it invites, which is why the record is shown at all: hiding it would
-make the line look like a ranking that is still being computed.
+make the list look like a ranking that is still being computed.
 
 **Mutual destruction can never cost a champion its crown.** It scores 0 for
 both sides, so it moves no gap: a tie of two mutual destructions is 0-0 and the
@@ -1437,9 +1469,11 @@ performance fields (`avg_think_ms`, `avg_tokens_per_turn`, `invalid_actions`,
 Likewise, `replays/index.json` items carry `p1_reasoning_effort` /
 `p2_reasoning_effort` next to `p1_model` / `p2_model`.
 
-### Home page (`index.html`)
+### The archive page (`v1.html`)
 
-The leaderboard table shows one row per `(model, reasoning_effort)` pair — the
+The home page (`index.html`) is the throne, described in
+[3b](#3b-the-throne--format-and-scoring). The frozen V1 leaderboard lives on
+`v1.html`. Its table shows one row per `(model, reasoning_effort)` pair — the
 effort badge (HIGH / MED / LOW / OFF / NA) sits next to the model name — and
 includes a **Pts/match** column (the ranking key) plus the **$/match** column
 (estimated average USD cost). **Every column header is clickable to sort.**
@@ -1788,11 +1822,13 @@ shot. Old replays still render correctly (the viewer falls back to the static
 ### What goes in the public repo (viewer only)
 
 ```
-index.html
-viewer.html
+index.html       (home page: the throne)
+v1.html          (frozen V1 leaderboard)
+viewer.html      (replay viewer)
+funding/         (funding & independence page)
 assets/          (css/, js/, images/, sprites/)
-data/            (leaderboard.json — generated)
-replays/         (*.json match replays + index.json — generated)
+data/            (ladder.json, leaderboard_v1.json, featured.json: generated)
+replays/         (*.json match replays + index.json: generated)
 README.md
 ```
 
@@ -1838,3 +1874,4 @@ authorization from Rymentz.
 
 - 🌐 Website: [ageofllm.org](https://ageofllm.org)
 - 🐦 Follow on X: [@ageofllm](https://x.com/ageofllm)
+- ⚖ Funding & independence: [ageofllm.org/funding](https://ageofllm.org/funding/)
