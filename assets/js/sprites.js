@@ -1,5 +1,5 @@
 /*
- * sprites.js — Loads every WebP once and resolves replay entities to images.
+ * sprites.js - Loads every WebP once and resolves replay entities to images.
  *
  * Sprite footprint conventions (from the supplied asset pack, now WebP):
  *   - terrain / buildings : 90 x 80  (diamond 90x45 + vertical depth)
@@ -134,7 +134,7 @@ const Sprites = (() => {
 
   // ---- buildings ----
   // state: 'construct' | 'normal' | 'damage' | 'destroy' | 'launch'
-  // owner: 0 | 1 — only used by the base, which has a dedicated per-player sprite.
+  // owner: 0 | 1 - only used by the base, which has a dedicated per-player sprite.
   function building(type, state, variant, owner = 0) {
     const stem = BLDG_STEM[type] || 'base';
     const v = variant === 2 ? 2 : 1;

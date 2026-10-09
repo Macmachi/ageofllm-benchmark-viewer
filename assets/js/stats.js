@@ -1,5 +1,5 @@
 /*
- * stats.js — Derived match analytics + lightweight vanilla Canvas charts.
+ * stats.js - Derived match analytics + lightweight vanilla Canvas charts.
  *
  * No external charting library. Computes per-turn series from the replay up to
  * (and including) the current turn index, and renders them into small canvases

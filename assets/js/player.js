@@ -1,16 +1,16 @@
 /*
- * player.js — Playback state machine.
+ * player.js - Playback state machine.
  *
  * Owns: current turn index, play/pause, speed, and the per-turn animation clock.
- * Knows NOTHING about Canvas — it only produces an interpolated `frame` object
+ * Knows NOTHING about Canvas - it only produces an interpolated `frame` object
  * that renderer.js consumes. The viewer wires callbacks (onFrame / onTurnChange).
  *
- * Animation model per turn (SEQUENTIAL — one action at a time):
+ * Animation model per turn (SEQUENTIAL - one action at a time):
  *   A half-turn lasts `actionMs * nbActions / speed`. The normalized clock
  *   animT 0..1 is sliced into N equal parts, one per non-wait action. Within a
  *   slice, a local clock localT 0..1 runs:
- *   - 0.00 .. 0.55 : MOVE phase  — the acting unit glides from .from to .to.
- *   - 0.55 .. 1.00 : ACTION phase — that action's attack line / launch flash /
+ *   - 0.00 .. 0.55 : MOVE phase  - the acting unit glides from .from to .to.
+ *   - 0.55 .. 1.00 : ACTION phase - that action's attack line / launch flash /
  *                    target destroy sprite play out.
  *   The end-of-turn snapshot (turn.units/buildings) is the source of truth for
  *   final positions; intermediate positions are reconstructed from actions[].
@@ -80,7 +80,7 @@ const Player = (() => {
     play() {
       if (this.playing) return;
       // Restart from the beginning if: at the end, OR at turn 0 not yet started
-      // (animT === 1 means the turn snapshot is shown fully resolved — clicking
+      // (animT === 1 means the turn snapshot is shown fully resolved - clicking
       // Play from the initial state should animate from turn 0, not skip it).
       if ((this.idx >= this.count - 1 && this.animT >= 1) ||
           (this.idx === 0 && this.animT >= 1)) {
@@ -226,7 +226,7 @@ const Player = (() => {
       }
       // On the resolution frame, once the mushroom is blooming (animT past the
       // initial flash), everything belonging to a nuked player is shown as
-      // 'destroy' (wiped out by the blast) — buildings and units alike.
+      // 'destroy' (wiped out by the blast) - buildings and units alike.
       const nukeWipe = nukedOwners.size > 0 && clamp01(animT) >= 0.18;
       // Tie each destruction to the slice of the attack/launch that caused it,
       // so the victim only disappears once that action plays.
@@ -307,7 +307,7 @@ const Player = (() => {
         let bstate;
         // Once a silo fires this turn it shows the 'launch' sprite from the very
         // start of the launch slice (the missile is rising) and KEEPS it for the
-        // rest of the turn — it never reverts to its idle sprite.
+        // rest of the turn - it never reverts to its idle sprite.
         const siloFired = launchAction && b.type === 'silo'
           && b.owner === turn.active_player
           && activeI >= launchIdx;
@@ -345,7 +345,7 @@ const Player = (() => {
       // Ghost buildings: a mine/silo destroyed by a TANK this turn is gone from
       // the end-of-turn snapshot. Re-inject it so it stands intact until the
       // attack slice that destroys it, then plays its 'destroy' sprite during
-      // that slice's FX phase — keeping the tank's shot synced with the wreck
+      // that slice's FX phase - keeping the tank's shot synced with the wreck
       // (no more "firing at an empty cell").
       const liveBldgIds = new Set(buildings.map((b) => b.id));
       for (const [bid, ev] of destroyedBldgs) {

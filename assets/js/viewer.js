@@ -1,5 +1,5 @@
 /*
- * viewer.js — Orchestrates the replay viewer page.
+ * viewer.js - Orchestrates the replay viewer page.
  *
  * Wiring only: loads the replay JSON, preloads sprites, constructs a
  * Player.Playback, renders each emitted frame via Renderer, and binds the UI
@@ -14,9 +14,9 @@
     nuclear:   { ttl: 'NUCLEAR VICTORY', bolt: '☢' },
     military:  { ttl: 'MILITARY VICTORY', bolt: '⚔' },
     ultimatum: { ttl: 'ULTIMATUM VICTORY', bolt: '📜' },
-    peace:     { ttl: 'DRAW — PEACE', bolt: '🕊' },
+    peace:     { ttl: 'DRAW · PEACE', bolt: '🕊' },
     mutual_destruction: { ttl: 'MUTUAL DESTRUCTION', bolt: '☢' },
-    timeout:   { ttl: 'DRAW — TIMEOUT', bolt: '⏳' },
+    timeout:   { ttl: 'DRAW · TIMEOUT', bolt: '⏳' },
   };
 
   // Reasoning-effort badge label (extendable in the future).
@@ -290,7 +290,7 @@
   // ── diplomacy status, under the model names ───────────────────────────────
   // A ceasefire in force and an offer still awaiting an answer both change how
   // the moves on screen should be read, and until now neither was visible
-  // outside the diplomacy log — you had to open a panel to know the players
+  // outside the diplomacy log - you had to open a panel to know the players
   // were not allowed to shoot at each other.
   const PROPOSAL_KINDS = new Set(['ceasefire', 'peace', 'ultimatum']);
   // Replays written before engine 0.18.0 carry no ceasefire window, so for those
@@ -465,7 +465,7 @@
     const player = replay.meta.players[ap];
 
     // reasoning
-    els['reason-text'].textContent = ps.reasoning || '—';
+    els['reason-text'].textContent = ps.reasoning || '–';
     const badge = els['reason-badge'];
     badge.textContent = String(ap + 1);
     badge.className = ap === 0 ? 'badge-p0' : 'badge-p1';
@@ -487,7 +487,7 @@
     els['reason-discovered'].style.display = disc ? 'flex' : 'none';
 
     // Recorded from engine 0.18.0 on. Absent in older replays, where it must
-    // stay hidden rather than render as "not warned" — we simply do not know.
+    // stay hidden rather than render as "not warned" - we simply do not know.
     const warned = ps.knowledge && ps.knowledge.enemy_launch_detected;
     if (els['reason-launch']) {
       els['reason-launch'].style.display = warned ? 'flex' : 'none';
@@ -637,7 +637,7 @@
       });
     });
 
-    // panels (reasoning closed by default — opt-in, not shown automatically)
+    // panels (reasoning closed by default - opt-in, not shown automatically)
     bindToggle('btn-reason', 'reason-panel', false);
     bindToggle('btn-diplo', 'diplo-panel', false, 'amber', () => {
       // opening the panel clears the diplomacy notification

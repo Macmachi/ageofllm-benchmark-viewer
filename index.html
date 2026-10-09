@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Age of LLM™ — The Throne · Current champion</title>
+  <title>Age of LLM™ · The Throne · Current champion</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css?v=0.19.1" />
+  <link rel="stylesheet" href="assets/css/style.css?v=0.19.2" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png" />
@@ -20,9 +20,9 @@
 
     <div class="lb-header">
       <img src="assets/images/Logo_AOL.png" alt="Age of LLM" class="header-logo" />
-      <h1>Age of LLM™ <span class="lb-tag">— The Throne</span></h1>
+      <h1>Age of LLM™ <span class="lb-tag">· The Throne</span></h1>
       <span class="lb-ver" id="lad-ver" title="The game-engine (rules) version stamped when this page was last written. It is not necessarily the version every match here was played on, nor the one in force today: each replay carries the version its own match ran under."></span>
-      <span class="lb-eng" id="lad-site" title="Site / tooling version. Never stamped into a replay — it cannot change how a match was played."></span>
+      <span class="lb-eng" id="lad-site" title="Site / tooling version. Never stamped into a replay: it cannot change how a match was played."></span>
     </div>
     <!-- Both of these are rewritten by ladder.js from rules.format in
          data/ladder.json, so an archived gauntlet season or a preview built
@@ -32,11 +32,11 @@
     <div class="lb-tagline" id="lb-tagline">One champion. Beat it over two matches and the crown is yours.</div>
     <div class="lb-sub" id="lb-sub">
       There is one thing to win here: <strong>the throne</strong>. A new model
-      does not join a standing and it does not climb — it plays the reigning
+      does not join a standing and it does not climb. It plays the reigning
       champion, <strong>two matches, one from each side of the map</strong>, and
       either takes the crown or goes home.
-      <span class="lb-sub-tie"><strong>One win each</strong> — the crown goes to
-      whichever model won in fewer turns. <strong>Two draws</strong> — the
+      <span class="lb-sub-tie"><strong>One win each</strong>: the crown goes to
+      whichever model won in fewer turns. <strong>Two draws</strong>: the
       champion keeps it.</span>
     </div>
 
@@ -46,7 +46,7 @@
       <a class="cta-btn star" href="https://github.com/Macmachi/ageofllm-benchmark-viewer" target="_blank" rel="noopener"
          title="Star the project on GitHub">⭐ Give a star on GitHub</a>
       <a class="cta-btn xfollow" href="https://x.com/ageofllm" target="_blank" rel="noopener"
-         title="Follow on X to know when new models are tested">𝕏 Follow on X — know when new models are tested</a>
+         title="Follow on X to know when new models are tested">𝕏 Follow on X to know when new models are tested</a>
       <!-- Sits beside the two calls to action rather than at the foot of the page:
            a reader who has just read the format is exactly who asks "and the old
            one?". Muted styling keeps it an archive, not a competing ranking. -->
@@ -57,7 +57,7 @@
 
     <!-- Animated teaser of the most recent match. Stays hidden until
          data/featured.json loads, so a fresh install shows nothing rather than
-         an empty frame. Sprite-free by design — see assets/js/featured.js. -->
+         an empty frame. Sprite-free by design - see assets/js/featured.js. -->
     <div class="featured" id="featured-match" hidden></div>
 
     <div id="opening-section"></div>
@@ -91,7 +91,7 @@
     <div class="lb-section-title">Every champion, from the beginning</div>
     <div class="lad-reigns" id="lad-reigns"></div>
 
-    <!-- Models that held a seat and lost it — gauntlet seasons only. Under the
+    <!-- Models that held a seat and lost it - gauntlet seasons only. Under the
          throne they are rows of the model list above, with their matches. -->
     <div id="dropped-history"></div>
 
@@ -102,16 +102,19 @@
     <footer class="site-footer">
       <a class="foot-link" href="https://youtu.be/Ec-CV1uzyVY" target="_blank" rel="noopener" title="Presentation video">▶ Presentation ↗</a>
       <a class="foot-link" href="https://github.com/Macmachi/ageofllm-benchmark-viewer" target="_blank" rel="noopener" title="Star on GitHub">⭐ Star on GitHub</a>
-      <a class="foot-link" href="https://x.com/ageofllm" target="_blank" rel="noopener" title="Follow on X — know when new models are tested">𝕏 Follow @ageofllm</a>
+      <a class="foot-link" href="https://x.com/ageofllm" target="_blank" rel="noopener" title="Follow on X to know when new models are tested">𝕏 Follow @ageofllm</a>
       <a class="foot-link" href="https://www.youtube.com/@AgeofLLM" target="_blank" rel="noopener" title="YouTube">▶ YouTube</a>
-      <!-- URL sent in outreach emails — do not change this path. -->
+      <!-- URL sent in outreach emails - do not change this path. -->
       <a class="foot-link" href="funding/" title="Funding &amp; independence">⚖ Funding &amp; independence</a>
-      <span class="foot-copy">© 2026 Rymentz — Age of LLM™ — All rights reserved</span>
+      <!-- Every contribution is credited here and itemised on the funding page,
+           which says what it paid for. -->
+      <a class="foot-link" href="funding/#contributions" title="$50 in API credits, listed with what they paid for">♥ Compute credits from Venice AI</a>
+      <span class="foot-copy">© 2026 Rymentz · Age of LLM™ · All rights reserved</span>
     </footer>
   </div>
 
-  <script src="assets/js/model-meta.js?v=0.19.1"></script>
-  <script src="assets/js/ladder.js?v=0.19.1"></script>
+  <script src="assets/js/model-meta.js?v=0.19.2"></script>
+  <script src="assets/js/ladder.js?v=0.19.2"></script>
   <script src="assets/js/featured.js"></script>
 </body>
 </html>

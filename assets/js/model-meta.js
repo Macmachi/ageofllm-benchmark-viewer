@@ -1,5 +1,5 @@
 /*
- * model-meta.js — per-model presentation metadata: flag, author, "new" badge.
+ * model-meta.js - per-model presentation metadata: flag, author, "new" badge.
  *
  * Loaded before leaderboard.js, ladder.js and viewer.js. Kept in ONE place:
  * two pages holding two copies of this table is exactly how "GLM 5.1" ended up
@@ -8,7 +8,7 @@
  */
 
 window.MODEL_META = {
-  // 🇨🇭 Switzerland — deterministic benchmark anchor (not an LLM)
+  // 🇨🇭 Switzerland - deterministic benchmark anchor (not an LLM)
   'champion-agent':                    { flag: '🇨🇭', author: 'Rymentz AI' },
   // 🇺🇸 United States
   'gpt-5.5':                           { flag: '🇺🇸', author: 'OpenAI' },

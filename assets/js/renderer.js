@@ -1,5 +1,5 @@
 /*
- * renderer.js — Canvas 2D isometric board renderer.
+ * renderer.js - Canvas 2D isometric board renderer.
  *
  * Pure drawing. Receives an immutable `frame` (the interpolated playback state
  * produced by player.js) plus view options, and paints one canvas frame. It
@@ -185,7 +185,7 @@ const Renderer = (() => {
     const dep = depositsFor(replay, turn);
     const fog = fogFor(view, replay, turn);
 
-    // 1) TERRAIN — back to front (painter's order by col+row).
+    // 1) TERRAIN - back to front (painter's order by col+row).
     for (let s = 0; s <= (W - 1) + (H - 1); s++) {
       for (let c = 0; c < W; c++) {
         const r = s - c;
@@ -194,7 +194,7 @@ const Renderer = (() => {
       }
     }
 
-    // 2) ENTITIES — collect, sort by depth, paint.
+    // 2) ENTITIES - collect, sort by depth, paint.
     // In player view, hide everything sitting on a fogged cell (own or enemy):
     // you simply cannot see what is in the dark.
     const drawList = [];
@@ -202,7 +202,7 @@ const Renderer = (() => {
     for (const b of frame.buildings) {
       const [c, r] = b.pos;
       // In player view: a building on a fogged cell is normally hidden, EXCEPT
-      // an enemy building the viewed player has discovered before — that one is
+      // an enemy building the viewed player has discovered before - that one is
       // drawn dimmed (a "remembered" sighting) instead of disappearing.
       if (isFoggedCell(c, r, fog)) {
         if (!isRememberedCell(c, r, fog)) continue;
@@ -304,7 +304,7 @@ const Renderer = (() => {
     const maxhp = MAXHP[b.type] || 10;
     // state + stable variant come from player.js (b._state, b._variant)
     // A remembered building (out of current vision) is always drawn in its
-    // 'normal' state — we no longer have live HP/under-construction info for it.
+    // 'normal' state - we no longer have live HP/under-construction info for it.
     const state = memory ? 'normal' : (b._state || (b.hp <= 0 ? 'destroy' : 'normal'));
     const variant = b._variant || Sprites.variantFor(b.id);
     const img = Sprites.building(b.type, state, variant, b.owner);

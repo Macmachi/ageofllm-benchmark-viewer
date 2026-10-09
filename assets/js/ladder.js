@@ -1,5 +1,5 @@
 /*
- * ladder.js — renders data/ladder.json: the champion, every model ever tested
+ * ladder.js - renders data/ladder.json: the champion, every model ever tested
  * with its matches, every challenge played for the throne, and the succession
  * of reigns. The frozen V1 corpus joins the model list read-only, from
  * data/leaderboard_v1.json and replays/index_v1.json.
@@ -8,8 +8,8 @@
  * `throne` a challenger plays the champion and only the champion, so the seats
  * below the first were never played for and this page must NOT draw them as a
  * ranking: no rank numbers, no podium colours, no "climbed" badge. They are a
- * line of succession. Under `gauntlet` — the first season, and every challenge
- * record written before site 0.18.0 — the challenger climbed rung by rung and
+ * line of succession. Under `gauntlet` - the first season, and every challenge
+ * record written before site 0.18.0 - the challenger climbed rung by rung and
  * the standing IS an order, so that wording is kept for those.
  *
  * The file is written by run_ladder.py (real matches) or by
@@ -64,16 +64,16 @@
     throne: {
       tagline: 'One champion. Beat it over two matches and the crown is yours.',
       sub: 'There is one thing to win here: <strong>the throne</strong>. A new '
-        + 'model does not join a standing and it does not climb — it plays the '
+        + 'model does not join a standing and it does not climb. It plays the '
         + 'reigning champion, <strong>two matches, one from each side of the '
         + 'map</strong>, and either takes the crown or goes home. '
-        + '<span class="lb-sub-tie"><strong>One win each</strong> — the crown '
-        + 'goes to whichever model won in fewer turns. <strong>Two draws</strong> '
-        + '— the champion keeps it.</span>',
+        + '<span class="lb-sub-tie"><strong>One win each</strong>: the crown '
+        + 'goes to whichever model won in fewer turns. <strong>Two draws</strong>'
+        + ': the champion keeps it.</span>',
       boardTitle: 'Every model tested',
       boardNote: 'The champion, then every former champion by time on the '
         + 'throne, then every other model, most recently tested first. '
-        + '<strong>Not a ranking</strong> — only the throne is played for. '
+        + '<strong>Not a ranking</strong>: only the throne is played for. '
         + '<strong>Open a model to see each of its matches and watch the '
         + 'replays.</strong>',
       boardNoteTitle: 'Models did not play the same number of matches: the '
@@ -83,14 +83,14 @@
         + 'older game engine and are kept frozen.',
     },
     gauntlet: {
-      tagline: 'The current standing — four places, held until someone takes them',
-      sub: 'Four places. A new model does not join the ladder — it challenges in '
+      tagline: 'The current standing: four places, held until someone takes them',
+      sub: 'Four places. A new model does not join the ladder. It challenges in '
         + 'at the bottom: <strong>two matches against #4, one from each side of '
         + 'the map</strong>. Win both and it moves up to face #3, then #2, then '
         + '#1. As soon as it fails to take a place, the climb stops there and it '
         + 'keeps the last place it won. <span class="lb-sub-tie"><strong>One win '
-        + 'each</strong> — the place goes to whichever model won in fewer turns. '
-        + '<strong>Two draws</strong> — the model already there keeps its place.'
+        + 'each</strong>: the place goes to whichever model won in fewer turns. '
+        + '<strong>Two draws</strong>: the model already there keeps its place.'
         + '</span>',
       boardTitle: 'Standing',
       boardNote: 'Seeded once by the opening table, then held until a challenger '
@@ -131,7 +131,7 @@
     const ver = document.getElementById('lad-ver');
     // Labelled on purpose: an unlabelled "v0.17.0" invites the reader to think
     // the rules changed when only the site did. This badge is the RULES version
-    // — the one that says whether these matches are comparable to each other.
+    // - the one that says whether these matches are comparable to each other.
     if (ver) ver.textContent = data.engine_version ? 'game engine ' + data.engine_version : 'ladder';
     const site = document.getElementById('lad-site');
     if (site && data.site_version) site.textContent = 'site v' + data.site_version;
@@ -209,7 +209,7 @@
       // winner counted for neither side and a model that had played two matches
       // could show "0W-1L".
       //
-      // Mutual destruction is a LOSS FOR BOTH — the same rule ladder_core.py
+      // Mutual destruction is a LOSS FOR BOTH - the same rule ladder_core.py
       // and generate_stats.py apply. It is the one outcome with no winner that
       // is nonetheless nobody's draw.
       const mutual = leg.victory_type === 'mutual_destruction';
@@ -222,7 +222,7 @@
         else a.d += 1;
       }
       // Turns to win / to lose, for the tempo tiebreak only. A match nobody
-      // closed out has no time to contribute — including a mutual destruction,
+      // closed out has no time to contribute - including a mutual destruction,
       // where "how fast was it annihilated" measures nothing.
       if (typeof leg.turns === 'number' && win && lose && !mutual) {
         (acc[win] || {}).winTurns?.push(leg.turns);
@@ -266,7 +266,7 @@
     }
   }
 
-  // `record: false` where the caller prints the record itself — the model list
+  // `record: false` where the caller prints the record itself - the model list
   // shows it as a tile and lists the matches right under it.
   function perfCells(model, opts) {
     const p = perfByModel[model];
@@ -274,16 +274,16 @@
     const lat = p.thinkMs != null
       ? `<span class="lad-stat" title="Mean thinking time per played turn, measured across ${p.matches} match(es) on a pinned provider">⏱ ${fmtMs(p.thinkMs)}</span>` : '';
     // Win-loss record over everything this model has played here. A ladder rank
-    // says "nobody has beaten me at this rung", which on day one — when the
-    // opening is the only thing that happened — tells the reader nothing about
+    // says "nobody has beaten me at this rung", which on day one - when the
+    // opening is the only thing that happened - tells the reader nothing about
     // how the four got there. The record does, and it links to the matches.
     const rec = (opts && opts.record === false) ? ''
       : (p.wins + p.losses + p.draws)
-      ? `<a class="lad-stat rec" href="#board-title" data-model="${esc(model)}" title="Record across every match played on this ladder — W–L–D, and it always sums to the ${p.matches} match(es) played. A mutual destruction counts as a loss for both sides, not a draw. Click to open its matches and replays in the model list.">▤ ${p.wins}W–${p.losses}L${p.draws ? `–${p.draws}D` : ''}</a>` : '';
+      ? `<a class="lad-stat rec" href="#board-title" data-model="${esc(model)}" title="Record across every match played on this ladder (W–L–D). It always sums to the ${p.matches} match(es) played. A mutual destruction counts as a loss for both sides, not a draw. Click to open its matches and replays in the model list.">▤ ${p.wins}W–${p.losses}L${p.draws ? `–${p.draws}D` : ''}</a>` : '';
     // Tempo. It settles the opening table when points, wins and head-to-head
     // are all level, and since site 0.17.1 it settles a level challenge too.
     const tempo = p.winTurns != null
-      ? `<span class="lad-stat" title="Mean turns taken in the ${p.wonMatches} match(es) this model won. Career figure, shown as information — a challenge is settled on the speed inside that duel, not on this average.">⚔ wins in ${p.winTurns.toFixed(0)}</span>` : '';
+      ? `<span class="lad-stat" title="Mean turns taken in the ${p.wonMatches} match(es) this model won. Career figure, shown as information: a challenge is settled on the speed inside that duel, not on this average.">⚔ wins in ${p.winTurns.toFixed(0)}</span>` : '';
     // Cost is a PRICE EPOCH, not a constant. A model that played before a price
     // cut carries the old rate in its average for ever, and comparing it to one
     // benchmarked this week compares two eras. So when re-pricing the same
@@ -302,22 +302,22 @@
     const listPerMatch = (pt.discount && (today != null || p.usdPerMatch != null))
       ? (today != null ? today : p.usdPerMatch) / (1 - pt.discount) : null;
     const promo = pt.discount
-      ? ` <span class="lad-promo" title="This model's pinned endpoint is on a promotion right now: $${pt.input}/$${pt.output} per 1M against a list price of $${pt.list_input}/$${pt.list_output}. At list price these same matches average ${fmtUsd(listPerMatch)}. The discount is a date, not a price — it expires.">PROMO −${Math.round(pt.discount * 100)}%</span>` : '';
+      ? ` <span class="lad-promo" title="This model's pinned endpoint is on a promotion right now: $${pt.input}/$${pt.output} per 1M against a list price of $${pt.list_input}/$${pt.list_output}. At list price these same matches average ${fmtUsd(listPerMatch)}. The discount is a date, not a price: it expires.">PROMO −${Math.round(pt.discount * 100)}%</span>` : '';
     const cost = p.usdPerMatch != null
       ? `<span class="lad-stat${p.allReported ? '' : ' estimated'}" title="${p.allReported
           ? 'Average USD per match, as charged by the provider on the day it was played'
-          : 'Average USD per match — at least one match had no provider-reported cost and fell back to an estimate'}">💲 ${fmtUsd(p.usdPerMatch)}${nowCell}${promo}</span>` : '';
+          : 'Average USD per match. At least one match had no provider-reported cost and fell back to an estimate'}">💲 ${fmtUsd(p.usdPerMatch)}${nowCell}${promo}</span>` : '';
     const prov = p.providers.length === 1
       ? `<span class="lad-stat prov" title="Every call was served by this endpoint">${esc(p.providers[0])}</span>`
       : p.providers.length > 1
-        ? `<span class="lad-stat prov warn" title="Served by more than one endpoint — the provider pin did not hold, so latency and cost mix backends">⚠ ${esc(p.providers.join(', '))}</span>`
+        ? `<span class="lad-stat prov warn" title="Served by more than one endpoint: the provider pin did not hold, so latency and cost mix backends">⚠ ${esc(p.providers.join(', '))}</span>`
         : '';
     // Two separate numbers on purpose. "illegal" is the rule-following signal:
     // actions the model had every element in its observation to get right.
     // "fog" is shown next to it, greyed, so the reader can see it exists and
     // that it is deliberately NOT held against the model.
     const ill = p.illegalRate != null
-      ? `<span class="lad-stat" title="Share of submitted actions the engine rejected for a reason the model could have foreseen — ${p.illegal} action(s)">⚠ ${(p.illegalRate * 100).toFixed(1)}% illegal</span>` : '';
+      ? `<span class="lad-stat" title="Share of submitted actions the engine rejected for a reason the model could have foreseen (${p.illegal} action(s))">⚠ ${(p.illegalRate * 100).toFixed(1)}% illegal</span>` : '';
     const fog = p.fog
       ? `<span class="lad-stat muted" title="Actions rejected by something outside the model's field of view (a hidden unit on the destination, an undiscovered building on the line of fire). Not counted as illegal: bumping into the unknown is how a fog-of-war game reveals the board.">🌫 ${p.fog} fog-blocked</span>` : '';
     return rec + lat + tempo + cost + ill + fog + prov;
@@ -336,8 +336,8 @@
     if (!q) return '';
     const unknown = q === 'unknown';
     const title = unknown
-      ? 'The provider does not publish the numeric precision it serves. Normal for a closed model — it can be neither chosen nor verified.'
-      : `Numeric precision of the pinned endpoint. Lower precision costs capability, and this model plays at ${q} because that is what the endpoint it is pinned to serves — shown next to its record.`;
+      ? 'The provider does not publish the numeric precision it serves. Normal for a closed model: it can be neither chosen nor verified.'
+      : `Numeric precision of the pinned endpoint. Lower precision costs capability, and this model plays at ${q} because that is what the endpoint it is pinned to serves. It is shown next to its record.`;
     return `<span class="lad-quant${unknown ? ' unknown' : ''}" title="${esc(title)}">${esc(q)}</span>`;
   }
 
@@ -356,7 +356,7 @@
     document.getElementById('preview-banner').innerHTML =
       `<div class="preview-banner">
          <span class="pb-tag">PREVIEW</span>
-         <span>${esc(data.note || 'Fabricated data — not a result.')}</span>
+         <span>${esc(data.note || 'Fabricated data, not a result.')}</span>
        </div>`;
   }
 
@@ -368,7 +368,7 @@
   // ── paging ────────────────────────────────────────────────────────────────
   // The opening grows as n(n-1) legs and the challenge log never stops growing,
   // so both get pages. Below the threshold nothing is drawn: a pager under nine
-  // items is chrome for its own sake. Reigns stay whole on purpose — that list
+  // items is chrome for its own sake. Reigns stay whole on purpose - that list
   // is a timeline whose bars are positioned against a shared start and end, and
   // slicing it would silently rescale the axis.
   // Halved on a narrow screen: a page that takes four thumb-scrolls to reach its
@@ -421,7 +421,7 @@
   }
 
   function renderOpening() {
-    // Pending, the opening IS the page — nothing else has happened yet, so it
+    // Pending, the opening IS the page - nothing else has happened yet, so it
     // sits at the top. Once played it becomes the ladder's origin story: it
     // moves to the bottom and collapses to one line. Six months and a dozen
     // challenges later, none of those four models may still be on the board,
@@ -460,7 +460,7 @@
     if (isThrone()) return;
 
     const champion = (op.table || [])[0];
-    // Collapsed once challenges exist — the opening is then provenance. Until
+    // Collapsed once challenges exist - the opening is then provenance. Until
     // then it is the ONLY thing that has happened, and hiding it leaves a reader
     // with four names and no evidence, so it opens by default.
     const firstDay = !((data.challenges || []).length);
@@ -479,16 +479,16 @@
          <table class="lb opening-table">
            <thead><tr><th>#</th><th>Model</th><th class="num">Pts</th>
              <th class="num">W</th><th class="num">D</th><th class="num">L</th>
-             <th class="num" title="Mean turns taken in the matches this model WON — shorter means it closed them out faster">Win in</th>
-             <th class="num" title="Mean turns taken in the matches this model LOST — longer means it held out longer">Lost in</th>
+             <th class="num" title="Mean turns taken in the matches this model WON. Shorter means it closed them out faster">Win in</th>
+             <th class="num" title="Mean turns taken in the matches this model LOST. Longer means it held out longer">Lost in</th>
              <th title="Only filled when points and wins were level: which criterion settled the order">Settled by</th></tr></thead>
            <tbody>${(op.table || []).map((r) =>
              `<tr><td>${r.rank}</td>
                   <td>${flag(r.model)}${esc(r.display_name)} ${effortBadge(r.reasoning_effort)}${quantBadge(r.quantization)}${author(r.model)}</td>
                   <td class="num">${fmtPts(r.pts)}</td>
                   <td class="num">${r.w}</td><td class="num">${r.d}</td><td class="num">${r.l}</td>
-                  <td class="num">${r.avg_win_turns != null ? r.avg_win_turns : '—'}</td>
-                  <td class="num">${r.avg_loss_turns != null ? r.avg_loss_turns : '—'}</td>
+                  <td class="num">${r.avg_win_turns != null ? r.avg_win_turns : '–'}</td>
+                  <td class="num">${r.avg_loss_turns != null ? r.avg_loss_turns : '–'}</td>
                   <td class="tiebreak${r.tiebreak && r.tiebreak.indexOf('unresolved') === 0 ? ' warn' : ''}">${r.tiebreak ? esc(r.tiebreak) : ''}</td>
               </tr>`).join('')}</tbody>
          </table>
@@ -582,11 +582,11 @@
     const label = l.outcome === 'draw'
       ? (l.victory_type === 'mutual_destruction'
         ? `${esc(name(l.a))} and ${esc(name(l.b))} destroyed each other`
-        : `${esc(name(l.a))} — ${esc(name(l.b))} drew`)
+        : `${esc(name(l.a))} and ${esc(name(l.b))} drew`)
       : `${esc(name(l.outcome === 'a' ? l.a : l.b))} beat ${esc(name(l.outcome === 'a' ? l.b : l.a))}`;
     const vt = `<span class="vt vt-${esc(l.victory_type)}">${VT_LABEL[l.victory_type] || esc(l.victory_type)}</span>`;
     if (!l.match_id) {
-      return `<div class="leg sim" title="Fabricated for this preview — no such match was ever played">
+      return `<div class="leg sim" title="Fabricated for this preview: no such match was ever played">
                 ${label} · ${vt}<span class="leg-sim">SIM</span></div>`;
     }
     return `<a class="leg" href="viewer.html?match=${encodeURIComponent(l.match_id)}"
@@ -599,7 +599,7 @@
     const el = document.getElementById('throne');
     const top = (data.ladder || [])[0];
     if (!top) {
-      el.innerHTML = '<div class="empty-state">No champion yet — the opening has not been played.</div>';
+      el.innerHTML = '<div class="empty-state">No champion yet: the opening has not been played.</div>';
       return;
     }
     const reign = (data.reigns || []).filter((x) => x.to === null).pop()
@@ -627,33 +627,33 @@
   // What a reader wants there instead is who it took the crown FROM.
   function thirdTile(top) {
     if (!isThrone()) {
-      return `<div class="ts"><b>${top.seeded ? '—' : top.climbed}</b>` +
+      return `<div class="ts"><b>${top.seeded ? '–' : top.climbed}</b>` +
              `<span>places climbed</span></div>`;
     }
     const prev = predecessor();
     return prev
       ? `<div class="ts wide" title="The champion this model beat to take the crown">` +
         `<b>${esc(prev)}</b><span>dethroned</span></div>`
-      : `<div class="ts wide" title="No predecessor — this model won the opening round-robin">` +
-        `<b>—</b><span>won the opening</span></div>`;
+      : `<div class="ts wide" title="No predecessor: this model won the opening round-robin">` +
+        `<b>–</b><span>won the opening</span></div>`;
   }
 
   // ── the standing ─────────────────────────────────────────────────────────
 
   // How a model got its place. Shared by the standing and by the dropped list:
   // the two printed different things for the same entry, so a model that won
-  // its place in the opening lost that fact the moment it was pushed off — and
+  // its place in the opening lost that fact the moment it was pushed off - and
   // "came in through the opening" is the most interesting thing about it.
   function originBadge(e) {
     if (e.via === 'opening') {
       return '<span class="lad-badge from-opening" title="Place won in the opening round-robin, not by challenging in">OPENING</span>';
     }
     if (e.seeded) {
-      return '<span class="lad-badge seeded" title="Placed when the ladder was created — not won on the board">SEEDED</span>';
+      return '<span class="lad-badge seeded" title="Placed when the ladder was created, not won on the board">SEEDED</span>';
     }
     if (e.via === 'throne') {
       return '<span class="lad-badge throne" title="Won the crown by beating the ' +
-        'reigning champion over two matches — the only way onto this page">👑 TOOK THE THRONE</span>';
+        'reigning champion over two matches, the only way onto this page">👑 TOOK THE THRONE</span>';
     }
     return `<span class="lad-badge climbed" title="Rungs won on the way in">▲ ${e.climbed}</span>`;
   }
@@ -687,7 +687,7 @@
   // The order is the only claim the list makes, and the note above it says
   // what it is: the champion, former champions by time on the throne, then
   // everyone else by the date they were tested. Records are printed, never
-  // compared — the opening four played each other, a challenger plays twice.
+  // compared - the opening four played each other, a challenger plays twice.
   //
   // The frozen V1 corpus closes the list. It keeps its own published order
   // (points per match, at least three matches) because V1 WAS a ranking, and
@@ -915,7 +915,7 @@
     el.innerHTML = page.map((m, i) => {
       const divider = m.era === 'v1' && (i === 0 || page[i - 1].era !== 'v1')
         ? `<div class="mdl-divider">
-             <b>V1 archive — frozen.</b> Played on game engine ${V1_ENGINES}, under
+             <b>V1 archive, frozen.</b> Played on game engine ${V1_ENGINES}, under
              rules and a system prompt the current engine no longer uses, and before
              the throne existed. Shown in the order the
              <a href="v1.html">V1 leaderboard</a> still publishes.
@@ -974,10 +974,10 @@
       ? `<span class="effort effort-na" title="${esc(window.choiceInterfaceTitle(m.decision))}">CHOICE</span>`
       : effortBadge(m.effort);
     const throne = m.era === 'v1'
-      ? '<div class="mdl-tile muted" title="V1 was played before the throne existed"><b>—</b><span>before the throne</span></div>'
+      ? '<div class="mdl-tile muted" title="V1 was played before the throne existed"><b>–</b><span>before the throne</span></div>'
       : m.reigns.length
         ? `<div class="mdl-tile gold" title="${m.spans.map((s, i) => `${fmtDate(m.reigns[i].from)} → ${m.reigns[i].to ? fmtDate(m.reigns[i].to) : 'today'}`).join(', ')}"><b>${fmtSpan({ days: m.throneDays, ms: m.throneMs })}</b><span>on the throne</span></div>`
-        : '<div class="mdl-tile muted"><b>—</b><span>never champion</span></div>';
+        : '<div class="mdl-tile muted"><b>–</b><span>never champion</span></div>';
     const rec = `<div class="mdl-tile" title="Wins–losses${d ? '–draws' : ''} over its ${n} match${n === 1 ? '' : 'es'}. A mutual destruction counts as a loss for both sides."><b>${w}W–${l}L${d ? `–${d}D` : ''}</b><span>${n} match${n === 1 ? '' : 'es'}</span></div>`;
     const perf = m.era === 'v1' ? v1Perf(m.v1) : perfCells(m.id, { record: false });
     const cls = m.current ? ' king' : m.era === 'ladder' && m.reigns.length ? ' held' : '';
@@ -1014,7 +1014,7 @@
     const res = x.res === 'w' ? '<span class="leg-w">won</span>'
       : x.res === 'l' ? '<span class="leg-l">lost</span>'
         : x.res === 'md'
-          ? '<span class="leg-l" title="Mutual destruction scores 0 for both, like a loss — it is not a draw">both lost</span>'
+          ? '<span class="leg-l" title="Mutual destruction scores 0 for both, like a loss. It is not a draw">both lost</span>'
           : '<span class="leg-d">drew</span>';
     const vt = `<span class="vt vt-${esc(x.vt)}">${VT_LABEL[x.vt] || esc(x.vt)}</span>`;
     const body = `<span class="mleg-date">${fmtDay(x.date)}</span>
@@ -1022,7 +1022,7 @@
       <span class="mleg-opp">vs ${flag(x.opp)}${esc(opp)}</span>
       <span class="mleg-res">${side} ${res} · ${vt} ${x.turns ? `<span class="mleg-turns">T${x.turns}</span>` : ''}</span>`;
     if (x.sim) {
-      return `<div class="leg mleg sim" title="Fabricated for this preview — no such match was ever played">${body}<span class="leg-sim">SIM</span></div>`;
+      return `<div class="leg mleg sim" title="Fabricated for this preview: no such match was ever played">${body}<span class="leg-sim">SIM</span></div>`;
     }
     return `<a class="leg mleg" href="viewer.html?match=${encodeURIComponent(x.id)}" title="Watch the replay">${body}<span class="leg-play">▶ replay</span></a>`;
   }
@@ -1033,11 +1033,11 @@
     const el = document.getElementById('latest-challenge');
     const c = (data.challenges || [])[0];
     if (!c) {
-      el.innerHTML = '<div class="empty-state">No challenge yet — the queue starts once there is a champion to play.</div>';
+      el.innerHTML = '<div class="empty-state">No challenge yet: the queue starts once there is a champion to play.</div>';
       return;
     }
     el.innerHTML = challengeCard(c, true);
-    // Open by default — it is the headline — but still closable. This card
+    // Open by default - it is the headline - but still closable. This card
     // draws the same .chal-chevron as the log's, so leaving it inert made the
     // page show an affordance that did nothing.
     bindChalToggle(el);
@@ -1072,7 +1072,7 @@
     // "fails to enter" is a gauntlet verdict: it means the challenger could not
     // beat the bottom rung. Under the throne format the same word would be
     // applied to a model that lost to the CHAMPION, which is a different result
-    // and a much harder one — there is no lower bar it also failed.
+    // and a much harder one - there is no lower bar it also failed.
     //
     // On a throne page a gauntlet climb is told in the throne's terms: the only
     // question it answers is whether the challenger reached the champion. Where
@@ -1092,7 +1092,7 @@
       : c.displaced && !isThrone()
         ? `<span class="chal-displaced">${esc(c.displaced)} drops off</span>` : '';
     const gauntlet = retold
-      ? '<span class="lad-badge gauntlet" title="Played under the first season\'s gauntlet, before 05 Sep 2026: a challenger entered at #4 and had to win one two-leg tie per seat to reach the champion at #1. Same game engine, same rules of play — only the route to the throne was longer.">GAUNTLET</span>'
+      ? '<span class="lad-badge gauntlet" title="Played under the first season\'s gauntlet, before 05 Sep 2026: a challenger entered at #4 and had to win one two-leg tie per seat to reach the champion at #1. Same game engine, same rules of play: only the route to the throne was longer.">GAUNTLET</span>'
       : '';
     // Count both: the body draws one card per TIE, each holding its two legs.
     // Printing only "6 matches" above three cards read as three missing ones.
@@ -1101,8 +1101,8 @@
     const rungs = c.steps.length;
     const legs = c.steps.reduce((n, s) => n + s.legs.length, 0);
     const count = throne
-      ? `<span class="chal-count" title="A throne challenge is one two-leg tie against the champion — the same pair, sides swapped. Win it and the crown changes hands; lose it and nothing on the board moves.">${legs} match${legs === 1 ? '' : 'es'} · one from each side</span>`
-      : `<span class="chal-count" title="One card per seat challenged on the way up. Every seat is a two-leg tie — the same pair, sides swapped — so ${rungs} ties means ${legs} matches.">${rungs} ${retold ? 'tie' : 'rung'}${rungs === 1 ? '' : 's'} · ${legs} match${legs === 1 ? '' : 'es'}</span>`;
+      ? `<span class="chal-count" title="A throne challenge is one two-leg tie against the champion: the same pair, sides swapped. Win it and the crown changes hands; lose it and nothing on the board moves.">${legs} match${legs === 1 ? '' : 'es'} · one from each side</span>`
+      : `<span class="chal-count" title="One card per seat challenged on the way up. Every seat is a two-leg tie (the same pair, sides swapped), so ${rungs} ties means ${legs} matches.">${rungs} ${retold ? 'tie' : 'rung'}${rungs === 1 ? '' : 's'} · ${legs} match${legs === 1 ? '' : 'es'}</span>`;
     const decisionBadge = c.challenger.decision_interface?.kind === 'choice'
       ? `<span class="effort effort-na" title="${esc(window.choiceInterfaceTitle(c.challenger.decision_interface))}">CHOICE</span>`
       : effortBadge(c.challenger.reasoning_effort);
@@ -1140,7 +1140,7 @@
       ? `<span class="step-note">${esc(s.decided_by)}</span>` : '';
     return `<div class="step ${won ? 'won' : 'lost'}">
       <div class="step-head">
-        <span class="step-rank${throne || s.rank === 1 ? ' crown' : ''}" title="${throne || s.rank === 1 ? 'The reigning champion — the throne' : 'The seat this tie was played for, on the way up to the champion'}">${throne || s.rank === 1 ? '👑' : '#' + s.rank}</span>
+        <span class="step-rank${throne || s.rank === 1 ? ' crown' : ''}" title="${throne || s.rank === 1 ? 'The reigning champion, on the throne' : 'The seat this tie was played for, on the way up to the champion'}">${throne || s.rank === 1 ? '👑' : '#' + s.rank}</span>
         <span class="step-opp">${flag(s.opponent.model)}${esc(s.opponent.display_name)}</span>
         <span class="step-score">${fmtPts(pc)}–${fmtPts(pi)}</span>
       </div>
@@ -1156,13 +1156,13 @@
     const res = l.outcome === 'challenger' ? '<span class="leg-w">won</span>'
       : l.outcome === 'incumbent' ? '<span class="leg-l">lost</span>'
         : l.victory_type === 'mutual_destruction'
-          ? '<span class="leg-l" title="Mutual destruction scores 0 for both, like a loss — it is not a draw">both lost</span>'
+          ? '<span class="leg-l" title="Mutual destruction scores 0 for both, like a loss. It is not a draw">both lost</span>'
           : '<span class="leg-d">drew</span>';
     const vt = `<span class="vt vt-${esc(l.victory_type)}">${VT_LABEL[l.victory_type] || esc(l.victory_type)}</span>`;
     const turns = l.turns ? `${l.turns}t` : '';
     const body = `${side} ${res} · ${vt} ${turns}`;
     if (l.source === 'simulated') {
-      return `<div class="leg sim" title="Fabricated for this preview — no such match was ever played">
+      return `<div class="leg sim" title="Fabricated for this preview: no such match was ever played">
                 ${body}<span class="leg-sim">SIM</span></div>`;
     }
     return `<a class="leg" href="viewer.html?match=${encodeURIComponent(l.match_id)}"
@@ -1177,7 +1177,7 @@
     if (!rs.length) { el.innerHTML = '<div class="empty-state">No reign yet.</div>'; return; }
 
     // The track ends today, or later if a reign was closed with a date ahead of
-    // the reader's clock — otherwise that bar would run off the end of it.
+    // the reader's clock - otherwise that bar would run off the end of it.
     const start = new Date(rs[0].from).getTime();
     const last = rs.reduce((m, r) => Math.max(m, new Date(r.to || 0).getTime() || 0), 0);
     const end = Math.max(new Date(todayISO()).getTime(), last, start + 86400000);
@@ -1215,7 +1215,7 @@
     return `<div class="reign-before">
       <span class="reign-before-tag">Before the throne</span>
       ${flag(top.model)}<b>${esc(top.name)}</b> led the frozen
-      <a href="v1.html">V1 leaderboard</a> — ${top.v1.wins}W–${top.v1.losses}L,
+      <a href="v1.html">V1 leaderboard</a>: ${top.v1.wins}W–${top.v1.losses}L,
       ${fmtPts(top.v1.points_per_match)} points per match, ${fmtDay(d[0])} → ${fmtDate(d[d.length - 1])},
       game engine ${V1_ENGINES}
     </div>`;

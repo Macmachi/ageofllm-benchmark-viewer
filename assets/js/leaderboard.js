@@ -1,5 +1,5 @@
 /*
- * leaderboard.js — Builds the ranking table + recent matches list.
+ * leaderboard.js - Builds the ranking table + recent matches list.
  *
  * Reads data/leaderboard.json (per-model aggregates) and replays/index.json
  * (lightweight match list). No dependency on the viewer modules.
@@ -10,7 +10,7 @@
 
   // Per-model metadata (flag / author / NEW badge) lives in model-meta.js so
   // this page and the ladder page can never drift apart. Falls back to an empty
-  // table if the script failed to load — names still render, flags just vanish.
+  // table if the script failed to load - names still render, flags just vanish.
   const MODEL_META = window.MODEL_META || {};
 
   function modelDisplayName(m) {
@@ -150,18 +150,18 @@
       let rankCell;
       if (isArchived) {
         tr.className = 'archived';
-        rankCell = `<td class="rank" title="Archived model">—</td>`;
+        rankCell = `<td class="rank" title="Archived model">–</td>`;
       } else if (isProvisional) {
         tr.className = 'provisional';
-        rankCell = `<td class="rank" title="Provisional — fewer than ${minMatches} matches played">—</td>`;
+        rankCell = `<td class="rank" title="Provisional: fewer than ${minMatches} matches played">–</td>`;
       } else {
         rank += 1;
         rankCell = `<td class="${rank === 1 ? 'rank gold' : 'rank'}">${rank}</td>`;
       }
       const tag = isArchived
-        ? ` <span class="archived-badge" title="Archived — no longer active">archived</span>`
+        ? ` <span class="archived-badge" title="Archived, no longer active">archived</span>`
         : isProvisional
-          ? ` <span class="prov-badge" title="Fewer than ${minMatches} matches — not yet ranked">prov.</span>`
+          ? ` <span class="prov-badge" title="Fewer than ${minMatches} matches, not yet ranked">prov.</span>`
           : '';
       tr.innerHTML =
         rankCell +
@@ -192,7 +192,7 @@
     if (provisional.length && minMatches > 0) {
       const sep = document.createElement('tr');
       sep.className = 'lb-separator';
-      sep.innerHTML = `<td colspan="18">Provisional — fewer than ${minMatches} matches played</td>`;
+      sep.innerHTML = `<td colspan="18">Provisional: fewer than ${minMatches} matches played</td>`;
       body.appendChild(sep);
     }
     provisional.forEach((m) => body.appendChild(buildRow(m, true, false)));
@@ -211,7 +211,7 @@
         `</button></td>`;
       body.appendChild(toggleRow);
 
-      // Archived rows — hidden by default
+      // Archived rows - hidden by default
       const archRows = archSorted.map((m) => {
         const tr = buildRow(m, false, true);
         tr.classList.add('archived-hidden');
@@ -309,20 +309,20 @@
 
   // Think time is shown in SECONDS (models routinely take several seconds).
   function fmtMs(ms) {
-    if (!ms) return '—';
+    if (!ms) return '–';
     const s = ms / 1000;
     return (s >= 10 ? s.toFixed(0) : s.toFixed(1)) + 's';
   }
   function fmtTok(n) {
-    if (!n) return '—';
+    if (!n) return '–';
     return n >= 1000 ? (n / 1000).toFixed(1) + 'k' : Math.round(n);
   }
   function fmtRate(r) {
-    if (r == null) return '—';
+    if (r == null) return '–';
     return (r * 100).toFixed(1) + '%';
   }
   function fmtUsd(v) {
-    if (!v) return '—';
+    if (!v) return '–';
     return v >= 1 ? '$' + v.toFixed(2) : '$' + v.toFixed(v >= 0.01 ? 3 : 4);
   }
 
@@ -342,7 +342,7 @@
 
   // ── Snapshot / share ──────────────────────────────────────────────────────
   // Captures the leaderboard table as a PNG with a branded footer stamp:
-  //   Age of LLM™ — Benchmark  |  ageofllm.com  |  <date>
+  //   Age of LLM™ - Benchmark  |  ageofllm.com  |  <date>
   function bindSnapshot() {
     const btn = document.getElementById('btn-snapshot');
     if (!btn) return;
@@ -378,7 +378,7 @@
         hdr.appendChild(titleEl);
         wrapper.appendChild(hdr);
 
-        // Table clone (only the qualified / provisional rows — no archived toggle)
+        // Table clone (only the qualified / provisional rows - no archived toggle)
         const tableClone = document.getElementById('lb-table').cloneNode(true);
         // Remove hidden archived rows from clone
         tableClone.querySelectorAll('.archived-hidden, .lb-archive-toggle').forEach((r) => r.remove());
@@ -424,7 +424,7 @@
         link.click();
       } catch (err) {
         console.error('Snapshot failed', err);
-        alert('Snapshot failed — see browser console for details.');
+        alert('Snapshot failed. See the browser console for details.');
       } finally {
         btn.disabled = false;
         btn.textContent = origText;

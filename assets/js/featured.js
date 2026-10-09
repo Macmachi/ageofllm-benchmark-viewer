@@ -1,4 +1,4 @@
-/* featured.js — the animated "latest match" card on the throne page.
+/* featured.js - the animated "latest match" card on the throne page.
  *
  * Draws the closing half-turns of the most recent match as a flat minimap and
  * loops them. Deliberately sprite-free: the viewer's isometric renderer needs
@@ -6,14 +6,14 @@
  * for a decoration. Flat cells and dots read fine at this size, and the card
  * links to the real viewer for anyone who wants the actual thing.
  *
- * Data: data/featured.json, written by scripts/build_featured.py (~11 KB — the
+ * Data: data/featured.json, written by scripts/build_featured.py (~11 KB - the
  * matching replay is 1.5 MB, four fifths of it reasoning text).
  */
 (function () {
   'use strict';
 
   const HOLD_MS = 1900;   // pause on the final position before looping
-  const STEP_MS = 780;    // one half-turn — slow enough to follow the arrows
+  const STEP_MS = 780;    // one half-turn - slow enough to follow the arrows
   const BLAST_MS = 1250;  // the detonation, animated frame by frame
 
   const css = (n, fb) =>
@@ -257,7 +257,7 @@
   //
   // Returns a LIST, and that is the whole point. This used to `find` the first
   // nuke event and draw one blast, which is right for a nuclear victory and
-  // silently wrong for a mutual destruction — both launches resolve in the same
+  // silently wrong for a mutual destruction - both launches resolve in the same
   // frame, both bases are destroyed, and the teaser drew only whichever event
   // the engine happened to emit first. The home page showed one side of the
   // board being annihilated and the other apparently untouched, which is the
@@ -320,7 +320,7 @@
     const winner = data.players.find((p) => p.slot === data.winner);
     const p0 = data.players.find((p) => p.slot === 0) || {};
     const p1 = data.players.find((p) => p.slot === 1) || {};
-    const nameOf = (p) => (p.name || '—');
+    const nameOf = (p) => (p.name || '–');
     // A draw (winner -1) marks neither side: a crown with no skull opposite
     // would read as a win that never happened.
     const mark = (p) => {

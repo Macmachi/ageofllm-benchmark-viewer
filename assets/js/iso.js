@@ -1,5 +1,5 @@
 /*
- * iso.js — Isometric projection helpers.
+ * iso.js - Isometric projection helpers.
  *
  * Pure math + z-order utilities. Knows NOTHING about the DOM, the replay
  * data, or rendering. Everything is driven by a small `view` object that the
@@ -100,7 +100,7 @@ const Iso = (() => {
    *   sw = +row (south)  ·  ne = -row (north)
    * (Confirmed by the idle facing: a base on the left looks 'se' toward the
    * enemy on the +col side.) We therefore pick based on the dominant GRID axis
-   * directly — using screen-space deltas here mismaps row-axis moves.
+   * directly - using screen-space deltas here mismaps row-axis moves.
    */
   function facingFromDelta(dCol, dRow) {
     if (dCol === 0 && dRow === 0) return null;

@@ -69,18 +69,18 @@
     <div class="lb-header">
       <a href="../"><img src="../assets/images/Logo_AOL.png" alt="Age of LLM" class="header-logo" /></a>
       <h1>Age of LLM™ <span class="lb-tag">· Funding</span></h1>
-      <!-- Filled from ../data/ladder.json, the same file the standing reads, so
+      <!-- Filled from ../data/ladder.json, the same file the throne page reads, so
            the two chips can never disagree. Hard-coding it here meant a bump on
            one page and not the other read as a bug. The text below is only the
            fallback shown if that file cannot be fetched. -->
-      <span class="lb-ver" id="fund-ver">site v0.17.1 · game engine v0.17.0</span>
+      <span class="lb-ver" id="fund-ver">site v0.19.2 · game engine v0.18.0</span>
     </div>
 
     <div class="doc">
-      <a class="backlink" href="../">← Back to the standing</a>
+      <a class="backlink" href="../">← Back to the throne</a>
 
       <h1 class="doc-title">Funding &amp; independence</h1>
-      <div class="updated">Last updated 2026-08-16</div>
+      <div class="updated">Last updated 2026-10-09</div>
 
       <p class="lede">
         Age of LLM accepts API credits and compute from model providers, inference
@@ -110,7 +110,8 @@
         <li>
           <strong>Identical protocol.</strong>
           A funded model is tested exactly as any other: same engine version, same
-          prompt, same reasoning effort, same opponents, same match count.
+          prompt, same reasoning effort, same opponent (the reigning champion), same
+          two matches.
         </li>
         <li>
           <strong>Full disclosure.</strong>
@@ -126,15 +127,15 @@
 
       <h2>What a fair test costs</h2>
       <p>
-        Since 15 August 2026 the board is a <strong>ladder</strong>, and that changed
-        what a fair test costs. A new model no longer needs a long run against the whole
-        field: it challenges in at the bottom and plays <strong>two matches per place</strong>,
-        one from each side of the map, and the climb stops as soon as it fails to take a
-        place. Two matches if it fails immediately, eight if it goes all the way to first.
+        Since 5 September 2026 the board is a <strong>throne</strong>. There is one
+        reigning champion, and a new model plays it and nobody else:
+        <strong>two matches</strong>, one from each side of the map. Win the tie and the
+        crown changes hands. Lose it and nothing on the board moves. What it costs to
+        test a model no longer depends on how good the model turns out to be.
       </p>
       <p>
         Every figure below is the <strong>amount the provider actually billed</strong>,
-        read back out of each replay — not a price × token estimate. The distinction is
+        read back out of each replay, not a price × token estimate. The distinction is
         not cosmetic: prompt caching made one model 22&nbsp;% cheaper than its estimate
         in the opening, so the estimate was a number we knew to be wrong.
       </p>
@@ -143,24 +144,31 @@
           <tr><th>Item</th><th class="num">Cost</th></tr>
         </thead>
         <tbody>
-          <tr><td>One match, both sides (measured mean over the opening)</td><td class="num">$3.42</td></tr>
-          <tr><td>A challenger that fails to take the bottom place (2 matches)</td><td class="num">~$7</td></tr>
-          <tr><td>A challenger that climbs to first (8 matches)</td><td class="num">~$27</td></tr>
-          <tr><td>Opening a fresh ladder &mdash; 4 models, 12 matches (measured)</td><td class="num">$41.08</td></tr>
-          <tr><td>Day-one coverage of every new release, per year</td><td class="num">$700&ndash;1,200</td></tr>
+          <tr><td>One match, both sides (measured mean over 40 matches)</td><td class="num">$2.47</td></tr>
+          <tr><td>One challenge for the throne, 2 matches (measured mean over 5)</td><td class="num">$5.47</td></tr>
+          <tr><td>Cheapest and dearest challenge so far</td><td class="num">$2.09 / $7.90</td></tr>
+          <tr><td>Opening a fresh season: 4 models, 12 matches (measured)</td><td class="num">$41.08</td></tr>
+          <tr><td>Everything played since 15 August 2026, 40 matches (measured)</td><td class="num">$98.74</td></tr>
+          <tr><td>Day-one challenge for every flagship release, per year (about 44)</td><td class="num">~$250</td></tr>
         </tbody>
       </table>
+      <p class="muted">
+        Half of every bill is the champion's, so these figures move with the crown. The
+        current champion, Gemini 3.8 Flash, is one of the cheaper models on the board and
+        is billed at a 50&nbsp;% launch discount today. A more expensive champion makes
+        every challenge cost more.
+      </p>
       <div class="note">
-        <strong>Why a ladder is cheaper than a table, and says more.</strong> Simulated
-        over a full round-robin with a Bradley-Terry fit, a global ordering converges
-        fast but separating <em>neighbouring</em> models converges very slowly: at 28
-        matches per model the overall ranking is already near-perfect (Spearman ρ =
-        0.97) while barely 3 adjacent pairs in 5 are ordered correctly, and 14× more
-        compute still misses 1 adjacent pair in 25. Spending to rank a model 4th rather
-        than 5th buys almost nothing. A ladder spends the compute on the one comparison
-        that is actually decidable &mdash; <em>can this model beat the one above it,
-        twice, from both sides?</em> &mdash; and answers it with two matches instead of
-        twenty.
+        <strong>Why one duel and not a table.</strong> Simulated over a full
+        round-robin with a Bradley-Terry fit, a global ordering converges fast but
+        separating <em>neighbouring</em> models converges very slowly: at 28 matches per
+        model the overall ranking is already near-perfect (Spearman ρ = 0.97) while
+        barely 3 adjacent pairs in 5 are ordered correctly, and 14× more compute still
+        misses 1 adjacent pair in 25. Spending to rank a model 4th rather than 5th buys
+        almost nothing. The throne spends the compute on the one comparison that can
+        actually be decided (<em>can this model beat the champion, from both sides of
+        the map?</em>), answers it with two matches instead of twenty, and makes no
+        claim about the order below the crown.
       </div>
 
       <h2>What independence has already cost us</h2>
@@ -182,31 +190,38 @@
       </p>
       <p>
         <strong>August 2026, again: the engine was penalising the models for its own
-        defects.</strong> Before the first ladder match we re-read all 54 archived
-        replays and asked what had never been asked of them &mdash; of the 300 actions
+        defects.</strong> Before the first match of the current corpus we re-read all 54
+        archived replays and asked what had never been asked of them: of the 300 actions
         the engine rejected, how many could the model actually have avoided? Three
         answers came back and all three were ours. Every one of the 60 "unit not found"
         rejections, across 19 models, came from the engine assigning a new unit's id
         only <em>after</em> the model had already submitted its turn: unguessable by
         construction. Aiming a building into unscouted territory answered "there is
         already a building here", which handed out a free map probe. And bumping into a
-        unit you cannot see &mdash; how a fog-of-war game reveals its board &mdash; was
+        unit you cannot see, which is how a fog-of-war game reveals its board, was
         being counted in the published illegal-action column, penalising the very
         probing the fog exists to require. All three are fixed in game engine 0.17.0,
-        and the illegal-action rate on the new corpus is 2.1&nbsp;% against 5.3&nbsp;%
-        on the old one.
+        and on the 12 opening matches that followed the illegal-action rate was
+        2.1&nbsp;% against 5.3&nbsp;% on the old corpus.
       </p>
       <p>
-        <strong>And one question still open.</strong> Across the 12 opening matches the
-        right-hand side of the map won 10. The design is slot-balanced &mdash; every
-        model played three matches from each side &mdash; so model strength cannot
-        explain it, and the exact binomial reads p&nbsp;=&nbsp;0.039. But we noticed the
-        pattern <em>during</em> the campaign and tested it on the same 12 matches, which
-        is the weakest form of evidence there is, and the 57-match mirror experiment
-        above found nothing of the kind on an earlier engine. The standing itself is not
-        affected: every duel is played from both sides, so a side advantage cancels
-        inside it. We are reporting an anomaly we have not yet resolved rather than
-        waiting until it is comfortable.
+        <strong>The side question, and what the matches since have said.</strong>
+        Across the 12 opening matches the right-hand side of the map won 10 (exact
+        binomial p&nbsp;=&nbsp;0.039). We noticed that pattern <em>during</em> the
+        campaign and tested it on the same 12 matches, which is the weakest form of
+        evidence there is, so we reported it as open and kept counting. The 26 decisive
+        challenge matches played since then are a clean test, and the right-hand side
+        won 21 of them (p&nbsp;=&nbsp;0.002). Over all 38 decisive matches played on
+        game engines 0.17.0 and 0.18.0 it has won 31. The 57-match mirror experiment above found
+        nothing of the kind on an earlier engine, and we have not yet found the cause.
+      </p>
+      <p>
+        The crown is protected by construction: every challenge is played once from
+        each side, so a side advantage cancels inside the tie. What it changes is how
+        ties end. In 6 of the 14 ties played so far, each model won the match it played
+        from the right and the tie was settled on speed, and 3 of the 5 challenges for
+        the throne ended that way. We are publishing this before we can explain it,
+        because that is the point of this section.
       </p>
       <p class="muted">
         We publish all of this because a benchmark that never reports a problem with
@@ -223,15 +238,26 @@
         organisation that wants to verify a result before relying on it.
       </p>
 
-      <h2>Contributions received</h2>
+      <h2 id="contributions">Contributions received</h2>
       <table>
         <thead>
           <tr><th>Date</th><th>Contributor</th><th class="num">Amount</th><th>What it paid for</th></tr>
         </thead>
         <tbody>
-          <tr><td class="empty" colspan="4">No contributions received to date. All compute so far has been paid for personally.</td></tr>
+          <tr>
+            <td class="num">2026-10-09</td>
+            <td><a class="inline" href="https://venice.ai" target="_blank" rel="noopener">Venice AI</a></td>
+            <td class="num">$50 in API credits</td>
+            <td>Not spent yet. The credits are on the Venice API, so they can only pay for
+              models served through Venice. Every match run on them will name Venice as
+              its compute provider, under the rules above.</td>
+          </tr>
         </tbody>
       </table>
+      <p class="muted">
+        Everything else, including all 40 matches played since 15 August 2026, has been
+        paid for personally.
+      </p>
 
       <h2>Contributing compute</h2>
       <p>
@@ -247,7 +273,7 @@
     </div>
 
     <footer class="site-footer">
-      <a class="foot-link" href="../">← The Ladder</a>
+      <a class="foot-link" href="../">← The Throne</a>
       <a class="foot-link" href="https://youtu.be/Ec-CV1uzyVY" target="_blank" rel="noopener" title="Presentation video">▶ Presentation ↗</a>
       <a class="foot-link" href="https://github.com/Macmachi/ageofllm-benchmark-viewer" target="_blank" rel="noopener" title="Star on GitHub">⭐ Star on GitHub</a>
       <a class="foot-link" href="https://x.com/ageofllm" target="_blank" rel="noopener" title="Follow on X">𝕏 Follow @ageofllm</a>
@@ -257,9 +283,9 @@
   </div>
 
   <script>
-    // Single source of truth for both chips: the standing's own JSON. If it
+    // Single source of truth for both chips: the throne page's own JSON. If it
     // cannot be read we leave the hard-coded fallback in place rather than
-    // blanking the badge — a missing version reads worse than a stale one.
+    // blanking the badge: a missing version reads worse than a stale one.
     fetch('../data/ladder.json', { cache: 'no-cache' })
       .then((r) => (r.ok ? r.json() : null))
       .then((d) => {

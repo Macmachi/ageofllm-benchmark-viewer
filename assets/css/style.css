@@ -1,6 +1,6 @@
 /* ============================================================
-   Age of LLM — Benchmark · Replay Viewer & Leaderboard
-   Aesthetic: Into the Breach / Frostpunk — sharp geometry,
+   Age of LLM - Benchmark · Replay Viewer & Leaderboard
+   Aesthetic: Into the Breach / Frostpunk - sharp geometry,
    sober palette, strong contrast.
    ============================================================ */
 
@@ -285,7 +285,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .zoom-ctl .zbtn:hover { background: #28323f; color: var(--text); }
 
 /* docks: vertical stacks that hold panels without overlap.
-   z-index: 22 — above the topbar (20), HUD (18) and rail (18) so an OPEN panel
+   z-index: 22 - above the topbar (20), HUD (18) and rail (18) so an OPEN panel
    visibly sits on top of the player cards instead of being overlapped by them. */
 .dock {
   position: absolute; top: 150px; bottom: 92px; z-index: 22;
@@ -338,7 +338,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
   padding: 11px 12px;
   overflow-y: auto; overflow-x: hidden;
   flex: 1 1 auto;  /* fill remaining panel height */
-  min-height: 0;   /* allow shrink — critical for scroll to work inside flex */
+  min-height: 0;   /* allow shrink - critical for scroll to work inside flex */
   scrollbar-width: thin; scrollbar-color: var(--border) transparent;
   /* Long unbroken strings (URLs, JSON blobs in reasoning) must wrap inside the
      panel instead of overflowing to the right (notably on mobile). */
@@ -354,7 +354,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 #reason-panel .actions-row { margin-top: 9px; padding-top: 9px; border-top: 1px solid var(--border-soft); display: flex; flex-wrap: wrap; gap: 5px; }
 #reason-panel .discovered { margin-top: 8px; color: var(--uranium); font-size: 12px; display: flex; align-items: center; gap: 5px; }
 /* The early warning is the one signal that can flip a defeat into a draw, and it
-   lasts a single half-turn — it gets a louder treatment than the other badges. */
+   lasts a single half-turn - it gets a louder treatment than the other badges. */
 #reason-panel .launch-warned {
   margin-top: 8px; font-size: 12px; align-items: center; gap: 5px;
   color: var(--p1); font-weight: 600;
@@ -497,7 +497,7 @@ button { font-family: inherit; cursor: pointer; border: none; background: none; 
 .cta-btn.snapshot { color: var(--text-dim); border: 1px solid var(--border); background: var(--panel-solid); cursor: pointer; font-size: 13px; }
 .cta-btn.snapshot:hover { border-color: var(--text); color: var(--text); }
 .cta-btn.snapshot:disabled { opacity: .5; cursor: wait; }
-/* Deliberately the quietest button in the row — it points at a frozen archive,
+/* Deliberately the quietest button in the row - it points at a frozen archive,
    not at a second ranking someone could mistake for the live one. */
 .cta-btn.v1 {
   color: var(--text-dim); border: 1px solid var(--border-soft);
@@ -697,7 +697,7 @@ table.lb tbody tr.lb-archive-toggle td {
   .player-card .pmodel { font-size: 14px; }
   /* Side panel on tablet: take the full window width with a comfortable inner
      padding. The dock is anchored to the LEFT of the screen and the panel
-     content wraps naturally before the right edge — no more clipping. An open
+     content wraps naturally before the right edge - no more clipping. An open
      panel must SIT ABOVE the topbar / HUD / rail so the player cards do not
      show through and overlap the panel content. */
   .dock { width: 100vw; max-width: 100vw; z-index: 30; }
@@ -795,7 +795,7 @@ table.lb tbody tr.lb-archive-toggle td {
    The standing top-N, the climb of each challenger, the reigns.
    ============================================================ */
 
-/* Preview banner — amber, not red: this is "not a result yet", not an alarm. */
+/* Preview banner - amber, not red: this is "not a result yet", not an alarm. */
 .preview-banner {
   display: flex; align-items: flex-start; gap: 12px;
   padding: 12px 16px; margin-bottom: 22px;
@@ -853,7 +853,7 @@ table.lb tbody tr.lb-archive-toggle td {
 /* ---------- every model tested (throne format) ----------
    Deliberately flat, like the line it replaced: no rank number and no podium
    colours, because the order is not a ranking. Gold marks the throne and only
-   the throne — the champion's row, and the time a former champion held it. */
+   the throne - the champion's row, and the time a former champion held it. */
 .mdl {
   border: 1px solid var(--border-soft); border-left: 3px solid var(--border);
   border-radius: var(--radius); background: var(--panel-solid);
@@ -888,7 +888,7 @@ table.lb tbody tr.lb-archive-toggle td {
 }
 .mdl-tile.gold b { color: var(--gold); }
 .mdl-tile.muted b { color: var(--text-faint); }
-/* The affordance is spelled out — "Show its 6 matches" — because a chevron
+/* The affordance is spelled out - "Show its 6 matches" - because a chevron
    alone did not say that the replays are one click away. */
 .mdl-toggle {
   flex: none; display: flex; align-items: center; gap: 6px;
@@ -967,7 +967,7 @@ table.lb tbody tr.lb-archive-toggle td {
 /* flex-basis 100% puts the strip on its own line, always. Letting it sit inline
    when it happens to fit made rows ragged: the fog-blocked badge only exists for
    models that actually hit one, so two entries wrapped and two did not. Every
-   row is now the same two lines — name above, measurements below, left-aligned. */
+   row is now the same two lines - name above, measurements below, left-aligned. */
 .lad-meta {
   display: flex; gap: 5px; flex: 1 1 100%; flex-wrap: wrap;
   align-items: center; justify-content: flex-start;
@@ -1002,7 +1002,7 @@ table.lb tbody tr.lb-archive-toggle td {
 .chal-verdict.enters { background: rgba(57,255,119,0.12); color: var(--accent); }
 .chal-verdict.fails { background: rgba(120,130,140,0.14); color: var(--text-dim); }
 /* A challenger that lost to the CHAMPION, which is not the same result as one
-   that could not beat the bottom rung — so not the same chip either. */
+   that could not beat the bottom rung - so not the same chip either. */
 .chal-verdict.held { background: rgba(212,175,55,0.10); color: #b9a45a; }
 .chal-displaced { font-size: 12px; color: var(--text-faint); }
 .chal-count { margin-left: auto; font-family: var(--mono); font-size: 12px; color: var(--text-faint); }
@@ -1011,7 +1011,7 @@ table.lb tbody tr.lb-archive-toggle td {
 .chal-body { display: none; padding: 4px 16px 16px; }
 .chal.open .chal-body { display: block; }
 
-/* The challenger's own figures — latency, cost, illegal actions, endpoint.
+/* The challenger's own figures - latency, cost, illegal actions, endpoint.
    Same children as .lad-meta, because it is the same row: a challenger that
    fails to enter never reaches the standing list, so this is the only place
    its numbers are ever printed. */
@@ -1099,14 +1099,14 @@ a.leg:hover { background: #1d2733; color: var(--text); border-color: var(--borde
   .throne-stats .ts { text-align: left; }
   .lad-row { flex-wrap: wrap; }
   .lad-meta { width: 100%; padding-left: 48px; }
-  /* The climb becomes a vertical stack — still read bottom rung first. */
+  /* The climb becomes a vertical stack - still read bottom rung first. */
   .climb { flex-direction: column; }
   .climb-arrow { transform: rotate(90deg); }
   .step { min-width: 0; }
   .reign-name { width: 120px; font-size: 12px; }
   .reign-days { width: 96px; font-size: 10px; }
   /* A model row becomes three lines: name and status, the two tiles, then the
-     button — each match below wraps onto two lines instead of a grid. */
+     button - each match below wraps onto two lines instead of a grid. */
   .mdl-head { flex-wrap: wrap; }
   .mdl-main { flex: 1 1 calc(100% - 40px); }
   .mdl-tiles { width: 100%; padding-left: 38px; gap: 22px; }
@@ -1163,14 +1163,14 @@ table.lb.opening-table th, table.lb.opening-table td { padding: 8px 12px; }
 .v1-notice a:hover { text-decoration: underline; }
 .v1-notice strong { color: var(--text); }
 
-/* Effort levels above "high" — OpenRouter's max / xhigh allocate ~95 % of the
+/* Effort levels above "high" - OpenRouter's max / xhigh allocate ~95 % of the
    token budget to reasoning, so they get the strongest colour on the scale. */
 .effort-max { color: #ff6b6b; border-color: rgba(255,107,107,.5); background: rgba(255,107,107,.12); font-weight: 700; }
 .effort-xhigh { color: #ff8360; border-color: rgba(255,131,96,.48); background: rgba(255,131,96,.11); }
 .effort-minimal { color: #9fb0c2; border-color: rgba(159,176,194,.35); background: rgba(159,176,194,.08); }
 
 /* Second header chip: the site/tooling version next to the engine version, or
-   the engine range on the archive. Deliberately dimmer than .lb-ver — the
+   the engine range on the archive. Deliberately dimmer than .lb-ver - the
    engine number is the one that decides whether matches are comparable. */
 .lb-header .lb-eng {
   font-family: var(--mono); font-size: 11px; color: var(--text-faint);
@@ -1203,7 +1203,7 @@ table.lb.opening-table th, table.lb.opening-table td { padding: 8px 12px; }
   padding: 2px 7px; border-radius: 4px; white-space: nowrap;
 }
 .lad-stat.estimated { border-style: dashed; }
-/* Shown, but visibly not held against the model — see perfCells() in ladder.js. */
+/* Shown, but visibly not held against the model - see perfCells() in ladder.js. */
 .lad-stat.muted { color: var(--text-faint); background: transparent; border-style: dotted; opacity: .75; }
 .lad-stat.prov { color: var(--text-dim); background: transparent; border-color: transparent; }
 .lad-stat.prov.warn { color: var(--amber); border-color: rgba(224,168,46,.45); background: rgba(224,168,46,.08); }

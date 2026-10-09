@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Age of LLM — Benchmark · Replay</title>
+  <title>Age of LLM · Benchmark · Replay</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
@@ -26,7 +26,7 @@
       <div class="brand">
         <a class="home-link" href="index.html" title="Back to the throne">⮜ The Throne</a>
         <img src="assets/images/Logo_AOL.png" alt="Age of LLM" class="brand-logo" />
-        <span class="title">Age of LLM™ <span class="lb-tag">— Benchmark</span></span>
+        <span class="title">Age of LLM™ <span class="lb-tag">· Benchmark</span></span>
         <span class="ver">v0.14.0</span>
         <span class="mid" id="match-id"></span>
       </div>
@@ -46,7 +46,7 @@
       <div class="player-card left" id="card0">
         <div class="pc-head">
           <span class="pdot dot0"></span>
-          <span class="pmodel" id="model0">—</span>
+          <span class="pmodel" id="model0">–</span>
           <span class="peffort" id="effort0"></span>
         </div>
         <div class="pname" id="name0">Player 1</div>
@@ -73,7 +73,7 @@
       <div class="player-card right" id="card1">
         <div class="pc-head">
           <span class="pdot dot1"></span>
-          <span class="pmodel" id="model1">—</span>
+          <span class="pmodel" id="model1">–</span>
           <span class="peffort" id="effort1"></span>
         </div>
         <div class="pname" id="name1">Player 2</div>
@@ -147,8 +147,8 @@
         <div class="panel-body legend-body">
           <div class="lg-sec">Goal of the game</div>
           <p class="lg-p">A 1v1 duel between two AIs. Each turn both players take up to <b>3 actions</b>.
-          Win by destroying the enemy base before the turn limit (default 80) — by <b>nuclear bomb</b> or
-          <b>military conquest</b> (tanks reduce the base to 0 HP) — or by an accepted <b>ultimatum</b>.
+          Win by destroying the enemy base before the turn limit (default 80), by <b>nuclear bomb</b> or
+          <b>military conquest</b> (tanks reduce the base to 0 HP), or by an accepted <b>ultimatum</b>.
           A <b>peace</b> or the turn limit ends in a draw. Fog of war hides the enemy half: you must scout.</p>
           <p class="lg-p lg-small">Who plays first is drawn at random on turn 1, then <b>alternates</b> every
           turn. Each side starts with <b>5◆ and 0☢</b> and earns <b>+1◆/turn passively</b>, on top of its mines.</p>
@@ -170,7 +170,7 @@
           <table class="lg-table">
             <thead><tr><th>Unit</th><th>Cost</th><th>Move</th><th>Sight</th><th>Range</th><th>Hits</th></tr></thead>
             <tbody>
-              <tr><td>🛩 Drone</td><td>2◆</td><td>3</td><td>3</td><td>—</td><td>recon</td></tr>
+              <tr><td>🛩 Drone</td><td>2◆</td><td>3</td><td>3</td><td>–</td><td>recon</td></tr>
               <tr><td>🚀 SAM</td><td>3◆</td><td>2</td><td>2</td><td>2</td><td>air</td></tr>
               <tr><td>🛡 Tank</td><td>4◆</td><td>2</td><td>1</td><td>2</td><td>ground+bldg</td></tr>
               <tr><td>✈ Fighter</td><td>4◆</td><td>3</td><td>2</td><td>2</td><td>tank/air</td></tr>
@@ -179,18 +179,18 @@
           <p class="lg-p lg-small">Triangle: Fighter &gt; Tank/Drone/Fighter · Tank &gt; SAM/Tank/buildings ·
           SAM &gt; air units. Only the Tank can hit buildings (2 HP/hit). Attacker survives (mirror rule).
           <b>Line of sight:</b> a ground attack (tank/sam) is blocked by a <b>mountain or building</b>
-          between shooter and target — flank around cover. The fighter (air) ignores obstacles.
+          between shooter and target: flank around cover. The fighter (air) ignores obstacles.
           Ground movement needs a clear <b>path</b>: mountains <i>and</i> buildings block it, so being in
           range is not enough.</p>
           <p class="lg-p lg-small"><b>Deployment:</b> units roll off the base onto a free adjacent cell the
           engine picks (production fails if none is free), and a unit produced this turn cannot move or
-          attack until its owner's next turn — the same one-turn delay as a building.</p>
+          attack until its owner's next turn, the same one-turn delay as a building.</p>
 
           <div class="lg-sec">Buildings <span class="lg-hint">(have HP)</span></div>
           <table class="lg-table">
             <thead><tr><th>Building</th><th>Cost</th><th>HP</th><th>Effect</th></tr></thead>
             <tbody>
-              <tr><td>🏛 Base</td><td>—</td><td>4</td><td>produces units</td></tr>
+              <tr><td>🏛 Base</td><td>–</td><td>4</td><td>produces units</td></tr>
               <tr><td>⛏ Credit mine (oil)</td><td>2◆</td><td>2</td><td>+3◆/turn</td></tr>
               <tr><td>☢ Uranium mine</td><td>2◆</td><td>2</td><td>+1☢/turn</td></tr>
               <tr><td>☢ Central mine</td><td>4◆</td><td>3</td><td>+1☢/turn (col 6)</td></tr>
@@ -200,7 +200,7 @@
           <p class="lg-p lg-small">Construction: operational on the <b>next turn</b>. Under construction =
           no effect + destroyed in <b>1 hit</b>. You can only build on a <b>visible</b>, free cell.
           One building per cell; cells <b>adjacent to a base</b> are reserved for unit spawning.
-          <b>Mines</b> can go on any free matching deposit you see — incl. the enemy's side (no instant
+          <b>Mines</b> can go on any free matching deposit you see, incl. the enemy's side (no instant
           capture: destroy the enemy mine or wait for its deposit to run dry, then claim it); the
           <b>silo</b> stays own-territory only. <b>Deposits deplete:</b> a drained deposit removes its
           mine and respawns elsewhere on the same side (central on column 6).</p>
@@ -210,10 +210,10 @@
           23☢ from T40, 21☢ from 50, 19☢ from 60, 17☢ from 70, 15☢ from 80. The engine floor of 13☢ is only
           reached on turn 90, so a standard 80-turn match never goes below 15☢. Requires an operational silo +
           uranium ≥ cost + enemy base discovered. Launches are <b>secret &amp; simultaneous</b>: resolved at
-          end of turn — a double launch = mutual destruction.</p>
+          end of turn: a double launch = mutual destruction.</p>
           <p class="lg-p lg-small"><b>Early warning:</b> a bomb cannot be intercepted; the only answer is to
           fire back the same turn. A player is told of an enemy launch only if an <b>enemy silo is in its
-          field of view</b> at that moment — so only the player acting <i>second</i> that turn can ever be
+          field of view</b> at that moment, so only the player acting <i>second</i> that turn can ever be
           warned. Without that line of sight the launch stays secret.</p>
 
           <div class="lg-sec">Diplomacy <span class="lg-hint">(free, off the action quota)</span></div>
@@ -223,18 +223,18 @@
               <tr><td>💬 Message</td><td>always</td><td>Free text read by the opponent next turn</td></tr>
               <tr><td>🤝 Ceasefire</td><td>turn 10+</td><td>No attacks for 4 turns (+6☢ bomb penalty)</td></tr>
               <tr><td>🕊 Peace</td><td>turn 15+</td><td>Immediate draw if accepted</td></tr>
-              <tr><td>📜 Ultimatum</td><td>turn 10+</td><td>"Surrender by turn X" — if accepted, proposer wins (accepter gets 0.5 pt)</td></tr>
+              <tr><td>📜 Ultimatum</td><td>turn 10+</td><td>"Surrender by turn X": if accepted, proposer wins (accepter gets 0.5 pt)</td></tr>
             </tbody>
           </table>
           <p class="lg-p lg-small">Proposals are <b>binding only if accepted</b>; a promise in a message is not.
-          A ceasefire accepted on turn T is active on <b>T, T+1, T+2 and T+3</b> — attacks are forbidden for both
+          A ceasefire accepted on turn T is active on <b>T, T+1, T+2 and T+3</b>: attacks are forbidden for both
           sides and resume on T+4. It cannot be broken early by a conventional attack; the one thing it does not
           stop is the bomb, which may still be launched (with the +6☢ penalty). Peace and ultimatum stay open
           during it. An ultimatum's deadline must fall within the next 3 turns, and refusing one costs nothing.</p>
 
           <div class="lg-sec">Map</div>
           <p class="lg-p lg-small">The central barrier (column 6), the in-territory mountains and all
-          deposit positions are <b>seed-driven</b> — they differ every match. Mountains block ground
+          deposit positions are <b>seed-driven</b>: they differ every match. Mountains block ground
           movement, construction <b>and line of sight</b> for ground attacks (air flies over).
           Extra mountains are confined to cols 2-4 / 8-10; the cell immediately in front of each
           col.6 passage (col.5 side A, col.7 side B) is always kept clear so neither side's
@@ -266,7 +266,7 @@
           <div class="discovered" id="reason-discovered" style="display:none">📡 Enemy base spotted</div>
           <!-- Only shown when the engine actually told this player. It separates
                "it knew and did not fire back" from "it never knew". -->
-          <div class="launch-warned" id="reason-launch" style="display:none">☢ Enemy launch detected — this player was told, and could still fire back this turn</div>
+          <div class="launch-warned" id="reason-launch" style="display:none">☢ Enemy launch detected: this player was told, and could still fire back this turn</div>
         </div>
       </div>
     </div>
@@ -302,9 +302,9 @@
     <footer class="viewer-footer">
       <a class="foot-link" href="https://youtu.be/Ec-CV1uzyVY" target="_blank" rel="noopener" title="Presentation video">▶ Presentation ↗</a>
       <a class="foot-link" href="https://github.com/Macmachi/ageofllm-benchmark-viewer" target="_blank" rel="noopener" title="Star on GitHub">⭐ Star on GitHub</a>
-      <a class="foot-link" href="https://x.com/ageofllm" target="_blank" rel="noopener" title="Follow on X — know when new models are tested">𝕏 Follow @ageofllm</a>
+      <a class="foot-link" href="https://x.com/ageofllm" target="_blank" rel="noopener" title="Follow on X to know when new models are tested">𝕏 Follow @ageofllm</a>
       <a class="foot-link" href="https://www.youtube.com/@AgeofLLM" target="_blank" rel="noopener" title="YouTube">▶ YouTube</a>
-      <span class="foot-copy">© 2026 Rymentz — Age of LLM™ — All rights reserved</span>
+      <span class="foot-copy">© 2026 Rymentz · Age of LLM™ · All rights reserved</span>
     </footer>
   </div>
 
@@ -313,7 +313,7 @@
   <script src="assets/js/renderer.js"></script>
   <script src="assets/js/player.js"></script>
   <script src="assets/js/stats.js"></script>
-  <script src="assets/js/model-meta.js?v=0.18.3"></script>
-  <script src="assets/js/viewer.js?v=0.18.3"></script>
+  <script src="assets/js/model-meta.js?v=0.19.2"></script>
+  <script src="assets/js/viewer.js?v=0.19.2"></script>
 </body>
 </html>
