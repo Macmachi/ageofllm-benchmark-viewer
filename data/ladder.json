@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-03T22:51:06.913372+00:00",
+  "generated_at": "2026-10-13T21:12:07.111645+00:00",
   "engine_version": "0.18.0",
   "site_version": "0.19.2",
   "preview": false,
@@ -42,12 +42,9 @@
       "endpoint": "xai"
     },
     "qwen/qwen3.8-27b": {
-      "input": 0.2025,
-      "output": 1.782,
-      "endpoint": "akashml",
-      "discount": 0.1,
-      "list_input": 0.225,
-      "list_output": 1.98
+      "input": 0.225,
+      "output": 1.98,
+      "endpoint": "akashml"
     },
     "z-ai/glm-5.3": {
       "input": 1.4,
@@ -89,6 +86,14 @@
       "input": 2.0,
       "output": 6.0,
       "endpoint": "xai"
+    },
+    "google/gemini-4-argon": {
+      "input": 2.0,
+      "output": 10.0,
+      "endpoint": "google-vertex/global",
+      "discount": 0.5,
+      "list_input": 4.0,
+      "list_output": 20.0
     }
   },
   "started_at": "2026-08-15",
@@ -625,8 +630,8 @@
       "reasoning_effort": "high",
       "quantization": "unknown",
       "entered_at": "2026-09-05",
-      "defences": 3,
-      "holds": 3,
+      "defences": 4,
+      "holds": 4,
       "climbed": 1,
       "seeded": false,
       "via": "throne",
@@ -673,6 +678,105 @@
     }
   ],
   "challenges": [
+    {
+      "id": "2026-10_google-gemini-4-argon",
+      "format": "throne",
+      "challenger": {
+        "model": "google/gemini-4-argon",
+        "display_name": "Gemini 4 Argon",
+        "reasoning_effort": "high",
+        "quantization": "unknown"
+      },
+      "date": "2026-10-13",
+      "steps": [
+        {
+          "rank": 1,
+          "opponent": {
+            "model": "google/gemini-3.8-flash",
+            "display_name": "Gemini 3.8 Flash",
+            "reasoning_effort": "high"
+          },
+          "legs": [
+            {
+              "match_id": "ladder_2026-10_google-gemini-4-argon_r1_leg1",
+              "challenger_side": 0,
+              "outcome": "incumbent",
+              "victory_type": "nuclear",
+              "turns": 17,
+              "date": "2026-10-13T19:31:24.963192+00:00",
+              "usd": 3.3882,
+              "perf": {
+                "google/gemini-4-argon": {
+                  "usd": 1.979123,
+                  "usd_today": 1.979123,
+                  "cost_source": "provider",
+                  "think_ms": 82427,
+                  "half_turns": 17,
+                  "served_by": "Google",
+                  "actions_ok": 47,
+                  "illegal": 2,
+                  "fog_blocked": 0
+                },
+                "google/gemini-3.8-flash": {
+                  "usd": 1.409031,
+                  "usd_today": 1.409031,
+                  "cost_source": "provider",
+                  "think_ms": 150145,
+                  "half_turns": 17,
+                  "served_by": "Google",
+                  "actions_ok": 47,
+                  "illegal": 1,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            },
+            {
+              "match_id": "ladder_2026-10_google-gemini-4-argon_r1_leg2",
+              "challenger_side": 1,
+              "outcome": "challenger",
+              "victory_type": "nuclear",
+              "turns": 24,
+              "date": "2026-10-13T21:11:59.378291+00:00",
+              "usd": 4.7973,
+              "perf": {
+                "google/gemini-3.8-flash": {
+                  "usd": 2.256504,
+                  "usd_today": 2.256504,
+                  "cost_source": "provider",
+                  "think_ms": 172754,
+                  "half_turns": 24,
+                  "served_by": "Google",
+                  "actions_ok": 68,
+                  "illegal": 0,
+                  "fog_blocked": 0
+                },
+                "google/gemini-4-argon": {
+                  "usd": 2.540795,
+                  "usd_today": 2.540795,
+                  "cost_source": "provider",
+                  "think_ms": 78645,
+                  "half_turns": 24,
+                  "served_by": "Google",
+                  "actions_ok": 69,
+                  "illegal": 0,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            }
+          ],
+          "pts": [
+            3.0,
+            3.0
+          ],
+          "result": "hold",
+          "decided_by": "level on points, incumbent won faster (17 vs 24 turns)"
+        }
+      ],
+      "final_rank": null,
+      "displaced": null
+    },
     {
       "id": "2026-10_x-ai-grok-4.7",
       "format": "throne",
@@ -2116,7 +2220,7 @@
       "display_name": "Gemini 3.8 Flash",
       "from": "2026-09-05",
       "to": null,
-      "defences": 3,
+      "defences": 4,
       "seeded": false
     }
   ]

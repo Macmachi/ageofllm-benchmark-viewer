@@ -44,6 +44,7 @@ window.MODEL_META = {
   'z-ai/glm-5.3-flash':                { flag: '🇨🇳', author: 'Zhipu', isNew: true },
   'google/gemini-3.7-flash':           { flag: '🇺🇸', author: 'Google', isNew: true },
   'google/gemini-3.8-flash':           { flag: '🇺🇸', author: 'Google', isNew: true },
+  'google/gemini-4-argon':             { flag: '🇺🇸', author: 'Google', isNew: true },
   // TypeSafe's company address: https://typesafe.ai/legal/terms
   'jev-1.13.0':                       { flag: '🇺🇸', author: 'TypeSafe AI', isNew: true },
 };
