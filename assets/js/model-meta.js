@@ -42,6 +42,7 @@ window.MODEL_META = {
   'z-ai/glm-5.2':                      { flag: '🇨🇳', author: 'Zhipu' },
   'z-ai/glm-5.3':                      { flag: '🇨🇳', author: 'Zhipu', isNew: true },
   'z-ai/glm-5.3-flash':                { flag: '🇨🇳', author: 'Zhipu', isNew: true },
+  'deepseek/deepseek-v4.1-flash-1017': { flag: '🇨🇳', author: 'DeepSeek', isNew: true },
   'google/gemini-3.7-flash':           { flag: '🇺🇸', author: 'Google', isNew: true },
   'google/gemini-3.8-flash':           { flag: '🇺🇸', author: 'Google', isNew: true },
   'google/gemini-4-argon':             { flag: '🇺🇸', author: 'Google', isNew: true },

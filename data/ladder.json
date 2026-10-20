@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-13T21:12:07.111645+00:00",
+  "generated_at": "2026-10-20T16:56:06.358031+00:00",
   "engine_version": "0.18.0",
   "site_version": "0.19.2",
   "preview": false,
@@ -24,12 +24,9 @@
       "endpoint": "anthropic"
     },
     "openai/gpt-5.6-sol": {
-      "input": 2.0,
-      "output": 10.0,
-      "endpoint": "openai",
-      "discount": 0.5,
-      "list_input": 4.0,
-      "list_output": 20.0
+      "input": 4.0,
+      "output": 20.0,
+      "endpoint": "openai"
     },
     "moonshotai/kimi-k3": {
       "input": 3.0,
@@ -94,6 +91,14 @@
       "discount": 0.5,
       "list_input": 4.0,
       "list_output": 20.0
+    },
+    "deepseek/deepseek-v4.1-flash-1017": {
+      "input": 0.098,
+      "output": 0.294,
+      "endpoint": "deepinfra/fp8",
+      "discount": 0.51,
+      "list_input": 0.2,
+      "list_output": 0.6
     }
   },
   "started_at": "2026-08-15",
@@ -630,8 +635,8 @@
       "reasoning_effort": "high",
       "quantization": "unknown",
       "entered_at": "2026-09-05",
-      "defences": 4,
-      "holds": 4,
+      "defences": 5,
+      "holds": 5,
       "climbed": 1,
       "seeded": false,
       "via": "throne",
@@ -678,6 +683,105 @@
     }
   ],
   "challenges": [
+    {
+      "id": "2026-10_deepseek-deepseek-v4.1-flash-1017",
+      "format": "throne",
+      "challenger": {
+        "model": "deepseek/deepseek-v4.1-flash-1017",
+        "display_name": "DeepSeek V4.1 Flash 1017",
+        "reasoning_effort": "high",
+        "quantization": "fp8"
+      },
+      "date": "2026-10-20",
+      "steps": [
+        {
+          "rank": 1,
+          "opponent": {
+            "model": "google/gemini-3.8-flash",
+            "display_name": "Gemini 3.8 Flash",
+            "reasoning_effort": "high"
+          },
+          "legs": [
+            {
+              "match_id": "ladder_2026-10_deepseek-deepseek-v4.1-flash-1017_r1_leg1",
+              "challenger_side": 0,
+              "outcome": "incumbent",
+              "victory_type": "nuclear",
+              "turns": 17,
+              "date": "2026-10-20T15:29:01.198265+00:00",
+              "usd": 1.2564,
+              "perf": {
+                "deepseek/deepseek-v4.1-flash-1017": {
+                  "usd": 0.040663,
+                  "usd_today": 0.040663,
+                  "cost_source": "provider",
+                  "think_ms": 96158,
+                  "half_turns": 17,
+                  "served_by": "DeepInfra",
+                  "actions_ok": 48,
+                  "illegal": 2,
+                  "fog_blocked": 0
+                },
+                "google/gemini-3.8-flash": {
+                  "usd": 1.215784,
+                  "usd_today": 1.215784,
+                  "cost_source": "provider",
+                  "think_ms": 117450,
+                  "half_turns": 17,
+                  "served_by": "Google",
+                  "actions_ok": 46,
+                  "illegal": 0,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            },
+            {
+              "match_id": "ladder_2026-10_deepseek-deepseek-v4.1-flash-1017_r1_leg2",
+              "challenger_side": 1,
+              "outcome": "incumbent",
+              "victory_type": "nuclear",
+              "turns": 20,
+              "date": "2026-10-20T16:56:02.472343+00:00",
+              "usd": 1.5049,
+              "perf": {
+                "google/gemini-3.8-flash": {
+                  "usd": 1.442511,
+                  "usd_today": 1.442511,
+                  "cost_source": "provider",
+                  "think_ms": 127981,
+                  "half_turns": 20,
+                  "served_by": "Google",
+                  "actions_ok": 53,
+                  "illegal": 1,
+                  "fog_blocked": 1
+                },
+                "deepseek/deepseek-v4.1-flash-1017": {
+                  "usd": 0.062429,
+                  "usd_today": 0.062429,
+                  "cost_source": "provider",
+                  "think_ms": 133050,
+                  "half_turns": 20,
+                  "served_by": "DeepInfra",
+                  "actions_ok": 55,
+                  "illegal": 1,
+                  "fog_blocked": 0
+                }
+              },
+              "source": "replay"
+            }
+          ],
+          "pts": [
+            0.0,
+            6.0
+          ],
+          "result": "hold",
+          "decided_by": "points"
+        }
+      ],
+      "final_rank": null,
+      "displaced": null
+    },
     {
       "id": "2026-10_google-gemini-4-argon",
       "format": "throne",
@@ -2220,7 +2324,7 @@
       "display_name": "Gemini 3.8 Flash",
       "from": "2026-09-05",
       "to": null,
-      "defences": 4,
+      "defences": 5,
       "seeded": false
     }
   ]

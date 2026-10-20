@@ -958,11 +958,14 @@ table.lb tbody tr.lb-archive-toggle td {
    second line on every entry, whatever the screen width. */
 .lad-model {
   flex: 0 1 auto; min-width: 0; font-size: 15px; font-weight: 600;
-  display: flex; align-items: center; gap: 6px;
-  flex-wrap: nowrap; white-space: nowrap; overflow: hidden;
+  display: flex; align-items: center; gap: 6px; row-gap: 3px;
+  flex-wrap: wrap; white-space: nowrap;
 }
-/* The name yields first: badges stay legible, a long name gets an ellipsis. */
-.lad-model > .lad-name { flex: 0 1 auto; overflow: hidden; text-overflow: ellipsis; min-width: 7em; }
+/* The name is never cut. It used to yield first with an ellipsis, and on a
+   phone that ate the end of "DeepSeek V4.1 Flash 1017": the snapshot suffix,
+   which is the part that tells two releases apart. Now the badges wrap under a
+   long name, and a name longer than the row wraps itself. */
+.lad-model > .lad-name { flex: 0 1 auto; min-width: 0; white-space: normal; overflow-wrap: anywhere; }
 .lad-model > :not(.lad-name) { flex: none; }
 /* flex-basis 100% puts the strip on its own line, always. Letting it sit inline
    when it happens to fit made rows ragged: the fog-blocked badge only exists for
