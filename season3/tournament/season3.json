@@ -8,7 +8,7 @@
    "id": "deepseek-v4-1-flash-1017",
    "country": "CN",
    "quantization": "fp8",
-   "provider_name": "Venice",
+   "provider_name": "Venice AI",
    "host_name": null,
    "params_b": 763,
    "active_b": null,
@@ -21,7 +21,7 @@
    "id": "claude-haiku-5-5",
    "country": "US",
    "quantization": "unknown",
-   "provider_name": "Venice",
+   "provider_name": "Venice AI",
    "host_name": null,
    "params_b": null,
    "active_b": null,
@@ -34,7 +34,7 @@
    "id": "nvidia-nemotron-3-ultra-550b-a55b",
    "country": "US",
    "quantization": "fp8",
-   "provider_name": "Venice",
+   "provider_name": "Venice AI",
    "host_name": null,
    "params_b": 550,
    "active_b": 55,
@@ -303,7 +303,7 @@
      "lab": "Anthropic",
      "quantization": "unknown",
      "open": false,
-     "provider_name": "Venice"
+     "provider_name": "Venice AI"
     },
     {
      "name": "GPT-6 Astra",
@@ -314,7 +314,7 @@
      "lab": "OpenAI",
      "quantization": "unknown",
      "open": false,
-     "provider_name": "Venice"
+     "provider_name": "Venice AI"
     }
    ],
    "rounds": [
@@ -337,7 +337,7 @@
      "lab": "Anthropic",
      "quantization": "unknown",
      "open": false,
-     "provider_name": "Venice"
+     "provider_name": "Venice AI"
     },
     {
      "name": "Gemini 4 Carbon",
