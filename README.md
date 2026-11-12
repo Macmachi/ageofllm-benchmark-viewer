@@ -1,8 +1,35 @@
-# Age of LLM™ Benchmark · site v0.19.2 · game engine v0.18.0
+# Age of LLM™ Benchmark
 
-![Age of LLM Benchmark cover](assets/images/Cover.png)
+![Age of LLM, Season 3: Robot Duel](assets/images/og-season3.jpg)
 
-> Project name: **Age of LLM™ Benchmark** (formerly "Modern War").
+> An independent benchmark for language models, played in seasons. **Season 3,
+> Robot Duel, is under way** at [ageofllm.org](https://ageofllm.org/).
+> (Project name: **Age of LLM™ Benchmark**, formerly "Modern War".)
+
+## Season 3: Robot Duel (now)
+
+Each language model designs a robot of at most 110 kg (the chassis, the armor,
+the motors, the battery, and mechanisms it calibrates itself: spinners,
+hammers, flippers, lifters, clamps, wedges) and writes the Python program that
+drives it. The two robots then run alone under a glass bubble, in a
+deterministic physics simulation: nobody steers them during a round. Before
+each round the two models exchange a message; between rounds each one reads a
+report of what happened and may redesign, reprogram, or both. The first to win
+3 rounds wins the match, in 5 rounds at most.
+
+- **Watch:** [the season's page](https://ageofllm.org/season3/) (the
+  leaderboard, then the Cup between the top 8, and the exhibition matches),
+  and every match in the 3D viewer, with each model's messages, reasoning and
+  code.
+- **Fixed for the season:** the rules (engine `rd-0.5.0`), and for each model
+  the provider that serves it and the precision it is served at, the same for
+  all its matches and published on the season's page.
+- **In this repository:** the season's ranking, Cup and exhibitions in
+  `season3/tournament/season3.json`, one JSON file per match in
+  `season3/replays/season3/` (data under CC BY 4.0, `season3/DATA-LICENSE.txt`),
+  and the built pages of the season (all rights reserved, `season3/LICENSE.txt`).
+  The engine, the rules as the models read them and the runner stay in the
+  private repository, as for the earlier seasons.
 
 ## The three seasons
 
@@ -19,6 +46,10 @@ Licenses differ by season and by kind of file: the code of Seasons 1 and 2 is
 under the GNU AGPL-3.0-or-later and their data under CC BY 4.0; Season 3's code
 is all rights reserved and its data under CC BY 4.0 (see [License &
 Copyright](#license--copyright)).
+
+## Seasons 1 and 2: the strategy duel
+
+![Age of LLM, Seasons 1 and 2](assets/images/Cover.png)
 
 A strategic **1v1 benchmark between two LLMs**. Two language models face off in a
 turn-based duel: the goal is to **destroy the enemy base**, either by **nuclear
@@ -83,7 +114,9 @@ could not, the crown carries over and the release notes say so.
 
 This repository publishes what changes the **benchmark**: every game-engine release, plus the rare site change that alters what is measured or how it is ranked. Ordinary site and tooling changes are tracked in the private repository: they cannot change how a match was played.
 
+- [Season 3: Robot Duel (now)](#season-3-robot-duel-now): what it is, where to watch it, what is in this repository
 - [The three seasons](#the-three-seasons): what each one is, and where its data is
+- [Seasons 1 and 2: the strategy duel](#seasons-1-and-2-the-strategy-duel): everything below describes it
 - [Two version numbers](#two-version-numbers): which number moves when, and why it matters
 - [Releases](#releases): 12 entries, newest first
 - [1. Overview & architecture](#1-overview--architecture)
