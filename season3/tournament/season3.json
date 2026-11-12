@@ -16,19 +16,6 @@
    "native": "fp8",
    "output_limit": 32000
   },
-  "claude-haiku-5.5": {
-   "name": "Claude Haiku 5.5",
-   "id": "claude-haiku-5-5",
-   "country": "US",
-   "quantization": "unknown",
-   "provider_name": "Venice AI",
-   "host_name": null,
-   "params_b": null,
-   "active_b": null,
-   "open": false,
-   "native": null,
-   "output_limit": 32000
-  },
   "nemotron-3-ultra": {
    "name": "Nemotron 3 Ultra",
    "id": "nvidia-nemotron-3-ultra-550b-a55b",
@@ -54,6 +41,19 @@
    "open": true,
    "native": "bf16",
    "output_limit": 32000
+  },
+  "claude-haiku-5.5": {
+   "name": "Claude Haiku 5.5",
+   "id": "claude-haiku-5-5",
+   "country": "US",
+   "quantization": "unknown",
+   "provider_name": "Venice AI",
+   "host_name": null,
+   "params_b": null,
+   "active_b": null,
+   "open": false,
+   "native": null,
+   "output_limit": 32000
   }
  },
  "leaderboard": {
@@ -65,8 +65,8 @@
    "legacy": false
   },
   "updated": "2026-11-12",
-  "matches": 3,
-  "rounds": 9,
+  "matches": 4,
+  "rounds": 12,
   "center": 1000,
   "centred_on": [
    "claude-haiku-5.5",
@@ -91,15 +91,15 @@
     "rank": 1,
     "rank_range": [
      1,
-     1
+     2
     ],
     "model": "deepseek-v4.1-flash",
     "name": "DeepSeek V4.1 Flash 1017",
     "id": "deepseek-v4-1-flash-1017",
     "country": "CN",
     "quantization": "fp8",
-    "rating": 1393,
-    "low": 1019,
+    "rating": 1428,
+    "low": 1040,
     "high": null,
     "one_sided": "lower",
     "matches": 3,
@@ -156,49 +156,7 @@
    {
     "rank": 2,
     "rank_range": [
-     2,
-     4
-    ],
-    "model": "claude-haiku-5.5",
-    "name": "Claude Haiku 5.5",
-    "id": "claude-haiku-5-5",
-    "country": "US",
-    "quantization": "unknown",
-    "rating": 869,
-    "low": null,
-    "high": 1346,
-    "one_sided": "upper",
-    "matches": 1,
-    "rounds": {
-     "won": 0,
-     "drawn": 0,
-     "lost": 3
-    },
-    "provisional": true,
-    "why": [
-     "1 of 8 placement matches",
-     "lost all its rounds"
-    ],
-    "connected": true,
-    "last": [
-     {
-      "date": "2026-11-12",
-      "opponent": "deepseek-v4.1-flash",
-      "side": "A",
-      "rounds": [
-       0,
-       3
-      ],
-      "result": "lost",
-      "replay": "replays/season3/s3_claude-haiku-5-5_vs_deepseek-v4-1-flash-1017_0.json",
-      "replay_id": "s3_claude-haiku-5-5_vs_deepseek-v4-1-flash-1017_0"
-     }
-    ]
-   },
-   {
-    "rank": 2,
-    "rank_range": [
-     2,
+     1,
      4
     ],
     "model": "nemotron-3-ultra",
@@ -206,23 +164,35 @@
     "id": "nvidia-nemotron-3-ultra-550b-a55b",
     "country": "US",
     "quantization": "fp8",
-    "rating": 869,
-    "low": null,
-    "high": 1346,
-    "one_sided": "upper",
-    "matches": 1,
+    "rating": 1024,
+    "low": 696,
+    "high": 1351,
+    "one_sided": null,
+    "matches": 2,
     "rounds": {
-     "won": 0,
+     "won": 3,
      "drawn": 0,
      "lost": 3
     },
     "provisional": true,
     "why": [
-     "1 of 8 placement matches",
-     "lost all its rounds"
+     "2 of 8 placement matches",
+     "interval wider than ±180"
     ],
     "connected": true,
     "last": [
+     {
+      "date": "2026-11-12",
+      "opponent": "claude-haiku-5.5",
+      "side": "B",
+      "rounds": [
+       3,
+       0
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_claude-haiku-5-5_vs_nvidia-nemotron-3-ultra-550b-a55b_0.json",
+      "replay_id": "s3_claude-haiku-5-5_vs_nvidia-nemotron-3-ultra-550b-a55b_0"
+     },
      {
       "date": "2026-11-12",
       "opponent": "deepseek-v4.1-flash",
@@ -238,7 +208,7 @@
     ]
    },
    {
-    "rank": 2,
+    "rank": 3,
     "rank_range": [
      2,
      4
@@ -248,9 +218,9 @@
     "id": "qwen/qwen3.8-27b",
     "country": "CN",
     "quantization": "bf16",
-    "rating": 869,
+    "rating": 889,
     "low": null,
-    "high": 1346,
+    "high": 1387,
     "one_sided": "upper",
     "matches": 1,
     "rounds": {
@@ -276,6 +246,60 @@
       "result": "lost",
       "replay": "replays/season3/s3_deepseek-v4-1-flash-1017_vs_qwen3.8-27b_0.json",
       "replay_id": "s3_deepseek-v4-1-flash-1017_vs_qwen3.8-27b_0"
+     }
+    ]
+   },
+   {
+    "rank": 4,
+    "rank_range": [
+     2,
+     4
+    ],
+    "model": "claude-haiku-5.5",
+    "name": "Claude Haiku 5.5",
+    "id": "claude-haiku-5-5",
+    "country": "US",
+    "quantization": "unknown",
+    "rating": 659,
+    "low": null,
+    "high": 1094,
+    "one_sided": "upper",
+    "matches": 2,
+    "rounds": {
+     "won": 0,
+     "drawn": 0,
+     "lost": 6
+    },
+    "provisional": true,
+    "why": [
+     "2 of 8 placement matches",
+     "lost all its rounds"
+    ],
+    "connected": true,
+    "last": [
+     {
+      "date": "2026-11-12",
+      "opponent": "nemotron-3-ultra",
+      "side": "A",
+      "rounds": [
+       0,
+       3
+      ],
+      "result": "lost",
+      "replay": "replays/season3/s3_claude-haiku-5-5_vs_nvidia-nemotron-3-ultra-550b-a55b_0.json",
+      "replay_id": "s3_claude-haiku-5-5_vs_nvidia-nemotron-3-ultra-550b-a55b_0"
+     },
+     {
+      "date": "2026-11-12",
+      "opponent": "deepseek-v4.1-flash",
+      "side": "A",
+      "rounds": [
+       0,
+       3
+      ],
+      "result": "lost",
+      "replay": "replays/season3/s3_claude-haiku-5-5_vs_deepseek-v4-1-flash-1017_0.json",
+      "replay_id": "s3_claude-haiku-5-5_vs_deepseek-v4-1-flash-1017_0"
      }
     ]
    }
