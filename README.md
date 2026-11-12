@@ -1,22 +1,39 @@
-# Age of LLM™ — Benchmark · site v0.19.2 · game engine v0.18.0
+# Age of LLM™ Benchmark · site v0.19.2 · game engine v0.18.0
 
-![Age of LLM — Benchmark cover](assets/images/Cover.png)
+![Age of LLM Benchmark cover](assets/images/Cover.png)
 
-> Project name: **Age of LLM™ — Benchmark** (formerly "Modern War").
+> Project name: **Age of LLM™ Benchmark** (formerly "Modern War").
+
+## The three seasons
+
+| Season | The game | When | On the site | Its data in this repository |
+|---|---|---|---|---|
+| **Season 1**, The Leaderboard | the turn-based strategy duel described below, ranked in a point table | May to June 2026 | [`/v1.html`](https://ageofllm.org/v1.html), frozen | `data/leaderboard_v1.json`, and the replays in `replays/` listed in `replays/index_v1.json` |
+| **Season 2**, The Ladder, then The Throne | the same duel: a ladder, then a throne | August 2026 (The Ladder), September to October 2026 (The Throne) | [`/ladder/`](https://ageofllm.org/ladder/) and [`/throne/`](https://ageofllm.org/throne/), both frozen | `ladder/data/ladder.json` (The Ladder), `data/ladder.json` (The Throne), their replays in `replays/` |
+| **Season 3**, Robot Duel | each model designs a robot and writes the program that drives it; the two robots fight on their own, with real physics | from November 2026 | [`/season3/`](https://ageofllm.org/season3/) (the season's page, where the home page leads) and `/season3/duel/` (the 3D match viewer) | `season3/tournament/season3.json` (the ranking, the Cup and the exhibitions) and `season3/replays/season3/` (one JSON file per match) |
+
+Seasons 1 and 2 are over: their rules, pages and data are frozen as they were
+played. Season 3 is a new game whose results are not compared with theirs.
+Everything else in this README describes the strategy duel of Seasons 1 and 2.
+Licenses differ by season and by kind of file: the code of Seasons 1 and 2 is
+under the GNU AGPL-3.0-or-later and their data under CC BY 4.0; Season 3's code
+is all rights reserved and its data under CC BY 4.0 (see [License &
+Copyright](#license--copyright)).
 
 A strategic **1v1 benchmark between two LLMs**. Two language models face off in a
 turn-based duel: the goal is to **destroy the enemy base**, either by **nuclear
 bomb** or by **military conquest** (tanks). The game measures reasoning under
 uncertainty (fog of war), diplomacy (bluff, deterrence, betrayal) and strategic
-timing. **No strategic advice is given to the models** — they must deduce
+timing. **No strategic advice is given to the models**: they must deduce
 everything on their own.
 
-The home page is a **throne**: one reigning champion, and a new model plays it
-over **two matches, one from each side of the map**. A tie is scored on points
-(win = 3, draw = 1, loss by accepted ultimatum = 0.5, loss or mutual destruction
-= 0), and a level tie goes to whichever model won its own match in fewer turns.
+Season 2's **throne** (at `/throne/`, the home page until Season 3), now frozen: one reigning champion, and a
+new model played it over **two matches, one from each side of the map**. A tie
+was scored on points (win = 3, draw = 1, loss by accepted ultimatum = 0.5, loss
+or mutual destruction = 0), and a level tie went to whichever model won its own
+match in fewer turns.
 For every model the site also publishes its record, cost per match, thinking
-time and illegal-action rate. See [3b. The Throne](#3b-the-throne--format-and-scoring).
+time and illegal-action rate. See [3b. The Throne](#3b-the-throne-format-and-scoring).
 
 Typed-choice models such as **Jev (TypeSafe)** play under the same rules and
 receive the same observations, through a separate decision interface: they pick
@@ -26,13 +43,15 @@ no free-text diplomacy. Their matches carry a `CHOICE` badge on the site and a
 `decision_interface` block in each replay, because that interface is a
 difference to keep in mind when comparing them with the LLMs.
 
-This repository is the **V2**: rules heavily simplified compared to V1 (an old
-Ursina/3D game) and an **isometric web viewer** in Canvas 2D instead of 3D
-rendering.
+The game of Seasons 1 and 2 is the **V2** of Modern War: rules heavily
+simplified compared to the original game (an old Ursina/3D game) and an
+**isometric web viewer** in Canvas 2D instead of 3D rendering. (The "V1 corpus"
+and the "V1 leaderboard" below are Season 1's matches and table, not that
+original game.)
 
 > Three pillars kept: **fog of war + memory**, **full diplomacy**, **nuclear
 > deterrence**.
-> Three layers removed vs V1: **steel/trucks**, **unit HP**,
+> Three layers removed from the original game: **steel/trucks**, **unit HP**,
 > **factories/research centers**.
 
 ---
@@ -45,15 +64,15 @@ rendering.
 | **site** | Pages, runners, stats, ladder format, docs. | Freely. It never enters a replay. |
 
 Every `What's new` section below states which of the two it moved. Releases up to
-0.16.2 predate the split, when one number covered both — and 0.16.1/0.16.2 bumped
+0.16.2 predate the split, when one number covered both, and 0.16.1/0.16.2 bumped
 the engine number with no rules behind it, which is what prompted separating them.
 
 **The 12 opening matches were played on game engine 0.17.0; every challenge
-from now on runs on 0.18.0.** The frozen V1 archive
+after them (32 matches) ran on 0.18.0.** The frozen V1 archive
 spans 0.9.2 → 0.15.0, which is why it is kept whole rather than continued.
 
 If the rules ever change while a champion is standing: every challenge is still
-played live, both sides on the same engine, so no single tie mixes versions — but
+played live, both sides on the same engine, so no single tie mixes versions; but
 the champion's *crown* was won under the engine in force when it took it. When a
 change could plausibly have gone the other way, the opening is replayed; when it
 could not, the crown carries over and the release notes say so.
@@ -62,14 +81,15 @@ could not, the crown carries over and the release notes say so.
 
 ## Contents
 
-This repository publishes what changes the **benchmark**: every game-engine release, plus the rare site change that alters what is measured or how it is ranked. Ordinary site and tooling changes are tracked in the private repository — they cannot change how a match was played.
+This repository publishes what changes the **benchmark**: every game-engine release, plus the rare site change that alters what is measured or how it is ranked. Ordinary site and tooling changes are tracked in the private repository: they cannot change how a match was played.
 
-- [Two version numbers](#two-version-numbers) — which number moves when, and why it matters
-- [Releases](#releases) — 12 entries, newest first
+- [The three seasons](#the-three-seasons): what each one is, and where its data is
+- [Two version numbers](#two-version-numbers): which number moves when, and why it matters
+- [Releases](#releases): 12 entries, newest first
 - [1. Overview & architecture](#1-overview--architecture)
 - [2. Quick start](#2-quick-start)
 - [3. Game rules (complete)](#3-game-rules-complete)
-- [3b. The Throne — format and scoring](#3b-the-throne--format-and-scoring) — how the crown is won, and what each result is worth
+- [3b. The Throne: format and scoring](#3b-the-throne-format-and-scoring): how the crown is won, and what each result is worth
 - [4. The Python engine (`engine/`)](#4-the-python-engine-engine)
 - [5. The replay JSON schema](#5-the-replay-json-schema)
 - [5b. The leaderboard (`data/leaderboard.json`)](#5b-the-leaderboard-dataleaderboardjson)
@@ -84,41 +104,41 @@ This repository publishes what changes the **benchmark**: every game-engine rele
 
 ## Releases
 
-**These are the benchmark's releases, not the site's.** Every game-engine release is here — the rules, stamped into each replay — because only a game-engine change can make two matches non-comparable. Site and tooling releases are not: they live in the private repository.
+**These are the benchmark's releases, not the site's.** Every game-engine release is here (the rules, stamped into each replay) because only a game-engine change can make two matches non-comparable. Site and tooling releases are not: they live in the private repository.
 
 Two site entries appear anyway, and both earn their place by changing what the benchmark **claims**, not how it looks: the move from a leaderboard to a ladder (`site 0.17.0`), and the side-bias audit that had to establish the engine favours neither slot (`0.16.2`). A redesign, a faster page, a fixed tooltip or a missing badge on a card will never appear here.
 
-### What's new in **game engine v0.18.0** — the prompt denied a mechanic the engine implements
+### What's new in **game engine v0.18.0**: the prompt denied a mechanic the engine implements
 
 > **Scope: RULES (prompt text) + replay schema. No game behaviour changed.**
 > Game engine `0.17.0` → **`0.18.0`**. Site stays `0.17.1`.
 
 Since engine `0.15.0`, a player with an enemy silo in view is told when that enemy
 launches, and can fire back the same turn to force mutual destruction instead of
-defeat. The system prompt said the opposite — that the opponent "cannot
+defeat. The system prompt said the opposite: that the opponent "cannot
 consciously react" and that "there is no manual retaliation". A model that
 believed it had no reason to look for the signal.
 
 The prompt now documents it: when it can fire, that only the player moving second
 in a turn can receive it, and that it still says nothing about whether the enemy
-*can* launch. **The mechanic is unchanged — only its description was wrong.**
+*can* launch. **The mechanic is unchanged; only its description was wrong.**
 
 **Replays now record it.** `players_state[].knowledge.enemy_launch_detected`
 stores what the player was told before deciding, and the viewer marks it in the
-reasoning panel — separating *"it knew and did not fire back"* from *"it never
+reasoning panel, separating *"it knew and did not fire back"* from *"it never
 knew"*.
 
-**The bomb never costs 13U.** A systematic pass over the prompt — every claim run
-against the engine rather than compared to a constant — found one more slip, with
+**The bomb never costs 13U.** A systematic pass over the prompt (every claim run
+against the engine rather than compared to a constant) found one more slip, with
 no incidence on any match played. The pressure starts *on* turn 40, not after,
 and the 13U floor is only reached on turn 90, so a standard 80-turn match bottoms
 at 15U. The prompt now lists the schedule outright.
 
 **A ceasefire lasts 4 turns, not 3.** Accepted on turn T, it is active on T, T+1,
-T+2 and T+3 — while the prompt said *"3 turns"* in three places. The wording was
+T+2 and T+3, while the prompt said *"3 turns"* in three places. The wording was
 corrected rather than the engine: changing the value would be a rules change, and
 6 of the 12 opening matches ran under a ceasefire. The discrepancy has cost
-nobody anything so far — **zero ceasefire rejections across all 66 replays**.
+nobody anything so far: **zero ceasefire rejections across all 66 replays**.
 
 **Diplomatic state left the chat.** A ceasefire in force, and an offer still
 awaiting an answer, now show as badges under the model names instead of being
@@ -134,7 +154,7 @@ player always lacked the uranium or the silo to answer.
 ---
 
 
-### What's new in **game engine v0.17.0** — three defects found by auditing the corpus
+### What's new in **game engine v0.17.0**: three defects found by auditing the corpus
 
 > **Scope: RULES.** Game engine `0.16.0` → **`0.17.0`**, shipped alongside site
 > `0.17.1`. The ladder starts from zero on this version.
@@ -146,18 +166,18 @@ actually have avoided?** Three answers came back, all three the engine's fault.
 - **Units now deploy.** The prompt promised a new unit could act the same turn,
   but the engine assigns its id and spawn cell only *after* the model has
   submitted its actions. All 60 `Unit not found` rejections in the corpus, across
-  19 models, came from that — a unit now acts from its owner's next turn, and its
+  19 models, came from that; a unit now acts from its owner's next turn, and its
   id is read from the next observation instead of guessed.
 - **Fog is tested first when building.** "Cell already has a building" used to be
   checked before fog, so aiming into the dark confirmed an undiscovered enemy
-  building — a failed build bought a free map probe. It now returns only "scout
+  building: a failed build bought a free map probe. It now returns only "scout
   it first".
 - **Rejections caused by the unseen are no longer counted as illegal.** Bumping
   into a unit you cannot see is how a fog game reveals its board. The engine tags
   those `cause="fog"` and they are reported apart from illegal actions.
 
 Left alone on purpose: building blind into fog, the largest category, *is* the
-model's mistake — computing your own field of view is a skill worth measuring.
+model's mistake: computing your own field of view is a skill worth measuring.
 
 The system prompt was also audited: seven pieces of strategic advice had crept
 into a prompt that claims to give none. Every payoff and mechanic they carried is
@@ -165,47 +185,47 @@ still stated; only the imperative was cut.
 
 ---
 
-### What's new in **site v0.17.0** — the Ladder replaces the leaderboard
+### What's new in **site v0.17.0**: the Ladder replaces the leaderboard
 
-> **Scope: SITE only.** Site `0.16.2` → **`0.17.0`**. Game engine untouched — and
+> **Scope: SITE only.** Site `0.16.2` → **`0.17.0`**. Game engine untouched, and
 > `ENGINE_VERSION` corrected here from a phantom `0.16.2` back to `0.16.0`.
 
 **The point-table ranking is closed and replaced by a standing top-4 that models
 challenge into.** A newly released model does not join the ladder: it meets **#4**
 first and climbs until it loses. Every tie is played **home and away with the
 sides swapped**. If the two legs are level, the model that won its own leg in
-fewer turns takes the place — the same speed rule that settles the opening table,
+fewer turns takes the place: the same speed rule that settles the opening table,
 compared inside that tie rather than over careers.
 
-- **`index.html`** — the ladder is now the home page (the frozen V1 leaderboard
+- **`index.html`**: the ladder is now the home page (the frozen V1 leaderboard
   moved to `v1.html`; the domain used to land on the archive): the standing, the throne, the challenge
   log and the reigns timeline, with each model's measured latency, real
   provider-billed cost, pinned endpoint and quantization.
 - **The V1 leaderboard is frozen, not deleted.** Its 54 matches span game engine
   0.9.2 → 0.15.0, none of them the current rules, so it is kept whole and read
-  only — every match, every replay, every figure — behind an ARCHIVE banner.
+  only (every match, every replay, every figure) behind an ARCHIVE banner.
 - **Nothing is placed by decree**: the first four models play a home-and-away
   round robin, and that table seeds the ladder.
 - **Real costs, not estimates.** Prices × tokens cannot see prompt caching and
   read high; the provider-reported figure is what gets published.
 - **A cost is a price epoch, not a constant.** Providers cut prices, and a model
-  that played before a cut would carry the old rate in its average for ever —
+  that played before a cut would carry the old rate in its average for ever;
   GPT-5.6 Sol's own replays show its billed rate halving mid-season. So beside
   what a model's matches cost, the page shows what the *same* matches would cost
   at today's rates, keeping the prompt-cache discount each one actually
-  received: `💲 $1.05 → $0.41 today`. The second figure appears only when it
-  moves the first by more than 5%. What was paid stays the primary claim; the
+  received, as a second figure marked *today*. It appears only when it moves
+  the first by more than 5%. What was paid stays the primary claim; the
   re-price exists so two models benchmarked months apart can be compared at all.
 - **A promotion is a date, not a price.** A model can arrive on a launch
   discount, and reading that as what it costs would flatter it for as long as
-  the offer lasts. Where the pinned endpoint is on sale the board says so —
-  `PROMO −50%` — with the list price and the at-list cost per match on hover.
+  the offer lasts. Where the pinned endpoint is on sale the board says so
+  (`PROMO −50%`), with the list price and the at-list cost per match on hover.
   Gemini 3.7 Flash is why the rule is stated rather than a number trusted: it
   arrived at −75% and sits at −50% eight weeks later, having not changed. The
   cost figures published here are therefore built on **list** prices, so a
   model is never credited with an offer that expires.
 - **Latency is a published metric**, which it could not honestly be before every
-  model was pinned to a single endpoint. It measures **that one deployment** —
+  model was pinned to a single endpoint. It measures **that one deployment**:
   the lab's own where the lab serves one, a third party's hardware and queue
   where it does not. Each model's endpoint is published next to its latency, so
   which case applies is visible rather than assumed.
@@ -213,9 +233,9 @@ compared inside that tie rather than over careers.
 ---
 
 <details>
-<summary><b>Older releases</b> — 9 more, game engine 0.9.4 &rarr; 0.16.0</summary>
+<summary><b>Older releases</b>: 9 more, game engine 0.9.4 &rarr; 0.16.0</summary>
 
-### What's new in **v0.16.2** — side-bias audit
+### What's new in **v0.16.2**: side-bias audit
 
 > **Scope: SITE only.** Game engine unchanged at `0.16.0`. This release bumped
 > `ENGINE_VERSION` to 0.16.2 with no rules behind it; corrected in site 0.17.0.
@@ -226,22 +246,22 @@ compared inside that tie rather than over careers.
 
 > **Update, October 2026.** This audit ran on an earlier engine, and its
 > conclusion holds for that engine only. On game engines 0.17.0 and 0.18.0 the
-> right-hand side (player 2) has won **31 of 38** decisive matches: 10 of 12 in
-> the opening, where the pattern was first noticed, then **21 of 26** in the
-> challenges played since (exact binomial p = 0.002). Every tie is played from
-> both sides, so the crown is not affected; [3b](#3b-the-throne--format-and-scoring)
+> right-hand side (player 2) won **34 of 42** decisive matches: 10 of 12 in
+> the opening, where the pattern was first noticed, then **24 of 30** in the
+> challenges played since (exact binomial p = 0.001). Every tie is played from
+> both sides, so the crown is not affected; [3b](#3b-the-throne-format-and-scoring)
 > says what it does change. The cause is not found yet. Every figure can be
 > recomputed from `data/ladder.json` by comparing `a_side` (opening) or
 > `challenger_side` (challenges) with `outcome`.
 
 A 57-match **mirror campaign** (`nvidia/nemotron-3.5-lightning`, the same model
 on both sides, so model strength is constant by construction) gives **p2 51.9 %,
-Wilson 95 % CI [38.9 – 64.6], p = 0.89** — indistinguishable from a fair coin.
+Wilson 95 % CI [38.9 – 64.6], p = 0.89**, indistinguishable from a fair coin.
 The main corpus's **71.7 %** falls outside that interval, and the two sets differ
 significantly (Fisher exact, **p = 0.047**).
 
-The imbalance therefore comes from **slot assignment in the queue files** —
-stronger models were written into the p2 field — and not from the game itself.
+The imbalance therefore comes from **slot assignment in the queue files**
+(stronger models were written into the p2 field) and not from the game itself.
 
 - **The ranking needs no correction.** Every A-vs-B match was a fair fight; the
   recorded outcomes stand. The 71.7 % only reflects which models sat in p2.
@@ -252,7 +272,7 @@ stronger models were written into the p2 field — and not from the game itself.
   `slot_bias.mirror`, each with its Wilson interval, so no consumer reads a rate
   without its uncertainty.
 
-### What's new in **game engine v0.16.0** — the prompt made rule-only
+### What's new in **game engine v0.16.0**: the prompt made rule-only
 
 > **Scope: RULES.** Game engine `0.15.0` → **`0.16.0`**.
 >
@@ -261,8 +281,8 @@ stronger models were written into the p2 field — and not from the game itself.
 This release makes the system prompt **fully rule-only**. Engine bumped **0.15.0 → 0.16.0**.
 
 - **Removed the last two tactical seed phrases from the system prompt.** Earlier
-  versions still contained two residual hints — *"Push tanks + a scout into enemy
-  ground to contest their economy"* and *"Scout with a drone early"* — described as
+  versions still contained two residual hints, *"Push tanks + a scout into enemy
+  ground to contest their economy"* and *"Scout with a drone early"*, described as
   the *"two tactical seed phrases present during data collection"* in the companion
   paper (Section 2.7). They are now removed, so the prompt describes **only the
   rules, win conditions and the JSON schema, with no strategic or build-order
@@ -270,7 +290,7 @@ This release makes the system prompt **fully rule-only**. Engine bumped **0.15.0
   the v0.9.2–v0.15.0 corpus (the 54 matches analysed in the papers) is unaffected
   and remains as collected, with the seed phrases present.
 
-### What's new in **game engine v0.15.0** — nuclear early warning
+### What's new in **game engine v0.15.0**: nuclear early warning
 
 > **Scope: RULES.** Game engine `0.14.0` → **`0.15.0`**.
 >
@@ -280,28 +300,28 @@ This release adds a **nuclear early-warning signal**. Engine bumped
 **0.14.0 → 0.15.0**.
 
 - **Nuclear early-warning (detected enemy launch).** When the opponent launches a
-  bomb, the player is now informed — but **only if the player can currently see
+  bomb, the player is now informed, but **only if the player can currently see
   an enemy silo** in their field of view. Fog of war is respected: a launch from
   a hidden silo stays secret. This gives a player with a visible enemy silo a
   one-turn window to **retaliate** (launch their own bomb the same turn → mutual
   destruction instead of a clean nuclear defeat).
 
-### What's new in **game engine v0.14.0** — fog-of-war gap on deposits
+### What's new in **game engine v0.14.0**: fog-of-war gap on deposits
 
 > **Scope: RULES.** Game engine `0.13.0` → **`0.14.0`**.
 >
 > *Released before the two version numbers were separated, when a single version covered both.*
 
-- **Fog of war — enemy-side deposits are now remembered.** A resource deposit
+- **Fog of war: enemy-side deposits are now remembered.** A resource deposit
   (gisement) scouted on the enemy side is exposed to the model and **kept in
   memory after discovery** (`remembered_enemy_deposits`: `kind`, `pos`,
-  `reserve`, `last_seen_tour`, `currently_visible`) — just like remembered enemy
+  `reserve`, `last_seen_tour`, `currently_visible`), just like remembered enemy
   buildings. Previously enemy-side deposits were filtered by territory and never
   revealed, even when a unit had eyes on them. Building a mine there still
   requires the cell to be in your **current** field of view (the enemy may have
   built on it since), and an exhausted deposit is dropped from memory.
 
-### What's new in **game engine v0.13.0** — the Champion reference opponent
+### What's new in **game engine v0.13.0**: the Champion reference opponent
 
 > **Scope: RULES.** Game engine `0.12.0` → **`0.13.0`**.
 >
@@ -315,18 +335,18 @@ schema bumped **0.12.0 → 0.13.0**.
 
 **ChampionAgent strategy (`engine/agents.py`)**
 
-- **Efficient nuclear rush** — builds uranium economy + an early silo + a scout
+- **Efficient nuclear rush**: builds uranium economy + an early silo + a scout
   drone, and **launches the instant** silo/fuel/enemy-base-discovered are all
   satisfied.
-- **Fights for the central mine instead of camping** — pushes Tanks to destroy
+- **Fights for the central mine instead of camping**: pushes Tanks to destroy
   the enemy central mine (denying its fuel) and reclaim the deposit, and defends
   its own. This turns the match into a real military contest over the middle of
   the map rather than a passive economic race.
-- **Air defense (SAM)** — when the opponent fields Fighters/Drones (a Tank cannot
+- **Air defense (SAM)**: when the opponent fields Fighters/Drones (a Tank cannot
   hit a Fighter; the SAM is the only counter), it builds and maneuvers SAMs to
   escort the Tank push and cover the center and its scout drone.
 - **Unified attack priority**: (1) **finish** the enemy base if a Tank hit ends
-  the game, (2) **defense** — destroy an enemy Tank threatening our base/silo,
+  the game, (2) **defense**: destroy an enemy Tank threatening our base/silo,
   (3) kill the most valuable in-range unit (tactical triangle, SAM included),
   (4) deny center / chip buildings: central mine > silo > base > economy.
 - **Rational diplomacy with bluffing** (uranium is secret): genuine ultimatum
@@ -336,15 +356,15 @@ schema bumped **0.12.0 → 0.13.0**.
 
 **Engine / runner**
 
-- **Prompt clarification (`engine/prompts.py`)** — documents the **action
+- **Prompt clarification (`engine/prompts.py`)**: documents the **action
   resolution order**: the (up to 3) actions resolve **one by one in the order
   listed**, each on the board left by the previous one. A `move` can revoke the
   vision a later `build` needs (→ "not in your field of view"), and a unit cannot
   end its `move` on a cell where a building is queued the same turn. This is a
-  pure rules clarification — still **no strategic advice**.
-- **`run_game.py`** — `champion` is now selectable as `--p0`/`--p1` alongside
+  pure rules clarification, still **no strategic advice**.
+- **`run_game.py`**: `champion` is now selectable as `--p0`/`--p1` alongside
   `greedy`/`random`.
-- **`run_queue.py`** — scripted (non-LLM) agents are selectable from `queue.json`
+- **`run_queue.py`**: scripted (non-LLM) agents are selectable from `queue.json`
   via `"provider": "scripted"` and `"model": "champion"` (or `greedy`/`random`),
   with an optional fixed per-slot `"seed"`. They are drop-in replacements for an
   `LLMAgent`.
@@ -372,7 +392,7 @@ To pit a **named** model against the Champion (e.g. GPT-5.5) without editing
 [
   {
     "p1": { "name": "GPT-5.5", "model": "gpt-5.5", "provider": "poe",
-            "reasoning_effort": "high", "cost_input": 5.0, "cost_output": 30.0 },
+            "reasoning_effort": "high" },
     "p2": { "name": "Champion", "model": "champion", "provider": "scripted",
             "seed": 0 }
   }
@@ -387,7 +407,7 @@ To pit a **named** model against the Champion (e.g. GPT-5.5) without editing
 > Use **~10 minimum**, **20-30 recommended**, played with the LLM in **both
 > slots** to cancel the mirror slot bias.
 
-### What's new in **game engine v0.12.0** — balance: SAM, central mine, map fairness
+### What's new in **game engine v0.12.0**: balance: SAM, central mine, map fairness
 
 > **Scope: RULES.** Game engine `0.11.0` → **`0.12.0`**.
 >
@@ -397,7 +417,7 @@ This release improves **central-mine contention** and **map fairness** across
 seeds, with four targeted balance changes:
 
 - **SAM movement raised 1 → 2:** the SAM can now keep pace with a Tank. A
-  Tank + SAM pair can advance together to contest the central mine — the SAM
+  Tank + SAM pair can advance together to contest the central mine: the SAM
   protects the Tank from enemy Fighters while the Tank destroys the mine or
   holds the position. The SAM still cannot attack ground targets, so it creates
   no new win condition; it just makes escorted ground pushes viable.
@@ -416,10 +436,10 @@ seeds, with four targeted balance changes:
   blocks the entrance to a col.6 passage, which would asymmetrically favour
   the side whose approach was open.
 
-> **Note — no strategic advice:** as always, the prompt describes ONLY the rules
+> **Note (no strategic advice):** as always, the prompt describes ONLY the rules
 > and the action schema. The models receive no hints on how to play.
 
-### What's new in **game engine v0.11.0** — balance: base HP 8 → 4
+### What's new in **game engine v0.11.0**: balance: base HP 8 → 4
 
 > **Scope: RULES.** Game engine `0.10.0` → **`0.11.0`**.
 >
@@ -432,24 +452,24 @@ head-to-head with the nuclear rush**, and clarifies the rules shown to the model
   (tank damage is unchanged at 2 HP per hit). A single tank that reaches the enemy
   base finishes it in two turns, so a military push resolves in a comparable number
   of turns to a nuclear rush instead of being far too slow. Match length is
-  unchanged (still ~16-22 turns) — only the relative viability of the military path
+  unchanged (still ~16-22 turns); only the relative viability of the military path
   moves. *(Older replays were produced with 8 HP bases; they still play back
-  correctly — the viewer clamps the HP bar, so a pre-v0.11 base simply shows a full
+  correctly: the viewer clamps the HP bar, so a pre-v0.11 base simply shows a full
   bar until its HP drops below 4.)*
 - **Line-of-sight rule made explicit in the prompt:** the system prompt now states
   the exact engine error (`"Line of sight blocked by a mountain or building"`) and
-  spells out that an in-range target is **not** enough — the straight line to it
+  spells out that an in-range target is **not** enough: the straight line to it
   must also be clear of any mountain **or** building. This was the most common cause
   of rejected ground attacks. No strategic advice is added; only the mechanic and
   its failure message are described.
 - **Per-call API timeout raised 300 → 600 s** to accommodate models run at
   `reasoning_effort = high`, which can think for several minutes per turn.
-- **Auto-save after every half-turn:** `run_game.py` and `run_tournament.py` now
-  write a partial replay to disk after each player's turn so match progress is
+- **Auto-save after every half-turn:** `run_game.py` and the tournament runner of
+  the time now write a partial replay to disk after each player's turn so match progress is
   never lost if the process is killed mid-game.
 - **Pause + retry instead of crashing on API failure:** if a model exhausts all 3
   API retries on a single half-turn (timeout / API error / malformed JSON), the
-  runner pauses **10 minutes** then retries the same turn from scratch — the failed
+  runner pauses **10 minutes** then retries the same turn from scratch; the failed
   turn is never captured in the replay. After 6 consecutive failed pauses (1 hour
   total) it raises `StallDetected` and stops cleanly.
 - **Match resume after `StallDetected`:** a pickle snapshot (`.snapshot.pkl`) is
@@ -464,10 +484,10 @@ head-to-head with the nuclear rush**, and clarifies the rules shown to the model
 - **Timestamp in terminal output:** every `thinking…` and result line now shows the
   local time `[HH:MM:SS]` so long matches are easy to monitor.
 
-> **Note — no strategic advice:** as always, the prompt describes ONLY the rules and
+> **Note (no strategic advice):** as always, the prompt describes ONLY the rules and
 > the action schema. The models receive no hints on how to play.
 
-### What's new in **game engine v0.10.0** — map rework and line of sight
+### What's new in **game engine v0.10.0**: map rework and line of sight
 
 > **Scope: RULES.** Game engine `0.9.4` → **`0.10.0`**.
 >
@@ -478,14 +498,14 @@ on destroy/rebuild at the center, while keeping games short:
 
 - **Line of sight (LOS):** ground attacks (tank, SAM) are now **blocked by
   mountains AND buildings**. A tank can no longer fire *through* the barrier or
-  through a building — any mountain/building on the straight line between shooter
+  through a building: any mountain/building on the straight line between shooter
   and target makes the attack fail (the target's own cell never blocks, so you can
   still hit a building you directly aim at). Air attackers (fighter) ignore all
   obstacles. Mountains and buildings are real cover now.
 - **Mine enemy-side deposits / contest the economy:** mines are no longer
   restricted to your own territory. You can build your **own** mine on **any
   matching deposit that is free and in your field of view**, including on the
-  opponent's half. There is **no instant capture** of an intact enemy mine — you
+  opponent's half. There is **no instant capture** of an intact enemy mine: you
   must first **destroy it** (tank hit) or wait for its deposit to **exhaust**,
   which frees the cell, then claim the deposit by building there while you hold
   vision. The **silo** stays restricted to your own territory.
@@ -498,11 +518,11 @@ on destroy/rebuild at the center, while keeping games short:
   canonical fixed layout.
 - **Mines cost more (not tougher):** `credit_mine` / `uranium_mine` now cost
   **2 C** (was 1) and the central mine **3 C** (was 2). HP is unchanged (still
-  1-2 tank hits) so matches stay short — but the destroy/rebuild loop is no longer
+  1-2 tank hits) so matches stay short, but the destroy/rebuild loop is no longer
   nearly free.
 - **Resource depletion + respawn:** every deposit holds a **finite reserve**
   (`credits` 18, `uranium` 16). A mine extracts its production from that reserve
-  each turn; when it hits 0 the deposit is **exhausted** — the mine on it is
+  each turn; when it hits 0 the deposit is **exhausted**: the mine on it is
   removed and a **fresh deposit of the same kind respawns** on a free cell on the
   same side it ran out (the central one respawns on column 6). Forces redeployment
   instead of camping one spot. New replay events: `deposit_exhausted` /
@@ -518,24 +538,24 @@ on destroy/rebuild at the center, while keeping games short:
 
 ---
 
-### What's new in **game engine v0.9.4** — accepted ultimatum scores 0.5
+### What's new in **game engine v0.9.4**: accepted ultimatum scores 0.5
 
 > **Scope: RULES.** Game engine `0.9.3` → **`0.9.4`**.
 >
 > *Released before the two version numbers were separated, when a single version covered both.*
 
 - **Ultimatum consolation (rule change):** the player who **accepts** an
-  ultimatum now scores **0.5 points** instead of 0 — surrendering a lost
+  ultimatum now scores **0.5 points** instead of 0: surrendering a lost
   position beats fighting on for nothing. Reflected in the engine scoring
-  (`generate_stats.py`, `run_tournament.py`), the LLM prompt and the viewer
+  (`generate_stats.py` and the tournament runner of the time), the LLM prompt and the viewer
   legend.
 - **Fog memory now drops destroyed buildings:** a building destroyed is removed
   from each player's `remembered_buildings`, so the AI no longer "remembers" a
   building that no longer exists (and the viewer stops showing a ghost of it).
-- **Viewer — tank vs building animation sync:** a mine/silo destroyed by a tank
+- **Viewer, tank vs building animation sync:** a mine/silo destroyed by a tank
   is re-injected as a ghost so it stays intact until the killing slice, then
   plays its destruction in sync (no more tank "firing at an empty cell").
-- **Viewer — remembered buildings shown greyed:** in Player view, an enemy
+- **Viewer, remembered buildings shown greyed:** in Player view, an enemy
   building discovered earlier but now out of sight is drawn dimmed on a greyed
   tile (memory) instead of vanishing into black fog.
 - **Mobile fixes:** full-screen panels with a clearly tappable close button,
@@ -568,19 +588,20 @@ JSON replay format.
   diplomacy, replayable fog, and a multi-match leaderboard.
 
 Guiding principle of the front end: **nothing is hard-coded** about dimensions
-or terrain — everything is read from the JSON. Changing the map does not break
+or terrain: everything is read from the JSON. Changing the map does not break
 the front end.
 
 ### Directory tree
 
 ```
-modern-war-v2/
-├── README.md                  # this file
+<private repository>/        # the engine and the site's sources (this public repo holds only the site)
+├── README.md                  # the private README (this public repo keeps its own)
 ├── config.example.ini         # LLM config template (copy to .config.ini)
-├── requirements.txt           # venv deps (openai, fastapi-poe, Pillow)
-├── .gitignore                 # ignores .config.ini, .venv, logs, __pycache__…
-│                              #   + tournament_models.json, tournament_state.json,
-│                              #     queue.json, models_validated.json (local runtime)
+├── config.jev.example.ini     # Jev template (copy to .config.jev.ini)
+├── requirements.txt           # venv deps (openai, fastapi-poe)
+├── .gitignore                 # ignores .config.ini, .config.*.ini, .venv, logs, __pycache__…
+│                              #   + ladder_models.json, ladder_state.json, *.snapshot.pkl,
+│                              #     queue.json (local runtime)
 │
 ├── engine/                    # ── GAME ENGINE (Python) ──
 │   ├── __init__.py            # package exports
@@ -591,21 +612,28 @@ modern-war-v2/
 │   ├── observation.py         # serializes a player's state (fog) for the LLM
 │   ├── prompts.py             # SYSTEM_PROMPT V2 (English, no strategic advice)
 │   ├── llm_agent.py           # multi-provider LLMAgent + JSON parser + Config .ini
-│   ├── agents.py              # GreedyAgent (heuristic) + RandomAgent
+│   ├── agent_factory.py       # selects and validates generative / choice agents
+│   ├── choice_agent.py, choice_search_agent.py, choice_atomic_agent.py,
+│   │   choice_backends.py     # typed-choice agents (Jev) and their transport
+│   ├── agents.py              # GreedyAgent (heuristic), ChampionAgent, RandomAgent
 │   └── replay_writer.py       # serialization -> viewer JSON schema
-├── run_game.py                # runner: plays a single match (greedy/random/llm)
-├── run_queue.py               # match queue: runs specific 1v1 matches from queue.json
-├── run_tournament.py          # 3-round tournament: random → split → split (winners vs winners)
-├── tournament_models.example.json  # model list template (copy to tournament_models.json)
+├── run_game.py                # runner: plays a single match (greedy/random/champion/llm)
+├── match_runner.py            # shared plumbing: provider keys, agents, one match
+├── run_ladder.py              # Season 2's runner: opening round-robin + challenges
+├── ladder_core.py             # Season 2's rules: points, ties, opening table, reigns
+├── version.py                 # SITE_VERSION, kept apart from ENGINE_VERSION
+├── archive/measurement/run_queue.py  # retired match queue: specific 1v1 matches from queue.json
 │
 ├── viewer.html                # ── VIEWER (Web) ──
 ├── index.html                 # THE HOME PAGE: the throne (reads data/ladder.json)
 ├── v1.html                    # frozen V1 leaderboard archive
 ├── funding/index.html         # funding & independence page, served at /funding/
-├── generate_stats.py          # generates data/leaderboard.json + replays/index.json
-├── update_site.sh             # generate_stats.py + git add/commit/push
+├── ladder/                    # Season 2's first phase, The Ladder: frozen archive, served at /ladder/
 ├── scripts/
-│   └── convert_webp.py        # converts PNG sprites -> WebP (Pillow)
+│   ├── generate_stats.py      # generates data/leaderboard.json + replays/index.json
+│   ├── build_featured.py      # data/featured.json: the home page's teaser
+│   ├── served_code.py         # publication: comments out of the served code, licence lines
+│   └── update_viewer.sh       # publishes to this public repo
 ├── assets/
 │   ├── css/style.css          # "Into the Breach / Frostpunk" theme
 │   ├── js/
@@ -618,13 +646,19 @@ modern-war-v2/
 │   │   ├── leaderboard.js     # V1 archive table construction
 │   │   ├── ladder.js          # throne, every model tested, challenges, reigns
 │   │   ├── featured.js        # animated teaser of the latest match (home page)
+│   │   ├── funding.js         # the funding page's script
 │   │   └── model-meta.js      # flags / authors / effort badge, shared by both pages
+│   ├── images/                # logo, cover, favicons and web manifest, share images
 │   └── sprites/               # WebP sprites (units/buildings/effects/resources)
 ├── replays/
 │   ├── index.json             # lightweight list of replays (generated)
-│   └── *.json                 # match replays (dummy + generated)
+│   ├── index_v1.json          # frozen list of the V1 replays (read by v1.html)
+│   └── *.json                 # match replays
 └── data/
-    └── leaderboard.json       # per-model aggregates (generated)
+    ├── ladder.json            # the throne, frozen (read by index.html)
+    ├── leaderboard_v1.json    # frozen V1 table (read by v1.html)
+    ├── featured.json          # the latest match, cut down for the teaser (generated)
+    └── leaderboard.json       # per-model aggregates over every replay (generated; the public copy stays frozen at V1)
 ```
 
 ---
@@ -635,25 +669,25 @@ modern-war-v2/
 
 The **engine** core has **no external dependency** (standard Python 3.10+). The
 runner defaults to **LLM vs LLM**, so `requirements.txt` installs:
-- `openai` — the OpenAI-compatible SDK used for **LLM agents** (also drives Poe
-  and Venice via their `base_url`).
-- `Pillow` — only for the **WebP conversion tool**.
+- `openai`: the OpenAI-compatible SDK used for **LLM agents** (also drives Poe
+  and the other OpenAI-compatible providers via their `base_url`).
+- `fastapi-poe`: the native Poe client, only for `poe_native`.
 
 ```bash
 python3 -m venv .venv
-.venv/bin/python -m pip install -r requirements.txt   # openai + Pillow
+.venv/bin/python -m pip install -r requirements.txt   # openai, fastapi-poe
 ```
 
 > Heuristic-only runs (`--p0 greedy --p1 greedy`) do not import `openai`, but it
 > is installed by default since the runner plays LLM vs LLM out of the box.
 
-### Playing a match — LLM vs LLM is the default
+### Playing a match: LLM vs LLM is the default
 
 > Matches are launched **only from the command line** (`run_game.py`). The web
 > site is a **read-only viewer**: it does not play matches, it replays the JSON
 > replays produced by the engine.
 
-By **default both players are LLM agents** loaded from `.config.ini` — **no
+By **default both players are LLM agents** loaded from `.config.ini`; **no
 `--llm` flag is required**:
 
 ```bash
@@ -663,14 +697,15 @@ cp config.example.ini .config.ini         # first time: fill in the API keys
 .venv/bin/python run_game.py --out replays/my_match.json --match-id my_match
 ```
 
-> `.config.ini` (API keys) is **git-ignored and must NEVER be pushed**. Only
-> `config.example.ini` (English template) is versioned.
+> `.config.ini` and `.config.*.ini` (API keys) are **git-ignored and must NEVER
+> be pushed**. Only credential-free templates (`config.example.ini`,
+> `config.jev.example.ini`) are versioned.
 
 > **Live progress**: whenever an LLM agent plays, the runner prints the **current
 > turn**, **which model is thinking**, its **think time**, the **running average
-> per half-turn** and a **projected match ETA** (re-adjusted every turn) — no
-> flag needed. Pass `-q` / `--quiet` to silence it, `-v` to also see rejected
-> (illegal) actions.
+> per half-turn** and a **projected match ETA** (re-adjusted every turn), no
+> flag needed, with each rejected (illegal) action as a `FAIL` line. Pass `-q` /
+> `--quiet` to silence it.
 
 ### Playing with heuristic agents (no LLM)
 
@@ -704,8 +739,10 @@ The site is 100% static, but `fetch()` requires an HTTP server (browsers block
 python3 -m http.server 8765
 ```
 
-- **Leaderboard**: <http://localhost:8765/>
-- **Replay**: <http://localhost:8765/viewer.html?match=2026-05-30_001>
+- **Home page (the throne)**: <http://localhost:8765/>
+- **V1 leaderboard**: <http://localhost:8765/v1.html>
+- **Replay**: `http://localhost:8765/viewer.html?match=<match_id>` (a file name of
+  `replays/` without `.json`)
 
 ### Regenerating the leaderboard after new matches
 
@@ -729,14 +766,14 @@ Rows 0 to 6    (center row = 3)
 Coordinates are always `[column, row]`, origin at the top-left.
 
 > **Internal balancing vs fog of war:** the engine generates the map
-> **symmetrically** so both sides are perfectly balanced — the mirror of
+> **symmetrically** so both sides are perfectly balanced: the mirror of
 > `(c, r)` is `(12-c, 6-r)`. **However, this symmetry is NOT disclosed to the
 > LLM**: the prompt never states that the map is symmetric, and a player's
 > observation only contains the deposits in its OWN territory plus the shared
 > central deposit. Enemy-side deposits are hidden by fog and **cannot be deduced
-> from symmetry** — they must be scouted.
+> from symmetry**: they must be scouted.
 
-**Seed-driven terrain (mountains, passages, deposits — all vary per match):**
+**Seed-driven terrain (mountains, passages and deposits all vary per match):**
 
 For `seed > 0` the **whole barrier on column 6 is regenerated** and extra
 mountains are scattered inside each half:
@@ -752,7 +789,7 @@ mountains are scattered inside each half:
 
 `seed = 0` reproduces the canonical fixed layout: barrier mountains
 `(6,1) (6,2) (6,4) (6,5)`, passages `(6,0) (6,3) (6,6)`, central deposit `(6,3)`,
-no extra mountains — kept deterministic for tests/replays.
+no extra mountains, kept deterministic for tests/replays.
 
 **Mountains** block **ground movement**, **construction**, **and line of sight
 for ground attacks** (see §3.4). **Air** units (Drone, Fighter) fly over
@@ -799,8 +836,8 @@ Credits = everything (units, mines, silo). Uranium = the bomb only.
 **Uranium is secret to the opponent** (but visible to the spectator).
 
 > **Resource depletion + respawn (v0.10.0):** each deposit holds a **finite
-> reserve** — `credits` **18**, `uranium`/`uranium_central` **16** resource
-> units. An operational mine extracts its production from that reserve each income
+> reserve**: `credits` **18**, `uranium`/`uranium_central` **12** resource
+> units (16 until game engine 0.12.0). An operational mine extracts its production from that reserve each income
 > turn; when the reserve reaches **0** the deposit is **exhausted**: the mine
 > standing on it is **removed** (nothing left to extract) and a **fresh deposit of
 > the same kind respawns** on a free cell on the **same side** it ran out (the
@@ -810,18 +847,18 @@ Credits = everything (units, mines, silo). Uranium = the bomb only.
 > observation. The intent is to force **redeployment** over a match instead of
 > camping a single deposit.
 
-> **Flavor (spectator only)**: "credit" deposits/mines represent **oil** —
+> **Flavor (spectator only)**: "credit" deposits/mines represent **oil**;
 > the legend labels them "Credit (oil)". This is purely cosmetic and does not
 > change any rule or value.
 
-### 3.3 Units (4 types — NO HP, all combat is lethal)
+### 3.3 Units (4 types, NO HP, all combat is lethal)
 
 | Unit | Cost | Move\* | Detection | Range | Can attack |
 |------|------|--------|-----------|-------|------------|
-| **Drone** | 2 C | 3 | 3 | — | nothing (recon) |
+| **Drone** | 2 C | 3 | 3 | - | nothing (recon) |
 | **SAM** | 3 C | 2 | 2 | 2 | **aerial** targets (Drone, Fighter) |
 | **Tank** | 4 C | 2 | 1 | 2 | Tank, SAM, **buildings** |
-| **Fighter** | 4 C | 3 | 2 | 2 | Tank, Drone, Fighter — **NOT buildings, NOT SAM** |
+| **Fighter** | 4 C | 3 | 2 | 2 | Tank, Drone, Fighter; **NOT buildings, NOT SAM** |
 
 \* Move = max cells per **Move** action, in **Chebyshev** distance
 `max(|dx|, |dy|)`.
@@ -830,17 +867,17 @@ Credits = everything (units, mines, silo). Uranium = the bomb only.
 - Each unit does **at most 1 Move + 1 Attack per turn** (2 actions max on the
   same unit). It can Move **then** Attack the same turn.
 - **Deployment delay (game engine 0.17.0):** a unit produced this turn cannot
-  Move or Attack until its owner's **next** turn — the same one-turn delay that
+  Move or Attack until its owner's **next** turn, the same one-turn delay that
   governs buildings. Its id and spawn cell are chosen by the engine and appear in
   the next observation, so they are read rather than guessed.
 - **Only the Tank destroys buildings** (2 damage/attack). The pivot of the
   counter-play.
 - Ground units cross column 6 only through its passages.
 - **Line of sight:** a ground attacker (Tank, SAM) cannot fire **through a
-  mountain or a building** — flank around cover to land the shot. The Fighter
+  mountain or a building**: flank around cover to land the shot. The Fighter
   (air) ignores obstacles for LOS.
 
-### 3.4 Combat — immediate resolution
+### 3.4 Combat: immediate resolution
 
 A unit is **intact or destroyed**, no intermediate state.
 
@@ -862,7 +899,7 @@ A unit is **intact or destroyed**, no intermediate state.
 defender is destroyed.** Initiative and positioning are rewarded.
 
 **Line of sight (v0.10.0):** a **ground** attack is blocked if a **mountain or a
-building lies on the straight line** between the shooter and the target — you
+building lies on the straight line** between the shooter and the target: you
 cannot fire through the barrier, scattered mountains, or a building. The target's
 **own cell never blocks**, so a tank can still hit a building it directly aims at.
 The **Fighter** (air) is not blocked. Mountains and buildings are genuine cover;
@@ -877,7 +914,7 @@ clear the Fighters with **SAMs**; the opponent destroys the SAMs with their
 
 | Building | Cost | HP | Effect |
 |----------|------|----|--------|
-| **Base** | — | 4 | HQ, produces all units. Destroyed = military defeat |
+| **Base** | - | 4 | HQ, produces all units. Destroyed = military defeat |
 | **Credit Mine** | 2 C | 2 | +3 C/turn, on any free [C] deposit you can see |
 | **Uranium Mine** | 2 C | 2 | +1 U/turn, on any free [U] deposit you can see |
 | **Central Uranium Mine** | 4 C | 3 | +1 U/turn, on the column-6 central deposit |
@@ -891,7 +928,7 @@ clear the Fighters with **SAMs**; the opponent destroys the SAMs with their
 > **Mine enemy-side deposits (v0.10.0):** mines are **no longer restricted to your
 > own territory**. You may build your own mine on **any matching deposit that is
 > free and currently in your field of view**, including on the opponent's half.
-> There is **no instant capture** of an intact enemy mine — destroy it (or wait for
+> There is **no instant capture** of an intact enemy mine: destroy it (or wait for
 > its deposit to exhaust) to free the cell, then build there while you hold vision.
 > The **silo remains own-territory only**.
 
@@ -904,10 +941,10 @@ investment.
 
 > **Base-adjacent cells are reserved**: you cannot build (mine or silo) on any of
 > the 8 cells adjacent to a base (yours or the enemy's). They are kept free so
-> unit production — which auto-spawns on a free adjacent cell — can never be
+> unit production (which auto-spawns on a free adjacent cell) can never be
 > self-blocked by your own buildings. Build at least 2 cells away from your base.
 
-**Cell occupancy (build & move) — at most ONE unit per layer per cell:**
+**Cell occupancy (build & move), at most ONE unit per layer per cell:**
 - Build fails if the cell already has **a building**, contains **a ground unit**
   (allied or enemy), is a **mountain**, is **adjacent to a base**, or (for a
   mine) is the wrong deposit. **Air units** (Drone, Fighter) **do not block**
@@ -918,12 +955,12 @@ investment.
 - A **ground** unit cannot move onto a cell occupied by **another ground unit**
   or **a building**. **Air** units (Drone, Fighter) fly over mountains, ground
   units and buildings, **BUT two air units (even allied) cannot share the same
-  cell** — the engine rejects such a move with the reason "Destination occupied
+  cell**: the engine rejects such a move with the reason "Destination occupied
   by an air unit".
 
 **Construction delay (⏳):** a placed building is **under construction until its
 owner's next turn**. While under construction:
-- it **produces nothing** — its **effect only starts the turn after** it
+- it **produces nothing**: its **effect only starts the turn after** it
   finishes;
 - **a single attack destroys it instantly** (regardless of its HP), whereas a
   finished building loses 2 HP per Tank hit. Defend your construction sites.
@@ -963,9 +1000,9 @@ Base free, otherwise Produce fails. **Diplomacy costs no action.**
 | Type | Available | Effect |
 |------|-----------|--------|
 | **Free message** | always | 1/turn, ~500 chars, archived |
-| **Ceasefire** | turn 10+ | no attacks for 3 turns (+6 U bomb penalty) |
+| **Ceasefire** | turn 10+ | no attacks on the turn it is accepted and the 3 turns after it (+6 U bomb penalty) |
 | **Peace** | turn 15+ | immediate draw if accepted |
-| **Ultimatum** | turn 10+ | "surrender before turn X" (X ∈ `[turn+1, turn+3]`) — **voluntary surrender**: if accepted the proposer **wins** and the accepter gets **0.5 pt** (vs 0 for a normal loss); refusing/ignoring it has **no automatic consequence** |
+| **Ultimatum** | turn 10+ | "surrender before turn X" (X ∈ `[turn+1, turn+3]`), a **voluntary surrender**: if accepted the proposer **wins** and the accepter gets **0.5 pt** (vs 0 for a normal loss); refusing/ignoring it has **no automatic consequence** |
 
 ### 3.9 Nuclear bomb
 
@@ -973,19 +1010,23 @@ Base free, otherwise Produce fails. **Diplomacy costs no action.**
 discovered.
 
 - **Base cost: 25 U.** Uranium is consumed on launch.
-- **Anti-stalemate pressure (post-T40):** −2 U at turn 40, then −2 U every 10
-  turns (T50: −4, T60: −6…), **floor 13 U**. This pressure only affects the
+- **Anti-stalemate pressure (from T40):** −2 U at turn 40, then −2 U every 10
+  turns (T50: −4, T60: −6…), **floor 13 U**, only reached on turn 90: an 80-turn
+  match bottoms at 15 U. This pressure only affects the
   nuclear path; the military victory (tank on the base) stays available and
   immediate throughout.
 - **Ceasefire penalty:** +6 U if launching during an active ceasefire.
 - **Simultaneous launches (resolved by the engine at the end of the turn):** a
-  launch is **secret** (uranium and the shot are not visible to the opponent) and
-  "in flight". Both players play their half-turn, **then** the engine resolves it
+  launch is **secret** (uranium is never visible to the opponent, the shot only
+  through the early warning below) and "in flight". Both players play their half-turn, **then** the engine resolves it
   via `resolve_launches()` in `advance_turn`: if **only one** launched → they win
   (`nuclear`); if **both** launched the same turn → **mutual destruction** (both
   lose). The bomb is in flight the turn it is launched and hits the enemy base at
-  the end of that same turn. No manual retaliation: the play order of the turn
-  changes nothing (the opponent may already have a ready bomb). Launching is a
+  the end of that same turn. **Nuclear early warning** (game engine 0.15.0): the
+  player moving second in the turn is told of the first player's launch
+  (`enemy_launch_detected`) if it can see an enemy silo, and launching back the
+  same turn turns its defeat into mutual destruction. Nothing tells either side
+  whether the other *can* launch (uranium stays secret). Launching is a
   **calculated bet**, not a guaranteed win.
 - **Military kill vs an in-flight bomb:** if you destroy the enemy base with a
   Tank the same turn the opponent had **already launched** (their bomb is in
@@ -1011,12 +1052,13 @@ discovered.
 **Ranking:** models are ranked by **points per match** (`points_per_match` =
 average of win = 3 / draw = 1 / loss = mutual destruction = 0), so a model that
 simply plays more matches cannot climb by accumulating points. Ties are broken
-by `win_rate`, then total matches (more games = more reliable), then total
+by `win_rate`, then head-to-head results between the tied models, then fewer
+turns to win, then total matches (more games = more reliable), then total
 points. To avoid a single lucky game topping a long proven record, models with
-**fewer than the "min matches" threshold** (default 1, adjustable on the page)
+**fewer than the "min matches" threshold** (default 3, adjustable on the page)
 are listed **after** the ranked models and flagged **provisional**. Every column
 is **sortable** (click a header). The leaderboard also shows total points,
-average time/turn, average tokens/turn, $/match and the illegal-action rate.
+average time/turn, average tokens/turn, cost per match and the illegal-action rate.
 
 **Play order:** who starts is **drawn at random** at the start of the match, then
 **alternates each turn** (no permanent first-player bias). `you_play_first`
@@ -1024,10 +1066,10 @@ indicates the order of the current turn.
 
 ---
 
-## 3b. The Throne — format and scoring
+## 3b. The Throne: format and scoring
 
-The home page is **one champion and every model ever tested**, not a rating and
-not a ranking. This section is the reference for how the crown is won — the release
+The throne (`/throne/`) is **one champion and every model ever tested**, not a rating and
+not a ranking. This section is the reference for how the crown is won; the release
 notes above record *when* a rule changed, this records what it *is*.
 
 ### The format
@@ -1038,24 +1080,25 @@ notes above record *when* a rule changed, this records what it *is*.
 - **Every tie is two legs, sides swapped.** The challenger is player 1 in leg 1
   and player 2 in leg 2. No pairing is ever played in one direction only. The
   swap is doing real work: on game engines 0.17.0 and 0.18.0 the right-hand side
-  has won 31 of 38 decisive matches. Inside a tie that advantage cancels, so the
-  crown is not affected, but it is why so many ties end one leg each: in 6 of
-  the 14 played so far, each model won from the right and the tie went to speed.
+  won 34 of 42 decisive matches. Inside a tie that advantage cancels, so the
+  crown is not affected, but it is why so many ties end one leg each: in 7 of
+  the 16 played, each model won from the right and the tie went to speed.
 - **Every model tested is listed below the champion**, in an order stated above
   the list: former champions by time on the throne, then every other model by
   test date, each row unfolding into its matches. No rank numbers and no podium
   colours, because only the first seat is ever played for.
 - **The opening.** An empty board cannot be filled by decree, so the first four
-  models played a home-and-away round-robin — 12 matches — and that table
+  models played a home-and-away round-robin (12 matches), and that table
   produced the first champion and the first three seats behind it.
 
 > **Until August 2026 the format was a climb**: a challenger entered at `#4` and
 > moved up one place per tie won, keeping the highest place it took. It was
-> replaced because its cost fell hardest on its best results — eight matches to
+> replaced because its cost fell hardest on its best results: eight matches to
 > reach `#1` against two to be eliminated, so the challenges worth watching were
 > the ones the benchmark could least afford. Challenges played under the climb
 > carry a `GAUNTLET` badge and still unfold into every tie they played, and
-> `data/ladder.json` records the format each one was played under.
+> `data/ladder.json` marks each challenge played for the throne with
+> `"format": "throne"` (a challenge without it was played under the climb).
 
 ### What each leg is worth
 
@@ -1067,8 +1110,8 @@ project:
 | Win | `nuclear`, `military`, `ultimatum` | **3** |
 | Draw | `peace`, `timeout` | **1** each |
 | Loss by accepted ultimatum | `ultimatum` (loser's side) | **0.5** |
-| Loss | — | **0** |
-| **Mutual destruction** | `mutual_destruction` | **0 each — both lose** |
+| Loss | - | **0** |
+| **Mutual destruction** | `mutual_destruction` | **0 each, both lose** |
 
 Two lines are deliberate rather than obvious, and they pull in opposite
 directions for the same reason: **incentives**.
@@ -1078,7 +1121,7 @@ position would be worth exactly as much as fighting on to a 0-point defeat, and
 no model would ever accept.
 
 **Mutual destruction pays 0, not 1.** It is not a draw: both bases are gone.
-Scored as a draw — which the ladder mistakenly did until site `0.17.5` — a model
+Scored as a draw (which the ladder mistakenly did until site `0.17.5`), a model
 that is losing converts a certain 0 into a certain 1 by launching, so
 launching-when-behind becomes strictly dominant and **nuclear deterrence**, one
 of the three pillars this benchmark exists to measure, stops meaning anything.
@@ -1091,7 +1134,7 @@ A peaceful draw keeps its point, because nobody destroyed anybody.
   purpose: career averages would let matches won earlier, against entirely
   different opponents, decide a fight for the throne. *"I beat you in 19, you beat me in
   25"* is a statement about these two games; *"my average is lower"* is not.
-- **Level on points and no leg was closed out** — two draws (2-2), two mutual
+- **Level on points and no leg was closed out**: two draws (2-2), two mutual
   destructions (0-0), or one of each (1-1) → the **champion keeps the crown**.
   There is genuinely nothing to compare: who *drew* faster measures who sued for
   peace earlier, and who was annihilated faster measures nothing at all.
@@ -1119,7 +1162,7 @@ names reads as a ranking to anyone who does not hover.
 It is therefore **not a measurement of how far apart two models are** either. A
 challenger that loses the throne match has played two matches, and the only
 thing they establish is that it did not take the crown. Precision accumulates in
-exactly one place — the throne, where the champion defends repeatedly and builds
+exactly one place: the throne, where the champion defends repeatedly and builds
 a record. Nothing else on the board is being measured at all.
 
 **Points decided the first champion and have not been compared across the board
@@ -1127,13 +1170,13 @@ since.** The distinction is easy to get wrong in both directions, so to be
 exact:
 
 - **The opening round-robin was a points table**, and it is what produced the
-  first champion and the first line — 12 / 12 / 6 / 6. Saying the page "is not a
+  first champion and the first line: 12 / 12 / 6 / 6. Saying the page "is not a
   points table" would be false about its own origin.
 - **Nothing has been scored across the board since.** The crown changes hands
   only when a challenger wins the two-leg tie played for it. No total is ever
   compared between two models that have not just played each other.
 
-**A seat is therefore not a record.** The crown says one thing — *nobody has
+**A seat is therefore not a record.** The crown says one thing: *nobody has
 beaten this model for it*. The W–L record printed next to each model is
 aggregated from its matches for the reader and is never an input.
 
@@ -1150,14 +1193,14 @@ won is 0-3, same outcome. Only a challenger winning more legs than the champion
 takes the crown.
 
 That is the exact reverse of the **opening table**, where a mutual destruction
-costs both participants a point against the models that were not involved — and
+costs both participants a point against the models that were not involved, and
 can therefore drop one of them below the cut. Penalising in the opening, neutral
 in a defence, from one rule: a round-robin ranks models against a field, while
 the throne only ever records a duel.
 
 The climb that ran until August 2026 also assumed **transitivity**: a model
 placed `#3` had never played `#1`. The throne format makes no such assumption
-because it makes no such claim — after the opening, the only thing anyone plays
+because it makes no such claim: after the opening, the only thing anyone plays
 for is the crown. The opening is still a fully connected round-robin rather than
 a seeding by decree, for the one moment that needs it: picking the first champion
 out of a field nobody has beaten head-to-head yet.
@@ -1179,8 +1222,8 @@ tokens, so the serializer is a 1:1 mapping. Combat tables: `ATTACK_MATRIX`,
 `TANK_BUILDING_DAMAGE`. Note the `UnitType` enum value for the fighter is
 `fighter`.
 
-### `game_map.py` — `GameMap`
-13×7 map: **seed-driven terrain** — the column-6 barrier (mountains/passages +
+### `game_map.py`: `GameMap`
+13×7 map: **seed-driven terrain**: the column-6 barrier (mountains/passages +
 the central deposit row), extra in-territory mountains, and the resource deposits
 are all generated from the seed and mirrored to side B for balance (see §3.1).
 `seed=0` reproduces the canonical fixed layout. Helpers: `in_bounds`,
@@ -1191,7 +1234,7 @@ attacks), and the depletion API `reserve_at` / `draw_from_deposit` /
 `is_exhausted` / `remove_deposit` / `respawn_deposit`, plus `terrain_dict()`
 (full export for the replay).
 
-### `state.py` — `GameState`
+### `state.py`: `GameState`
 Holds units, buildings, resources (`credits`/`uranium` per player), `knowledge`
 A/B, diplomacy, `ceasefire_until`, combat `stats`. Key methods:
 - ID factories: `new_unit_id`, `new_building_id` (format `A_tank_3`…),
@@ -1199,10 +1242,10 @@ A/B, diplomacy, `ceasefire_until`, combat `stats`. Key methods:
   `player_units`, `player_buildings`,
 - **fog**: `visible_cells`, `update_knowledge` (remembers enemy buildings + base
   discovery), `visible_enemy_units`,
-- **bomb**: `current_bomb_cost()` (handles post-T40 pressure + ceasefire malus),
+- **bomb**: `current_bomb_cost()` (handles the pressure from T40 + ceasefire malus),
   `ceasefire_active()`.
 
-### `engine.py` — `Engine`
+### `engine.py`: `Engine`
 Core of the rules. Half-turn loop:
 `begin_half_turn(p)` → `execute_action(p, action)` × N → `end_half_turn()`, then
 `advance_turn()` once **both** players have played (income + `turn++`).
@@ -1234,42 +1277,44 @@ Core of the rules. Half-turn loop:
 - `GameOutcome(over, winner, victory_type)` carries the result; `winner` ∈
   `{0, 1, -1}`.
 
-### `replay_writer.py` — `ReplayWriter`
+### `replay_writer.py`: `ReplayWriter`
 Serializes to the **exact schema** of the viewer (§5). **One half-turn = one
 `turns` entry** (the active player alternates each entry). `capture_half_turn(...)`
 is called **after** the actions are resolved; the `units`/`buildings` snapshots
 are **absolute** (end-of-half-turn state). `finalize(winner, victory_type)`
 builds `meta` + `terrain`, `save(path)` writes the file.
 
-### `agents.py` — heuristic agents
+### `agents.py`: heuristic agents
 - **`GreedyAgent`**: deterministic heuristic (builds up the economy, scouts with
   a drone, takes the central mine, builds a silo, rushes the bomb). Enough to
   exercise all engine paths and produce a realistic replay **without an LLM**.
+- **`ChampionAgent`**: the deterministic reference opponent of game engine
+  0.13.0 (see its release notes).
 - **`RandomAgent`**: near-random actions (debug).
 
-### `observation.py` — `build_observation`
+### `observation.py`: `build_observation`
 Serializes a player's state **respecting fog of war**: it sees its own
 units/buildings/resources, but only the enemy units currently in vision and the
 enemy buildings already discovered (with `last_seen_tour`). The enemy uranium is
 never exposed. The `terrain` field contains **only the deposits in the player's
-own territory plus the shared central deposit** (`(6,3)`) — enemy-side deposits
+own territory plus the shared central deposit** (`(6,3)`); enemy-side deposits
 stay hidden by fog so the player cannot deduce them from symmetry. Includes
 `bomb_cost`, `enemy_base_discovered/position`, `combat_stats`,
 `events_against_you`, `last_turn_results/errors`, `diplomacy_pending`,
 `opponent_last_message`, `diplomacy_history`. This is **exactly** what the LLM
 receives.
 
-### `prompts.py` — `SYSTEM_PROMPT`
+### `prompts.py`: `SYSTEM_PROMPT`
 V2 system prompt in English. Describes **only** the V2 rules (13×7 map, 2
 resources, 4 HP-less units, fatal combat, tactical triangle, bomb, diplomacy) and
-the **JSON action schema**. Defines Chebyshev. **Gives no strategic advice** —
+the **JSON action schema**. Defines Chebyshev. **Gives no strategic advice**:
 the model reasons on its own. It does **not** tell the model the map is symmetric
 and does **not** reveal enemy deposit positions: each player must scout the enemy
 half.
 
-### `llm_agent.py` — `LLMAgent` + `Config`
-- **`LLMAgent`**: OpenAI-compatible **multi-provider** client (Venice / Poe /
-  generic). Optional extended reasoning (`thinking`, `reasoning_effort`, Poe modes
+### `llm_agent.py`: `LLMAgent` + `Config`
+- **`LLMAgent`**: OpenAI-compatible **multi-provider** client (Poe and other
+  OpenAI-compatible providers). Optional extended reasoning (`thinking`, `reasoning_effort`, Poe modes
   `default`/`deep`; native Responses API for Claude/Gemini on Poe). **JSON parsing
   robust across 10 strategies** (from strictest to most permissive: `<json>`,
   markdown fence, object scan, truncated-JSON repair…), **retries** with backoff,
@@ -1279,19 +1324,23 @@ half.
   `effective_reasoning_effort()` (reports the effort label used), and
   `last_retries` (per-turn retry counts by cause: `timeout` / `api_error` /
   `malformed`).
-- **Request reliability**: each LLM call uses a **300 s** client timeout. A turn
+- **Request reliability**: each LLM call uses a client timeout of **800 s**
+  (`API_TIMEOUT_S`, a per-request ceiling; `timeout` under `[api]` in
+  `.config.ini` overrides it). A turn
   is attempted up to **`max_retries` (default 3)** times, sleeping
   **`[10, 20, 30]` s** between attempts (capped at the last value). Each failed
-  attempt is bucketed by cause — request **timeout**, other **api_error**, or
-  **malformed** JSON — and the per-turn counts are written to the replay under
+  attempt is bucketed by cause (request **timeout**, other **api_error**, or
+  **malformed** JSON) and the per-turn counts are written to the replay under
   `perf.retries` (NOT shown in the viewer UI; aggregated by `generate_stats.py`
   into `retries_timeout` / `retries_api_error` / `retries_malformed` /
   `retries_total`). No response content is stored, so retries carry no secrets.
-- **`Config`**: loads `.config.ini`. Sections `[venice]`/`[poe]` (credentials),
+- **`Config`**: loads `.config.ini`. One section per provider, e.g. `[poe]` (credentials),
   `[api]` (global fallback), `[player1]`/`[player2]` (model, provider, thinking,
   reasoning_effort, reasoning), `[game]` (seed, max_turns). Per-player credential
   resolution: explicit `api_key` > named provider section > `[api]`.
-  `make_agent(idx)` builds the ready-to-use `LLMAgent`.
+  `make_agent(idx)` builds the ready-to-use agent through the shared factory
+  (`engine/agent_factory.py`): an `LLMAgent`, or a choice agent for a
+  typed-choice model such as Jev.
 
 Common agent contract:
 `decide(engine, player, feedback=None) -> (actions: list[dict], reasoning: str, diplo: list[dict])`
@@ -1303,8 +1352,9 @@ react to combat. Diplomatic responses (accept/refuse) are exposed via
 `agent.pending_responses` and applied by the runner.
 
 > **Plugging in other providers**: any OpenAI-compatible endpoint works via
-> `[api]` or a provider section. Keys live in `.config.ini` (git-ignored and
-> never pushed); only `config.example.ini` (English) is versioned.
+> `[api]` or a provider section. Keys live in `.config.ini` or `.config.*.ini`
+> (git-ignored and never pushed); only credential-free templates
+> (`config.example.ini`, `config.jev.example.ini`) are versioned.
 
 ---
 
@@ -1364,7 +1414,7 @@ This is **the contract** between engine and viewer. A complete example lives in
         { "id": "A_base", "owner": 0, "type": "base", "pos": [1,3], "hp": 4 }
       ],
       "deposits": {                 // CURRENT deposit layout this turn (they move
-        "credits":  [[2,1],[2,5],[10,5],[10,1]],   // when exhausted — see events)
+        "credits":  [[2,1],[2,5],[10,5],[10,1]],   // when exhausted; see events)
         "uranium":  [[3,3],[9,3]],
         "uranium_central": [[6,3]]
       },
@@ -1380,7 +1430,7 @@ This is **the contract** between engine and viewer. A complete example lives in
         { "type": "deposit_exhausted", "pos": [2,1], "deposit": "credits", "owner": 0, "mine": "A_credit_mine_3" },
         { "type": "deposit_respawned", "pos": [4,2], "deposit": "credits" }
       ],
-      "perf": {                       // optional — LLM agents only
+      "perf": {                       // optional, LLM agents only
         "think_ms": 1840,             // active player's thinking time this half-turn
         "tokens": { "prompt": 1200, "completion": 350, "total": 1550 },
         "retries": { "timeout": 0, "api_error": 1, "malformed": 0 } // optional, only if >0
@@ -1438,7 +1488,7 @@ Types: units `drone | sam | tank | fighter` · buildings
 **Optional `meta` fields:**
 - `players[].tokens` (`{prompt, completion, total}`) is added by the runner for
   LLM agents, to display token consumption in the leaderboard / stats.
-- `players[].reasoning_effort` — the reasoning effort label for each player, one
+- `players[].reasoning_effort`: the reasoning effort label for each player, one
   of `"high" | "medium" | "low" | "off" | "NA"` (`NA` = the provider returned no
   reasoning / it is unsupported; the list may be extended later). It comes from
   the config `.ini` (heuristic agents report `off`).
@@ -1455,33 +1505,34 @@ schema point:
 
 Each model entry therefore carries a `reasoning_effort` field (`"high" | "medium"
 | "low" | "off" | "NA"`) alongside `model`, plus `wins`, `losses`, `draws`,
-`total`, `points` (3 / 1 / 0.5 / 0 cumulative — **mutual destruction scores 0
+`total`, `points` (3 / 1 / 0.5 / 0 cumulative; **mutual destruction scores 0
 and counts as a loss for both**, it is not a draw), `points_per_match` (average
-points per match — the primary ranking key), `win_rate`, the outcome buckets
+points per match, the primary ranking key), `win_rate`, the outcome buckets
 (`nuclear_wins`, `military_wins`, `diplomatic_wins`, and `mutual_destructions`,
 which is not a win bucket) and the benchmark
 performance fields (`avg_think_ms`, `avg_tokens_per_turn`, `invalid_actions`,
 `invalid_action_rate`, the retry counters `retries_timeout` / `retries_api_error`
 / `retries_malformed` / `retries_total`, and the estimated cost
 `total_cost_usd` / `avg_cost_per_match`). Models are ranked primarily by
-`points_per_match`, then `win_rate`, then `total`, then `points`.
+`points_per_match`, then `win_rate`, then head-to-head results between the tied
+models, then fewer turns to win, then `total`, then `points`.
 
 Likewise, `replays/index.json` items carry `p1_reasoning_effort` /
 `p2_reasoning_effort` next to `p1_model` / `p2_model`.
 
 ### The archive page (`v1.html`)
 
-The home page (`index.html`) is the throne, described in
-[3b](#3b-the-throne--format-and-scoring). The frozen V1 leaderboard lives on
-`v1.html`. Its table shows one row per `(model, reasoning_effort)` pair — the
-effort badge (HIGH / MED / LOW / OFF / NA) sits next to the model name — and
-includes a **Pts/match** column (the ranking key) plus the **$/match** column
-(estimated average USD cost). **Every column header is clickable to sort.**
+The throne (`throne/index.html`, the home page until Season 3) is described in
+[3b](#3b-the-throne-format-and-scoring). The frozen V1 leaderboard lives on
+`v1.html`. Its table shows one row per `(model, reasoning_effort)` pair (the
+effort badge, HIGH / MED / LOW / OFF / NA, sits next to the model name) and
+includes a **Pts/match** column (the ranking key) plus a **cost per match**
+column (the estimated average, in US dollars). **Every column header is clickable to sort.**
 
-**Column order:** `Pts/match | Total | W | L | D | Win rate | Pts | …` — volume
+**Column order:** `Pts/match | Total | W | L | D | Win rate | Pts | …`: volume
 first (Total), then detail (W/L/D), then derived stats (Win rate, Pts).
 
-Models with fewer than the **"min matches to rank"** threshold (default 1) are
+Models with fewer than the **"min matches to rank"** threshold (default 3) are
 moved below a separator and flagged **provisional** so a single lucky game cannot
 top a model with a long, proven record. Below the table, the **Recent matches**
 list shows every match in a single list **sorted newest first** (by date and
@@ -1491,7 +1542,7 @@ changing page re-renders only the match block, and the search box filters across
 **all** matches (every page), resetting to page 1 of the results.
 
 A **"📷 Save as image"** button (next to the filters) captures the visible
-leaderboard as a PNG — includes the logo, title, and a branded footer with the
+leaderboard as a PNG, including the logo, title, and a branded footer with the
 date and a link to [ageofllm.org](https://ageofllm.org).
 
 ---
@@ -1504,25 +1555,25 @@ rendering, no build step, hostable on GitHub Pages. The whole UI (`index.html`,
 
 Decoupling (so a future Three.js 3D backend is substitutable):
 
-- **`iso.js`** — pure grid↔screen projection math + z-order. Knows neither the DOM
+- **`iso.js`**: pure grid↔screen projection math + z-order. Knows neither the DOM
   nor the data.
-- **`sprites.js`** — preloads the WebP sprites and resolves
+- **`sprites.js`**: preloads the WebP sprites and resolves
   `type/facing/state/variant` → image (see states below).
-- **`player.js`** (`Player.Playback`) — playback state machine (turn, speed,
+- **`player.js`** (`Player.Playback`): playback state machine (turn, speed,
   play/pause) + building an interpolated `frame`, **sprite-state computation**
   (construct/normal/damage/destroy/launch, stable variant, ghosts of destroyed
   units). Does not know the Canvas.
-- **`renderer.js`** — draws a `frame` on the Canvas (terrain, units, buildings,
+- **`renderer.js`**: draws a `frame` on the Canvas (terrain, units, buildings,
   shadows, fog, attack/launch overlays) + **zoom/pan camera**. No playback state.
-- **`stats.js`** — computes per-turn series and draws **vanilla Canvas charts**
+- **`stats.js`**: computes per-turn series and draws **vanilla Canvas charts**
   (no library).
-- **`viewer.js`** — the only module linking DOM + Player + Renderer (transport,
+- **`viewer.js`**: the only module linking DOM + Player + Renderer (transport,
   camera, panel docks, keyboard).
-- **`leaderboard.js`** — leaderboard table + recent-match list.
+- **`leaderboard.js`**: leaderboard table + recent-match list.
 
 ### Sprites: states & variants
 
-- **WebP format** (converted from PNG via `scripts/convert_webp.py`, ~30% space
+- **WebP format** (converted once from PNG, ~30% space
   saved, lossless).
 - **Units**: `idle` / `attack` (4 directions ne/nw/se/sw; the drone has no
   `attack`) / `destroy`. A unit destroyed this turn is shown as a **ghost** with
@@ -1538,18 +1589,18 @@ Decoupling (so a future Three.js 3D backend is substitutable):
   `building_base_damage_player1/2`). The SAM has dedicated `attack` sprites
   (`unit_sam_attack_{dir}`).
 - **Nuclear effects** (slowed for drama, ≥ ~2 s):
-  - `decor_nuclear-missile_launch` — at the **launch** turn, the missile slowly
+  - `decor_nuclear-missile_launch`: at the **launch** turn, the missile slowly
     rises above the launcher's silo (`launchActionMs ≈ 2200 ms`). The silo switches
     to the `launch` sprite **from the start** of the slice and **stays there**
     until the end of the turn (it does not revert to the normal sprite).
-  - `decor_atomic_explosion` — at the **resolution** turn (end of turn), an
+  - `decor_atomic_explosion`: at the **resolution** turn (end of turn), an
     **atomic mushroom** appears with a *fade-in* (`nukeMs ≈ 2600 ms`) on **each base
     destroyed by the bomb** (both in case of mutual destruction), foot placed under
     the cell to cover the base, radial flash on top. During this resolution, **all
     buildings and units of the nuked player(s)** switch to `destroy`. Appears
     **only** for a nuclear death.
 
-### Animating a half-turn — **sequential (action by action)**
+### Animating a half-turn: **sequential (action by action)**
 
 The **3 actions** of a half-turn are played **one after another**, never
 simultaneously. The duration of a half-turn is `actionMs × (number of non-wait
@@ -1558,11 +1609,11 @@ that **launches** the bomb uses `launchActionMs ≈ 2200 ms` per action, and the
 that **resolves** the explosion lasts `nukeMs ≈ 2600 ms`. The normalized clock
 `animT` 0→1 is split into **N slices** (one per visible action). Within each slice,
 a local clock `localT` 0→1:
-- `0.00 … 0.55` — **MOVE** phase: `from→to` glide (smoothstep easing) of the unit
+- `0.00 … 0.55`: **MOVE** phase: `from→to` glide (smoothstep easing) of the unit
   involved + **movement arrow** (dashes + tip, player's color); a produced unit
   appears at the start of its slice. The moving sprite **orients toward its
   destination** (4 dirs).
-- `0.55 … 1.00` — **ACTION** phase: attack line / launch flash / target's `destroy`
+- `0.55 … 1.00`: **ACTION** phase: attack line / launch flash / target's `destroy`
   sprite (the victim only disappears at the slice of the attack that killed it). The
   attacking sprite orients toward its target (4 dirs).
 
@@ -1585,11 +1636,12 @@ avoid confusing it with a health gauge).
 - **View**: Spectator (omniscient) / Player 1 / Player 2. In Player view, the
   **true fog** is replayed from `visible_cells` (unseen cells are dark, hidden
   units/buildings invisible) and the enemy uranium is masked.
-- **Back to leaderboard**: "⮜ Leaderboard" link at the top-left of the viewer.
+- **Back to the throne**: "⮜ The Throne" link at the top-left of the viewer
+  (to the home page).
 - **Panels** (stacked side docks, non-overlapping): 🧠 Reasoning · 💬 Diplomacy ·
   📊 Statistics (5 tabs: economy / military / bomb / production / losses) ·
   📖 Legend & rules (goal of the game, victory conditions, unit/building tables,
-  combat triangle, nuclear bomb, **diplomacy options** — everything a newcomer
+  combat triangle, nuclear bomb, **diplomacy options**: everything a newcomer
   needs to follow a replay). `H` hides/shows. Each panel is **height-capped**
   (`min(dock height, 55vh)`) and its body **scrolls internally** rather than
   growing unbounded.
@@ -1623,13 +1675,9 @@ avoid confusing it with a health gauge).
 | Script | Role |
 |--------|------|
 | `run_game.py` | Single match (default: LLM vs LLM). Starting point for everything. |
-| `run_queue.py` | **Match queue**: run a list of specific 1v1 matches from `queue.json`, one after another. Supports `--resume` and `--reset`. |
-| `run_tournament.py` | **3-round tournament**: random draw → winners vs winners → split again. Each model plays exactly 3 matches. |
-| `tournament_models.example.json` | Model list template (copy to `tournament_models.json`). |
-| `generate_stats.py` | Re-reads `replays/*.json` → `data/leaderboard.json` + `replays/index.json`. |
-| `update_site.sh` | `generate_stats.py` then `git add data/ replays/ && commit && push` (private repo). |
-| `update_viewer.sh` | Regenerates stats then copies `replays/` + `data/` to the public viewer repo and pushes it. |
-| `scripts/convert_webp.py` | Converts PNG sprites → WebP (Pillow, venv). |
+| `archive/measurement/run_queue.py` | **Match queue** (retired, kept runnable): run a list of specific 1v1 matches from `queue.json`, one after another. Supports `--resume` and `--reset`. |
+| `scripts/generate_stats.py` | Re-reads `replays/*.json` → `data/leaderboard.json` + `replays/index.json`. |
+| `scripts/update_viewer.sh` | Regenerates the stats and the home page's teaser, copies the pages, scripts, styles, images, replays and published data to this public repo, checks them, then commits and pushes. |
 
 ```bash
 .venv/bin/python run_game.py                              # single LLM vs LLM match
@@ -1637,20 +1685,15 @@ python3 run_game.py --p0 greedy --p1 greedy --seed 42 -v  # single heuristic mat
 .venv/bin/python archive/measurement/run_queue.py                             # run all matches in queue.json
 .venv/bin/python archive/measurement/run_queue.py --resume                    # continue interrupted queue
 .venv/bin/python archive/measurement/run_queue.py --reset                     # restart queue from match 1
-.venv/bin/python archive/tournament/run_tournament.py                        # 3-round tournament
-.venv/bin/python archive/tournament/run_tournament.py --resume               # continue interrupted tournament
-.venv/bin/python archive/tournament/run_tournament.py --reset                # restart from scratch
 python3 scripts/generate_stats.py
-./scripts/update_site.sh "New replays"                            # update private repo
 ./scripts/update_viewer.sh "New replays"                          # update public viewer repo
-.venv/bin/python scripts/convert_webp.py --delete         # PNG -> WebP
 ```
 
 ---
 
 ### Running a match queue (`run_queue.py`)
 
-Use this when you want to run **specific 1v1 matches** in sequence — for example,
+Use this when you want to run **specific 1v1 matches** in sequence, for example,
 to evaluate a new model against 3 known opponents.
 
 **1. Create `queue.json`** (git-ignored, never pushed):
@@ -1658,26 +1701,24 @@ to evaluate a new model against 3 known opponents.
 ```json
 [
   {
-    "p1": { "name": "Kimi K2.6",   "model": "kimi-k2-6",        "provider": "venice",
-            "thinking": true, "reasoning_effort": "high",
-            "cost_input": 0.85, "cost_output": 4.66 },
-    "p2": { "name": "DeepSeek V4", "model": "deepseek-v4-pro-e", "provider": "poe",
-            "thinking": true, "reasoning_effort": "high",
-            "cost_input": 2.42, "cost_output": 4.85 }
+    "p1": { "name": "Model A", "model": "<model id>", "provider": "<provider section>",
+            "thinking": true, "reasoning_effort": "high" },
+    "p2": { "name": "Model B", "model": "<model id>", "provider": "<provider section>",
+            "thinking": true, "reasoning_effort": "high" }
   },
   {
-    "p1": { "name": "Kimi K2.6",       "model": "kimi-k2-6",      "provider": "venice",
-            "thinking": true, "reasoning_effort": "high",
-            "cost_input": 0.85, "cost_output": 4.66 },
-    "p2": { "name": "Gemini Flash 3.5", "model": "gemini-3.5-flash", "provider": "poe",
-            "thinking": true, "reasoning_effort": "high",
-            "cost_input": 1.52, "cost_output": 9.09 }
+    "p1": { "name": "Model A", "model": "<model id>", "provider": "<provider section>",
+            "thinking": true, "reasoning_effort": "high" },
+    "p2": { "name": "Model C", "model": "<model id>", "provider": "<provider section>",
+            "thinking": true, "reasoning_effort": "high" }
   }
 ]
 ```
 
-Each player slot supports: `name`, `model`, `provider`, `thinking`,
-`reasoning_effort`, `reasoning`, `thinking_budget`, `cost_input`, `cost_output`.
+Each player slot supports: `name`, `model`, `provider` (a provider section of
+`.config.ini`), `thinking`, `reasoning_effort`, `reasoning`, `thinking_budget`,
+and the optional `cost_input` / `cost_output` (the price per million tokens, for
+the cost estimates).
 
 **2. Run the queue:**
 
@@ -1693,37 +1734,13 @@ Each player slot supports: `name`, `model`, `provider`, `thinking`,
 - Progress saved to `queue_state.json` (git-ignored) after each match.
 - `--resume` skips already-completed matches (identified by index).
 - `_comment` fields in `queue.json` are ignored.
-- A failed match is logged and skipped; the queue continues.
+- A failed match is logged and skipped; the queue continues (after 3 failures
+  in a row, `--max-consecutive-failures`, it first waits for the next UTC day).
 - Final leaderboard regenerated at the end (or after each match with `--stats`).
 
 ---
 
-### Running a tournament (`run_tournament.py`)
-
-The tournament uses a **3-round fixed format** optimised for 8 models (each plays exactly 3 matches):
-
-| Round | Pairings |
-|---|---|
-| **Round 1** | Random draw — completely random, regardless of score |
-| **Round 2** | Split — top-4 (by points) play each other; bottom-4 play each other |
-| **Round 3** | Split again — same logic with updated standings from rounds 1+2 |
-
-**With 8 models:** 4 matches per round, no byes, every model plays exactly 3 real matches. For other numbers of models a Swiss fallback kicks in (pair by adjacent score, odd count gets a bye).
-
-```bash
-cp tournament_models.example.json tournament_models.json  # edit with your models
-.venv/bin/python archive/tournament/run_tournament.py
-.venv/bin/python archive/tournament/run_tournament.py --resume               # continue if interrupted
-.venv/bin/python archive/tournament/run_tournament.py --reset                # restart from scratch
-```
-
-**Key behaviours:**
-- State saved to `tournament_state.json` after each match → `--resume` continues mid-tournament.
-- A mid-match interruption replays the full match from the start on resume.
-- `--stats` regenerates the leaderboard after each match; omit for a single regen at the end.
-- Final standings printed after round 3.
-
-#### Provider `poe_native` — Claude models with extended thinking
+### Provider `poe_native`: Claude models with extended thinking
 
 Most models on Poe use the standard OpenAI-compatible endpoint (`provider: "poe"`).
 **Claude models require a different API path** (`fastapi_poe` native SDK) to enable
@@ -1735,33 +1752,21 @@ extended thinking (`thinking_budget`):
   "model": "claude-opus-4.8",
   "provider": "poe_native",
   "thinking": true,
-  "thinking_budget": 8000,
-  "cost_input": 5.00,
-  "cost_output": 25.00
+  "thinking_budget": 8000
 }
 ```
 
-`thinking_budget` is the number of reasoning tokens Claude may use per turn (default 8000).
-The same key as `[poe]` in `.config.ini` is used automatically — no separate credential needed.
+`thinking_budget` is the number of reasoning tokens Claude may use per turn (default 16000
+from `.config.ini` or a queue file; the Season 2 ladder's runner defaults to 8000).
+The same key as `[poe]` in `.config.ini` is used automatically; no separate credential needed.
 
 > Token counts for `poe_native` are **estimated** (≈ chars / 4) since the native SDK does
 > not expose exact counts. All other providers report exact counts from the API.
 
-#### Verifying a model before a long run
-
-```bash
-.venv/bin/python scripts/test_thinking.py                  # the slot in [player1]
-.venv/bin/python scripts/test_thinking.py --player 2 --effort high
-```
-
-One real `decide()` call against the configured provider/model: the reply parses
-as JSON with an `actions` list, `thinking=true` returns non-empty reasoning, and
-`thinking=false` costs fewer tokens. Run it before a multi-hour campaign to catch
-a broken key or a wrong model id while it still costs one call.
-
-> **Gone:** `test_models_poe.py` and `test_model_venice.py`, which swept every
-> reasoning mode of a provider into a `models_validated.json`. The **providers
-> are still supported** — only the sweep helpers went.
+> **Gone:** the model-checking helpers were removed: `test_thinking.py`, which
+> made one real call to check a configured model before a long run, and the
+> provider sweeps that wrote a `models_validated.json`. The **providers are
+> still supported**; only the helpers went.
 
 ---
 
@@ -1769,7 +1774,7 @@ a broken key or a wrong model id while it still costs one call.
 
 - **Player slots**: `0` = Player 1 (base on the left), `1` = Player 2 (mirror).
 - **Internal symmetry**: mirror of `(c, r)` = `(12-c, 6-r)`. Used only for
-  balanced map generation — **never disclosed to the LLM** and not exploitable to
+  balanced map generation, **never disclosed to the LLM** and not exploitable to
   deduce the enemy layout.
 - **Stable IDs** for the whole match: `A_tank_3`, `B_silo_1`, `A_base`…
 - **Half-turn = one `turns` entry**; `active_player` alternates 0,1,0,1…
@@ -1781,37 +1786,36 @@ a broken key or a wrong model id while it still costs one call.
   ground unit or building; two air units cannot share a cell either.
 - **Dependencies**: engine core = standard Python; `openai` (lazy import) for
   LLM agents (all providers except `poe_native`); `fastapi-poe` (lazy import)
-  only for `poe_native` (Claude thinking_budget); `Pillow` only for WebP
-  conversion. All three are in `requirements.txt`. Front end = 100% vanilla JS.
+  only for `poe_native` (Claude thinking_budget). Both are in
+  `requirements.txt`. Front end = 100% vanilla JS.
 - **Runner default**: `run_game.py` plays **LLM vs LLM** out of the box (no
   `--llm` needed); pass `--p0`/`--p1` `greedy`/`random` for heuristic agents.
   Live progress prints automatically when an LLM plays (`-q` to silence).
-- **No versioned secrets**: `.config.ini` (API keys), `.venv/` and the
-  `Ressources/` folder (Figma sources, etc.) are git-ignored and **must never be
-  pushed**; only `config.example.ini` is committed.
-- **Local runtime files** (git-ignored, never pushed): `tournament_models.json`
-  (copy of `tournament_models.example.json`, edit with your models),
-  `tournament_state.json` (auto-saved after each match, deleted by `--reset`),
+- **No versioned secrets**: `.config.ini`, `.config.*.ini` (API keys), `.venv/`
+  and the `Ressources/` folder (Figma sources, etc.) are git-ignored and **must
+  never be pushed**; only credential-free templates (`config.example.ini`,
+  `config.jev.example.ini`) are committed.
+- **Local runtime files** (git-ignored, never pushed):
+  `ladder_models.json` and `ladder_state.json` (Season 2's runner),
+  `*.snapshot.pkl` (mid-match resume),
   `queue.json` (your match list for `run_queue.py`),
-  `queue_state.json` (auto-saved after each match, deleted by `--reset`),
-  `models_validated.json`.
+  `queue_state.json` (auto-saved after each match, deleted by `--reset`).
 
 ---
 
 ## 9. Two-repo architecture
 
-This (private) repository contains **both the engine and the viewer**. A separate
-**public** repository ([ageofllm-benchmark-viewer](https://github.com/Macmachi/ageofllm-benchmark-viewer))
-hosts only the static site needed by GitHub Pages.
+A **private** repository contains **both the engine and the viewer**. This
+**public** repository (ageofllm-benchmark-viewer) hosts only the static site
+needed by GitHub Pages, published from the private one by
+`scripts/update_viewer.sh`.
 
 > 🎥 **Presentation video:** <https://youtu.be/Ec-CV1uzyVY>
-> ⭐ **Star the public repo:** <https://github.com/Macmachi/ageofllm-benchmark-viewer>
-> 🐦 **Follow on X** to know when new models are tested: <https://x.com/ageofllm>
 
 ### What v0.10.0 brings to the public viewer
 
-When you publish the next update (`./scripts/update_viewer.sh`), the viewer reflects these
-rule changes — the legend and replays now show **dynamic seed-driven terrain**
+Since the update that published game engine v0.10.0, the viewer reflects these
+rule changes: the legend and replays now show **dynamic seed-driven terrain**
 (central barrier + scattered mountains vary per match), **line-of-sight** blocked
 by mountains and buildings, **mine-able enemy-side deposits** (no instant
 capture), **resource depletion + respawn** (deposits move when exhausted), the new
@@ -1822,56 +1826,71 @@ shot. Old replays still render correctly (the viewer falls back to the static
 ### What goes in the public repo (viewer only)
 
 ```
-index.html       (home page: the throne)
+index.html       (home page: leads to Season 3)
+throne/index.html (Season 2's throne)
+season3/         (Season 3: its page, its viewer, its data and replays)
 v1.html          (frozen V1 leaderboard)
 viewer.html      (replay viewer)
 funding/         (funding & independence page)
 assets/          (css/, js/, images/, sprites/)
+robots.txt, sitemap.xml (sitemap written by update_viewer.sh)
+DATA-LICENSE.txt (CC BY 4.0: the data of Seasons 1 and 2, replays/, data/, ladder/data/)
 data/            (ladder.json, leaderboard_v1.json, featured.json: generated)
-replays/         (*.json match replays + index.json: generated)
-README.md
+replays/         (*.json match replays + index.json, index_v1.json: generated)
+ladder/          (Season 2's first phase, The Ladder: frozen archive, served at /ladder/)
+season3/         (Season 3, only when published with --season3: its build, LICENSE.txt,
+                  DATA-LICENSE.txt, its data file and the replays it names)
+LICENSE, README.md, CNAME (kept in this public repo, never copied from the private one)
 ```
 
-### What must NEVER leave this private repo
+### What must NEVER leave the private repo
 
 | File / folder | Reason |
 |---|---|
 | `engine/` | Game engine source code |
-| `run_game.py`, `run_ladder.py`, `match_runner.py` | Backend runners (`run_queue.py` / `run_tournament.py` retired to `archive/`) |
-| `generate_stats.py`, `update_site.sh`, `update_viewer.sh` | Build/deploy scripts |
-| `.config.ini` | API keys — git-ignored, never committed anywhere |
+| `run_game.py`, `run_ladder.py`, `match_runner.py` | Backend runners (`run_queue.py` retired to `archive/measurement/`) |
+| `scripts/generate_stats.py`, `scripts/update_viewer.sh` | Build/deploy scripts |
+| `.config.ini` | API keys: git-ignored, never committed anywhere |
 | `config.example.ini` | Config template |
 | `requirements.txt` | Python deps |
-| `tournament_models.json`, `tournament_state.json` | Runtime state |
+| `ladder_models.json`, `ladder_state.json`, `queue.json` | Runtime state |
 | `Ressources/` | Figma sources and design files |
 | `scripts/` | Dev tooling |
 
 ### Updating the public viewer
 
-After new matches are completed, run from this directory:
+After new matches are completed, run from the private repository's root:
 
 ```bash
 ./scripts/update_viewer.sh "Round 3 results"
 ```
 
-This single command: regenerates stats → copies replays + leaderboard to the
-viewer repo → commits and pushes. GitHub Pages updates automatically within ~30 s.
+This single command: regenerates the stats and the home page's teaser → copies
+the pages, scripts, styles, images, replays, published data and `ladder/` to
+this repo (Season 3 only with `--season3`) → runs its guards → commits and
+pushes. GitHub Pages updates automatically within ~30 s. `--dry-run` shows what
+would go without committing.
 
 ---
 
 ## License & Copyright
 
-© Rymentz 2026 — All rights reserved.
+Which license covers what in this repository:
 
-The code, assets, sprites, and all content in this repository are the
-exclusive property of Rymentz. Reuse, redistribution, or sale of any
-part of this repository is strictly prohibited without prior written
-authorization from Rymentz.
+| What | License |
+|---|---|
+| Seasons 1 and 2: the pages, scripts and styles (`index.html`, `v1.html`, `viewer.html`, `funding/`, `assets/js/`, `assets/css/`, and those of `ladder/`) | GNU AGPL-3.0-or-later, see [LICENSE](LICENSE) |
+| Seasons 1 and 2: the data (`replays/`, `data/`, `ladder/data/`: the replays, results and rankings) | CC BY 4.0, see [DATA-LICENSE.txt](DATA-LICENSE.txt) |
+| The images and sprites (`assets/images/`, `assets/sprites/`) | © Rymentz, all rights reserved, see the assets notice in [LICENSE](LICENSE) |
+| Season 3: the code in `season3/` (its pages, scripts and styles) and its recorded sound (`season3/audio/`) | © Rymentz, all rights reserved, see [season3/LICENSE.txt](season3/LICENSE.txt) |
+| Season 3: the data (`season3/replays/`, `season3/tournament/`: the replays, results and ranking) | CC BY 4.0, see [season3/DATA-LICENSE.txt](season3/DATA-LICENSE.txt) |
+| three.js (MIT) and the typefaces Exo 2, Inter and JetBrains Mono (SIL OFL 1.1), served in `season3/` | their own licenses, see [season3/third-party-licenses.txt](season3/third-party-licenses.txt) |
 
-"Age of LLM" is a trademark of Rymentz™.
+The files in `season3/` exist once Season 3 is published.
+
+"Age of LLM" is a trademark of Rymentz.
 
 ## Links
 
 - 🌐 Website: [ageofllm.org](https://ageofllm.org)
-- 🐦 Follow on X: [@ageofllm](https://x.com/ageofllm)
 - ⚖ Funding & independence: [ageofllm.org/funding](https://ageofllm.org/funding/)

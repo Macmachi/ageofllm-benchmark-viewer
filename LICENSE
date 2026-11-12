@@ -18,6 +18,15 @@ along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 ---
 
+DATA NOTICE:
+
+The data of Seasons 1 and 2 (the replays in replays/, the results and
+rankings in data/ and ladder/data/) is licensed under CC BY 4.0: see
+DATA-LICENSE.txt. Season 3 (season3/) has its own licenses: see
+season3/LICENSE.txt and season3/DATA-LICENSE.txt.
+
+---
+
 TRADEMARK NOTICE:
 
 "Age of LLM" and the Age of LLM logo are trademarks of Rymentz.
@@ -31,7 +40,7 @@ the origin of the Work.
 ASSETS NOTICE:
 
 All sprites, images, and visual assets located in assets/sprites/
-and assets/images/ are copyright (c) 2026 Rymentz — All rights reserved.
+and assets/images/ are copyright (c) 2026 Rymentz. All rights reserved.
 Reuse, redistribution, or modification of these assets is strictly
 prohibited without prior written authorization from Rymentz.
 
@@ -39,4 +48,4 @@ prohibited without prior written authorization from Rymentz.
 
 COMMERCIAL LICENSING:
 
-For commercial licensing inquiries, contact: [TON EMAIL]
+For commercial licensing inquiries, see https://ageofllm.org.
