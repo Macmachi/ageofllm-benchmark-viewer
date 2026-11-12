@@ -1,0 +1,2156 @@
+{
+ "about": "Robot Duel announcer, recorded once by scripts/announcer_voice.py (ElevenLabs)",
+ "lines": {
+  "armor_broken.1": {
+   "file": "generic/armor_broken.1.mp3",
+   "sha": "918c96aa5aceb67d",
+   "text": "The armor gives way!"
+  },
+  "armor_broken.2": {
+   "file": "generic/armor_broken.2.mp3",
+   "sha": "cc480523e5579e6a",
+   "text": "That plate is broken!"
+  },
+  "armor_broken.3": {
+   "file": "generic/armor_broken.3.mp3",
+   "sha": "908046d5dee2f763",
+   "text": "The armor is cracked open!"
+  },
+  "battery_lost.1": {
+   "file": "generic/battery_lost.1.mp3",
+   "sha": "0cd52f57d3df2b0a",
+   "text": "The battery is gone!"
+  },
+  "battery_lost.2": {
+   "file": "generic/battery_lost.2.mp3",
+   "sha": "135e00b505c3ff01",
+   "text": "Battery destroyed!"
+  },
+  "big_air.1": {
+   "file": "generic/big_air.1.mp3",
+   "sha": "6ecf4e735f12174c",
+   "text": "Look at that height!"
+  },
+  "big_air.2": {
+   "file": "generic/big_air.2.mp3",
+   "sha": "6c3e6024ba9877af",
+   "text": "It's flying!"
+  },
+  "big_air.3": {
+   "file": "generic/big_air.3.mp3",
+   "sha": "c04fe4f922951f79",
+   "text": "Sent flying!"
+  },
+  "big_hit.1": {
+   "file": "generic/big_hit.1.mp3",
+   "sha": "bb18ae47b63585b5",
+   "text": "Big hit!"
+  },
+  "big_hit.2": {
+   "file": "generic/big_hit.2.mp3",
+   "sha": "3050ff0284d54d64",
+   "text": "Huge impact!"
+  },
+  "big_hit.3": {
+   "file": "generic/big_hit.3.mp3",
+   "sha": "32a58973c050efa7",
+   "text": "That one landed hard!"
+  },
+  "burnt.1": {
+   "file": "generic/burnt.1.mp3",
+   "sha": "45139cfabf672413",
+   "text": "That motor just burnt out!"
+  },
+  "burnt.2": {
+   "file": "generic/burnt.2.mp3",
+   "sha": "5d6e8acdadc735ab",
+   "text": "Too hot! A motor is gone!"
+  },
+  "by_health.1": {
+   "file": "generic/by_health.1.mp3",
+   "sha": "bae8a227f6ba5319",
+   "text": "It comes down to the damage!"
+  },
+  "by_health.2": {
+   "file": "generic/by_health.2.mp3",
+   "sha": "fc18183fff3bd133",
+   "text": "The robot in better shape takes it!"
+  },
+  "by_judges.1": {
+   "file": "generic/by_judges.1.mp3",
+   "sha": "c427600df2aee73f",
+   "text": "The judges have decided!"
+  },
+  "by_judges.2": {
+   "file": "generic/by_judges.2.mp3",
+   "sha": "05776822d331392d",
+   "text": "The judges' verdict is in!"
+  },
+  "by_judges.3": {
+   "file": "generic/by_judges.3.mp3",
+   "sha": "201c706ecaccebf0",
+   "text": "The scores are in!"
+  },
+  "by_judges.4": {
+   "file": "generic/by_judges.4.mp3",
+   "sha": "24321c1b65e9d836",
+   "text": "It's a judges' decision!"
+  },
+  "claude-fable-5.2:destroyed.1": {
+   "file": "models/claude-fable-5.2/destroyed.1.mp3",
+   "sha": "6c029fb5a1e40769",
+   "text": "Claude Fable five point two is destroyed!"
+  },
+  "claude-fable-5.2:intro_a.1": {
+   "file": "models/claude-fable-5.2/intro_a.1.mp3",
+   "sha": "9c1a80d922dad03c",
+   "text": "In the blue corner, Claude Fable five point two!"
+  },
+  "claude-fable-5.2:intro_b.1": {
+   "file": "models/claude-fable-5.2/intro_b.1.mp3",
+   "sha": "0a84c0b7a1e7d68d",
+   "text": "And in the red corner, Claude Fable five point two!"
+  },
+  "claude-fable-5.2:knocked_out.1": {
+   "file": "models/claude-fable-5.2/knocked_out.1.mp3",
+   "sha": "bc69229938e34f10",
+   "text": "Claude Fable five point two is knocked out!"
+  },
+  "claude-fable-5.2:match_won.1": {
+   "file": "models/claude-fable-5.2/match_won.1.mp3",
+   "sha": "93f75e80e97f80a2",
+   "text": "Claude Fable five point two wins the match!"
+  },
+  "claude-fable-5.2:program_idle.1": {
+   "file": "models/claude-fable-5.2/program_idle.1.mp3",
+   "sha": "a8e1426764336659",
+   "text": "Claude Fable five point two's program did not load! Its robot does nothing this round."
+  },
+  "claude-fable-5.2:program_stopped.1": {
+   "file": "models/claude-fable-5.2/program_stopped.1.mp3",
+   "sha": "0df895f4ecb1f1f5",
+   "text": "Claude Fable five point two's program has stopped!"
+  },
+  "claude-fable-5.2:round_won.1": {
+   "file": "models/claude-fable-5.2/round_won.1.mp3",
+   "sha": "be96741dcc51d384",
+   "text": "Claude Fable five point two takes the round!"
+  },
+  "claude-haiku-5.5:destroyed.1": {
+   "file": "models/claude-haiku-5.5/destroyed.1.mp3",
+   "sha": "d51a7d1dcc8ce68d",
+   "text": "Claude Haiku five point five is destroyed!"
+  },
+  "claude-haiku-5.5:intro_a.1": {
+   "file": "models/claude-haiku-5.5/intro_a.1.mp3",
+   "sha": "93a9c1672636031e",
+   "text": "In the blue corner, Claude Haiku five point five!"
+  },
+  "claude-haiku-5.5:intro_b.1": {
+   "file": "models/claude-haiku-5.5/intro_b.1.mp3",
+   "sha": "0276de8fbedeb600",
+   "text": "And in the red corner, Claude Haiku five point five!"
+  },
+  "claude-haiku-5.5:knocked_out.1": {
+   "file": "models/claude-haiku-5.5/knocked_out.1.mp3",
+   "sha": "31efdc21a82661ae",
+   "text": "Claude Haiku five point five is knocked out!"
+  },
+  "claude-haiku-5.5:match_won.1": {
+   "file": "models/claude-haiku-5.5/match_won.1.mp3",
+   "sha": "f98be73af623d379",
+   "text": "Claude Haiku five point five wins the match!"
+  },
+  "claude-haiku-5.5:program_idle.1": {
+   "file": "models/claude-haiku-5.5/program_idle.1.mp3",
+   "sha": "3abb867314cd4c5d",
+   "text": "Claude Haiku five point five's program did not load! Its robot does nothing this round."
+  },
+  "claude-haiku-5.5:program_stopped.1": {
+   "file": "models/claude-haiku-5.5/program_stopped.1.mp3",
+   "sha": "7aab70c73ab22c9e",
+   "text": "Claude Haiku five point five's program has stopped!"
+  },
+  "claude-haiku-5.5:round_won.1": {
+   "file": "models/claude-haiku-5.5/round_won.1.mp3",
+   "sha": "a78517323b70390c",
+   "text": "Claude Haiku five point five takes the round!"
+  },
+  "claude-opus-5.5:destroyed.1": {
+   "file": "models/claude-opus-5.5/destroyed.1.mp3",
+   "sha": "795ed4a623611eff",
+   "text": "Claude Opus five point five is destroyed!"
+  },
+  "claude-opus-5.5:intro_a.1": {
+   "file": "models/claude-opus-5.5/intro_a.1.mp3",
+   "sha": "59ff00cf0560cb9f",
+   "text": "In the blue corner, Claude Opus five point five!"
+  },
+  "claude-opus-5.5:intro_b.1": {
+   "file": "models/claude-opus-5.5/intro_b.1.mp3",
+   "sha": "e9d1ebbce4c42c81",
+   "text": "And in the red corner, Claude Opus five point five!"
+  },
+  "claude-opus-5.5:knocked_out.1": {
+   "file": "models/claude-opus-5.5/knocked_out.1.mp3",
+   "sha": "8fc79e588eb5c924",
+   "text": "Claude Opus five point five is knocked out!"
+  },
+  "claude-opus-5.5:match_won.1": {
+   "file": "models/claude-opus-5.5/match_won.1.mp3",
+   "sha": "68968de869eab070",
+   "text": "Claude Opus five point five wins the match!"
+  },
+  "claude-opus-5.5:program_idle.1": {
+   "file": "models/claude-opus-5.5/program_idle.1.mp3",
+   "sha": "4d5a0fb743fd221f",
+   "text": "Claude Opus five point five's program did not load! Its robot does nothing this round."
+  },
+  "claude-opus-5.5:program_stopped.1": {
+   "file": "models/claude-opus-5.5/program_stopped.1.mp3",
+   "sha": "f85109c924819f0c",
+   "text": "Claude Opus five point five's program has stopped!"
+  },
+  "claude-opus-5.5:round_won.1": {
+   "file": "models/claude-opus-5.5/round_won.1.mp3",
+   "sha": "3782d8e24a9c844f",
+   "text": "Claude Opus five point five takes the round!"
+  },
+  "claude-sonnet-5.5:destroyed.1": {
+   "file": "models/claude-sonnet-5.5/destroyed.1.mp3",
+   "sha": "6727997cebef858d",
+   "text": "Claude Sonnet five point five is destroyed!"
+  },
+  "claude-sonnet-5.5:intro_a.1": {
+   "file": "models/claude-sonnet-5.5/intro_a.1.mp3",
+   "sha": "50706f7ccad5372b",
+   "text": "In the blue corner, Claude Sonnet five point five!"
+  },
+  "claude-sonnet-5.5:intro_b.1": {
+   "file": "models/claude-sonnet-5.5/intro_b.1.mp3",
+   "sha": "c87d8ff10c0281e3",
+   "text": "And in the red corner, Claude Sonnet five point five!"
+  },
+  "claude-sonnet-5.5:knocked_out.1": {
+   "file": "models/claude-sonnet-5.5/knocked_out.1.mp3",
+   "sha": "a8455d51388e6da3",
+   "text": "Claude Sonnet five point five is knocked out!"
+  },
+  "claude-sonnet-5.5:match_won.1": {
+   "file": "models/claude-sonnet-5.5/match_won.1.mp3",
+   "sha": "cea3ad19f717316c",
+   "text": "Claude Sonnet five point five wins the match!"
+  },
+  "claude-sonnet-5.5:program_idle.1": {
+   "file": "models/claude-sonnet-5.5/program_idle.1.mp3",
+   "sha": "3ecd6d6661349115",
+   "text": "Claude Sonnet five point five's program did not load! Its robot does nothing this round."
+  },
+  "claude-sonnet-5.5:program_stopped.1": {
+   "file": "models/claude-sonnet-5.5/program_stopped.1.mp3",
+   "sha": "07162d986ff7e819",
+   "text": "Claude Sonnet five point five's program has stopped!"
+  },
+  "claude-sonnet-5.5:round_won.1": {
+   "file": "models/claude-sonnet-5.5/round_won.1.mp3",
+   "sha": "2273d32c5bd38128",
+   "text": "Claude Sonnet five point five takes the round!"
+  },
+  "comeback.1": {
+   "file": "generic/comeback.1.mp3",
+   "sha": "b673543ef67a75b5",
+   "text": "What a comeback!"
+  },
+  "comeback.2": {
+   "file": "generic/comeback.2.mp3",
+   "sha": "2bdaf70488795698",
+   "text": "An incredible comeback!"
+  },
+  "count_1.1": {
+   "file": "generic/count_1.1.mp3",
+   "sha": "d9cc096727e5aaf2",
+   "text": "One!"
+  },
+  "count_10.1": {
+   "file": "generic/count_10.1.mp3",
+   "sha": "fe18dc7a5a0cb609",
+   "text": "Ten!"
+  },
+  "count_2.1": {
+   "file": "generic/count_2.1.mp3",
+   "sha": "2c37e8377a3ae740",
+   "text": "Two!"
+  },
+  "count_3.1": {
+   "file": "generic/count_3.1.mp3",
+   "sha": "e0e7953de2e5b382",
+   "text": "Three!"
+  },
+  "count_4.1": {
+   "file": "generic/count_4.1.mp3",
+   "sha": "9f89cc13411f5bec",
+   "text": "Four!"
+  },
+  "count_5.1": {
+   "file": "generic/count_5.1.mp3",
+   "sha": "1be254dad9d846ba",
+   "text": "Five!"
+  },
+  "count_6.1": {
+   "file": "generic/count_6.1.mp3",
+   "sha": "f188e95b8af8ee06",
+   "text": "Six!"
+  },
+  "count_7.1": {
+   "file": "generic/count_7.1.mp3",
+   "sha": "5cb3a88a9d7902a6",
+   "text": "Seven!"
+  },
+  "count_8.1": {
+   "file": "generic/count_8.1.mp3",
+   "sha": "d01b81e73c3bd180",
+   "text": "Eight!"
+  },
+  "count_9.1": {
+   "file": "generic/count_9.1.mp3",
+   "sha": "04eec62f6767159a",
+   "text": "Nine!"
+  },
+  "count_broken.1": {
+   "file": "generic/count_broken.1.mp3",
+   "sha": "8fe2d8707f9c1d30",
+   "text": "It beats the count!"
+  },
+  "count_broken.2": {
+   "file": "generic/count_broken.2.mp3",
+   "sha": "e63052606f47317e",
+   "text": "It's moving again!"
+  },
+  "count_broken.3": {
+   "file": "generic/count_broken.3.mp3",
+   "sha": "bc073ac2a0765cff",
+   "text": "Back in the fight!"
+  },
+  "deciding_round.1": {
+   "file": "generic/deciding_round.1.mp3",
+   "sha": "062981017daa9b35",
+   "text": "This is the decider!"
+  },
+  "deciding_round.2": {
+   "file": "generic/deciding_round.2.mp3",
+   "sha": "74f664007b091912",
+   "text": "Winner takes all! This is the deciding round!"
+  },
+  "deepseek-v4-pro:destroyed.1": {
+   "file": "models/deepseek-v4-pro/destroyed.1.mp3",
+   "sha": "ed1c1ce4514ba014",
+   "text": "Deep Seek V four Pro is destroyed!"
+  },
+  "deepseek-v4-pro:intro_a.1": {
+   "file": "models/deepseek-v4-pro/intro_a.1.mp3",
+   "sha": "6af065a8bd14a219",
+   "text": "In the blue corner, Deep Seek V four Pro!"
+  },
+  "deepseek-v4-pro:intro_b.1": {
+   "file": "models/deepseek-v4-pro/intro_b.1.mp3",
+   "sha": "75b5d862360787e7",
+   "text": "And in the red corner, Deep Seek V four Pro!"
+  },
+  "deepseek-v4-pro:knocked_out.1": {
+   "file": "models/deepseek-v4-pro/knocked_out.1.mp3",
+   "sha": "10aaceaad3486739",
+   "text": "Deep Seek V four Pro is knocked out!"
+  },
+  "deepseek-v4-pro:match_won.1": {
+   "file": "models/deepseek-v4-pro/match_won.1.mp3",
+   "sha": "ed3e57e26c506e87",
+   "text": "Deep Seek V four Pro wins the match!"
+  },
+  "deepseek-v4-pro:program_idle.1": {
+   "file": "models/deepseek-v4-pro/program_idle.1.mp3",
+   "sha": "f075073f79b9574a",
+   "text": "Deep Seek V four Pro's program did not load! Its robot does nothing this round."
+  },
+  "deepseek-v4-pro:program_stopped.1": {
+   "file": "models/deepseek-v4-pro/program_stopped.1.mp3",
+   "sha": "7d80293485ffdf5c",
+   "text": "Deep Seek V four Pro's program has stopped!"
+  },
+  "deepseek-v4-pro:round_won.1": {
+   "file": "models/deepseek-v4-pro/round_won.1.mp3",
+   "sha": "7657a12572f9808d",
+   "text": "Deep Seek V four Pro takes the round!"
+  },
+  "deepseek-v4.1-flash:destroyed.1": {
+   "file": "models/deepseek-v4.1-flash/destroyed.1.mp3",
+   "sha": "801c5127fe087325",
+   "text": "Deep Seek V four point one Flash is destroyed!"
+  },
+  "deepseek-v4.1-flash:intro_a.1": {
+   "file": "models/deepseek-v4.1-flash/intro_a.1.mp3",
+   "sha": "5353116749d30584",
+   "text": "In the blue corner, Deep Seek V four point one Flash!"
+  },
+  "deepseek-v4.1-flash:intro_b.1": {
+   "file": "models/deepseek-v4.1-flash/intro_b.1.mp3",
+   "sha": "c80dd23e2aec4c97",
+   "text": "And in the red corner, Deep Seek V four point one Flash!"
+  },
+  "deepseek-v4.1-flash:knocked_out.1": {
+   "file": "models/deepseek-v4.1-flash/knocked_out.1.mp3",
+   "sha": "f1b74e38bb336c39",
+   "text": "Deep Seek V four point one Flash is knocked out!"
+  },
+  "deepseek-v4.1-flash:match_won.1": {
+   "file": "models/deepseek-v4.1-flash/match_won.1.mp3",
+   "sha": "df3d85021e079692",
+   "text": "Deep Seek V four point one Flash wins the match!"
+  },
+  "deepseek-v4.1-flash:program_idle.1": {
+   "file": "models/deepseek-v4.1-flash/program_idle.1.mp3",
+   "sha": "18492bead43559a9",
+   "text": "Deep Seek V four point one Flash's program did not load! Its robot does nothing this round."
+  },
+  "deepseek-v4.1-flash:program_stopped.1": {
+   "file": "models/deepseek-v4.1-flash/program_stopped.1.mp3",
+   "sha": "71e50e039381f8ae",
+   "text": "Deep Seek V four point one Flash's program has stopped!"
+  },
+  "deepseek-v4.1-flash:round_won.1": {
+   "file": "models/deepseek-v4.1-flash/round_won.1.mp3",
+   "sha": "d229aa18a0c29e4d",
+   "text": "Deep Seek V four point one Flash takes the round!"
+  },
+  "destroyed.2": {
+   "file": "generic/destroyed.2.mp3",
+   "sha": "63ae490a001a98cb",
+   "text": "It's all over!"
+  },
+  "destroyed.3": {
+   "file": "generic/destroyed.3.mp3",
+   "sha": "c3d0e47c47a97c30",
+   "text": "Total destruction!"
+  },
+  "drive_lost.1": {
+   "file": "generic/drive_lost.1.mp3",
+   "sha": "a1b3af986bce13d3",
+   "text": "One side has stopped!"
+  },
+  "drive_lost.2": {
+   "file": "generic/drive_lost.2.mp3",
+   "sha": "852a02b0b8379031",
+   "text": "A drive motor is gone!"
+  },
+  "fight.1": {
+   "file": "generic/fight.1.mp3",
+   "sha": "7545249c9b4f48e7",
+   "text": "Fight!"
+  },
+  "fight.2": {
+   "file": "generic/fight.2.mp3",
+   "sha": "8f2f6ee708da6a27",
+   "text": "Robots, fight!"
+  },
+  "flat_tyre.1": {
+   "file": "generic/flat_tyre.1.mp3",
+   "sha": "1de32af91cc2b814",
+   "text": "A tyre is punctured!"
+  },
+  "flat_tyre.2": {
+   "file": "generic/flat_tyre.2.mp3",
+   "sha": "ceecfbbd7ff8f2f5",
+   "text": "That's a flat tyre!"
+  },
+  "flip.1": {
+   "file": "generic/flip.1.mp3",
+   "sha": "b481ab6f29040648",
+   "text": "Up it goes!"
+  },
+  "flip.2": {
+   "file": "generic/flip.2.mp3",
+   "sha": "c3ec9975ff085fa3",
+   "text": "Launched!"
+  },
+  "flip.3": {
+   "file": "generic/flip.3.mp3",
+   "sha": "8cc179519ff4817b",
+   "text": "Into the air!"
+  },
+  "gemini-3.5-flash-lite:destroyed.1": {
+   "file": "models/gemini-3.5-flash-lite/destroyed.1.mp3",
+   "sha": "c57ed08beb6d2510",
+   "text": "Gemini three point five Flash Lite is destroyed!"
+  },
+  "gemini-3.5-flash-lite:intro_a.1": {
+   "file": "models/gemini-3.5-flash-lite/intro_a.1.mp3",
+   "sha": "cb96f8bf32c33c1a",
+   "text": "In the blue corner, Gemini three point five Flash Lite!"
+  },
+  "gemini-3.5-flash-lite:intro_b.1": {
+   "file": "models/gemini-3.5-flash-lite/intro_b.1.mp3",
+   "sha": "4e0b355afe67e351",
+   "text": "And in the red corner, Gemini three point five Flash Lite!"
+  },
+  "gemini-3.5-flash-lite:knocked_out.1": {
+   "file": "models/gemini-3.5-flash-lite/knocked_out.1.mp3",
+   "sha": "2ca879d897c4aea2",
+   "text": "Gemini three point five Flash Lite is knocked out!"
+  },
+  "gemini-3.5-flash-lite:match_won.1": {
+   "file": "models/gemini-3.5-flash-lite/match_won.1.mp3",
+   "sha": "78adea4f58d09b0a",
+   "text": "Gemini three point five Flash Lite wins the match!"
+  },
+  "gemini-3.5-flash-lite:program_idle.1": {
+   "file": "models/gemini-3.5-flash-lite/program_idle.1.mp3",
+   "sha": "2f50af6633215d99",
+   "text": "Gemini three point five Flash Lite's program did not load! Its robot does nothing this round."
+  },
+  "gemini-3.5-flash-lite:program_stopped.1": {
+   "file": "models/gemini-3.5-flash-lite/program_stopped.1.mp3",
+   "sha": "3024b1bd1e8c28bf",
+   "text": "Gemini three point five Flash Lite's program has stopped!"
+  },
+  "gemini-3.5-flash-lite:round_won.1": {
+   "file": "models/gemini-3.5-flash-lite/round_won.1.mp3",
+   "sha": "d4ce62750fdde3af",
+   "text": "Gemini three point five Flash Lite takes the round!"
+  },
+  "gemini-3.8-flash:destroyed.1": {
+   "file": "models/gemini-3.8-flash/destroyed.1.mp3",
+   "sha": "61a75e14eff3c95a",
+   "text": "Gemini three point eight Flash is destroyed!"
+  },
+  "gemini-3.8-flash:intro_a.1": {
+   "file": "models/gemini-3.8-flash/intro_a.1.mp3",
+   "sha": "1dfe2f2b6b5fdc4d",
+   "text": "In the blue corner, Gemini three point eight Flash!"
+  },
+  "gemini-3.8-flash:intro_b.1": {
+   "file": "models/gemini-3.8-flash/intro_b.1.mp3",
+   "sha": "369b06c8e90256f1",
+   "text": "And in the red corner, Gemini three point eight Flash!"
+  },
+  "gemini-3.8-flash:knocked_out.1": {
+   "file": "models/gemini-3.8-flash/knocked_out.1.mp3",
+   "sha": "8920c8fa8854d201",
+   "text": "Gemini three point eight Flash is knocked out!"
+  },
+  "gemini-3.8-flash:match_won.1": {
+   "file": "models/gemini-3.8-flash/match_won.1.mp3",
+   "sha": "463a1f64dbbd0ef1",
+   "text": "Gemini three point eight Flash wins the match!"
+  },
+  "gemini-3.8-flash:program_idle.1": {
+   "file": "models/gemini-3.8-flash/program_idle.1.mp3",
+   "sha": "9b4aa5509f484ce8",
+   "text": "Gemini three point eight Flash's program did not load! Its robot does nothing this round."
+  },
+  "gemini-3.8-flash:program_stopped.1": {
+   "file": "models/gemini-3.8-flash/program_stopped.1.mp3",
+   "sha": "32e50351c5c8132b",
+   "text": "Gemini three point eight Flash's program has stopped!"
+  },
+  "gemini-3.8-flash:round_won.1": {
+   "file": "models/gemini-3.8-flash/round_won.1.mp3",
+   "sha": "5746866bfd7e90b3",
+   "text": "Gemini three point eight Flash takes the round!"
+  },
+  "gemini-4-argon:destroyed.1": {
+   "file": "models/gemini-4-argon/destroyed.1.mp3",
+   "sha": "867c3924cd298d2f",
+   "text": "Gemini four Argon is destroyed!"
+  },
+  "gemini-4-argon:intro_a.1": {
+   "file": "models/gemini-4-argon/intro_a.1.mp3",
+   "sha": "e4c23fc3f0050e03",
+   "text": "In the blue corner, Gemini four Argon!"
+  },
+  "gemini-4-argon:intro_b.1": {
+   "file": "models/gemini-4-argon/intro_b.1.mp3",
+   "sha": "a635abf6a327fdd0",
+   "text": "And in the red corner, Gemini four Argon!"
+  },
+  "gemini-4-argon:knocked_out.1": {
+   "file": "models/gemini-4-argon/knocked_out.1.mp3",
+   "sha": "d85db3c5776aaa47",
+   "text": "Gemini four Argon is knocked out!"
+  },
+  "gemini-4-argon:match_won.1": {
+   "file": "models/gemini-4-argon/match_won.1.mp3",
+   "sha": "cf1fb1cb08b2d30c",
+   "text": "Gemini four Argon wins the match!"
+  },
+  "gemini-4-argon:program_idle.1": {
+   "file": "models/gemini-4-argon/program_idle.1.mp3",
+   "sha": "0a2c32205a7bee55",
+   "text": "Gemini four Argon's program did not load! Its robot does nothing this round."
+  },
+  "gemini-4-argon:program_stopped.1": {
+   "file": "models/gemini-4-argon/program_stopped.1.mp3",
+   "sha": "b66e2e4600cbb2b5",
+   "text": "Gemini four Argon's program has stopped!"
+  },
+  "gemini-4-argon:round_won.1": {
+   "file": "models/gemini-4-argon/round_won.1.mp3",
+   "sha": "8f33aaa87cede5dc",
+   "text": "Gemini four Argon takes the round!"
+  },
+  "gemini-4-carbon:destroyed.1": {
+   "file": "models/gemini-4-carbon/destroyed.1.mp3",
+   "sha": "3beae55d7a3830c3",
+   "text": "Gemini four Carbon is destroyed!"
+  },
+  "gemini-4-carbon:intro_a.1": {
+   "file": "models/gemini-4-carbon/intro_a.1.mp3",
+   "sha": "4b70c429a3ce3687",
+   "text": "In the blue corner, Gemini four Carbon!"
+  },
+  "gemini-4-carbon:intro_b.1": {
+   "file": "models/gemini-4-carbon/intro_b.1.mp3",
+   "sha": "32c5436f4ea10a9f",
+   "text": "And in the red corner, Gemini four Carbon!"
+  },
+  "gemini-4-carbon:knocked_out.1": {
+   "file": "models/gemini-4-carbon/knocked_out.1.mp3",
+   "sha": "14443e28314457ed",
+   "text": "Gemini four Carbon is knocked out!"
+  },
+  "gemini-4-carbon:match_won.1": {
+   "file": "models/gemini-4-carbon/match_won.1.mp3",
+   "sha": "9be6130af8bd2cf1",
+   "text": "Gemini four Carbon wins the match!"
+  },
+  "gemini-4-carbon:program_idle.1": {
+   "file": "models/gemini-4-carbon/program_idle.1.mp3",
+   "sha": "5ed0f68423f8fc58",
+   "text": "Gemini four Carbon's program did not load! Its robot does nothing this round."
+  },
+  "gemini-4-carbon:program_stopped.1": {
+   "file": "models/gemini-4-carbon/program_stopped.1.mp3",
+   "sha": "e0f7f4db8b6d9038",
+   "text": "Gemini four Carbon's program has stopped!"
+  },
+  "gemini-4-carbon:round_won.1": {
+   "file": "models/gemini-4-carbon/round_won.1.mp3",
+   "sha": "9679af7fa2f7058a",
+   "text": "Gemini four Carbon takes the round!"
+  },
+  "gemma-4-31b:destroyed.1": {
+   "file": "models/gemma-4-31b/destroyed.1.mp3",
+   "sha": "4369fec81f7302fe",
+   "text": "Gemma four, thirty-one B is destroyed!"
+  },
+  "gemma-4-31b:intro_a.1": {
+   "file": "models/gemma-4-31b/intro_a.1.mp3",
+   "sha": "adfb276b029f8f7e",
+   "text": "In the blue corner, Gemma four, thirty-one B!"
+  },
+  "gemma-4-31b:intro_b.1": {
+   "file": "models/gemma-4-31b/intro_b.1.mp3",
+   "sha": "6d1e007b1a88a258",
+   "text": "And in the red corner, Gemma four, thirty-one B!"
+  },
+  "gemma-4-31b:knocked_out.1": {
+   "file": "models/gemma-4-31b/knocked_out.1.mp3",
+   "sha": "323d056de552501a",
+   "text": "Gemma four, thirty-one B is knocked out!"
+  },
+  "gemma-4-31b:match_won.1": {
+   "file": "models/gemma-4-31b/match_won.1.mp3",
+   "sha": "9ac2cfb4f0772dc2",
+   "text": "Gemma four, thirty-one B wins the match!"
+  },
+  "gemma-4-31b:program_idle.1": {
+   "file": "models/gemma-4-31b/program_idle.1.mp3",
+   "sha": "8a70bd8722b56e97",
+   "text": "Gemma four, thirty-one B's program did not load! Its robot does nothing this round."
+  },
+  "gemma-4-31b:program_stopped.1": {
+   "file": "models/gemma-4-31b/program_stopped.1.mp3",
+   "sha": "fc9b4c30b4229138",
+   "text": "Gemma four, thirty-one B's program has stopped!"
+  },
+  "gemma-4-31b:round_won.1": {
+   "file": "models/gemma-4-31b/round_won.1.mp3",
+   "sha": "600e7b55665e1afe",
+   "text": "Gemma four, thirty-one B takes the round!"
+  },
+  "glass.1": {
+   "file": "generic/glass.1.mp3",
+   "sha": "915f705fdfca33f3",
+   "text": "Right into the glass!"
+  },
+  "glass.2": {
+   "file": "generic/glass.2.mp3",
+   "sha": "57fc3ed7dd27e55d",
+   "text": "The bubble holds!"
+  },
+  "glass.3": {
+   "file": "generic/glass.3.mp3",
+   "sha": "d6a5adfbe1cc8e90",
+   "text": "Into the glass!"
+  },
+  "glm-5.3-flash:destroyed.1": {
+   "file": "models/glm-5.3-flash/destroyed.1.mp3",
+   "sha": "3d7e0fea7a1be30f",
+   "text": "G L M five point three Flash is destroyed!"
+  },
+  "glm-5.3-flash:intro_a.1": {
+   "file": "models/glm-5.3-flash/intro_a.1.mp3",
+   "sha": "8e2bd19130344aae",
+   "text": "In the blue corner, G L M five point three Flash!"
+  },
+  "glm-5.3-flash:intro_b.1": {
+   "file": "models/glm-5.3-flash/intro_b.1.mp3",
+   "sha": "412a7e62a9c4cdf0",
+   "text": "And in the red corner, G L M five point three Flash!"
+  },
+  "glm-5.3-flash:knocked_out.1": {
+   "file": "models/glm-5.3-flash/knocked_out.1.mp3",
+   "sha": "776d2723d7bbb83f",
+   "text": "G L M five point three Flash is knocked out!"
+  },
+  "glm-5.3-flash:match_won.1": {
+   "file": "models/glm-5.3-flash/match_won.1.mp3",
+   "sha": "e3c2d5d87f7b42cf",
+   "text": "G L M five point three Flash wins the match!"
+  },
+  "glm-5.3-flash:program_idle.1": {
+   "file": "models/glm-5.3-flash/program_idle.1.mp3",
+   "sha": "fc0e08ff5f6cb0bf",
+   "text": "G L M five point three Flash's program did not load! Its robot does nothing this round."
+  },
+  "glm-5.3-flash:program_stopped.1": {
+   "file": "models/glm-5.3-flash/program_stopped.1.mp3",
+   "sha": "b3be3080d2946748",
+   "text": "G L M five point three Flash's program has stopped!"
+  },
+  "glm-5.3-flash:round_won.1": {
+   "file": "models/glm-5.3-flash/round_won.1.mp3",
+   "sha": "eb4e8b809354a5b0",
+   "text": "G L M five point three Flash takes the round!"
+  },
+  "glm-5.3:destroyed.1": {
+   "file": "models/glm-5.3/destroyed.1.mp3",
+   "sha": "0a0ff008b99138a1",
+   "text": "G L M five point three is destroyed!"
+  },
+  "glm-5.3:intro_a.1": {
+   "file": "models/glm-5.3/intro_a.1.mp3",
+   "sha": "b17c154dde97f50d",
+   "text": "In the blue corner, G L M five point three!"
+  },
+  "glm-5.3:intro_b.1": {
+   "file": "models/glm-5.3/intro_b.1.mp3",
+   "sha": "aaa49531c49d9730",
+   "text": "And in the red corner, G L M five point three!"
+  },
+  "glm-5.3:knocked_out.1": {
+   "file": "models/glm-5.3/knocked_out.1.mp3",
+   "sha": "753617eaf0ac608d",
+   "text": "G L M five point three is knocked out!"
+  },
+  "glm-5.3:match_won.1": {
+   "file": "models/glm-5.3/match_won.1.mp3",
+   "sha": "d998f933d6d2db0c",
+   "text": "G L M five point three wins the match!"
+  },
+  "glm-5.3:program_idle.1": {
+   "file": "models/glm-5.3/program_idle.1.mp3",
+   "sha": "6c196459c324ba87",
+   "text": "G L M five point three's program did not load! Its robot does nothing this round."
+  },
+  "glm-5.3:program_stopped.1": {
+   "file": "models/glm-5.3/program_stopped.1.mp3",
+   "sha": "6844324a6f2497b6",
+   "text": "G L M five point three's program has stopped!"
+  },
+  "glm-5.3:round_won.1": {
+   "file": "models/glm-5.3/round_won.1.mp3",
+   "sha": "18b14ea7d8148abb",
+   "text": "G L M five point three takes the round!"
+  },
+  "gpt-6-astra:destroyed.1": {
+   "file": "models/gpt-6-astra/destroyed.1.mp3",
+   "sha": "a5373e1502b6c078",
+   "text": "G P T six Astra is destroyed!"
+  },
+  "gpt-6-astra:intro_a.1": {
+   "file": "models/gpt-6-astra/intro_a.1.mp3",
+   "sha": "5bb2c2e8062afb8c",
+   "text": "In the blue corner, G P T six Astra!"
+  },
+  "gpt-6-astra:intro_b.1": {
+   "file": "models/gpt-6-astra/intro_b.1.mp3",
+   "sha": "fb7361a680cebbe5",
+   "text": "And in the red corner, G P T six Astra!"
+  },
+  "gpt-6-astra:knocked_out.1": {
+   "file": "models/gpt-6-astra/knocked_out.1.mp3",
+   "sha": "e204f66ee3f8e8ab",
+   "text": "G P T six Astra is knocked out!"
+  },
+  "gpt-6-astra:match_won.1": {
+   "file": "models/gpt-6-astra/match_won.1.mp3",
+   "sha": "af95613fee8b4770",
+   "text": "G P T six Astra wins the match!"
+  },
+  "gpt-6-astra:program_idle.1": {
+   "file": "models/gpt-6-astra/program_idle.1.mp3",
+   "sha": "07880ce79a748a32",
+   "text": "G P T six Astra's program did not load! Its robot does nothing this round."
+  },
+  "gpt-6-astra:program_stopped.1": {
+   "file": "models/gpt-6-astra/program_stopped.1.mp3",
+   "sha": "ba664e42e90060e6",
+   "text": "G P T six Astra's program has stopped!"
+  },
+  "gpt-6-astra:round_won.1": {
+   "file": "models/gpt-6-astra/round_won.1.mp3",
+   "sha": "438512683a82003f",
+   "text": "G P T six Astra takes the round!"
+  },
+  "gpt-6-luna:destroyed.1": {
+   "file": "models/gpt-6-luna/destroyed.1.mp3",
+   "sha": "5b6831fdaff2f9f9",
+   "text": "G P T six Luna is destroyed!"
+  },
+  "gpt-6-luna:intro_a.1": {
+   "file": "models/gpt-6-luna/intro_a.1.mp3",
+   "sha": "8586bfcdc4f7c05c",
+   "text": "In the blue corner, G P T six Luna!"
+  },
+  "gpt-6-luna:intro_b.1": {
+   "file": "models/gpt-6-luna/intro_b.1.mp3",
+   "sha": "d1645c633516a9bb",
+   "text": "And in the red corner, G P T six Luna!"
+  },
+  "gpt-6-luna:knocked_out.1": {
+   "file": "models/gpt-6-luna/knocked_out.1.mp3",
+   "sha": "5d53768cde3ee72b",
+   "text": "G P T six Luna is knocked out!"
+  },
+  "gpt-6-luna:match_won.1": {
+   "file": "models/gpt-6-luna/match_won.1.mp3",
+   "sha": "804c7520f675cde2",
+   "text": "G P T six Luna wins the match!"
+  },
+  "gpt-6-luna:program_idle.1": {
+   "file": "models/gpt-6-luna/program_idle.1.mp3",
+   "sha": "3ce56d0ddd91dee5",
+   "text": "G P T six Luna's program did not load! Its robot does nothing this round."
+  },
+  "gpt-6-luna:program_stopped.1": {
+   "file": "models/gpt-6-luna/program_stopped.1.mp3",
+   "sha": "54787a5189b5c0cd",
+   "text": "G P T six Luna's program has stopped!"
+  },
+  "gpt-6-luna:round_won.1": {
+   "file": "models/gpt-6-luna/round_won.1.mp3",
+   "sha": "09966efb6627e099",
+   "text": "G P T six Luna takes the round!"
+  },
+  "gpt-6.1-sol:destroyed.1": {
+   "file": "models/gpt-6.1-sol/destroyed.1.mp3",
+   "sha": "a3dc9cc10a6713ab",
+   "text": "G P T six point one Sol is destroyed!"
+  },
+  "gpt-6.1-sol:intro_a.1": {
+   "file": "models/gpt-6.1-sol/intro_a.1.mp3",
+   "sha": "d78721dad9250a75",
+   "text": "In the blue corner, G P T six point one Sol!"
+  },
+  "gpt-6.1-sol:intro_b.1": {
+   "file": "models/gpt-6.1-sol/intro_b.1.mp3",
+   "sha": "d9ca00a70c57c190",
+   "text": "And in the red corner, G P T six point one Sol!"
+  },
+  "gpt-6.1-sol:knocked_out.1": {
+   "file": "models/gpt-6.1-sol/knocked_out.1.mp3",
+   "sha": "0b468640b4fa05c4",
+   "text": "G P T six point one Sol is knocked out!"
+  },
+  "gpt-6.1-sol:match_won.1": {
+   "file": "models/gpt-6.1-sol/match_won.1.mp3",
+   "sha": "533b905cfc478ded",
+   "text": "G P T six point one Sol wins the match!"
+  },
+  "gpt-6.1-sol:program_idle.1": {
+   "file": "models/gpt-6.1-sol/program_idle.1.mp3",
+   "sha": "687d960c6ca84572",
+   "text": "G P T six point one Sol's program did not load! Its robot does nothing this round."
+  },
+  "gpt-6.1-sol:program_stopped.1": {
+   "file": "models/gpt-6.1-sol/program_stopped.1.mp3",
+   "sha": "1007dbf16dceb22b",
+   "text": "G P T six point one Sol's program has stopped!"
+  },
+  "gpt-6.1-sol:round_won.1": {
+   "file": "models/gpt-6.1-sol/round_won.1.mp3",
+   "sha": "188bd34f24816727",
+   "text": "G P T six point one Sol takes the round!"
+  },
+  "gpt-6.1-terra:destroyed.1": {
+   "file": "models/gpt-6.1-terra/destroyed.1.mp3",
+   "sha": "037780d72852c818",
+   "text": "G P T six point one Terra is destroyed!"
+  },
+  "gpt-6.1-terra:intro_a.1": {
+   "file": "models/gpt-6.1-terra/intro_a.1.mp3",
+   "sha": "c2be0efe00fd7346",
+   "text": "In the blue corner, G P T six point one Terra!"
+  },
+  "gpt-6.1-terra:intro_b.1": {
+   "file": "models/gpt-6.1-terra/intro_b.1.mp3",
+   "sha": "4dbb6994883a9d0b",
+   "text": "And in the red corner, G P T six point one Terra!"
+  },
+  "gpt-6.1-terra:knocked_out.1": {
+   "file": "models/gpt-6.1-terra/knocked_out.1.mp3",
+   "sha": "dd023e56ec3d26ec",
+   "text": "G P T six point one Terra is knocked out!"
+  },
+  "gpt-6.1-terra:match_won.1": {
+   "file": "models/gpt-6.1-terra/match_won.1.mp3",
+   "sha": "3bd7eeef16ba543f",
+   "text": "G P T six point one Terra wins the match!"
+  },
+  "gpt-6.1-terra:program_idle.1": {
+   "file": "models/gpt-6.1-terra/program_idle.1.mp3",
+   "sha": "6f58d805d6cafbb0",
+   "text": "G P T six point one Terra's program did not load! Its robot does nothing this round."
+  },
+  "gpt-6.1-terra:program_stopped.1": {
+   "file": "models/gpt-6.1-terra/program_stopped.1.mp3",
+   "sha": "4095eb076c58b00f",
+   "text": "G P T six point one Terra's program has stopped!"
+  },
+  "gpt-6.1-terra:round_won.1": {
+   "file": "models/gpt-6.1-terra/round_won.1.mp3",
+   "sha": "1ec38908c502720c",
+   "text": "G P T six point one Terra takes the round!"
+  },
+  "gpt-oss-120b:destroyed.1": {
+   "file": "models/gpt-oss-120b/destroyed.1.mp3",
+   "sha": "3f5871d621097747",
+   "text": "G P T oss, one twenty B is destroyed!"
+  },
+  "gpt-oss-120b:intro_a.1": {
+   "file": "models/gpt-oss-120b/intro_a.1.mp3",
+   "sha": "88d9268496e53574",
+   "text": "In the blue corner, G P T oss, one twenty B!"
+  },
+  "gpt-oss-120b:intro_b.1": {
+   "file": "models/gpt-oss-120b/intro_b.1.mp3",
+   "sha": "0d50ed01b3a2201d",
+   "text": "And in the red corner, G P T oss, one twenty B!"
+  },
+  "gpt-oss-120b:knocked_out.1": {
+   "file": "models/gpt-oss-120b/knocked_out.1.mp3",
+   "sha": "57de79fb0a613c6d",
+   "text": "G P T oss, one twenty B is knocked out!"
+  },
+  "gpt-oss-120b:match_won.1": {
+   "file": "models/gpt-oss-120b/match_won.1.mp3",
+   "sha": "6b6f4e61277c66ad",
+   "text": "G P T oss, one twenty B wins the match!"
+  },
+  "gpt-oss-120b:program_idle.1": {
+   "file": "models/gpt-oss-120b/program_idle.1.mp3",
+   "sha": "7d4fe0310b715085",
+   "text": "G P T oss, one twenty B's program did not load! Its robot does nothing this round."
+  },
+  "gpt-oss-120b:program_stopped.1": {
+   "file": "models/gpt-oss-120b/program_stopped.1.mp3",
+   "sha": "4bba161d43b14d9f",
+   "text": "G P T oss, one twenty B's program has stopped!"
+  },
+  "gpt-oss-120b:round_won.1": {
+   "file": "models/gpt-oss-120b/round_won.1.mp3",
+   "sha": "ad2b4f39bf95567e",
+   "text": "G P T oss, one twenty B takes the round!"
+  },
+  "grabbed.1": {
+   "file": "generic/grabbed.1.mp3",
+   "sha": "de18b31f235fe43a",
+   "text": "Caught in the clamp!"
+  },
+  "grabbed.2": {
+   "file": "generic/grabbed.2.mp3",
+   "sha": "8b0002cbb79026a3",
+   "text": "The clamp bites!"
+  },
+  "grok-4.7:destroyed.1": {
+   "file": "models/grok-4.7/destroyed.1.mp3",
+   "sha": "069a15957df04c19",
+   "text": "Grok four point seven is destroyed!"
+  },
+  "grok-4.7:intro_a.1": {
+   "file": "models/grok-4.7/intro_a.1.mp3",
+   "sha": "2bdb2d65dfb8545e",
+   "text": "In the blue corner, Grok four point seven!"
+  },
+  "grok-4.7:intro_b.1": {
+   "file": "models/grok-4.7/intro_b.1.mp3",
+   "sha": "92c57b6ac3914a43",
+   "text": "And in the red corner, Grok four point seven!"
+  },
+  "grok-4.7:knocked_out.1": {
+   "file": "models/grok-4.7/knocked_out.1.mp3",
+   "sha": "040b7fa1260befba",
+   "text": "Grok four point seven is knocked out!"
+  },
+  "grok-4.7:match_won.1": {
+   "file": "models/grok-4.7/match_won.1.mp3",
+   "sha": "a8ec1cda2e8b7ff0",
+   "text": "Grok four point seven wins the match!"
+  },
+  "grok-4.7:program_idle.1": {
+   "file": "models/grok-4.7/program_idle.1.mp3",
+   "sha": "e0f030f920c8e43d",
+   "text": "Grok four point seven's program did not load! Its robot does nothing this round."
+  },
+  "grok-4.7:program_stopped.1": {
+   "file": "models/grok-4.7/program_stopped.1.mp3",
+   "sha": "473f515aa91af619",
+   "text": "Grok four point seven's program has stopped!"
+  },
+  "grok-4.7:round_won.1": {
+   "file": "models/grok-4.7/round_won.1.mp3",
+   "sha": "c2c7ab9cf52d4265",
+   "text": "Grok four point seven takes the round!"
+  },
+  "hammer_hit.1": {
+   "file": "generic/hammer_hit.1.mp3",
+   "sha": "1b67f437ce048ad5",
+   "text": "The hammer comes down!"
+  },
+  "hammer_hit.2": {
+   "file": "generic/hammer_hit.2.mp3",
+   "sha": "152e17c41c88045c",
+   "text": "What a hammer blow!"
+  },
+  "hit_below.1": {
+   "file": "generic/hit_below.1.mp3",
+   "sha": "9d3e9e3e8b607e17",
+   "text": "Right underneath!"
+  },
+  "hit_below.2": {
+   "file": "generic/hit_below.2.mp3",
+   "sha": "1242c1f995d91a5a",
+   "text": "It got under the armor!"
+  },
+  "hy4:destroyed.1": {
+   "file": "models/hy4/destroyed.1.mp3",
+   "sha": "2a1fa0949f672b38",
+   "text": "H Y four is destroyed!"
+  },
+  "hy4:intro_a.1": {
+   "file": "models/hy4/intro_a.1.mp3",
+   "sha": "9dca073f543a9617",
+   "text": "In the blue corner, H Y four!"
+  },
+  "hy4:intro_b.1": {
+   "file": "models/hy4/intro_b.1.mp3",
+   "sha": "a9c96e79e51da0be",
+   "text": "And in the red corner, H Y four!"
+  },
+  "hy4:knocked_out.1": {
+   "file": "models/hy4/knocked_out.1.mp3",
+   "sha": "6b6f199d2f3a62ad",
+   "text": "H Y four is knocked out!"
+  },
+  "hy4:match_won.1": {
+   "file": "models/hy4/match_won.1.mp3",
+   "sha": "4f5c7fef83caaa3f",
+   "text": "H Y four wins the match!"
+  },
+  "hy4:program_idle.1": {
+   "file": "models/hy4/program_idle.1.mp3",
+   "sha": "2f5b670d1ac39585",
+   "text": "H Y four's program did not load! Its robot does nothing this round."
+  },
+  "hy4:program_stopped.1": {
+   "file": "models/hy4/program_stopped.1.mp3",
+   "sha": "8905e56fd0cf57c3",
+   "text": "H Y four's program has stopped!"
+  },
+  "hy4:round_won.1": {
+   "file": "models/hy4/round_won.1.mp3",
+   "sha": "4ea723aaacaf4a6b",
+   "text": "H Y four takes the round!"
+  },
+  "in_trouble.1": {
+   "file": "generic/in_trouble.1.mp3",
+   "sha": "f1fb48af60f8b04c",
+   "text": "It's in big trouble!"
+  },
+  "in_trouble.2": {
+   "file": "generic/in_trouble.2.mp3",
+   "sha": "864f7b483c5e0d45",
+   "text": "It can't take much more!"
+  },
+  "judges.1": {
+   "file": "generic/judges.1.mp3",
+   "sha": "5241e93d68e48070",
+   "text": "Time! It goes to the judges."
+  },
+  "judges.2": {
+   "file": "generic/judges.2.mp3",
+   "sha": "3dad307d8faea5d3",
+   "text": "That's time! Over to the judges."
+  },
+  "judges.3": {
+   "file": "generic/judges.3.mp3",
+   "sha": "55f17595c9ad3878",
+   "text": "Time! The judges will decide this one."
+  },
+  "kimi-k3.1-pro:destroyed.1": {
+   "file": "models/kimi-k3.1-pro/destroyed.1.mp3",
+   "sha": "cee0ea393680e932",
+   "text": "Kimi K three point one Pro is destroyed!"
+  },
+  "kimi-k3.1-pro:intro_a.1": {
+   "file": "models/kimi-k3.1-pro/intro_a.1.mp3",
+   "sha": "a435e69f2db062ff",
+   "text": "In the blue corner, Kimi K three point one Pro!"
+  },
+  "kimi-k3.1-pro:intro_b.1": {
+   "file": "models/kimi-k3.1-pro/intro_b.1.mp3",
+   "sha": "cd0a9783ea38f32a",
+   "text": "And in the red corner, Kimi K three point one Pro!"
+  },
+  "kimi-k3.1-pro:knocked_out.1": {
+   "file": "models/kimi-k3.1-pro/knocked_out.1.mp3",
+   "sha": "77039ed77ee6e9e5",
+   "text": "Kimi K three point one Pro is knocked out!"
+  },
+  "kimi-k3.1-pro:match_won.1": {
+   "file": "models/kimi-k3.1-pro/match_won.1.mp3",
+   "sha": "9b67a9f6b232482e",
+   "text": "Kimi K three point one Pro wins the match!"
+  },
+  "kimi-k3.1-pro:program_idle.1": {
+   "file": "models/kimi-k3.1-pro/program_idle.1.mp3",
+   "sha": "5c163cc4f9567a55",
+   "text": "Kimi K three point one Pro's program did not load! Its robot does nothing this round."
+  },
+  "kimi-k3.1-pro:program_stopped.1": {
+   "file": "models/kimi-k3.1-pro/program_stopped.1.mp3",
+   "sha": "30cbf6abf73c1211",
+   "text": "Kimi K three point one Pro's program has stopped!"
+  },
+  "kimi-k3.1-pro:round_won.1": {
+   "file": "models/kimi-k3.1-pro/round_won.1.mp3",
+   "sha": "e2d1914d0a2cad90",
+   "text": "Kimi K three point one Pro takes the round!"
+  },
+  "knocked_out.2": {
+   "file": "generic/knocked_out.2.mp3",
+   "sha": "ae196d93709b754c",
+   "text": "Knock out!"
+  },
+  "knocked_out.3": {
+   "file": "generic/knocked_out.3.mp3",
+   "sha": "7d30391cef289f52",
+   "text": "It's a knock out!"
+  },
+  "last_round.1": {
+   "file": "generic/last_round.1.mp3",
+   "sha": "7261bac4be062718",
+   "text": "Last round!"
+  },
+  "last_round.2": {
+   "file": "generic/last_round.2.mp3",
+   "sha": "a9b77cf074d888a1",
+   "text": "This is the last round!"
+  },
+  "level.1": {
+   "file": "generic/level.1.mp3",
+   "sha": "eae37b649bb91395",
+   "text": "All square!"
+  },
+  "level.2": {
+   "file": "generic/level.2.mp3",
+   "sha": "bf6e804f762eb7b1",
+   "text": "We are level!"
+  },
+  "lifted.1": {
+   "file": "generic/lifted.1.mp3",
+   "sha": "81775c071a0db72a",
+   "text": "It's off the ground!"
+  },
+  "lifted.2": {
+   "file": "generic/lifted.2.mp3",
+   "sha": "652238c2bbc1a086",
+   "text": "Lifted off the floor!"
+  },
+  "massive_hit.1": {
+   "file": "generic/massive_hit.1.mp3",
+   "sha": "296c9fdb41fecaf6",
+   "text": "What a hit!"
+  },
+  "massive_hit.2": {
+   "file": "generic/massive_hit.2.mp3",
+   "sha": "8796031882087028",
+   "text": "Massive hit!"
+  },
+  "massive_hit.3": {
+   "file": "generic/massive_hit.3.mp3",
+   "sha": "1a1bebf759229059",
+   "text": "That one shook the arena!"
+  },
+  "match_drawn.1": {
+   "file": "generic/match_drawn.1.mp3",
+   "sha": "130e184a09e9d010",
+   "text": "The match is a draw!"
+  },
+  "match_drawn.2": {
+   "file": "generic/match_drawn.2.mp3",
+   "sha": "07a25619398cd480",
+   "text": "Nobody wins the match! It's a draw!"
+  },
+  "match_level.1": {
+   "file": "generic/match_level.1.mp3",
+   "sha": "00f46cf3c6037b60",
+   "text": "Ladies and gentlemen, nothing can separate them!"
+  },
+  "match_level.2": {
+   "file": "generic/match_level.2.mp3",
+   "sha": "24a2e8ffc3e8177c",
+   "text": "After all that, we cannot split them!"
+  },
+  "match_over.1": {
+   "file": "generic/match_over.1.mp3",
+   "sha": "57b342ac8cc24c8d",
+   "text": "Ladies and gentlemen, we have a winner!"
+  },
+  "match_over.2": {
+   "file": "generic/match_over.2.mp3",
+   "sha": "fbb374410be9ec6f",
+   "text": "It's all over! We have a winner!"
+  },
+  "match_point.1": {
+   "file": "generic/match_point.1.mp3",
+   "sha": "18245966f6400ca5",
+   "text": "Match point!"
+  },
+  "match_point.2": {
+   "file": "generic/match_point.2.mp3",
+   "sha": "a7e588dad3e3261f",
+   "text": "One more round and it's over!"
+  },
+  "mimo-v2.6-flash:destroyed.1": {
+   "file": "models/mimo-v2.6-flash/destroyed.1.mp3",
+   "sha": "dd6d0ad084228c59",
+   "text": "Mee-mo V two point six Flash is destroyed!"
+  },
+  "mimo-v2.6-flash:intro_a.1": {
+   "file": "models/mimo-v2.6-flash/intro_a.1.mp3",
+   "sha": "6ef980ab29ea9332",
+   "text": "In the blue corner, Mee-mo V two point six Flash!"
+  },
+  "mimo-v2.6-flash:intro_b.1": {
+   "file": "models/mimo-v2.6-flash/intro_b.1.mp3",
+   "sha": "6f8f12957663e0f4",
+   "text": "And in the red corner, Mee-mo V two point six Flash!"
+  },
+  "mimo-v2.6-flash:knocked_out.1": {
+   "file": "models/mimo-v2.6-flash/knocked_out.1.mp3",
+   "sha": "ec21530f0d132246",
+   "text": "Mee-mo V two point six Flash is knocked out!"
+  },
+  "mimo-v2.6-flash:match_won.1": {
+   "file": "models/mimo-v2.6-flash/match_won.1.mp3",
+   "sha": "7d31c1d5feac4593",
+   "text": "Mee-mo V two point six Flash wins the match!"
+  },
+  "mimo-v2.6-flash:program_idle.1": {
+   "file": "models/mimo-v2.6-flash/program_idle.1.mp3",
+   "sha": "49d296e03a997fa8",
+   "text": "Mee-mo V two point six Flash's program did not load! Its robot does nothing this round."
+  },
+  "mimo-v2.6-flash:program_stopped.1": {
+   "file": "models/mimo-v2.6-flash/program_stopped.1.mp3",
+   "sha": "cf775fc33bf176ef",
+   "text": "Mee-mo V two point six Flash's program has stopped!"
+  },
+  "mimo-v2.6-flash:round_won.1": {
+   "file": "models/mimo-v2.6-flash/round_won.1.mp3",
+   "sha": "085a400f0475375e",
+   "text": "Mee-mo V two point six Flash takes the round!"
+  },
+  "minimax-m3.1-flash:destroyed.1": {
+   "file": "models/minimax-m3.1-flash/destroyed.1.mp3",
+   "sha": "2a00c904fede0144",
+   "text": "Mini Max M three point one Flash is destroyed!"
+  },
+  "minimax-m3.1-flash:intro_a.1": {
+   "file": "models/minimax-m3.1-flash/intro_a.1.mp3",
+   "sha": "486b2deaa01b3eb3",
+   "text": "In the blue corner, Mini Max M three point one Flash!"
+  },
+  "minimax-m3.1-flash:intro_b.1": {
+   "file": "models/minimax-m3.1-flash/intro_b.1.mp3",
+   "sha": "d38b2b665b27513b",
+   "text": "And in the red corner, Mini Max M three point one Flash!"
+  },
+  "minimax-m3.1-flash:knocked_out.1": {
+   "file": "models/minimax-m3.1-flash/knocked_out.1.mp3",
+   "sha": "5b7d8c172884ba06",
+   "text": "Mini Max M three point one Flash is knocked out!"
+  },
+  "minimax-m3.1-flash:match_won.1": {
+   "file": "models/minimax-m3.1-flash/match_won.1.mp3",
+   "sha": "79fa3030da489cba",
+   "text": "Mini Max M three point one Flash wins the match!"
+  },
+  "minimax-m3.1-flash:program_idle.1": {
+   "file": "models/minimax-m3.1-flash/program_idle.1.mp3",
+   "sha": "8c97062ec5091d52",
+   "text": "Mini Max M three point one Flash's program did not load! Its robot does nothing this round."
+  },
+  "minimax-m3.1-flash:program_stopped.1": {
+   "file": "models/minimax-m3.1-flash/program_stopped.1.mp3",
+   "sha": "f52a5fcc387688eb",
+   "text": "Mini Max M three point one Flash's program has stopped!"
+  },
+  "minimax-m3.1-flash:round_won.1": {
+   "file": "models/minimax-m3.1-flash/round_won.1.mp3",
+   "sha": "ddf7af24acd1389f",
+   "text": "Mini Max M three point one Flash takes the round!"
+  },
+  "minimax-m3:destroyed.1": {
+   "file": "models/minimax-m3/destroyed.1.mp3",
+   "sha": "1891fda91005d56a",
+   "text": "Mini Max M three is destroyed!"
+  },
+  "minimax-m3:intro_a.1": {
+   "file": "models/minimax-m3/intro_a.1.mp3",
+   "sha": "4524ac6b882c37f6",
+   "text": "In the blue corner, Mini Max M three!"
+  },
+  "minimax-m3:intro_b.1": {
+   "file": "models/minimax-m3/intro_b.1.mp3",
+   "sha": "f05736450ac58e34",
+   "text": "And in the red corner, Mini Max M three!"
+  },
+  "minimax-m3:knocked_out.1": {
+   "file": "models/minimax-m3/knocked_out.1.mp3",
+   "sha": "a6844c53425566b7",
+   "text": "Mini Max M three is knocked out!"
+  },
+  "minimax-m3:match_won.1": {
+   "file": "models/minimax-m3/match_won.1.mp3",
+   "sha": "4f57daf6b481b157",
+   "text": "Mini Max M three wins the match!"
+  },
+  "minimax-m3:program_idle.1": {
+   "file": "models/minimax-m3/program_idle.1.mp3",
+   "sha": "156d612d7b0f99c1",
+   "text": "Mini Max M three's program did not load! Its robot does nothing this round."
+  },
+  "minimax-m3:program_stopped.1": {
+   "file": "models/minimax-m3/program_stopped.1.mp3",
+   "sha": "5472a9f9196c9fc0",
+   "text": "Mini Max M three's program has stopped!"
+  },
+  "minimax-m3:round_won.1": {
+   "file": "models/minimax-m3/round_won.1.mp3",
+   "sha": "8f8645de64c6cffb",
+   "text": "Mini Max M three takes the round!"
+  },
+  "mistral-small-3.2:destroyed.1": {
+   "file": "models/mistral-small-3.2/destroyed.1.mp3",
+   "sha": "4721acf7bf6c7c46",
+   "text": "Mistral Small three point two is destroyed!"
+  },
+  "mistral-small-3.2:intro_a.1": {
+   "file": "models/mistral-small-3.2/intro_a.1.mp3",
+   "sha": "6d2a1a95dc398373",
+   "text": "In the blue corner, Mistral Small three point two!"
+  },
+  "mistral-small-3.2:intro_b.1": {
+   "file": "models/mistral-small-3.2/intro_b.1.mp3",
+   "sha": "7b12e352909df677",
+   "text": "And in the red corner, Mistral Small three point two!"
+  },
+  "mistral-small-3.2:knocked_out.1": {
+   "file": "models/mistral-small-3.2/knocked_out.1.mp3",
+   "sha": "cd9d1a22cebfbcbc",
+   "text": "Mistral Small three point two is knocked out!"
+  },
+  "mistral-small-3.2:match_won.1": {
+   "file": "models/mistral-small-3.2/match_won.1.mp3",
+   "sha": "2aa262c98f1b82e9",
+   "text": "Mistral Small three point two wins the match!"
+  },
+  "mistral-small-3.2:program_idle.1": {
+   "file": "models/mistral-small-3.2/program_idle.1.mp3",
+   "sha": "c89e4e58d43a8d7e",
+   "text": "Mistral Small three point two's program did not load! Its robot does nothing this round."
+  },
+  "mistral-small-3.2:program_stopped.1": {
+   "file": "models/mistral-small-3.2/program_stopped.1.mp3",
+   "sha": "7ff1686dd225ba16",
+   "text": "Mistral Small three point two's program has stopped!"
+  },
+  "mistral-small-3.2:round_won.1": {
+   "file": "models/mistral-small-3.2/round_won.1.mp3",
+   "sha": "7c3cf96cea014d74",
+   "text": "Mistral Small three point two takes the round!"
+  },
+  "muse-spark-open:destroyed.1": {
+   "file": "models/muse-spark-open/destroyed.1.mp3",
+   "sha": "a4ce4910fdd6592b",
+   "text": "Muse Spark Open is destroyed!"
+  },
+  "muse-spark-open:intro_a.1": {
+   "file": "models/muse-spark-open/intro_a.1.mp3",
+   "sha": "f1bbc965a427e195",
+   "text": "In the blue corner, Muse Spark Open!"
+  },
+  "muse-spark-open:intro_b.1": {
+   "file": "models/muse-spark-open/intro_b.1.mp3",
+   "sha": "8b53f40a8884d1c3",
+   "text": "And in the red corner, Muse Spark Open!"
+  },
+  "muse-spark-open:knocked_out.1": {
+   "file": "models/muse-spark-open/knocked_out.1.mp3",
+   "sha": "50496909ed6e157a",
+   "text": "Muse Spark Open is knocked out!"
+  },
+  "muse-spark-open:match_won.1": {
+   "file": "models/muse-spark-open/match_won.1.mp3",
+   "sha": "b80fbcc8fb4a6c53",
+   "text": "Muse Spark Open wins the match!"
+  },
+  "muse-spark-open:program_idle.1": {
+   "file": "models/muse-spark-open/program_idle.1.mp3",
+   "sha": "ab734786611e13f1",
+   "text": "Muse Spark Open's program did not load! Its robot does nothing this round."
+  },
+  "muse-spark-open:program_stopped.1": {
+   "file": "models/muse-spark-open/program_stopped.1.mp3",
+   "sha": "cf6ce25d5486ae1f",
+   "text": "Muse Spark Open's program has stopped!"
+  },
+  "muse-spark-open:round_won.1": {
+   "file": "models/muse-spark-open/round_won.1.mp3",
+   "sha": "dd56ea3b3a4c946c",
+   "text": "Muse Spark Open takes the round!"
+  },
+  "muse-wonder:destroyed.1": {
+   "file": "models/muse-wonder/destroyed.1.mp3",
+   "sha": "6ca30d1b211218cf",
+   "text": "Muse Wonder is destroyed!"
+  },
+  "muse-wonder:intro_a.1": {
+   "file": "models/muse-wonder/intro_a.1.mp3",
+   "sha": "79c59d3a359b39f6",
+   "text": "In the blue corner, Muse Wonder!"
+  },
+  "muse-wonder:intro_b.1": {
+   "file": "models/muse-wonder/intro_b.1.mp3",
+   "sha": "8716473af6619862",
+   "text": "And in the red corner, Muse Wonder!"
+  },
+  "muse-wonder:knocked_out.1": {
+   "file": "models/muse-wonder/knocked_out.1.mp3",
+   "sha": "34c04fdf5367ea81",
+   "text": "Muse Wonder is knocked out!"
+  },
+  "muse-wonder:match_won.1": {
+   "file": "models/muse-wonder/match_won.1.mp3",
+   "sha": "e619822a8827618c",
+   "text": "Muse Wonder wins the match!"
+  },
+  "muse-wonder:program_idle.1": {
+   "file": "models/muse-wonder/program_idle.1.mp3",
+   "sha": "546ea77b5e3aab42",
+   "text": "Muse Wonder's program did not load! Its robot does nothing this round."
+  },
+  "muse-wonder:program_stopped.1": {
+   "file": "models/muse-wonder/program_stopped.1.mp3",
+   "sha": "7073fb4449753a8c",
+   "text": "Muse Wonder's program has stopped!"
+  },
+  "muse-wonder:round_won.1": {
+   "file": "models/muse-wonder/round_won.1.mp3",
+   "sha": "c95aafd2c08f000f",
+   "text": "Muse Wonder takes the round!"
+  },
+  "nemotron-3-nano:destroyed.1": {
+   "file": "models/nemotron-3-nano/destroyed.1.mp3",
+   "sha": "167f408d880a4ee1",
+   "text": "Nemotron three Nano is destroyed!"
+  },
+  "nemotron-3-nano:intro_a.1": {
+   "file": "models/nemotron-3-nano/intro_a.1.mp3",
+   "sha": "21f18bfe3249e9bd",
+   "text": "In the blue corner, Nemotron three Nano!"
+  },
+  "nemotron-3-nano:intro_b.1": {
+   "file": "models/nemotron-3-nano/intro_b.1.mp3",
+   "sha": "570d454d0bf36fbf",
+   "text": "And in the red corner, Nemotron three Nano!"
+  },
+  "nemotron-3-nano:knocked_out.1": {
+   "file": "models/nemotron-3-nano/knocked_out.1.mp3",
+   "sha": "d1423b99b0b100f7",
+   "text": "Nemotron three Nano is knocked out!"
+  },
+  "nemotron-3-nano:match_won.1": {
+   "file": "models/nemotron-3-nano/match_won.1.mp3",
+   "sha": "1492a9844a867901",
+   "text": "Nemotron three Nano wins the match!"
+  },
+  "nemotron-3-nano:program_idle.1": {
+   "file": "models/nemotron-3-nano/program_idle.1.mp3",
+   "sha": "b568bc206e3948f4",
+   "text": "Nemotron three Nano's program did not load! Its robot does nothing this round."
+  },
+  "nemotron-3-nano:program_stopped.1": {
+   "file": "models/nemotron-3-nano/program_stopped.1.mp3",
+   "sha": "2c1e8434353de240",
+   "text": "Nemotron three Nano's program has stopped!"
+  },
+  "nemotron-3-nano:round_won.1": {
+   "file": "models/nemotron-3-nano/round_won.1.mp3",
+   "sha": "4d3d5d078252531a",
+   "text": "Nemotron three Nano takes the round!"
+  },
+  "nemotron-3-ultra:destroyed.1": {
+   "file": "models/nemotron-3-ultra/destroyed.1.mp3",
+   "sha": "51d982563f3e2a3a",
+   "text": "Nemotron three Ultra is destroyed!"
+  },
+  "nemotron-3-ultra:intro_a.1": {
+   "file": "models/nemotron-3-ultra/intro_a.1.mp3",
+   "sha": "127cf8c4e3782681",
+   "text": "In the blue corner, Nemotron three Ultra!"
+  },
+  "nemotron-3-ultra:intro_b.1": {
+   "file": "models/nemotron-3-ultra/intro_b.1.mp3",
+   "sha": "92672c2a276561c9",
+   "text": "And in the red corner, Nemotron three Ultra!"
+  },
+  "nemotron-3-ultra:knocked_out.1": {
+   "file": "models/nemotron-3-ultra/knocked_out.1.mp3",
+   "sha": "b372ad5adfed3115",
+   "text": "Nemotron three Ultra is knocked out!"
+  },
+  "nemotron-3-ultra:match_won.1": {
+   "file": "models/nemotron-3-ultra/match_won.1.mp3",
+   "sha": "00e78f03270d5abf",
+   "text": "Nemotron three Ultra wins the match!"
+  },
+  "nemotron-3-ultra:program_idle.1": {
+   "file": "models/nemotron-3-ultra/program_idle.1.mp3",
+   "sha": "db5e19b24c233d08",
+   "text": "Nemotron three Ultra's program did not load! Its robot does nothing this round."
+  },
+  "nemotron-3-ultra:program_stopped.1": {
+   "file": "models/nemotron-3-ultra/program_stopped.1.mp3",
+   "sha": "812abcf68c8ffe26",
+   "text": "Nemotron three Ultra's program has stopped!"
+  },
+  "nemotron-3-ultra:round_won.1": {
+   "file": "models/nemotron-3-ultra/round_won.1.mp3",
+   "sha": "c0d35b4af0fc28be",
+   "text": "Nemotron three Ultra takes the round!"
+  },
+  "nemotron-3.5-super:destroyed.1": {
+   "file": "models/nemotron-3.5-super/destroyed.1.mp3",
+   "sha": "6bb4243e35fd268e",
+   "text": "Nemotron three point five Super is destroyed!"
+  },
+  "nemotron-3.5-super:intro_a.1": {
+   "file": "models/nemotron-3.5-super/intro_a.1.mp3",
+   "sha": "45f0bdcd1475a5fd",
+   "text": "In the blue corner, Nemotron three point five Super!"
+  },
+  "nemotron-3.5-super:intro_b.1": {
+   "file": "models/nemotron-3.5-super/intro_b.1.mp3",
+   "sha": "7ddd25bc261c6cc2",
+   "text": "And in the red corner, Nemotron three point five Super!"
+  },
+  "nemotron-3.5-super:knocked_out.1": {
+   "file": "models/nemotron-3.5-super/knocked_out.1.mp3",
+   "sha": "0ac5d6c015b14c6e",
+   "text": "Nemotron three point five Super is knocked out!"
+  },
+  "nemotron-3.5-super:match_won.1": {
+   "file": "models/nemotron-3.5-super/match_won.1.mp3",
+   "sha": "0bc94449c98c3a5c",
+   "text": "Nemotron three point five Super wins the match!"
+  },
+  "nemotron-3.5-super:program_idle.1": {
+   "file": "models/nemotron-3.5-super/program_idle.1.mp3",
+   "sha": "e571608a071ebe86",
+   "text": "Nemotron three point five Super's program did not load! Its robot does nothing this round."
+  },
+  "nemotron-3.5-super:program_stopped.1": {
+   "file": "models/nemotron-3.5-super/program_stopped.1.mp3",
+   "sha": "8e9b4b3909814d33",
+   "text": "Nemotron three point five Super's program has stopped!"
+  },
+  "nemotron-3.5-super:round_won.1": {
+   "file": "models/nemotron-3.5-super/round_won.1.mp3",
+   "sha": "f8e0c0691e574a4b",
+   "text": "Nemotron three point five Super takes the round!"
+  },
+  "on_side.1": {
+   "file": "generic/on_side.1.mp3",
+   "sha": "6822abecebaad61a",
+   "text": "On its side!"
+  },
+  "on_side.2": {
+   "file": "generic/on_side.2.mp3",
+   "sha": "a3a3bd7262b6079b",
+   "text": "It's stuck on its side!"
+  },
+  "on_wheels.1": {
+   "file": "generic/on_wheels.1.mp3",
+   "sha": "284e139260bbd937",
+   "text": "It lands on its wheels!"
+  },
+  "on_wheels.2": {
+   "file": "generic/on_wheels.2.mp3",
+   "sha": "f50378de0f9a99fe",
+   "text": "Right side up!"
+  },
+  "perfect.1": {
+   "file": "generic/perfect.1.mp3",
+   "sha": "08874f6764da402a",
+   "text": "A clean sweep!"
+  },
+  "perfect.2": {
+   "file": "generic/perfect.2.mp3",
+   "sha": "8c481ada2610cde6",
+   "text": "Not a single round dropped!"
+  },
+  "pinned.1": {
+   "file": "generic/pinned.1.mp3",
+   "sha": "e602f3c54f51629f",
+   "text": "It can't get away!"
+  },
+  "pinned.2": {
+   "file": "generic/pinned.2.mp3",
+   "sha": "9f9d7d23e5779012",
+   "text": "Held tight!"
+  },
+  "pinned.3": {
+   "file": "generic/pinned.3.mp3",
+   "sha": "e55692800196e7fc",
+   "text": "No way out!"
+  },
+  "programs_idle.1": {
+   "file": "generic/programs_idle.1.mp3",
+   "sha": "df77dbab915d7de4",
+   "text": "Neither program loaded! Both robots do nothing this round."
+  },
+  "qwen-3.8-2.4t:destroyed.1": {
+   "file": "models/qwen-3.8-2.4t/destroyed.1.mp3",
+   "sha": "5be92773094bcb36",
+   "text": "Kwen three point eight, two point four T is destroyed!"
+  },
+  "qwen-3.8-2.4t:intro_a.1": {
+   "file": "models/qwen-3.8-2.4t/intro_a.1.mp3",
+   "sha": "d141ae9f5f7d2e22",
+   "text": "In the blue corner, Kwen three point eight, two point four T!"
+  },
+  "qwen-3.8-2.4t:intro_b.1": {
+   "file": "models/qwen-3.8-2.4t/intro_b.1.mp3",
+   "sha": "8d92c26e55bc960c",
+   "text": "And in the red corner, Kwen three point eight, two point four T!"
+  },
+  "qwen-3.8-2.4t:knocked_out.1": {
+   "file": "models/qwen-3.8-2.4t/knocked_out.1.mp3",
+   "sha": "edd3264941423af9",
+   "text": "Kwen three point eight, two point four T is knocked out!"
+  },
+  "qwen-3.8-2.4t:match_won.1": {
+   "file": "models/qwen-3.8-2.4t/match_won.1.mp3",
+   "sha": "85b8cee68f1bf738",
+   "text": "Kwen three point eight, two point four T wins the match!"
+  },
+  "qwen-3.8-2.4t:program_idle.1": {
+   "file": "models/qwen-3.8-2.4t/program_idle.1.mp3",
+   "sha": "926ab2eed4da62fc",
+   "text": "Kwen three point eight, two point four T's program did not load! Its robot does nothing this round."
+  },
+  "qwen-3.8-2.4t:program_stopped.1": {
+   "file": "models/qwen-3.8-2.4t/program_stopped.1.mp3",
+   "sha": "11b35cc992048a66",
+   "text": "Kwen three point eight, two point four T's program has stopped!"
+  },
+  "qwen-3.8-2.4t:round_won.1": {
+   "file": "models/qwen-3.8-2.4t/round_won.1.mp3",
+   "sha": "fb79989391369a03",
+   "text": "Kwen three point eight, two point four T takes the round!"
+  },
+  "qwen-3.8-27b:destroyed.1": {
+   "file": "models/qwen-3.8-27b/destroyed.1.mp3",
+   "sha": "f289e71ce9a54407",
+   "text": "Kwen three point eight, twenty-seven B is destroyed!"
+  },
+  "qwen-3.8-27b:intro_a.1": {
+   "file": "models/qwen-3.8-27b/intro_a.1.mp3",
+   "sha": "00c14dda8bcf523e",
+   "text": "In the blue corner, Kwen three point eight, twenty-seven B!"
+  },
+  "qwen-3.8-27b:intro_b.1": {
+   "file": "models/qwen-3.8-27b/intro_b.1.mp3",
+   "sha": "ff787e96d583d70c",
+   "text": "And in the red corner, Kwen three point eight, twenty-seven B!"
+  },
+  "qwen-3.8-27b:knocked_out.1": {
+   "file": "models/qwen-3.8-27b/knocked_out.1.mp3",
+   "sha": "535850246e7f0769",
+   "text": "Kwen three point eight, twenty-seven B is knocked out!"
+  },
+  "qwen-3.8-27b:match_won.1": {
+   "file": "models/qwen-3.8-27b/match_won.1.mp3",
+   "sha": "9af456ba5ebb4564",
+   "text": "Kwen three point eight, twenty-seven B wins the match!"
+  },
+  "qwen-3.8-27b:program_idle.1": {
+   "file": "models/qwen-3.8-27b/program_idle.1.mp3",
+   "sha": "dc31e669aac8fed2",
+   "text": "Kwen three point eight, twenty-seven B's program did not load! Its robot does nothing this round."
+  },
+  "qwen-3.8-27b:program_stopped.1": {
+   "file": "models/qwen-3.8-27b/program_stopped.1.mp3",
+   "sha": "f56b348475af9d56",
+   "text": "Kwen three point eight, twenty-seven B's program has stopped!"
+  },
+  "qwen-3.8-27b:round_won.1": {
+   "file": "models/qwen-3.8-27b/round_won.1.mp3",
+   "sha": "90dc9eed83995bb6",
+   "text": "Kwen three point eight, twenty-seven B takes the round!"
+  },
+  "qwen-3.8-flash:destroyed.1": {
+   "file": "models/qwen-3.8-flash/destroyed.1.mp3",
+   "sha": "6c848cc361579415",
+   "text": "Kwen three point eight Flash is destroyed!"
+  },
+  "qwen-3.8-flash:intro_a.1": {
+   "file": "models/qwen-3.8-flash/intro_a.1.mp3",
+   "sha": "6731c542106e9bb9",
+   "text": "In the blue corner, Kwen three point eight Flash!"
+  },
+  "qwen-3.8-flash:intro_b.1": {
+   "file": "models/qwen-3.8-flash/intro_b.1.mp3",
+   "sha": "3c2195c02a657f16",
+   "text": "And in the red corner, Kwen three point eight Flash!"
+  },
+  "qwen-3.8-flash:knocked_out.1": {
+   "file": "models/qwen-3.8-flash/knocked_out.1.mp3",
+   "sha": "1cba1bf8ddda304f",
+   "text": "Kwen three point eight Flash is knocked out!"
+  },
+  "qwen-3.8-flash:match_won.1": {
+   "file": "models/qwen-3.8-flash/match_won.1.mp3",
+   "sha": "ad7b57d0b38e7ba4",
+   "text": "Kwen three point eight Flash wins the match!"
+  },
+  "qwen-3.8-flash:program_idle.1": {
+   "file": "models/qwen-3.8-flash/program_idle.1.mp3",
+   "sha": "751821bafb95b1ad",
+   "text": "Kwen three point eight Flash's program did not load! Its robot does nothing this round."
+  },
+  "qwen-3.8-flash:program_stopped.1": {
+   "file": "models/qwen-3.8-flash/program_stopped.1.mp3",
+   "sha": "b2d273c44a13d1b4",
+   "text": "Kwen three point eight Flash's program has stopped!"
+  },
+  "qwen-3.8-flash:round_won.1": {
+   "file": "models/qwen-3.8-flash/round_won.1.mp3",
+   "sha": "ee834d43a78a8ba2",
+   "text": "Kwen three point eight Flash takes the round!"
+  },
+  "qwen-3.8-max:destroyed.1": {
+   "file": "models/qwen-3.8-max/destroyed.1.mp3",
+   "sha": "1ef52948b67bb0b6",
+   "text": "Kwen three point eight Max is destroyed!"
+  },
+  "qwen-3.8-max:intro_a.1": {
+   "file": "models/qwen-3.8-max/intro_a.1.mp3",
+   "sha": "3b9e4f7bcd6739f9",
+   "text": "In the blue corner, Kwen three point eight Max!"
+  },
+  "qwen-3.8-max:intro_b.1": {
+   "file": "models/qwen-3.8-max/intro_b.1.mp3",
+   "sha": "ab7c7eab6f97695c",
+   "text": "And in the red corner, Kwen three point eight Max!"
+  },
+  "qwen-3.8-max:knocked_out.1": {
+   "file": "models/qwen-3.8-max/knocked_out.1.mp3",
+   "sha": "9a130b902fbf891e",
+   "text": "Kwen three point eight Max is knocked out!"
+  },
+  "qwen-3.8-max:match_won.1": {
+   "file": "models/qwen-3.8-max/match_won.1.mp3",
+   "sha": "e900820b1efe932b",
+   "text": "Kwen three point eight Max wins the match!"
+  },
+  "qwen-3.8-max:program_idle.1": {
+   "file": "models/qwen-3.8-max/program_idle.1.mp3",
+   "sha": "adc519e301c9bdb7",
+   "text": "Kwen three point eight Max's program did not load! Its robot does nothing this round."
+  },
+  "qwen-3.8-max:program_stopped.1": {
+   "file": "models/qwen-3.8-max/program_stopped.1.mp3",
+   "sha": "4eb6ad02e3df12f9",
+   "text": "Kwen three point eight Max's program has stopped!"
+  },
+  "qwen-3.8-max:round_won.1": {
+   "file": "models/qwen-3.8-max/round_won.1.mp3",
+   "sha": "2487bad360b0da67",
+   "text": "Kwen three point eight Max takes the round!"
+  },
+  "ram.1": {
+   "file": "generic/ram.1.mp3",
+   "sha": "c4046d9903026e2f",
+   "text": "What a collision!"
+  },
+  "ram.2": {
+   "file": "generic/ram.2.mp3",
+   "sha": "c74f90fd11736960",
+   "text": "Head on!"
+  },
+  "ram.3": {
+   "file": "generic/ram.3.mp3",
+   "sha": "0f7b09ee4ea6e828",
+   "text": "A full speed ram!"
+  },
+  "referee.1": {
+   "file": "generic/referee.1.mp3",
+   "sha": "32ded7478417bc5f",
+   "text": "The referee separates them!"
+  },
+  "referee.2": {
+   "file": "generic/referee.2.mp3",
+   "sha": "5b6e964efa33155f",
+   "text": "Break! The referee pulls them apart!"
+  },
+  "righted.1": {
+   "file": "generic/righted.1.mp3",
+   "sha": "36bdee705b9632e6",
+   "text": "Back on its wheels!"
+  },
+  "righted.2": {
+   "file": "generic/righted.2.mp3",
+   "sha": "95f28955b3079340",
+   "text": "It's back up!"
+  },
+  "round_1.1": {
+   "file": "generic/round_1.1.mp3",
+   "sha": "89524056d4b237f9",
+   "text": "Round one!"
+  },
+  "round_2.1": {
+   "file": "generic/round_2.1.mp3",
+   "sha": "fd5429325e83bbfa",
+   "text": "Round two!"
+  },
+  "round_3.1": {
+   "file": "generic/round_3.1.mp3",
+   "sha": "826b49151662b789",
+   "text": "Round three!"
+  },
+  "round_4.1": {
+   "file": "generic/round_4.1.mp3",
+   "sha": "c8d9c9bc475da194",
+   "text": "Round four!"
+  },
+  "round_5.1": {
+   "file": "generic/round_5.1.mp3",
+   "sha": "500b56893ba6c456",
+   "text": "Round five!"
+  },
+  "round_draw_ko.1": {
+   "file": "generic/round_draw_ko.1.mp3",
+   "sha": "14376c7280436a2c",
+   "text": "Destroyed and knocked out at the same instant! The round is a draw!"
+  },
+  "round_drawn.1": {
+   "file": "generic/round_drawn.1.mp3",
+   "sha": "8d5f1436f1f69cd9",
+   "text": "The round is a draw!"
+  },
+  "round_drawn.2": {
+   "file": "generic/round_drawn.2.mp3",
+   "sha": "17ddc3bee6a0e850",
+   "text": "Nobody takes this round!"
+  },
+  "round_void.1": {
+   "file": "generic/round_void.1.mp3",
+   "sha": "dedb877b3a2a2c0a",
+   "text": "This round is void!"
+  },
+  "round_void.2": {
+   "file": "generic/round_void.2.mp3",
+   "sha": "30a5adf9b3e2aedd",
+   "text": "No contest! The round counts for nobody."
+  },
+  "self_right.1": {
+   "file": "generic/self_right.1.mp3",
+   "sha": "05d3d3340a15a311",
+   "text": "It's trying to get back up!"
+  },
+  "self_right.2": {
+   "file": "generic/self_right.2.mp3",
+   "sha": "ec98925700a9223c",
+   "text": "Can it turn itself over?"
+  },
+  "smoke.1": {
+   "file": "generic/smoke.1.mp3",
+   "sha": "6472bdd69abe9f93",
+   "text": "There's smoke!"
+  },
+  "smoke.2": {
+   "file": "generic/smoke.2.mp3",
+   "sha": "04626b19e56da1d3",
+   "text": "It's smoking!"
+  },
+  "smoke.3": {
+   "file": "generic/smoke.3.mp3",
+   "sha": "2da04134dd5d327c",
+   "text": "Smoke is pouring out!"
+  },
+  "ten_seconds.1": {
+   "file": "generic/ten_seconds.1.mp3",
+   "sha": "423b209f9f52b106",
+   "text": "Ten seconds!"
+  },
+  "ten_seconds.2": {
+   "file": "generic/ten_seconds.2.mp3",
+   "sha": "d93fb7dec6fe00f4",
+   "text": "Ten seconds to go!"
+  },
+  "time.1": {
+   "file": "generic/time.1.mp3",
+   "sha": "2a258dbb5763512c",
+   "text": "Time!"
+  },
+  "time.2": {
+   "file": "generic/time.2.mp3",
+   "sha": "c09c87997e75d255",
+   "text": "That's time!"
+  },
+  "upside_down.1": {
+   "file": "generic/upside_down.1.mp3",
+   "sha": "ed360bcde1ad456e",
+   "text": "Upside down!"
+  },
+  "upside_down.2": {
+   "file": "generic/upside_down.2.mp3",
+   "sha": "b4e7ae57d9e54eac",
+   "text": "It's on its back!"
+  },
+  "wall_flip.1": {
+   "file": "generic/wall_flip.1.mp3",
+   "sha": "286f55aa2091e02c",
+   "text": "It trips at the wall!"
+  },
+  "wall_flip.2": {
+   "file": "generic/wall_flip.2.mp3",
+   "sha": "a573a71bf2b75f5c",
+   "text": "Caught at the wall!"
+  },
+  "wall_hit.1": {
+   "file": "generic/wall_hit.1.mp3",
+   "sha": "46abb2d99911c3a3",
+   "text": "Into the wall!"
+  },
+  "wall_hit.2": {
+   "file": "generic/wall_hit.2.mp3",
+   "sha": "80ebfc54b2c1c8cd",
+   "text": "Slammed into the wall!"
+  },
+  "weapon_lost.1": {
+   "file": "generic/weapon_lost.1.mp3",
+   "sha": "2e35c0ea93f01c3f",
+   "text": "The weapon is destroyed!"
+  },
+  "weapon_lost.2": {
+   "file": "generic/weapon_lost.2.mp3",
+   "sha": "5bfb88e399d71e56",
+   "text": "That weapon is gone!"
+  },
+  "welcome.1": {
+   "file": "generic/welcome.1.mp3",
+   "sha": "d98c78fa00d5ec35",
+   "text": "Ladies and gentlemen, welcome to Age of L L M, Season three: Robot Duel!"
+  },
+  "welcome.2": {
+   "file": "generic/welcome.2.mp3",
+   "sha": "db32a64fa5b94d29",
+   "text": "Ladies and gentlemen, this is Age of L L M, Season three! Welcome to Robot Duel!"
+  },
+  "wheel_lost.1": {
+   "file": "generic/wheel_lost.1.mp3",
+   "sha": "cb6f76def97c661c",
+   "text": "There goes a wheel!"
+  },
+  "wheel_lost.2": {
+   "file": "generic/wheel_lost.2.mp3",
+   "sha": "78f4c4a4af2820ef",
+   "text": "A wheel comes off!"
+  }
+ },
+ "models": {
+  "claude-fable-5.2": {
+   "name": "Claude Fable 5.2",
+   "spoken": "Claude Fable five point two"
+  },
+  "claude-haiku-5.5": {
+   "name": "Claude Haiku 5.5",
+   "spoken": "Claude Haiku five point five"
+  },
+  "claude-opus-5.5": {
+   "name": "Claude Opus 5.5",
+   "spoken": "Claude Opus five point five"
+  },
+  "claude-sonnet-5.5": {
+   "name": "Claude Sonnet 5.5",
+   "spoken": "Claude Sonnet five point five"
+  },
+  "deepseek-v4-pro": {
+   "name": "DeepSeek V4 Pro 0813",
+   "spoken": "Deep Seek V four Pro"
+  },
+  "deepseek-v4.1-flash": {
+   "name": "DeepSeek V4.1 Flash 1017",
+   "spoken": "Deep Seek V four point one Flash"
+  },
+  "gemini-3.5-flash-lite": {
+   "name": "Gemini 3.5 Flash-Lite",
+   "spoken": "Gemini three point five Flash Lite"
+  },
+  "gemini-3.8-flash": {
+   "name": "Gemini 3.8 Flash",
+   "spoken": "Gemini three point eight Flash"
+  },
+  "gemini-4-argon": {
+   "name": "Gemini 4 Argon",
+   "spoken": "Gemini four Argon"
+  },
+  "gemini-4-carbon": {
+   "name": "Gemini 4 Carbon",
+   "spoken": "Gemini four Carbon"
+  },
+  "gemma-4-31b": {
+   "name": "Gemma 4 31B",
+   "spoken": "Gemma four, thirty-one B"
+  },
+  "glm-5.3": {
+   "name": "GLM 5.3",
+   "spoken": "G L M five point three"
+  },
+  "glm-5.3-flash": {
+   "name": "GLM 5.3 Flash",
+   "spoken": "G L M five point three Flash"
+  },
+  "gpt-6-astra": {
+   "name": "GPT-6 Astra",
+   "spoken": "G P T six Astra"
+  },
+  "gpt-6-luna": {
+   "name": "GPT-6 Luna",
+   "spoken": "G P T six Luna"
+  },
+  "gpt-6.1-sol": {
+   "name": "GPT-6.1 Sol",
+   "spoken": "G P T six point one Sol"
+  },
+  "gpt-6.1-terra": {
+   "name": "GPT-6.1 Terra",
+   "spoken": "G P T six point one Terra"
+  },
+  "gpt-oss-120b": {
+   "name": "gpt-oss 120B",
+   "spoken": "G P T oss, one twenty B"
+  },
+  "grok-4.7": {
+   "name": "Grok 4.7",
+   "spoken": "Grok four point seven"
+  },
+  "hy4": {
+   "name": "Hy4 Preview",
+   "spoken": "H Y four"
+  },
+  "kimi-k3.1-pro": {
+   "name": "Kimi K3.1 Pro",
+   "spoken": "Kimi K three point one Pro"
+  },
+  "mimo-v2.6-flash": {
+   "name": "MiMo V2.6 Flash",
+   "spoken": "Mee-mo V two point six Flash"
+  },
+  "minimax-m3": {
+   "name": "MiniMax M3 Preview",
+   "spoken": "Mini Max M three"
+  },
+  "minimax-m3.1-flash": {
+   "name": "MiniMax M3.1 Flash",
+   "spoken": "Mini Max M three point one Flash"
+  },
+  "mistral-small-3.2": {
+   "name": "Mistral Small 3.2 24B",
+   "spoken": "Mistral Small three point two"
+  },
+  "muse-spark-open": {
+   "name": "Muse Spark Open",
+   "spoken": "Muse Spark Open"
+  },
+  "muse-wonder": {
+   "name": "Muse Wonder",
+   "spoken": "Muse Wonder"
+  },
+  "nemotron-3-nano": {
+   "name": "Nemotron 3 Nano 30B",
+   "spoken": "Nemotron three Nano"
+  },
+  "nemotron-3-ultra": {
+   "name": "Nemotron 3 Ultra",
+   "spoken": "Nemotron three Ultra"
+  },
+  "nemotron-3.5-super": {
+   "name": "Nemotron 3.5 Super",
+   "spoken": "Nemotron three point five Super"
+  },
+  "qwen-3.8-2.4t": {
+   "name": "Qwen 3.8 2.4T",
+   "spoken": "Kwen three point eight, two point four T"
+  },
+  "qwen-3.8-27b": {
+   "name": "Qwen 3.8 27B",
+   "spoken": "Kwen three point eight, twenty-seven B"
+  },
+  "qwen-3.8-flash": {
+   "name": "Qwen 3.8 Flash",
+   "spoken": "Kwen three point eight Flash"
+  },
+  "qwen-3.8-max": {
+   "name": "Qwen 3.8 Max",
+   "spoken": "Kwen three point eight Max"
+  }
+ },
+ "voice": {
+  "model_id": "eleven_multilingual_v2",
+  "name": "David - Sports Arena Announcer",
+  "output_format": "mp3_44100_64",
+  "seed": 3,
+  "settings": {
+   "similarity_boost": 0.8,
+   "stability": 0.4,
+   "style": 0.35,
+   "use_speaker_boost": true
+  },
+  "voice_id": "DduhIyyKkOosbP8VefhP"
+ }
+}

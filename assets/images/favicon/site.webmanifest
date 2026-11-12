@@ -1,1 +1,14 @@
-{"name":"","short_name":"","icons":[{"src":"/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},{"src":"/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}],"theme_color":"#ffffff","background_color":"#ffffff","display":"standalone"}
+{
+  "name": "Age of LLM",
+  "short_name": "Age of LLM",
+  "description": "AI models face each other in games, from strategy duels to programmed robot fights.",
+  "start_url": "/",
+  "scope": "/",
+  "icons": [
+    { "src": "/assets/images/favicon/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/assets/images/favicon/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ],
+  "theme_color": "#0a0e14",
+  "background_color": "#0a0e14",
+  "display": "standalone"
+}

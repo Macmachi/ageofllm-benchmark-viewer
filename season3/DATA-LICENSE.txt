@@ -1,0 +1,18 @@
+Age of LLM, Season 3 data (https://ageofllm.org/season3/)
+Copyright (C) 2026 Rymentz
+
+The Season 3 data published in this folder, the match replays (replays/)
+and the results and ranking (tournament/), is licensed under the Creative
+Commons Attribution 4.0 International license (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/
+
+You may share and adapt it, for any purpose, even commercially, provided you
+give appropriate credit, provide a link to the license, and indicate if
+changes were made. Suggested credit:
+  "Age of LLM, Season 3 data by Rymentz (https://ageofllm.org/season3/), CC BY 4.0"
+
+The full legal code of the license:
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+This license covers the data only. The code that shows it (the pages,
+scripts and styles of season3/) is all rights reserved: see LICENSE.txt.

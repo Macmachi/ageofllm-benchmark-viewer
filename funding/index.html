@@ -1,10 +1,28 @@
 <!DOCTYPE html>
+<!-- Age of LLM · Copyright (C) 2026 Rymentz · AGPL-3.0-or-later · https://ageofllm.org -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'" />
   <title>Funding &amp; independence · Age of LLM™ Benchmark</title>
   <meta name="description" content="How Age of LLM is funded, what sponsors can and cannot influence, what a match costs, and every contribution received." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Age of LLM" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Age of LLM · Funding and independence" />
+  <meta property="og:description" content="How Age of LLM is funded, what sponsors can and cannot influence, and what a match costs." />
+  <meta property="og:url" content="https://ageofllm.org/funding/" />
+  <meta property="og:image" content="https://ageofllm.org/assets/images/og-ageofllm.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="627" />
+  <meta property="og:image:alt" content="Age of LLM Benchmark: two armies, blue and red, face each other across a mountain ridge" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Age of LLM · Funding and independence" />
+  <meta name="twitter:description" content="How Age of LLM is funded, what sponsors can and cannot influence, and what a match costs." />
+  <meta name="twitter:image" content="https://ageofllm.org/assets/images/og-ageofllm.jpg" />
+  <meta name="twitter:image:alt" content="Age of LLM Benchmark: two armies, blue and red, face each other across a mountain ridge" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../assets/css/style.css" />
@@ -15,53 +33,134 @@
   <link rel="icon" href="../assets/images/favicon/favicon.ico" />
   <link rel="canonical" href="https://ageofllm.org/funding/" />
   <style>
-    .doc { max-width: 820px; margin: 0 auto; padding: 0 4px 48px; }
-    .doc h2 {
-      font-size: 15px; letter-spacing: .06em; text-transform: uppercase;
-      color: var(--text-dim); font-weight: 700;
-      margin: 38px 0 14px; padding-bottom: 8px;
-      border-bottom: 1px solid var(--border-soft);
-    }
-    .doc p { line-height: 1.65; margin: 0 0 14px; color: var(--text); font-size: 15px; }
-    .doc p.lede { font-size: 16.5px; color: var(--text); }
-    .doc .muted { color: var(--text-dim); font-size: 14px; }
-    .doc a.inline { color: var(--p0); border-bottom: 1px solid rgba(77,166,255,.35); }
-    .doc a.inline:hover { border-bottom-color: var(--p0); }
-    .pledge { list-style: none; margin: 0 0 8px; padding: 0; }
-    .pledge li {
-      position: relative; padding: 14px 16px 14px 46px; margin-bottom: 10px;
-      background: var(--panel); border: 1px solid var(--border-soft);
-      border-left: 3px solid var(--accent); border-radius: var(--radius);
-      line-height: 1.6; font-size: 15px;
-    }
-    .pledge li::before {
-      content: "✓"; position: absolute; left: 17px; top: 13px;
-      color: var(--accent); font-weight: 700; font-size: 15px;
-    }
-    .pledge strong { color: var(--text); }
-    .doc table { width: 100%; border-collapse: collapse; margin: 4px 0 16px; font-size: 14px; }
-    .doc table th {
-      text-align: left; padding: 9px 12px; font-size: 11px; letter-spacing: .06em;
-      text-transform: uppercase; color: var(--text-dim); font-weight: 700;
-      border-bottom: 1px solid var(--border);
-    }
-    .doc table td {
-      padding: 10px 12px; border-bottom: 1px solid var(--border-soft);
-      color: var(--text); vertical-align: top;
-    }
-    .doc table td.num { font-family: var(--mono); text-align: right; white-space: nowrap; }
-    .doc table tr:last-child td { border-bottom: none; }
-    .doc table td.empty { color: var(--text-faint); text-align: center; font-style: italic; padding: 20px 12px; }
-    .note {
-      background: var(--bg-2); border: 1px solid var(--border-soft);
-      border-radius: var(--radius); padding: 14px 16px; margin: 0 0 16px;
-      color: var(--text-dim); font-size: 14px; line-height: 1.6;
-    }
-    .note strong { color: var(--text); }
-    .backlink { display: inline-block; margin: 4px 0 22px; color: var(--text-dim); font-size: 14px; }
-    .backlink:hover { color: var(--text); }
-    .doc-title { font-size: 26px; font-weight: 800; letter-spacing: -.01em; margin: 0 0 10px; }
-    .updated { font-family: var(--mono); font-size: 12px; color: var(--text-faint); margin-bottom: 26px; }
+.doc {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 4px 48px;
+}
+.doc h2 {
+  font-size: 15px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 700;
+  margin: 38px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-soft);
+}
+.doc p {
+  line-height: 1.65;
+  margin: 0 0 14px;
+  color: var(--text);
+  font-size: 15px;
+}
+.doc p.lede {
+  font-size: 16.5px;
+  color: var(--text);
+}
+.doc .muted {
+  color: var(--text-dim);
+  font-size: 14px;
+}
+.doc a.inline {
+  color: var(--p0);
+  border-bottom: 1px solid rgba(77, 166, 255, .35);
+}
+.doc a.inline:hover {
+  border-bottom-color: var(--p0);
+}
+.pledge {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0;
+}
+.pledge li {
+  position: relative;
+  padding: 14px 16px 14px 46px;
+  margin-bottom: 10px;
+  background: var(--panel);
+  border: 1px solid var(--border-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  line-height: 1.6;
+  font-size: 15px;
+}
+.pledge li::before {
+  content: "✓";
+  position: absolute;
+  left: 17px;
+  top: 13px;
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 15px;
+}
+.pledge strong {
+  color: var(--text);
+}
+.doc table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 4px 0 16px;
+  font-size: 14px;
+}
+.doc table th {
+  text-align: left;
+  padding: 9px 12px;
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 700;
+  border-bottom: 1px solid var(--border);
+}
+.doc table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--text);
+  vertical-align: top;
+}
+.doc table td.num {
+  font-family: var(--mono);
+  text-align: right;
+  white-space: nowrap;
+}
+.doc table tr:last-child td {
+  border-bottom: none;
+}
+.doc table td.empty {
+  color: var(--text-faint);
+  text-align: center;
+  font-style: italic;
+  padding: 20px 12px;
+}
+.note {
+  background: var(--bg-2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin: 0 0 16px;
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.note strong {
+  color: var(--text);
+}
+.backlink {
+  display: inline-block;
+  margin: 4px 0 22px;
+  color: var(--text-dim);
+  font-size: 14px;
+}
+.backlink:hover {
+  color: var(--text);
+}
+.doc-title {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -.01em;
+  margin: 0 0 10px;
+}
   </style>
 </head>
 <body>
@@ -69,18 +168,13 @@
     <div class="lb-header">
       <a href="../"><img src="../assets/images/Logo_AOL.png" alt="Age of LLM" class="header-logo" /></a>
       <h1>Age of LLM™ <span class="lb-tag">· Funding</span></h1>
-      <!-- Filled from ../data/ladder.json, the same file the throne page reads, so
-           the two chips can never disagree. Hard-coding it here meant a bump on
-           one page and not the other read as a bug. The text below is only the
-           fallback shown if that file cannot be fetched. -->
       <span class="lb-ver" id="fund-ver">site v0.19.2 · game engine v0.18.0</span>
     </div>
 
     <div class="doc">
-      <a class="backlink" href="../">← Back to the throne</a>
+      <a class="backlink" href="../throne/">← Back to the throne</a>
 
       <h1 class="doc-title">Funding &amp; independence</h1>
-      <div class="updated">Last updated 2026-10-09</div>
 
       <p class="lede">
         Age of LLM accepts API credits and compute from model providers, inference
@@ -115,8 +209,9 @@
         </li>
         <li>
           <strong>Full disclosure.</strong>
-          Every contribution is listed below with its amount and what it paid for,
-          before the results it funded are published.
+          Every contribution is listed below with what it paid for, before the
+          results it funded are published, and with its amount unless the
+          contributor's agreement keeps the amount confidential; the page then says so.
         </li>
         <li>
           <strong>Right to publish anything.</strong>
@@ -127,7 +222,7 @@
 
       <h2>What a fair test costs</h2>
       <p>
-        Since 5 September 2026 the board is a <strong>throne</strong>. There is one
+        Since September 2026 the board is a <strong>throne</strong>. There is one
         reigning champion, and a new model plays it and nobody else:
         <strong>two matches</strong>, one from each side of the map. Win the tie and the
         crown changes hands. Lose it and nothing on the board moves. What it costs to
@@ -144,11 +239,11 @@
           <tr><th>Item</th><th class="num">Cost</th></tr>
         </thead>
         <tbody>
-          <tr><td>One match, both sides (measured mean over 40 matches)</td><td class="num">$2.47</td></tr>
-          <tr><td>One challenge for the throne, 2 matches (measured mean over 5)</td><td class="num">$5.47</td></tr>
-          <tr><td>Cheapest and dearest challenge so far</td><td class="num">$2.09 / $7.90</td></tr>
+          <tr><td>One match, both sides (measured mean over the first 40 matches)</td><td class="num">$2.47</td></tr>
+          <tr><td>One challenge for the throne, 2 matches (measured mean over the first 5)</td><td class="num">$5.47</td></tr>
+          <tr><td>Cheapest and dearest of those 5 challenges</td><td class="num">$2.09 / $7.90</td></tr>
           <tr><td>Opening a fresh season: 4 models, 12 matches (measured)</td><td class="num">$41.08</td></tr>
-          <tr><td>Everything played since 15 August 2026, 40 matches (measured)</td><td class="num">$98.74</td></tr>
+          <tr><td>The first 40 matches of Season 2, all of them (measured)</td><td class="num">$98.74</td></tr>
           <tr><td>Day-one challenge for every flagship release, per year (about 44)</td><td class="num">~$250</td></tr>
         </tbody>
       </table>
@@ -205,28 +300,27 @@
         2.1&nbsp;% against 5.3&nbsp;% on the old corpus.
       </p>
       <p>
-        <strong>The side question, and what the matches since have said.</strong>
+        <strong>The side question, and what the next matches said.</strong>
         Across the 12 opening matches the right-hand side of the map won 10 (exact
         binomial p&nbsp;=&nbsp;0.039). We noticed that pattern <em>during</em> the
         campaign and tested it on the same 12 matches, which is the weakest form of
-        evidence there is, so we reported it as open and kept counting. The 26 decisive
-        challenge matches played since then are a clean test, and the right-hand side
-        won 21 of them (p&nbsp;=&nbsp;0.002). Over all 38 decisive matches played on
-        game engines 0.17.0 and 0.18.0 it has won 31. The 57-match mirror experiment above found
+        evidence there is, so we reported it as open and kept counting. The first 26
+        decisive challenge matches played after them were a clean test, and the right-hand
+        side won 21 of them (p&nbsp;=&nbsp;0.002). Over those 38 decisive matches, played on
+        game engines 0.17.0 and 0.18.0, it won 31. The 57-match mirror experiment above found
         nothing of the kind on an earlier engine, and we have not yet found the cause.
       </p>
       <p>
         The crown is protected by construction: every challenge is played once from
         each side, so a side advantage cancels inside the tie. What it changes is how
-        ties end. In 6 of the 14 ties played so far, each model won the match it played
-        from the right and the tie was settled on speed, and 3 of the 5 challenges for
+        ties end. In 6 of the first 14 ties, each model won the match it played
+        from the right and the tie was settled on speed, and 3 of the first 5 challenges for
         the throne ended that way. We are publishing this before we can explain it,
         because that is the point of this section.
       </p>
       <p class="muted">
         We publish all of this because a benchmark that never reports a problem with
-        itself is not a benchmark that has none. Full method and figures are in the
-        <a class="inline" href="https://github.com/Macmachi/ageofllm-benchmark-viewer#readme" target="_blank" rel="noopener">README</a>.
+        itself is not a benchmark that has none.
       </p>
 
       <h2>On verifiability</h2>
@@ -245,17 +339,24 @@
         </thead>
         <tbody>
           <tr>
-            <td class="num">2026-10-09</td>
+            <td class="num">October 2026</td>
             <td><a class="inline" href="https://venice.ai" target="_blank" rel="noopener">Venice AI</a></td>
             <td class="num">$50 in API credits</td>
             <td>Not spent yet. The credits are on the Venice API, so they can only pay for
               models served through Venice. Every match run on them will name Venice as
               its compute provider, under the rules above.</td>
           </tr>
+          <tr>
+            <td class="num">November 2026</td>
+            <td><a class="inline" href="https://venice.ai" target="_blank" rel="noopener">Venice AI</a></td>
+            <td class="num">Inference credits (amount confidential under the agreement)</td>
+            <td>Season 3 (Robot Duel): models served through Venice. Not loaded yet. Every
+              match run on them names Venice as its compute provider, under the rules above.</td>
+          </tr>
         </tbody>
       </table>
       <p class="muted">
-        Everything else, including all 40 matches played since 15 August 2026, has been
+        Everything else, including the first 40 matches of Season 2, has been
         paid for personally.
       </p>
 
@@ -265,38 +366,16 @@
         credits or inference, never cash. Contributors are credited as the compute
         provider on every match run through them, under the rules above.
       </p>
-      <p class="muted">
-        Reach out on <a class="inline" href="https://x.com/ageofllm" target="_blank" rel="noopener">X (@ageofllm)</a>
-        or open an issue on
-        <a class="inline" href="https://github.com/Macmachi/ageofllm-benchmark-viewer/issues" target="_blank" rel="noopener">GitHub</a>.
-      </p>
     </div>
 
     <footer class="site-footer">
-      <a class="foot-link" href="../">← The Throne</a>
+      <a class="foot-link" href="../throne/">← The Throne</a>
       <a class="foot-link" href="https://youtu.be/Ec-CV1uzyVY" target="_blank" rel="noopener" title="Presentation video">▶ Presentation ↗</a>
-      <a class="foot-link" href="https://github.com/Macmachi/ageofllm-benchmark-viewer" target="_blank" rel="noopener" title="Star on GitHub">⭐ Star on GitHub</a>
-      <a class="foot-link" href="https://x.com/ageofllm" target="_blank" rel="noopener" title="Follow on X">𝕏 Follow @ageofllm</a>
       <a class="foot-link" href="https://www.youtube.com/@AgeofLLM" target="_blank" rel="noopener" title="YouTube">▶ YouTube</a>
-      <span class="foot-copy">© 2026 Rymentz · Age of LLM™ · All rights reserved</span>
+      <span class="foot-copy">© 2026 Rymentz · Age of LLM™ · Code AGPL-3.0 · Data CC BY 4.0</span>
     </footer>
   </div>
 
-  <script>
-    // Single source of truth for both chips: the throne page's own JSON. If it
-    // cannot be read we leave the hard-coded fallback in place rather than
-    // blanking the badge: a missing version reads worse than a stale one.
-    fetch('../data/ladder.json', { cache: 'no-cache' })
-      .then((r) => (r.ok ? r.json() : null))
-      .then((d) => {
-        if (!d) return;
-        const el = document.getElementById('fund-ver');
-        const bits = [];
-        if (d.site_version) bits.push('site v' + d.site_version);
-        if (d.engine_version) bits.push('game engine v' + d.engine_version);
-        if (el && bits.length) el.textContent = bits.join(' · ');
-      })
-      .catch(() => {});
-  </script>
+  <script src="../assets/js/funding.js"></script>
 </body>
 </html>

@@ -1,9 +1,28 @@
 <!DOCTYPE html>
+<!-- Age of LLM · Copyright (C) 2026 Rymentz · AGPL-3.0-or-later · https://ageofllm.org -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'" />
   <title>Age of LLM · Benchmark · Replay</title>
+  <meta name="description" content="Replay of an Age of LLM match, Seasons 1 and 2: two AI models in a turn-based strategy duel under fog of war, turn by turn, with their moves and their messages." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Age of LLM" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Age of LLM · Match replay" />
+  <meta property="og:description" content="Two AI models in a turn-based strategy duel under fog of war, replayed turn by turn with their moves and their messages." />
+  <meta property="og:url" content="https://ageofllm.org/viewer.html" />
+  <meta property="og:image" content="https://ageofllm.org/assets/images/og-ageofllm.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="627" />
+  <meta property="og:image:alt" content="Age of LLM Benchmark: two armies, blue and red, face each other across a mountain ridge" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Age of LLM · Match replay" />
+  <meta name="twitter:description" content="Two AI models in a turn-based strategy duel under fog of war, replayed turn by turn." />
+  <meta name="twitter:image" content="https://ageofllm.org/assets/images/og-ageofllm.jpg" />
+  <meta name="twitter:image:alt" content="Age of LLM Benchmark: two armies, blue and red, face each other across a mountain ridge" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/css/style.css" />
@@ -18,13 +37,11 @@
   <div class="viewer-root">
     <div id="board-wrap"><canvas id="board"></canvas></div>
 
-    <!-- loading / error -->
     <div id="loading" class="loading">Loading replay…</div>
 
-    <!-- top bar -->
     <div class="topbar">
       <div class="brand">
-        <a class="home-link" href="index.html" title="Back to the throne">⮜ The Throne</a>
+        <a class="home-link" href="throne/" title="Back to the throne">⮜ The Throne</a>
         <img src="assets/images/Logo_AOL.png" alt="Age of LLM" class="brand-logo" />
         <span class="title">Age of LLM™ <span class="lb-tag">· Benchmark</span></span>
         <span class="ver">v0.14.0</span>
@@ -41,7 +58,6 @@
       </div>
     </div>
 
-    <!-- player HUD: two bricks, top-centered under the header -->
     <div class="hud-bar">
       <div class="player-card left" id="card0">
         <div class="pc-head">
@@ -50,8 +66,6 @@
           <span class="peffort" id="effort0"></span>
         </div>
         <div class="pname" id="name0">Player 1</div>
-        <!-- Ceasefire in force / this player's unanswered proposal.
-             Both are otherwise only readable in the diplomacy log. -->
         <div class="pdiplo" id="diplo0"></div>
         <div class="res">
           <span class="cred" id="cred0" title="Credits">◆ 0</span>
@@ -77,8 +91,6 @@
           <span class="peffort" id="effort1"></span>
         </div>
         <div class="pname" id="name1">Player 2</div>
-        <!-- Ceasefire in force / this player's unanswered proposal.
-             Both are otherwise only readable in the diplomacy log. -->
         <div class="pdiplo" id="diplo1"></div>
         <div class="res">
           <span class="cred" id="cred1" title="Credits">◆ 0</span>
@@ -99,7 +111,6 @@
       </div>
     </div>
 
-    <!-- action rail -->
     <div class="rail">
       <button class="rbtn" id="btn-reason" title="AI reasoning">🧠</button>
       <button class="rbtn" id="btn-diplo" title="Diplomacy">💬<span class="count" id="diplo-count" style="display:none">0</span></button>
@@ -107,16 +118,13 @@
       <button class="rbtn" id="btn-legend" title="Legend">≡</button>
     </div>
 
-    <!-- zoom controls -->
     <div class="zoom-ctl">
       <button class="zbtn" id="zoom-in" title="Zoom in (+)">+</button>
       <button class="zbtn" id="zoom-out" title="Zoom out (-)">−</button>
       <button class="zbtn" id="zoom-reset" title="Reset (0)">⊙</button>
     </div>
 
-    <!-- LEFT dock: scrollable, panels stack without overlap -->
     <div class="dock dock-left" id="dock-left">
-      <!-- diplomacy panel -->
       <div class="panel" id="diplo-panel" style="display:none">
         <div class="panel-h">
           <span class="ttl">💬 Diplomacy</span>
@@ -127,7 +135,6 @@
         </div>
       </div>
 
-      <!-- stats panel -->
       <div class="panel" id="stats-panel" style="display:none">
         <div class="panel-h">
           <span class="ttl">📊 Statistics</span>
@@ -138,7 +145,6 @@
         </div>
       </div>
 
-      <!-- legend panel -->
       <div class="panel" id="legend-panel" style="display:none">
         <div class="panel-h">
           <span class="ttl">📖 Legend &amp; rules</span>
@@ -251,9 +257,7 @@
       </div>
     </div>
 
-    <!-- RIGHT dock -->
     <div class="dock dock-right" id="dock-right">
-      <!-- reasoning panel (closed by default) -->
       <div class="panel" id="reason-panel" style="display:none">
         <div class="panel-h">
           <span class="ttl">🧠 Reasoning</span>
@@ -264,21 +268,17 @@
           <div class="reason-text" id="reason-text"></div>
           <div class="actions-row" id="reason-actions"></div>
           <div class="discovered" id="reason-discovered" style="display:none">📡 Enemy base spotted</div>
-          <!-- Only shown when the engine actually told this player. It separates
-               "it knew and did not fire back" from "it never knew". -->
           <div class="launch-warned" id="reason-launch" style="display:none">☢ Enemy launch detected: this player was told, and could still fire back this turn</div>
         </div>
       </div>
     </div>
 
-    <!-- victory banner -->
     <div class="victory hidden" id="victory">
       <div class="vbolt" id="vbolt">⚡</div>
       <div class="vttl" id="vttl">VICTORY</div>
       <div class="vsub" id="vsub"></div>
     </div>
 
-    <!-- transport -->
     <div class="transport">
       <div class="transport-inner">
         <div class="transport-row">
@@ -301,10 +301,8 @@
 
     <footer class="viewer-footer">
       <a class="foot-link" href="https://youtu.be/Ec-CV1uzyVY" target="_blank" rel="noopener" title="Presentation video">▶ Presentation ↗</a>
-      <a class="foot-link" href="https://github.com/Macmachi/ageofllm-benchmark-viewer" target="_blank" rel="noopener" title="Star on GitHub">⭐ Star on GitHub</a>
-      <a class="foot-link" href="https://x.com/ageofllm" target="_blank" rel="noopener" title="Follow on X to know when new models are tested">𝕏 Follow @ageofllm</a>
       <a class="foot-link" href="https://www.youtube.com/@AgeofLLM" target="_blank" rel="noopener" title="YouTube">▶ YouTube</a>
-      <span class="foot-copy">© 2026 Rymentz · Age of LLM™ · All rights reserved</span>
+      <span class="foot-copy">© 2026 Rymentz · Age of LLM™ · Code AGPL-3.0 · Data CC BY 4.0</span>
     </footer>
   </div>
 

@@ -1,0 +1,220 @@
+{
+ "about": "Robot Duel arena sound (crowd, bell, music), generated once by scripts/arena_audio.py (ElevenLabs)",
+ "models": {
+  "music": {
+   "model_id": "music_v1",
+   "output_format": "mp3_44100_96"
+  },
+  "sfx": {
+   "model_id": "eleven_text_to_sound_v2",
+   "output_format": "mp3_44100_64"
+  }
+ },
+ "sounds": {
+  "applause.1": {
+   "bytes": 48526,
+   "channels": 2,
+   "file": "crowd/applause.1.mp3",
+   "group": "applause",
+   "kind": "sfx",
+   "prompt": "A big crowd applauds warmly at the end of a round: sustained clapping with a few cheers, fading at the end. Recorded from the stands of a large indoor arena with thousands of spectators. No music, no announcer, no commentary.",
+   "seconds": 6.06,
+   "sha": "783f1102092e279e"
+  },
+  "applause.2": {
+   "bytes": 48526,
+   "channels": 2,
+   "file": "crowd/applause.2.mp3",
+   "group": "applause",
+   "kind": "sfx",
+   "prompt": "A standing ovation: thousands of people clapping, some whistles and shouts of approval, fading at the end. Recorded from the stands of a large indoor arena with thousands of spectators. No music, no announcer, no commentary.",
+   "seconds": 6.06,
+   "sha": "b90c5c2bec6bcec5"
+  },
+  "bed_calm": {
+   "bytes": 120624,
+   "channels": 2,
+   "file": "crowd/bed_calm.mp3",
+   "group": "bed_calm",
+   "kind": "sfx",
+   "loop": {
+    "end": 14.923,
+    "fade": 1.5,
+    "start": 1.6
+   },
+   "prompt": "Steady murmur of a big crowd waiting between the action: thousands of people talking, a wide and even walla, distant. Recorded from the stands of a large indoor arena with thousands of spectators. No music, no announcer, no commentary. No cheering, no whistles, no single voice standing out, constant level from start to end.",
+   "seconds": 15.073,
+   "sha": "b2b3ed1de8591c6e"
+  },
+  "bed_hot": {
+   "bytes": 120624,
+   "channels": 2,
+   "file": "crowd/bed_hot.mp3",
+   "group": "bed_hot",
+   "kind": "sfx",
+   "loop": {
+    "end": 14.923,
+    "fade": 1.5,
+    "start": 1.6
+   },
+   "prompt": "A big crowd cheering and shouting continuously during an intense fight: sustained excitement, loud and even, whistles far away. Recorded from the stands of a large indoor arena with thousands of spectators. No music, no announcer, no commentary. Constant level from start to end.",
+   "seconds": 15.073,
+   "sha": "fdfe4d58c05bd8bb"
+  },
+  "bell.1": {
+   "bytes": 24493,
+   "channels": 2,
+   "file": "crowd/bell.1.mp3",
+   "group": "bell",
+   "kind": "sfx",
+   "prompt": "One strike of a boxing ring bell: a bright metallic ding with a long clear ring, recorded close. No crowd, no voice, no music.",
+   "seconds": 3.056,
+   "sha": "5de5b572e7ffe297"
+  },
+  "boo.1": {
+   "bytes": 32643,
+   "channels": 2,
+   "file": "crowd/boo.1.mp3",
+   "group": "boo",
+   "kind": "sfx",
+   "prompt": "A big crowd boos in disapproval: a long, low 'boooo' from thousands of people, fading. Recorded from the stands of a large indoor arena with thousands of spectators. No music, no announcer, no commentary.",
+   "seconds": 4.075,
+   "sha": "2b41b81c96331067"
+  },
+  "break": {
+   "bytes": 480906,
+   "channels": 2,
+   "file": "music/break.mp3",
+   "group": "break",
+   "kind": "music",
+   "loop": {
+    "end": 40.05,
+    "fade": 0.04,
+    "start": 8.05
+   },
+   "prompt": "Tense underscore for the break between two rounds of a televised combat sport event. Instrumental only, no vocals, no choir, no spoken words. A low pulsing bass, steady restrained drums and ticking percussion, quiet sustained strings and muted brass swells. Moderate intensity, an even groove with no big change and no melody on top, made to sit under a commentator and to loop.",
+   "seconds": 40.072,
+   "sha": "33b43d73f270eec9"
+  },
+  "chant.1": {
+   "bytes": 88650,
+   "channels": 2,
+   "file": "crowd/chant.1.mp3",
+   "group": "chant",
+   "kind": "sfx",
+   "prompt": "A big crowd stomps its feet and claps in a steady rhythm that gets faster and louder over ten seconds, the tension building up to a peak. Recorded from the stands of a large indoor arena with thousands of spectators. No music, no announcer, no commentary.",
+   "seconds": 11.076,
+   "sha": "a5743cde395e9ac9"
+  },
+  "cheer.1": {
+   "bytes": 32643,
+   "channels": 2,
+   "file": "crowd/cheer.1.mp3",
+   "group": "cheer",
+   "kind": "sfx",
+   "prompt": "A big crowd bursts into a loud cheer after a great hit, then settles down. Recorded from the stands of a large indoor arena with thousands of spectators. No music, no announcer, no commentary.",
+   "seconds": 4.075,
+   "sha": "e257720473521a72"
+  },
+  "cheer.2": {
+   "bytes": 32643,
+   "channels": 2,
+   "file": "crowd/cheer.2.mp3",
+   "group": "cheer",
+   "kind": "sfx",
+   "prompt": "A big crowd shouts 'yeah' and cheers with some applause for a good move, a short burst that fades. Recorded from the stands of a large indoor arena with thousands of spectators. No music, no announcer, no commentary.",
+   "seconds": 4.075,
+   "sha": "283e556b951d9e8d"
+  },
+  "draw": {
+   "bytes": 192828,
+   "channels": 2,
+   "file": "music/draw.mp3",
+   "group": "draw",
+   "kind": "music",
+   "prompt": "A dignified, neutral closing theme for a combat sport match that ends in a draw. Instrumental only, no vocals, no choir, no spoken words. Warm strings and soft horns over slow measured drums, respectful, neither sad nor triumphant, ending on a calm held chord.",
+   "seconds": 16.065,
+   "sha": "44c04a3c0f07f8a8"
+  },
+  "horn.1": {
+   "bytes": 16552,
+   "channels": 2,
+   "file": "crowd/horn.1.mp3",
+   "group": "horn",
+   "kind": "sfx",
+   "prompt": "The loud buzzer horn of a sports arena that ends a period: one long low blast. No crowd, no voice, no music.",
+   "seconds": 2.064,
+   "sha": "c58fe0dbc98bd8d4"
+  },
+  "ooh.1": {
+   "bytes": 24493,
+   "channels": 2,
+   "file": "crowd/ooh.1.mp3",
+   "group": "ooh",
+   "kind": "sfx",
+   "prompt": "A big crowd reacts together to a heavy impact with a loud 'ooooh', a short collective gasp that fades. Recorded from the stands of a large indoor arena with thousands of spectators. No music, no announcer, no commentary.",
+   "seconds": 3.056,
+   "sha": "dab9ea6206c19860"
+  },
+  "ooh.2": {
+   "bytes": 24493,
+   "channels": 2,
+   "file": "crowd/ooh.2.mp3",
+   "group": "ooh",
+   "kind": "sfx",
+   "prompt": "A big crowd winces together at a brutal hit: a sharp 'oh!' then a falling 'ooooh'. Recorded from the stands of a large indoor arena with thousands of spectators. No music, no announcer, no commentary.",
+   "seconds": 3.056,
+   "sha": "6becd63f8c409a93"
+  },
+  "roar.1": {
+   "bytes": 48526,
+   "channels": 2,
+   "file": "crowd/roar.1.mp3",
+   "group": "roar",
+   "kind": "sfx",
+   "prompt": "A huge crowd explodes: a roaring ovation at the knock out of a championship fight, screams, whistles and applause, slowly settling. Recorded from the stands of a large indoor arena with thousands of spectators. No music, no announcer, no commentary.",
+   "seconds": 6.06,
+   "sha": "4178267ec45b9f99"
+  },
+  "roar.2": {
+   "bytes": 48526,
+   "channels": 2,
+   "file": "crowd/roar.2.mp3",
+   "group": "roar",
+   "kind": "sfx",
+   "prompt": "A packed arena erupts in a wild roar of joy and disbelief at a spectacular finish, long and loud, then easing. Recorded from the stands of a large indoor arena with thousands of spectators. No music, no announcer, no commentary.",
+   "seconds": 6.06,
+   "sha": "fbc3b8face3e1601"
+  },
+  "sting": {
+   "bytes": 78411,
+   "channels": 2,
+   "file": "music/sting.mp3",
+   "group": "sting",
+   "kind": "music",
+   "prompt": "A short triumphant orchestral sting for the winner of a round in a combat sport show. Instrumental only, no vocals, no choir, no spoken words. A big brass fanfare hit with a drum roll and a cymbal swell, ending on one strong final chord that rings out.",
+   "seconds": 6.531,
+   "sha": "bfa5d0826c4de1d7"
+  },
+  "victory": {
+   "bytes": 264612,
+   "channels": 2,
+   "file": "music/victory.mp3",
+   "group": "victory",
+   "kind": "music",
+   "prompt": "Triumphant epic victory theme for the champion at the end of a combat sport main event. Instrumental only, no vocals, no choir, no spoken words. A soaring heroic brass melody over huge drums and full strings, glorious and bright, starting at once at full power and ending on a grand final chord.",
+   "seconds": 22.047,
+   "sha": "f69342c490dff243"
+  },
+  "walkout": {
+   "bytes": 312573,
+   "channels": 2,
+   "file": "music/walkout.mp3",
+   "group": "walkout",
+   "kind": "music",
+   "prompt": "Epic cinematic walkout theme for the main event of a combat sport night in a huge arena. Instrumental only, no vocals, no choir, no spoken words. Thunderous taiko and stadium drums, a powerful brass fanfare, driving low strings, heavy sub hits. Grand and heroic, it starts strong at once and keeps building anticipation until a big final hit.",
+   "seconds": 26.044,
+   "sha": "a335d28c9735c2d0"
+  }
+ }
+}

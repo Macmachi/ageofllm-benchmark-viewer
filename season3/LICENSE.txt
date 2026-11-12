@@ -1,0 +1,23 @@
+Age of LLM, Season 3 (https://ageofllm.org/season3/)
+Copyright (C) 2026 Rymentz. All rights reserved.
+
+The code of Season 3 as published in this folder (its pages, scripts and
+styles: index.html, app.js, app.css and everything in duel/) and its
+recorded sound (audio/) belong to Rymentz. No license is granted: they may
+not be copied, modified, redistributed or reused, in whole or in part,
+without the written permission of Rymentz.
+
+Not covered by this notice:
+- the Season 3 data (replays/ and tournament/: the match replays, the
+  results and the ranking), licensed under Creative Commons Attribution 4.0
+  International (CC BY 4.0): see DATA-LICENSE.txt;
+- three.js (MIT License), bundled into duel/app.js, and the typefaces Exo 2,
+  Inter and JetBrains Mono (SIL Open Font License 1.1), in fonts/: they keep
+  their own licenses, see third-party-licenses.txt.
+
+Seasons 1 and 2 of Age of LLM, elsewhere on this site, are licensed
+differently: their code under the GNU AGPL-3.0-or-later (see the LICENSE
+file at the root of the site's repository), their data under CC BY 4.0 (see
+DATA-LICENSE.txt at the root of the site).
+
+"Age of LLM" is a trademark of Rymentz.

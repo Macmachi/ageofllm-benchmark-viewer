@@ -1,120 +1,126 @@
 <!DOCTYPE html>
+<!-- Age of LLM · Copyright (C) 2026 Rymentz · AGPL-3.0-or-later · https://ageofllm.org -->
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Age of LLM™ · The Throne · Current champion</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="assets/css/style.css?v=0.19.2" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'" />
+  <meta http-equiv="refresh" content="0; url=season3/" />
+  <title>Age of LLM™ · Season 3 · Robot Duel</title>
+  <meta name="description" content="Age of LLM, Season 3: AI models design, calibrate and program their own robots, which duel under real physics. A season leaderboard, then a Cup, all in 3D." />
+  <link rel="canonical" href="https://ageofllm.org/season3/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Age of LLM" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Age of LLM, Season 3 · Robot Duel, the tournament" />
+  <meta property="og:description" content="AI models design, calibrate and program their own robots, which duel under real physics. A season-long leaderboard, then a Cup between the top 8, every match watchable in 3D." />
+  <meta property="og:url" content="https://ageofllm.org/season3/" />
+  <meta property="og:image" content="https://ageofllm.org/assets/images/og-season3.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="627" />
+  <meta property="og:image:alt" content="Age of LLM, Season 3, Robot Duel: two robots designed and coded by AI models meet in a 3D arena" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Age of LLM, Season 3 · Robot Duel, the tournament" />
+  <meta name="twitter:description" content="AI models design, calibrate and program their own robots, which duel under real physics. A season-long leaderboard, then a Cup, every match in 3D." />
+  <meta name="twitter:image" content="https://ageofllm.org/assets/images/og-season3.jpg" />
+  <meta name="twitter:image:alt" content="Age of LLM, Season 3, Robot Duel: two robots designed and coded by AI models meet in a 3D arena" />
   <link rel="apple-touch-icon" sizes="180x180" href="assets/images/favicon/apple-touch-icon.png" />
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon/favicon-32x32.png" />
   <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon/favicon-16x16.png" />
   <link rel="icon" href="assets/images/favicon/favicon.ico" />
+  <link rel="manifest" href="assets/images/favicon/site.webmanifest" />
+  <style>
+html {
+  background: #0a0e14;
+  color: #e8eef5;
+  color-scheme: dark;
+}
+body {
+  margin: 0;
+  font-family:
+    Inter,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
+}
+.home {
+  min-height: 100vh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 32px 20px;
+  text-align: center;
+}
+.home img {
+  width: 48px;
+  height: 48px;
+}
+.home h1 {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: .5px;
+}
+.home .go {
+  margin-top: 6px;
+  padding: 10px 20px;
+  border: 1px solid #d4af37;
+  border-radius: 10px;
+  color: #d4af37;
+  font-size: 17px;
+  font-weight: 700;
+  text-decoration: none;
+}
+.home .go:hover,
+.home .go:focus-visible {
+  background: rgba(212, 175, 55, 0.1);
+}
+.home .note {
+  margin: 0;
+  color: #8a97a6;
+  font-size: 14px;
+}
+.home nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 16px;
+  margin-top: 14px;
+  font-size: 13px;
+}
+.home nav a {
+  color: #8a97a6;
+}
+.home nav a:hover,
+.home nav a:focus-visible {
+  color: #e8eef5;
+}
+.home footer {
+  margin-top: 10px;
+  color: #828d99;
+  font-size: 12px;
+}
+  </style>
 </head>
 <body>
-  <div class="lb-root">
-
-    <!-- Filled by ladder.js when data/ladder.json carries "preview": true -->
-    <div id="preview-banner"></div>
-
-    <div class="lb-header">
-      <img src="assets/images/Logo_AOL.png" alt="Age of LLM" class="header-logo" />
-      <h1>Age of LLM™ <span class="lb-tag">· The Throne</span></h1>
-      <span class="lb-ver" id="lad-ver" title="The game-engine (rules) version stamped when this page was last written. It is not necessarily the version every match here was played on, nor the one in force today: each replay carries the version its own match ran under."></span>
-      <span class="lb-eng" id="lad-site" title="Site / tooling version. Never stamped into a replay: it cannot change how a match was played."></span>
-    </div>
-    <!-- Both of these are rewritten by ladder.js from rules.format in
-         data/ladder.json, so an archived gauntlet season or a preview built
-         with --format gauntlet describes ITSELF rather than inheriting the
-         wording that happened to be typed here. What is written here is the
-         current format, so a reader without JS still reads the truth. -->
-    <div class="lb-tagline" id="lb-tagline">One champion. Beat it over two matches and the crown is yours.</div>
-    <div class="lb-sub" id="lb-sub">
-      There is one thing to win here: <strong>the throne</strong>. A new model
-      does not join a standing and it does not climb. It plays the reigning
-      champion, <strong>two matches, one from each side of the map</strong>, and
-      either takes the crown or goes home.
-      <span class="lb-sub-tie"><strong>One win each</strong>: the crown goes to
-      whichever model won in fewer turns. <strong>Two draws</strong>: the
-      champion keeps it.</span>
-    </div>
-
-    <!-- Same two calls to action as the V1 leaderboard carried. They replace the
-         rule chips, which repeated what the paragraph above already says. -->
-    <div class="lb-cta">
-      <a class="cta-btn star" href="https://github.com/Macmachi/ageofllm-benchmark-viewer" target="_blank" rel="noopener"
-         title="Star the project on GitHub">⭐ Give a star on GitHub</a>
-      <a class="cta-btn xfollow" href="https://x.com/ageofllm" target="_blank" rel="noopener"
-         title="Follow on X to know when new models are tested">𝕏 Follow on X to know when new models are tested</a>
-      <!-- Sits beside the two calls to action rather than at the foot of the page:
-           a reader who has just read the format is exactly who asks "and the old
-           one?". Muted styling keeps it an archive, not a competing ranking. -->
-      <a class="cta-btn v1" href="v1.html"
-         title="Frozen: 54 matches played on game engine 0.9.2 – 0.15.0, under rules and a system prompt the current game engine no longer uses.">▤ Deprecated V1 leaderboard
-        <span class="cta-note">frozen · 54 matches</span></a>
-    </div>
-
-    <!-- Animated teaser of the most recent match. Stays hidden until
-         data/featured.json loads, so a fresh install shows nothing rather than
-         an empty frame. Sprite-free by design - see assets/js/featured.js. -->
-    <div class="featured" id="featured-match" hidden></div>
-
-    <div id="opening-section"></div>
-
-    <div class="lb-section-title">The throne</div>
-    <div id="throne"></div>
-
-    <!-- Title AND note come from ladder.js, because they say different things
-         under the two formats and getting it wrong here is the single most
-         misleading thing this page could do. Under `throne` this is every model
-         ever tested, and the note says in the open, not in a tooltip, what the
-         order is and that it is not a ranking: a vertical list of model names
-         IS a ranking to anyone who does not read the small print. -->
-    <div class="lb-section-title" id="board-title">Every model tested</div>
-    <div class="lb-note" id="board-note"></div>
-    <div class="lb-filters">
-      <input type="text" id="f-model" placeholder="Filter by model…" />
-    </div>
-    <div class="lad-board" id="lad-board"></div>
-
-    <div class="lb-section-title">Latest challenge</div>
-    <div id="latest-challenge"></div>
-
-    <div class="lb-section-title">Challenge log</div>
-    <div class="lb-filters">
-      <input type="text" id="f-chal" placeholder="Filter by model…" />
-      <span class="lb-rank-note">Newest first · click a challenge to expand the legs</span>
-    </div>
-    <div class="lad-log" id="lad-log"></div>
-
-    <div class="lb-section-title">Every champion, from the beginning</div>
-    <div class="lad-reigns" id="lad-reigns"></div>
-
-    <!-- Models that held a seat and lost it - gauntlet seasons only. Under the
-         throne they are rows of the model list above, with their matches. -->
-    <div id="dropped-history"></div>
-
-    <!-- Once played, the opening is provenance, not news: it renders here,
-         collapsed, instead of at the top of the page. -->
-    <div id="opening-history"></div>
-
-    <footer class="site-footer">
-      <a class="foot-link" href="https://youtu.be/Ec-CV1uzyVY" target="_blank" rel="noopener" title="Presentation video">▶ Presentation ↗</a>
-      <a class="foot-link" href="https://github.com/Macmachi/ageofllm-benchmark-viewer" target="_blank" rel="noopener" title="Star on GitHub">⭐ Star on GitHub</a>
-      <a class="foot-link" href="https://x.com/ageofllm" target="_blank" rel="noopener" title="Follow on X to know when new models are tested">𝕏 Follow @ageofllm</a>
-      <a class="foot-link" href="https://www.youtube.com/@AgeofLLM" target="_blank" rel="noopener" title="YouTube">▶ YouTube</a>
-      <!-- URL sent in outreach emails - do not change this path. -->
-      <a class="foot-link" href="funding/" title="Funding &amp; independence">⚖ Funding &amp; independence</a>
-      <!-- Every contribution is credited here and itemised on the funding page,
-           which says what it paid for. -->
-      <a class="foot-link" href="funding/#contributions" title="$50 in API credits, listed with what they paid for">♥ Compute credits from Venice AI</a>
-      <span class="foot-copy">© 2026 Rymentz · Age of LLM™ · All rights reserved</span>
-    </footer>
-  </div>
-
-  <script src="assets/js/model-meta.js?v=0.19.2"></script>
-  <script src="assets/js/ladder.js?v=0.19.2"></script>
-  <script src="assets/js/featured.js"></script>
+  <main class="home">
+    <img src="assets/images/Logo_AOL.png" alt="" />
+    <h1>Age of LLM™</h1>
+    <a class="go" href="season3/">Season 3 · Robot Duel →</a>
+    <p class="note">Taking you to Season 3. If nothing happens, follow the link above.</p>
+    <nav aria-label="Earlier seasons">
+      <a href="throne/">Season 2 · The Throne</a>
+      <a href="ladder/">Season 2 · The Ladder</a>
+      <a href="v1.html">Season 1 · The Leaderboard</a>
+      <a href="funding/">Funding &amp; independence</a>
+    </nav>
+    <footer>© 2026 Rymentz · Age of LLM™</footer>
+  </main>
 </body>
 </html>

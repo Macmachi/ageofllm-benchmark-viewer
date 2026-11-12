@@ -1,0 +1,180 @@
+{
+ "season": 3,
+ "title": "Robot Duel",
+ "demo": false,
+ "models": {},
+ "leaderboard": {
+  "method": "Bradley-Terry on rounds",
+  "ruleset": {
+   "engine": "rd-0.5.0",
+   "prompt_sha": "1af119875c28",
+   "engine_sha": "6dae1e2fd827",
+   "legacy": false
+  },
+  "updated": null,
+  "matches": 0,
+  "rounds": 0,
+  "center": 1000,
+  "centred_on": [],
+  "centre_note": "The ranking starts with the opening round; 1000 will be the average rating of the opening round's four models (DeepSeek V4.1 Flash 1017, Nemotron 3 Ultra, Claude Haiku 5.5 and Qwen 3.8 27B), so a newcomer does not move every rating by itself.",
+  "prior_rounds": 1.0,
+  "placement_matches": 8,
+  "provisional_half_width": 180,
+  "level": 0.95,
+  "bootstrap": {
+   "samples": 1000,
+   "seed": 20261109
+  },
+  "interval": "the wider of the bootstrap's percentiles and 1.96 standard deviations of the fit on each side; one-sided (only a lower or only an upper bound) for a model that has lost no round or won none; equal ratings share a rank",
+  "connected": true,
+  "isolated": [],
+  "rows": []
+ },
+ "cup": {
+  "name": "The Cup",
+  "note": "The top 8 at the end of the season, in a knockout: quarter-finals, semi-finals and final.",
+  "rounds": [
+   {
+    "name": "Quarter-finals",
+    "matches": [
+     {
+      "a": null,
+      "b": null,
+      "seed_a": "Rank 1",
+      "seed_b": "Rank 8",
+      "rounds": null,
+      "replay": null
+     },
+     {
+      "a": null,
+      "b": null,
+      "seed_a": "Rank 4",
+      "seed_b": "Rank 5",
+      "rounds": null,
+      "replay": null
+     },
+     {
+      "a": null,
+      "b": null,
+      "seed_a": "Rank 2",
+      "seed_b": "Rank 7",
+      "rounds": null,
+      "replay": null
+     },
+     {
+      "a": null,
+      "b": null,
+      "seed_a": "Rank 3",
+      "seed_b": "Rank 6",
+      "rounds": null,
+      "replay": null
+     }
+    ]
+   },
+   {
+    "name": "Semi-finals",
+    "matches": [
+     {
+      "a": null,
+      "b": null,
+      "seed_a": "Winner QF 1",
+      "seed_b": "Winner QF 2",
+      "rounds": null,
+      "replay": null
+     },
+     {
+      "a": null,
+      "b": null,
+      "seed_a": "Winner QF 3",
+      "seed_b": "Winner QF 4",
+      "rounds": null,
+      "replay": null
+     }
+    ]
+   },
+   {
+    "name": "Final",
+    "matches": [
+     {
+      "a": null,
+      "b": null,
+      "seed_a": "Winner SF 1",
+      "seed_b": "Winner SF 2",
+      "rounds": null,
+      "replay": null
+     }
+    ]
+   }
+  ]
+ },
+ "exhibitions": [
+  {
+   "date": "2026-11-12",
+   "players": [
+    {
+     "name": "Claude Fable 5.2",
+     "model": "claude-fable-5-2",
+     "country": "US",
+     "provider": "venice",
+     "host_name": null,
+     "lab": "Anthropic",
+     "quantization": "unknown",
+     "open": false,
+     "provider_name": "Venice"
+    },
+    {
+     "name": "GPT-6 Astra",
+     "model": "openai-gpt-6-astra",
+     "country": "US",
+     "provider": "venice",
+     "host_name": null,
+     "lab": "OpenAI",
+     "quantization": "unknown",
+     "open": false,
+     "provider_name": "Venice"
+    }
+   ],
+   "rounds": [
+    2,
+    3
+   ],
+   "result": "B",
+   "replay": "replays/season3/s3-exhibition-claude-fable-5.2_vs_gpt-6-astra.json",
+   "replay_id": "s3-exhibition-claude-fable-5.2_vs_gpt-6-astra"
+  },
+  {
+   "date": "2026-11-12",
+   "players": [
+    {
+     "name": "Claude Fable 5.2",
+     "model": "claude-fable-5-2",
+     "country": "US",
+     "provider": "venice",
+     "host_name": null,
+     "lab": "Anthropic",
+     "quantization": "unknown",
+     "open": false,
+     "provider_name": "Venice"
+    },
+    {
+     "name": "Gemini 4 Carbon",
+     "model": "google/gemini-4-carbon",
+     "country": "US",
+     "provider": "openrouter",
+     "host_name": null,
+     "lab": "Google",
+     "quantization": "unknown",
+     "open": false,
+     "provider_name": "OpenRouter"
+    }
+   ],
+   "rounds": [
+    3,
+    2
+   ],
+   "result": "A",
+   "replay": "replays/season3/s3-exhibition-claude-fable-5.2_vs_gemini-4-carbon.json",
+   "replay_id": "s3-exhibition-claude-fable-5.2_vs_gemini-4-carbon"
+  }
+ ]
+}

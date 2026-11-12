@@ -1,0 +1,22 @@
+Age of LLM, Seasons 1 and 2 data (https://ageofllm.org/)
+Copyright (C) 2026 Rymentz
+
+The Season 1 and Season 2 data published on this site, the match replays
+(replays/), the results and rankings (data/) and the frozen data of The
+Ladder (ladder/data/), is licensed under the Creative Commons Attribution
+4.0 International license (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/
+
+You may share and adapt it, for any purpose, even commercially, provided you
+give appropriate credit, provide a link to the license, and indicate if
+changes were made. Suggested credit:
+  "Age of LLM, Seasons 1 and 2 data by Rymentz (https://ageofllm.org/), CC BY 4.0"
+
+The full legal code of the license:
+https://creativecommons.org/licenses/by/4.0/legalcode
+
+This license covers the data only. The code that shows it (the pages,
+scripts and styles) is licensed under the GNU AGPL-3.0-or-later, and the
+images and sprites in assets/ are all rights reserved: see LICENSE.
+Season 3 (season3/) has its own licenses: see season3/LICENSE.txt and
+season3/DATA-LICENSE.txt.
