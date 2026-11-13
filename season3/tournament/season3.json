@@ -104,8 +104,8 @@
    "legacy": false
   },
   "updated": "2026-11-13",
-  "matches": 26,
-  "rounds": 92,
+  "matches": 27,
+  "rounds": 96,
   "center": 1000,
   "centred_on": [
    "claude-haiku-5.5",
@@ -137,9 +137,9 @@
     "id": "deepseek-v4-1-flash-1017",
     "country": "CN",
     "quantization": "fp8",
-    "rating": 1376,
-    "low": 1150,
-    "high": 1606,
+    "rating": 1377,
+    "low": 1151,
+    "high": 1622,
     "one_sided": null,
     "matches": 9,
     "rounds": {
@@ -226,23 +226,35 @@
     "id": "qwen/qwen3.8-27b",
     "country": "CN",
     "quantization": "bf16",
-    "rating": 944,
-    "low": 718,
-    "high": 1146,
+    "rating": 937,
+    "low": 723,
+    "high": 1114,
     "one_sided": null,
-    "matches": 6,
+    "matches": 7,
     "rounds": {
-     "won": 12,
+     "won": 15,
      "drawn": 0,
-     "lost": 8
+     "lost": 9
     },
     "provisional": true,
     "why": [
-     "6 of 8 placement matches",
+     "7 of 8 placement matches",
      "interval wider than ±180"
     ],
     "connected": true,
     "last": [
+     {
+      "date": "2026-11-13",
+      "opponent": "nemotron-3-nano",
+      "side": "B",
+      "rounds": [
+       3,
+       1
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_nvidia-nemotron-3-nano-30b-a3b_vs_qwen3.8-27b_5.json",
+      "replay_id": "s3_nvidia-nemotron-3-nano-30b-a3b_vs_qwen3.8-27b_5"
+     },
      {
       "date": "2026-11-13",
       "opponent": "mistral-small-3.2",
@@ -290,18 +302,6 @@
       "result": "lost",
       "replay": "replays/season3/s3_qwen3.8-27b_vs_claude-haiku-5-5_0.json",
       "replay_id": "s3_qwen3.8-27b_vs_claude-haiku-5-5_0"
-     },
-     {
-      "date": "2026-11-12",
-      "opponent": "nemotron-3-ultra",
-      "side": "B",
-      "rounds": [
-       3,
-       0
-      ],
-      "result": "won",
-      "replay": "replays/season3/s3_nvidia-nemotron-3-ultra-550b-a55b_vs_qwen3.8-27b_0.json",
-      "replay_id": "s3_nvidia-nemotron-3-ultra-550b-a55b_vs_qwen3.8-27b_0"
      }
     ]
    },
@@ -316,9 +316,9 @@
     "id": "claude-haiku-5-5",
     "country": "US",
     "quantization": "unknown",
-    "rating": 896,
-    "low": 658,
-    "high": 1182,
+    "rating": 898,
+    "low": 656,
+    "high": 1145,
     "one_sided": null,
     "matches": 7,
     "rounds": {
@@ -406,9 +406,9 @@
     "id": "openai/gpt-oss-120b",
     "country": "US",
     "quantization": "bf16",
-    "rating": 882,
-    "low": 659,
-    "high": 1059,
+    "rating": 884,
+    "low": 693,
+    "high": 1073,
     "one_sided": null,
     "matches": 11,
     "rounds": {
@@ -495,9 +495,9 @@
     "id": "nvidia-nemotron-3-ultra-550b-a55b",
     "country": "US",
     "quantization": "fp8",
-    "rating": 784,
-    "low": 493,
-    "high": 1018,
+    "rating": 788,
+    "low": 503,
+    "high": 1016,
     "one_sided": null,
     "matches": 6,
     "rounds": {
@@ -585,9 +585,9 @@
     "id": "mistral-small-3-2-24b-instruct",
     "country": "FR",
     "quantization": "fp8",
-    "rating": 723,
-    "low": 487,
-    "high": 876,
+    "rating": 726,
+    "low": 499,
+    "high": 877,
     "one_sided": null,
     "matches": 9,
     "rounds": {
@@ -674,23 +674,35 @@
     "id": "nvidia-nemotron-3-nano-30b-a3b",
     "country": "US",
     "quantization": "fp8",
-    "rating": 675,
-    "low": 328,
-    "high": 879,
+    "rating": 689,
+    "low": 376,
+    "high": 876,
     "one_sided": null,
-    "matches": 4,
+    "matches": 5,
     "rounds": {
-     "won": 3,
+     "won": 4,
      "drawn": 4,
-     "lost": 9
+     "lost": 12
     },
     "provisional": true,
     "why": [
-     "4 of 8 placement matches",
+     "5 of 8 placement matches",
      "interval wider than ±180"
     ],
     "connected": true,
     "last": [
+     {
+      "date": "2026-11-13",
+      "opponent": "qwen-3.8-27b",
+      "side": "A",
+      "rounds": [
+       1,
+       3
+      ],
+      "result": "lost",
+      "replay": "replays/season3/s3_nvidia-nemotron-3-nano-30b-a3b_vs_qwen3.8-27b_5.json",
+      "replay_id": "s3_nvidia-nemotron-3-nano-30b-a3b_vs_qwen3.8-27b_5"
+     },
      {
       "date": "2026-11-13",
       "opponent": "gpt-oss-120b",
