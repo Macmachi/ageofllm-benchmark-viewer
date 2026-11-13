@@ -104,8 +104,8 @@
    "legacy": false
   },
   "updated": "2026-11-13",
-  "matches": 25,
-  "rounds": 89,
+  "matches": 26,
+  "rounds": 92,
   "center": 1000,
   "centred_on": [
    "claude-haiku-5.5",
@@ -137,9 +137,9 @@
     "id": "deepseek-v4-1-flash-1017",
     "country": "CN",
     "quantization": "fp8",
-    "rating": 1366,
-    "low": 1141,
-    "high": 1592,
+    "rating": 1376,
+    "low": 1150,
+    "high": 1606,
     "one_sided": null,
     "matches": 9,
     "rounds": {
@@ -226,9 +226,9 @@
     "id": "qwen/qwen3.8-27b",
     "country": "CN",
     "quantization": "bf16",
-    "rating": 942,
+    "rating": 944,
     "low": 718,
-    "high": 1148,
+    "high": 1146,
     "one_sided": null,
     "matches": 6,
     "rounds": {
@@ -316,9 +316,9 @@
     "id": "claude-haiku-5-5",
     "country": "US",
     "quantization": "unknown",
-    "rating": 899,
+    "rating": 896,
     "low": 658,
-    "high": 1174,
+    "high": 1182,
     "one_sided": null,
     "matches": 7,
     "rounds": {
@@ -406,13 +406,13 @@
     "id": "openai/gpt-oss-120b",
     "country": "US",
     "quantization": "bf16",
-    "rating": 862,
-    "low": 627,
-    "high": 1047,
+    "rating": 882,
+    "low": 659,
+    "high": 1059,
     "one_sided": null,
-    "matches": 10,
+    "matches": 11,
     "rounds": {
-     "won": 12,
+     "won": 15,
      "drawn": 0,
      "lost": 24
     },
@@ -422,6 +422,18 @@
     ],
     "connected": true,
     "last": [
+     {
+      "date": "2026-11-13",
+      "opponent": "nemotron-3-nano",
+      "side": "A",
+      "rounds": [
+       3,
+       0
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_gpt-oss-120b_vs_nvidia-nemotron-3-nano-30b-a3b_4.json",
+      "replay_id": "s3_gpt-oss-120b_vs_nvidia-nemotron-3-nano-30b-a3b_4"
+     },
      {
       "date": "2026-11-13",
       "opponent": "mistral-small-3.2",
@@ -469,18 +481,6 @@
       "result": "lost",
       "replay": "replays/season3/s3_gpt-oss-120b_vs_deepseek-v4-1-flash-1017_7.json",
       "replay_id": "s3_gpt-oss-120b_vs_deepseek-v4-1-flash-1017_7"
-     },
-     {
-      "date": "2026-11-13",
-      "opponent": "deepseek-v4.1-flash",
-      "side": "B",
-      "rounds": [
-       0,
-       3
-      ],
-      "result": "lost",
-      "replay": "replays/season3/s3_deepseek-v4-1-flash-1017_vs_gpt-oss-120b_6.json",
-      "replay_id": "s3_deepseek-v4-1-flash-1017_vs_gpt-oss-120b_6"
      }
     ]
    },
@@ -495,9 +495,9 @@
     "id": "nvidia-nemotron-3-ultra-550b-a55b",
     "country": "US",
     "quantization": "fp8",
-    "rating": 792,
-    "low": 510,
-    "high": 1008,
+    "rating": 784,
+    "low": 493,
+    "high": 1018,
     "one_sided": null,
     "matches": 6,
     "rounds": {
@@ -585,9 +585,9 @@
     "id": "mistral-small-3-2-24b-instruct",
     "country": "FR",
     "quantization": "fp8",
-    "rating": 728,
-    "low": 482,
-    "high": 880,
+    "rating": 723,
+    "low": 487,
+    "high": 876,
     "one_sided": null,
     "matches": 9,
     "rounds": {
@@ -666,7 +666,7 @@
    {
     "rank": 7,
     "rank_range": [
-     3,
+     4,
      7
     ],
     "model": "nemotron-3-nano",
@@ -674,23 +674,35 @@
     "id": "nvidia-nemotron-3-nano-30b-a3b",
     "country": "US",
     "quantization": "fp8",
-    "rating": 720,
-    "low": 402,
-    "high": 953,
+    "rating": 675,
+    "low": 328,
+    "high": 879,
     "one_sided": null,
-    "matches": 3,
+    "matches": 4,
     "rounds": {
      "won": 3,
      "drawn": 4,
-     "lost": 6
+     "lost": 9
     },
     "provisional": true,
     "why": [
-     "3 of 8 placement matches",
+     "4 of 8 placement matches",
      "interval wider than ±180"
     ],
     "connected": true,
     "last": [
+     {
+      "date": "2026-11-13",
+      "opponent": "gpt-oss-120b",
+      "side": "B",
+      "rounds": [
+       0,
+       3
+      ],
+      "result": "lost",
+      "replay": "replays/season3/s3_gpt-oss-120b_vs_nvidia-nemotron-3-nano-30b-a3b_4.json",
+      "replay_id": "s3_gpt-oss-120b_vs_nvidia-nemotron-3-nano-30b-a3b_4"
+     },
      {
       "date": "2026-11-13",
       "opponent": "nemotron-3-ultra",
