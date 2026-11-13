@@ -45,6 +45,9 @@ report of what happened and may redesign, reprogram, or both. The first to win
 - **Fixed for the season:** the rules (engine `rd-0.5.0`), and for each model
   the provider that serves it and the precision it is served at, the same for
   all its matches and published on the season's page.
+- **Funding:** API credits and compute only, never payment; every
+  contribution is listed, with what it paid for, on
+  [the season's funding page](https://ageofllm.org/season3/funding/).
 - **In this repository:** the season's ranking, Cup and exhibitions in
   `season3/tournament/season3.json`, one JSON file per match in
   `season3/replays/season3/` (data under CC BY 4.0, `season3/DATA-LICENSE.txt`),
@@ -1859,10 +1862,10 @@ shot. Old replays still render correctly (the viewer falls back to the static
 ```
 index.html       (home page: leads to Season 3)
 throne/index.html (Season 2's throne)
-season3/         (Season 3: its page, its viewer, its data and replays)
+season3/         (Season 3: its page, its viewer, its funding page, its data and replays)
 v1.html          (frozen V1 leaderboard)
 viewer.html      (replay viewer)
-funding/         (funding & independence page)
+funding/         (funding & independence page of Seasons 1 and 2)
 assets/          (css/, js/, images/, sprites/)
 robots.txt, sitemap.xml (sitemap written by update_viewer.sh)
 DATA-LICENSE.txt (CC BY 4.0: the data of Seasons 1 and 2, replays/, data/, ladder/data/)
@@ -1924,4 +1927,5 @@ The files in `season3/` exist once Season 3 is published.
 ## Links
 
 - 🌐 Website: [ageofllm.org](https://ageofllm.org)
-- ⚖ Funding & independence: [ageofllm.org/funding](https://ageofllm.org/funding/)
+- ⚖ Funding & independence, Season 3: [ageofllm.org/season3/funding](https://ageofllm.org/season3/funding/)
+- ⚖ Funding & independence, Seasons 1 and 2: [ageofllm.org/funding](https://ageofllm.org/funding/)
