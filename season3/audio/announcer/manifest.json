@@ -556,46 +556,6 @@
    "sha": "5746866bfd7e90b3",
    "text": "Gemini three point eight Flash takes the round!"
   },
-  "gemini-4-argon:destroyed.1": {
-   "file": "models/gemini-4-argon/destroyed.1.mp3",
-   "sha": "867c3924cd298d2f",
-   "text": "Gemini four Argon is destroyed!"
-  },
-  "gemini-4-argon:intro_a.1": {
-   "file": "models/gemini-4-argon/intro_a.1.mp3",
-   "sha": "e4c23fc3f0050e03",
-   "text": "In the blue corner, Gemini four Argon!"
-  },
-  "gemini-4-argon:intro_b.1": {
-   "file": "models/gemini-4-argon/intro_b.1.mp3",
-   "sha": "a635abf6a327fdd0",
-   "text": "And in the red corner, Gemini four Argon!"
-  },
-  "gemini-4-argon:knocked_out.1": {
-   "file": "models/gemini-4-argon/knocked_out.1.mp3",
-   "sha": "d85db3c5776aaa47",
-   "text": "Gemini four Argon is knocked out!"
-  },
-  "gemini-4-argon:match_won.1": {
-   "file": "models/gemini-4-argon/match_won.1.mp3",
-   "sha": "cf1fb1cb08b2d30c",
-   "text": "Gemini four Argon wins the match!"
-  },
-  "gemini-4-argon:program_idle.1": {
-   "file": "models/gemini-4-argon/program_idle.1.mp3",
-   "sha": "0a2c32205a7bee55",
-   "text": "Gemini four Argon's program did not load! Its robot does nothing this round."
-  },
-  "gemini-4-argon:program_stopped.1": {
-   "file": "models/gemini-4-argon/program_stopped.1.mp3",
-   "sha": "b66e2e4600cbb2b5",
-   "text": "Gemini four Argon's program has stopped!"
-  },
-  "gemini-4-argon:round_won.1": {
-   "file": "models/gemini-4-argon/round_won.1.mp3",
-   "sha": "8f33aaa87cede5dc",
-   "text": "Gemini four Argon takes the round!"
-  },
   "gemini-4-carbon:destroyed.1": {
    "file": "models/gemini-4-carbon/destroyed.1.mp3",
    "sha": "3beae55d7a3830c3",
@@ -2034,10 +1994,6 @@
   "gemini-3.8-flash": {
    "name": "Gemini 3.8 Flash",
    "spoken": "Gemini three point eight Flash"
-  },
-  "gemini-4-argon": {
-   "name": "Gemini 4 Argon",
-   "spoken": "Gemini four Argon"
   },
   "gemini-4-carbon": {
    "name": "Gemini 4 Carbon",
