@@ -104,8 +104,8 @@
    "legacy": false
   },
   "updated": "2026-11-13",
-  "matches": 24,
-  "rounds": 84,
+  "matches": 25,
+  "rounds": 89,
   "center": 1000,
   "centred_on": [
    "claude-haiku-5.5",
@@ -137,9 +137,9 @@
     "id": "deepseek-v4-1-flash-1017",
     "country": "CN",
     "quantization": "fp8",
-    "rating": 1360,
-    "low": 1134,
-    "high": 1594,
+    "rating": 1366,
+    "low": 1141,
+    "high": 1592,
     "one_sided": null,
     "matches": 9,
     "rounds": {
@@ -226,9 +226,9 @@
     "id": "qwen/qwen3.8-27b",
     "country": "CN",
     "quantization": "bf16",
-    "rating": 935,
-    "low": 682,
-    "high": 1150,
+    "rating": 942,
+    "low": 718,
+    "high": 1148,
     "one_sided": null,
     "matches": 6,
     "rounds": {
@@ -316,9 +316,9 @@
     "id": "claude-haiku-5-5",
     "country": "US",
     "quantization": "unknown",
-    "rating": 882,
-    "low": 632,
-    "high": 1171,
+    "rating": 899,
+    "low": 658,
+    "high": 1174,
     "one_sided": null,
     "matches": 7,
     "rounds": {
@@ -406,9 +406,9 @@
     "id": "openai/gpt-oss-120b",
     "country": "US",
     "quantization": "bf16",
-    "rating": 855,
-    "low": 634,
-    "high": 1056,
+    "rating": 862,
+    "low": 627,
+    "high": 1047,
     "one_sided": null,
     "matches": 10,
     "rounds": {
@@ -495,23 +495,35 @@
     "id": "nvidia-nemotron-3-ultra-550b-a55b",
     "country": "US",
     "quantization": "fp8",
-    "rating": 824,
-    "low": 489,
-    "high": 1088,
+    "rating": 792,
+    "low": 510,
+    "high": 1008,
     "one_sided": null,
-    "matches": 5,
+    "matches": 6,
     "rounds": {
-     "won": 7,
+     "won": 9,
      "drawn": 1,
-     "lost": 10
+     "lost": 13
     },
     "provisional": true,
     "why": [
-     "5 of 8 placement matches",
+     "6 of 8 placement matches",
      "interval wider than ±180"
     ],
     "connected": true,
     "last": [
+     {
+      "date": "2026-11-13",
+      "opponent": "nemotron-3-nano",
+      "side": "B",
+      "rounds": [
+       2,
+       3
+      ],
+      "result": "lost",
+      "replay": "replays/season3/s3_nvidia-nemotron-3-nano-30b-a3b_vs_nvidia-nemotron-3-ultra-550b-a55b_3.json",
+      "replay_id": "s3_nvidia-nemotron-3-nano-30b-a3b_vs_nvidia-nemotron-3-ultra-550b-a55b_3"
+     },
      {
       "date": "2026-11-13",
       "opponent": "mistral-small-3.2",
@@ -559,18 +571,6 @@
       "result": "won",
       "replay": "replays/season3/s3_claude-haiku-5-5_vs_nvidia-nemotron-3-ultra-550b-a55b_0.json",
       "replay_id": "s3_claude-haiku-5-5_vs_nvidia-nemotron-3-ultra-550b-a55b_0"
-     },
-     {
-      "date": "2026-11-12",
-      "opponent": "deepseek-v4.1-flash",
-      "side": "B",
-      "rounds": [
-       0,
-       3
-      ],
-      "result": "lost",
-      "replay": "replays/season3/s3_deepseek-v4-1-flash-1017_vs_nvidia-nemotron-3-ultra-550b-a55b_0.json",
-      "replay_id": "s3_deepseek-v4-1-flash-1017_vs_nvidia-nemotron-3-ultra-550b-a55b_0"
      }
     ]
    },
@@ -585,9 +585,9 @@
     "id": "mistral-small-3-2-24b-instruct",
     "country": "FR",
     "quantization": "fp8",
-    "rating": 707,
-    "low": 463,
-    "high": 865,
+    "rating": 728,
+    "low": 482,
+    "high": 880,
     "one_sided": null,
     "matches": 9,
     "rounds": {
@@ -674,23 +674,35 @@
     "id": "nvidia-nemotron-3-nano-30b-a3b",
     "country": "US",
     "quantization": "fp8",
-    "rating": 607,
-    "low": null,
-    "high": 930,
-    "one_sided": "upper",
-    "matches": 2,
+    "rating": 720,
+    "low": 402,
+    "high": 953,
+    "one_sided": null,
+    "matches": 3,
     "rounds": {
-     "won": 0,
+     "won": 3,
      "drawn": 4,
-     "lost": 4
+     "lost": 6
     },
     "provisional": true,
     "why": [
-     "2 of 8 placement matches",
-     "won none of its rounds"
+     "3 of 8 placement matches",
+     "interval wider than ±180"
     ],
     "connected": true,
     "last": [
+     {
+      "date": "2026-11-13",
+      "opponent": "nemotron-3-ultra",
+      "side": "A",
+      "rounds": [
+       3,
+       2
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_nvidia-nemotron-3-nano-30b-a3b_vs_nvidia-nemotron-3-ultra-550b-a55b_3.json",
+      "replay_id": "s3_nvidia-nemotron-3-nano-30b-a3b_vs_nvidia-nemotron-3-ultra-550b-a55b_3"
+     },
      {
       "date": "2026-11-13",
       "opponent": "mistral-small-3.2",
