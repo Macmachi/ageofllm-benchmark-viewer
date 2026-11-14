@@ -3,19 +3,6 @@
  "title": "Robot Duel",
  "demo": false,
  "models": {
-  "mimo-v2.6-flash": {
-   "name": "MiMo V2.6 Flash",
-   "id": "xiaomi-mimo-v2-6-flash",
-   "country": "CN",
-   "quantization": "fp8",
-   "provider_name": "Venice AI",
-   "host_name": null,
-   "params_b": 311,
-   "active_b": null,
-   "open": true,
-   "native": "fp8",
-   "output_limit": 32000
-  },
   "deepseek-v4.1-flash": {
    "name": "DeepSeek V4.1 Flash 1017",
    "id": "deepseek-v4-1-flash-1017",
@@ -24,6 +11,19 @@
    "provider_name": "Venice AI",
    "host_name": null,
    "params_b": 763,
+   "active_b": null,
+   "open": true,
+   "native": "fp8",
+   "output_limit": 32000
+  },
+  "mimo-v2.6-flash": {
+   "name": "MiMo V2.6 Flash",
+   "id": "xiaomi-mimo-v2-6-flash",
+   "country": "CN",
+   "quantization": "fp8",
+   "provider_name": "Venice AI",
+   "host_name": null,
+   "params_b": 311,
    "active_b": null,
    "open": true,
    "native": "fp8",
@@ -117,8 +117,8 @@
    "legacy": false
   },
   "updated": "2026-11-13",
-  "matches": 32,
-  "rounds": 115,
+  "matches": 33,
+  "rounds": 120,
   "center": 1000,
   "centred_on": [
    "claude-haiku-5.5",
@@ -143,70 +143,16 @@
     "rank": 1,
     "rank_range": [
      1,
-     5
-    ],
-    "model": "mimo-v2.6-flash",
-    "name": "MiMo V2.6 Flash",
-    "id": "xiaomi-mimo-v2-6-flash",
-    "country": "CN",
-    "quantization": "fp8",
-    "rating": 1457,
-    "low": 819,
-    "high": 1831,
-    "one_sided": null,
-    "matches": 2,
-    "rounds": {
-     "won": 6,
-     "drawn": 0,
-     "lost": 1
-    },
-    "provisional": true,
-    "why": [
-     "2 of 8 placement matches",
-     "interval wider than ±180"
-    ],
-    "connected": true,
-    "last": [
-     {
-      "date": "2026-11-13",
-      "opponent": "deepseek-v4.1-flash",
-      "side": "B",
-      "rounds": [
-       3,
-       1
-      ],
-      "result": "won",
-      "replay": "replays/season3/s3_deepseek-v4-1-flash-1017_vs_xiaomi-mimo-v2-6-flash_2.json",
-      "replay_id": "s3_deepseek-v4-1-flash-1017_vs_xiaomi-mimo-v2-6-flash_2"
-     },
-     {
-      "date": "2026-11-13",
-      "opponent": "gpt-oss-120b",
-      "side": "A",
-      "rounds": [
-       3,
-       0
-      ],
-      "result": "won",
-      "replay": "replays/season3/s3_xiaomi-mimo-v2-6-flash_vs_gpt-oss-120b_1.json",
-      "replay_id": "s3_xiaomi-mimo-v2-6-flash_vs_gpt-oss-120b_1"
-     }
-    ]
-   },
-   {
-    "rank": 2,
-    "rank_range": [
-     1,
-     2
+     3
     ],
     "model": "deepseek-v4.1-flash",
     "name": "DeepSeek V4.1 Flash 1017",
     "id": "deepseek-v4-1-flash-1017",
     "country": "CN",
     "quantization": "fp8",
-    "rating": 1340,
-    "low": 1141,
-    "high": 1559,
+    "rating": 1258,
+    "low": 1105,
+    "high": 1546,
     "one_sided": null,
     "matches": 10,
     "rounds": {
@@ -283,6 +229,72 @@
     ]
    },
    {
+    "rank": 2,
+    "rank_range": [
+     1,
+     5
+    ],
+    "model": "mimo-v2.6-flash",
+    "name": "MiMo V2.6 Flash",
+    "id": "xiaomi-mimo-v2-6-flash",
+    "country": "CN",
+    "quantization": "fp8",
+    "rating": 1171,
+    "low": 802,
+    "high": 1572,
+    "one_sided": null,
+    "matches": 3,
+    "rounds": {
+     "won": 8,
+     "drawn": 0,
+     "lost": 4
+    },
+    "provisional": true,
+    "why": [
+     "3 of 8 placement matches",
+     "interval wider than ±180"
+    ],
+    "connected": true,
+    "last": [
+     {
+      "date": "2026-11-13",
+      "opponent": "qwen-3.8-27b",
+      "side": "A",
+      "rounds": [
+       2,
+       3
+      ],
+      "result": "lost",
+      "replay": "replays/season3/s3_xiaomi-mimo-v2-6-flash_vs_qwen3.8-27b_3.json",
+      "replay_id": "s3_xiaomi-mimo-v2-6-flash_vs_qwen3.8-27b_3"
+     },
+     {
+      "date": "2026-11-13",
+      "opponent": "deepseek-v4.1-flash",
+      "side": "B",
+      "rounds": [
+       3,
+       1
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_deepseek-v4-1-flash-1017_vs_xiaomi-mimo-v2-6-flash_2.json",
+      "replay_id": "s3_deepseek-v4-1-flash-1017_vs_xiaomi-mimo-v2-6-flash_2"
+     },
+     {
+      "date": "2026-11-13",
+      "opponent": "gpt-oss-120b",
+      "side": "A",
+      "rounds": [
+       3,
+       0
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_xiaomi-mimo-v2-6-flash_vs_gpt-oss-120b_1.json",
+      "replay_id": "s3_xiaomi-mimo-v2-6-flash_vs_gpt-oss-120b_1"
+     }
+    ]
+   },
+   {
     "rank": 3,
     "rank_range": [
      2,
@@ -293,22 +305,34 @@
     "id": "qwen/qwen3.8-27b",
     "country": "CN",
     "quantization": "bf16",
-    "rating": 940,
-    "low": 759,
-    "high": 1110,
+    "rating": 1002,
+    "low": 790,
+    "high": 1191,
     "one_sided": null,
-    "matches": 7,
+    "matches": 8,
     "rounds": {
-     "won": 15,
+     "won": 18,
      "drawn": 0,
-     "lost": 9
+     "lost": 11
     },
     "provisional": true,
     "why": [
-     "7 of 8 placement matches"
+     "interval wider than ±180"
     ],
     "connected": true,
     "last": [
+     {
+      "date": "2026-11-13",
+      "opponent": "mimo-v2.6-flash",
+      "side": "B",
+      "rounds": [
+       3,
+       2
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_xiaomi-mimo-v2-6-flash_vs_qwen3.8-27b_3.json",
+      "replay_id": "s3_xiaomi-mimo-v2-6-flash_vs_qwen3.8-27b_3"
+     },
      {
       "date": "2026-11-13",
       "opponent": "nemotron-3-nano",
@@ -356,18 +380,6 @@
       "result": "won",
       "replay": "replays/season3/s3_gpt-oss-120b_vs_qwen3.8-27b_5.json",
       "replay_id": "s3_gpt-oss-120b_vs_qwen3.8-27b_5"
-     },
-     {
-      "date": "2026-11-12",
-      "opponent": "claude-haiku-5.5",
-      "side": "A",
-      "rounds": [
-       0,
-       3
-      ],
-      "result": "lost",
-      "replay": "replays/season3/s3_qwen3.8-27b_vs_claude-haiku-5-5_0.json",
-      "replay_id": "s3_qwen3.8-27b_vs_claude-haiku-5-5_0"
      }
     ]
    },
@@ -382,9 +394,9 @@
     "id": "claude-haiku-5-5",
     "country": "US",
     "quantization": "unknown",
-    "rating": 921,
-    "low": 720,
-    "high": 1178,
+    "rating": 930,
+    "low": 717,
+    "high": 1184,
     "one_sided": null,
     "matches": 8,
     "rounds": {
@@ -464,16 +476,16 @@
     "rank": 5,
     "rank_range": [
      3,
-     6
+     7
     ],
     "model": "gpt-oss-120b",
     "name": "gpt-oss 120B",
     "id": "openai/gpt-oss-120b",
     "country": "US",
     "quantization": "bf16",
-    "rating": 875,
-    "low": 687,
-    "high": 1016,
+    "rating": 869,
+    "low": 675,
+    "high": 1006,
     "one_sided": null,
     "matches": 13,
     "rounds": {
@@ -558,9 +570,9 @@
     "id": "nvidia-nemotron-3-ultra-550b-a55b",
     "country": "US",
     "quantization": "fp8",
-    "rating": 799,
-    "low": 555,
-    "high": 1001,
+    "rating": 810,
+    "low": 558,
+    "high": 995,
     "one_sided": null,
     "matches": 7,
     "rounds": {
@@ -648,9 +660,9 @@
     "id": "mistral-small-3-2-24b-instruct",
     "country": "FR",
     "quantization": "fp8",
-    "rating": 730,
-    "low": 516,
-    "high": 876,
+    "rating": 742,
+    "low": 531,
+    "high": 885,
     "one_sided": null,
     "matches": 9,
     "rounds": {
@@ -735,9 +747,9 @@
     "id": "nvidia-nemotron-3-nano-30b-a3b",
     "country": "US",
     "quantization": "fp8",
-    "rating": 673,
-    "low": 439,
-    "high": 828,
+    "rating": 684,
+    "low": 441,
+    "high": 835,
     "one_sided": null,
     "matches": 8,
     "rounds": {
