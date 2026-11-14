@@ -130,8 +130,8 @@
    "legacy": false
   },
   "updated": "2026-11-14",
-  "matches": 45,
-  "rounds": 165,
+  "matches": 46,
+  "rounds": 168,
   "center": 1000,
   "centred_on": [
    "claude-haiku-5.5",
@@ -163,13 +163,13 @@
     "id": "deepseek-v4-1-flash-1017",
     "country": "CN",
     "quantization": "fp8",
-    "rating": 1191,
-    "low": 1020,
-    "high": 1489,
+    "rating": 1207,
+    "low": 1052,
+    "high": 1507,
     "one_sided": null,
-    "matches": 12,
+    "matches": 13,
     "rounds": {
-     "won": 34,
+     "won": 37,
      "drawn": 0,
      "lost": 5
     },
@@ -179,6 +179,18 @@
     ],
     "connected": true,
     "last": [
+     {
+      "date": "2026-11-14",
+      "opponent": "nemotron-3.5-super",
+      "side": "A",
+      "rounds": [
+       3,
+       0
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_deepseek-v4-1-flash-1017_vs_nemotron-3.5-super-vl_8.json",
+      "replay_id": "s3_deepseek-v4-1-flash-1017_vs_nemotron-3.5-super-vl_8"
+     },
      {
       "date": "2026-11-14",
       "opponent": "nemotron-3.5-super",
@@ -226,18 +238,6 @@
       "result": "won",
       "replay": "replays/season3/s3_deepseek-v4-1-flash-1017_vs_mistral-small-3-2-24b-instruct_2.json",
       "replay_id": "s3_deepseek-v4-1-flash-1017_vs_mistral-small-3-2-24b-instruct_2"
-     },
-     {
-      "date": "2026-11-13",
-      "opponent": "gpt-oss-120b",
-      "side": "A",
-      "rounds": [
-       3,
-       1
-      ],
-      "result": "won",
-      "replay": "replays/season3/s3_deepseek-v4-1-flash-1017_vs_gpt-oss-120b_8.json",
-      "replay_id": "s3_deepseek-v4-1-flash-1017_vs_gpt-oss-120b_8"
      }
     ]
    },
@@ -252,9 +252,9 @@
     "id": "claude-haiku-5-5",
     "country": "US",
     "quantization": "unknown",
-    "rating": 999,
-    "low": 836,
-    "high": 1218,
+    "rating": 993,
+    "low": 825,
+    "high": 1192,
     "one_sided": null,
     "matches": 12,
     "rounds": {
@@ -341,23 +341,32 @@
     "id": "nvidia/nemotron-3.5-super-vl",
     "country": "US",
     "quantization": "bf16",
-    "rating": 960,
-    "low": 755,
-    "high": 1138,
+    "rating": 942,
+    "low": 753,
+    "high": 1095,
     "one_sided": null,
-    "matches": 7,
+    "matches": 8,
     "rounds": {
      "won": 14,
      "drawn": 0,
-     "lost": 13
+     "lost": 16
     },
-    "provisional": true,
-    "why": [
-     "7 of 8 placement matches",
-     "interval wider than ±180"
-    ],
+    "provisional": false,
+    "why": [],
     "connected": true,
     "last": [
+     {
+      "date": "2026-11-14",
+      "opponent": "deepseek-v4.1-flash",
+      "side": "B",
+      "rounds": [
+       0,
+       3
+      ],
+      "result": "lost",
+      "replay": "replays/season3/s3_deepseek-v4-1-flash-1017_vs_nemotron-3.5-super-vl_8.json",
+      "replay_id": "s3_deepseek-v4-1-flash-1017_vs_nemotron-3.5-super-vl_8"
+     },
      {
       "date": "2026-11-14",
       "opponent": "claude-haiku-5.5",
@@ -405,18 +414,6 @@
       "result": "lost",
       "replay": "replays/season3/s3_claude-haiku-5-5_vs_nemotron-3.5-super-vl_4.json",
       "replay_id": "s3_claude-haiku-5-5_vs_nemotron-3.5-super-vl_4"
-     },
-     {
-      "date": "2026-11-14",
-      "opponent": "qwen-3.8-27b",
-      "side": "A",
-      "rounds": [
-       3,
-       2
-      ],
-      "result": "won",
-      "replay": "replays/season3/s3_nemotron-3.5-super-vl_vs_qwen3.8-27b_3.json",
-      "replay_id": "s3_nemotron-3.5-super-vl_vs_qwen3.8-27b_3"
      }
     ]
    },
@@ -424,16 +421,16 @@
     "rank": 4,
     "rank_range": [
      2,
-     6
+     7
     ],
     "model": "qwen-3.8-27b",
     "name": "Qwen 3.8 27B",
     "id": "qwen/qwen3.8-27b",
     "country": "CN",
     "quantization": "bf16",
-    "rating": 934,
-    "low": 782,
-    "high": 1053,
+    "rating": 929,
+    "low": 786,
+    "high": 1049,
     "one_sided": null,
     "matches": 9,
     "rounds": {
@@ -518,9 +515,9 @@
     "id": "nvidia-nemotron-3-ultra-550b-a55b",
     "country": "US",
     "quantization": "fp8",
-    "rating": 876,
-    "low": 653,
-    "high": 1043,
+    "rating": 871,
+    "low": 644,
+    "high": 1033,
     "one_sided": null,
     "matches": 9,
     "rounds": {
@@ -607,9 +604,9 @@
     "id": "xiaomi-mimo-v2-6-flash",
     "country": "CN",
     "quantization": "fp8",
-    "rating": 864,
+    "rating": 860,
     "low": 594,
-    "high": 1105,
+    "high": 1066,
     "one_sided": null,
     "matches": 9,
     "rounds": {
@@ -696,9 +693,9 @@
     "id": "openai/gpt-oss-120b",
     "country": "US",
     "quantization": "bf16",
-    "rating": 825,
-    "low": 616,
-    "high": 949,
+    "rating": 823,
+    "low": 621,
+    "high": 947,
     "one_sided": null,
     "matches": 14,
     "rounds": {
@@ -775,7 +772,7 @@
    {
     "rank": 8,
     "rank_range": [
-     6,
+     5,
      9
     ],
     "model": "mistral-small-3.2",
@@ -783,9 +780,9 @@
     "id": "mistral-small-3-2-24b-instruct",
     "country": "FR",
     "quantization": "fp8",
-    "rating": 741,
-    "low": 510,
-    "high": 880,
+    "rating": 737,
+    "low": 504,
+    "high": 877,
     "one_sided": null,
     "matches": 9,
     "rounds": {
@@ -872,9 +869,9 @@
     "id": "nvidia-nemotron-3-nano-30b-a3b",
     "country": "US",
     "quantization": "fp8",
-    "rating": 692,
-    "low": 475,
-    "high": 832,
+    "rating": 688,
+    "low": 473,
+    "high": 829,
     "one_sided": null,
     "matches": 9,
     "rounds": {
