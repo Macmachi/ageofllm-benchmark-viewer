@@ -132,6 +132,19 @@
    "open": true,
    "native": "unknown",
    "output_limit": 16384
+  },
+  "qwen-3.8-flash": {
+   "name": "Qwen 3.8 Flash",
+   "id": "qwen-3-8-flash",
+   "country": "CN",
+   "quantization": "unknown",
+   "provider_name": "Venice AI",
+   "host_name": null,
+   "params_b": null,
+   "active_b": null,
+   "open": false,
+   "native": null,
+   "output_limit": 32000
   }
  },
  "leaderboard": {
@@ -143,8 +156,8 @@
    "legacy": false
   },
   "updated": "2026-11-15",
-  "matches": 54,
-  "rounds": 202,
+  "matches": 55,
+  "rounds": 205,
   "center": 1000,
   "centred_on": [
    "claude-haiku-5.5",
@@ -176,9 +189,9 @@
     "id": "deepseek-v4-1-flash-1017",
     "country": "CN",
     "quantization": "fp8",
-    "rating": 1165,
-    "low": 1036,
-    "high": 1351,
+    "rating": 1164,
+    "low": 1043,
+    "high": 1339,
     "one_sided": null,
     "matches": 15,
     "rounds": {
@@ -263,9 +276,9 @@
     "id": "google/gemma-4-31b-it",
     "country": "US",
     "quantization": "bf16",
-    "rating": 1019,
-    "low": 839,
-    "high": 1210,
+    "rating": 1018,
+    "low": 855,
+    "high": 1216,
     "one_sided": null,
     "matches": 8,
     "rounds": {
@@ -352,9 +365,9 @@
     "id": "claude-haiku-5-5",
     "country": "US",
     "quantization": "unknown",
-    "rating": 1014,
-    "low": 865,
-    "high": 1199,
+    "rating": 1012,
+    "low": 876,
+    "high": 1197,
     "one_sided": null,
     "matches": 13,
     "rounds": {
@@ -431,7 +444,7 @@
    {
     "rank": 4,
     "rank_range": [
-     1,
+     2,
      8
     ],
     "model": "nemotron-3.5-super",
@@ -439,9 +452,9 @@
     "id": "nvidia/nemotron-3.5-super-vl",
     "country": "US",
     "quantization": "bf16",
-    "rating": 982,
-    "low": 809,
-    "high": 1147,
+    "rating": 980,
+    "low": 823,
+    "high": 1144,
     "one_sided": null,
     "matches": 9,
     "rounds": {
@@ -526,13 +539,13 @@
     "id": "qwen/qwen3.8-27b",
     "country": "CN",
     "quantization": "bf16",
-    "rating": 951,
-    "low": 813,
-    "high": 1065,
+    "rating": 956,
+    "low": 816,
+    "high": 1062,
     "one_sided": null,
-    "matches": 11,
+    "matches": 12,
     "rounds": {
-     "won": 23,
+     "won": 26,
      "drawn": 0,
      "lost": 18
     },
@@ -540,6 +553,18 @@
     "why": [],
     "connected": true,
     "last": [
+     {
+      "date": "2026-11-15",
+      "opponent": "qwen-3.8-flash",
+      "side": "B",
+      "rounds": [
+       3,
+       0
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_qwen-3-8-flash_vs_qwen3.8-27b_1.json",
+      "replay_id": "s3_qwen-3-8-flash_vs_qwen3.8-27b_1"
+     },
      {
       "date": "2026-11-15",
       "opponent": "gemma-4-31b",
@@ -587,18 +612,6 @@
       "result": "won",
       "replay": "replays/season3/s3_xiaomi-mimo-v2-6-flash_vs_qwen3.8-27b_3.json",
       "replay_id": "s3_xiaomi-mimo-v2-6-flash_vs_qwen3.8-27b_3"
-     },
-     {
-      "date": "2026-11-13",
-      "opponent": "nemotron-3-nano",
-      "side": "B",
-      "rounds": [
-       3,
-       1
-      ],
-      "result": "won",
-      "replay": "replays/season3/s3_nvidia-nemotron-3-nano-30b-a3b_vs_qwen3.8-27b_5.json",
-      "replay_id": "s3_nvidia-nemotron-3-nano-30b-a3b_vs_qwen3.8-27b_5"
      }
     ]
    },
@@ -606,16 +619,16 @@
     "rank": 6,
     "rank_range": [
      2,
-     9
+     10
     ],
     "model": "mimo-v2.6-flash",
     "name": "MiMo V2.6 Flash",
     "id": "xiaomi-mimo-v2-6-flash",
     "country": "CN",
     "quantization": "fp8",
-    "rating": 902,
-    "low": 659,
-    "high": 1085,
+    "rating": 900,
+    "low": 688,
+    "high": 1087,
     "one_sided": null,
     "matches": 10,
     "rounds": {
@@ -695,16 +708,16 @@
     "rank": 7,
     "rank_range": [
      2,
-     9
+     10
     ],
     "model": "nemotron-3-ultra",
     "name": "Nemotron 3 Ultra",
     "id": "nvidia-nemotron-3-ultra-550b-a55b",
     "country": "US",
     "quantization": "fp8",
-    "rating": 870,
-    "low": 657,
-    "high": 1017,
+    "rating": 868,
+    "low": 671,
+    "high": 1013,
     "one_sided": null,
     "matches": 10,
     "rounds": {
@@ -789,9 +802,9 @@
     "id": "openai/gpt-oss-120b",
     "country": "US",
     "quantization": "bf16",
-    "rating": 831,
-    "low": 648,
-    "high": 953,
+    "rating": 829,
+    "low": 653,
+    "high": 948,
     "one_sided": null,
     "matches": 14,
     "rounds": {
@@ -869,16 +882,16 @@
     "rank": 9,
     "rank_range": [
      7,
-     10
+     11
     ],
     "model": "mistral-small-3.2",
     "name": "Mistral Small 3.2 24B",
     "id": "mistral-small-3-2-24b-instruct",
     "country": "FR",
     "quantization": "fp8",
-    "rating": 748,
-    "low": 540,
-    "high": 887,
+    "rating": 747,
+    "low": 548,
+    "high": 886,
     "one_sided": null,
     "matches": 9,
     "rounds": {
@@ -955,17 +968,17 @@
    {
     "rank": 10,
     "rank_range": [
-     8,
-     10
+     9,
+     11
     ],
     "model": "nemotron-3-nano",
     "name": "Nemotron 3 Nano 30B",
     "id": "nvidia-nemotron-3-nano-30b-a3b",
     "country": "US",
     "quantization": "fp8",
-    "rating": 701,
-    "low": 507,
-    "high": 840,
+    "rating": 699,
+    "low": 516,
+    "high": 839,
     "one_sided": null,
     "matches": 9,
     "rounds": {
@@ -1036,6 +1049,48 @@
       "result": "lost",
       "replay": "replays/season3/s3_nvidia-nemotron-3-nano-30b-a3b_vs_qwen3.8-27b_5.json",
       "replay_id": "s3_nvidia-nemotron-3-nano-30b-a3b_vs_qwen3.8-27b_5"
+     }
+    ]
+   },
+   {
+    "rank": 11,
+    "rank_range": [
+     5,
+     11
+    ],
+    "model": "qwen-3.8-flash",
+    "name": "Qwen 3.8 Flash",
+    "id": "qwen-3-8-flash",
+    "country": "CN",
+    "quantization": "unknown",
+    "rating": 599,
+    "low": null,
+    "high": 1124,
+    "one_sided": "upper",
+    "matches": 1,
+    "rounds": {
+     "won": 0,
+     "drawn": 0,
+     "lost": 3
+    },
+    "provisional": true,
+    "why": [
+     "1 of 8 placement matches",
+     "lost all its rounds"
+    ],
+    "connected": true,
+    "last": [
+     {
+      "date": "2026-11-15",
+      "opponent": "qwen-3.8-27b",
+      "side": "A",
+      "rounds": [
+       0,
+       3
+      ],
+      "result": "lost",
+      "replay": "replays/season3/s3_qwen-3-8-flash_vs_qwen3.8-27b_1.json",
+      "replay_id": "s3_qwen-3-8-flash_vs_qwen3.8-27b_1"
      }
     ]
    }
