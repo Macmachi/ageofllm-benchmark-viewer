@@ -169,8 +169,8 @@
    "legacy": false
   },
   "updated": "2026-11-15",
-  "matches": 65,
-  "rounds": 239,
+  "matches": 66,
+  "rounds": 244,
   "center": 1000,
   "centred_on": [
    "claude-haiku-5.5",
@@ -195,30 +195,42 @@
     "rank": 1,
     "rank_range": [
      1,
-     7
+     2
     ],
     "model": "gpt-6-luna",
     "name": "GPT-6 Luna",
     "id": "openai-gpt-6-luna",
     "country": "US",
     "quantization": "unknown",
-    "rating": 1374,
-    "low": 905,
-    "high": 1687,
+    "rating": 1279,
+    "low": 1063,
+    "high": 1552,
     "one_sided": null,
-    "matches": 3,
+    "matches": 4,
     "rounds": {
-     "won": 9,
-     "drawn": 0,
-     "lost": 1
+     "won": 11,
+     "drawn": 1,
+     "lost": 3
     },
     "provisional": true,
     "why": [
-     "3 of 8 placement matches",
+     "4 of 8 placement matches",
      "interval wider than ±180"
     ],
     "connected": true,
     "last": [
+     {
+      "date": "2026-11-15",
+      "opponent": "deepseek-v4.1-flash",
+      "side": "B",
+      "rounds": [
+       2,
+       2
+      ],
+      "result": "drawn",
+      "replay": "replays/season3/s3_deepseek-v4-1-flash-1017_vs_openai-gpt-6-luna_4.json",
+      "replay_id": "s3_deepseek-v4-1-flash-1017_vs_openai-gpt-6-luna_4"
+     },
      {
       "date": "2026-11-15",
       "opponent": "gemma-4-31b",
@@ -261,27 +273,39 @@
     "rank": 2,
     "rank_range": [
      1,
-     4
+     3
     ],
     "model": "deepseek-v4.1-flash",
     "name": "DeepSeek V4.1 Flash 1017",
     "id": "deepseek-v4-1-flash-1017",
     "country": "CN",
     "quantization": "fp8",
-    "rating": 1156,
-    "low": 1050,
-    "high": 1348,
+    "rating": 1162,
+    "low": 1053,
+    "high": 1337,
     "one_sided": null,
-    "matches": 16,
+    "matches": 17,
     "rounds": {
-     "won": 43,
-     "drawn": 0,
-     "lost": 13
+     "won": 45,
+     "drawn": 1,
+     "lost": 15
     },
     "provisional": false,
     "why": [],
     "connected": true,
     "last": [
+     {
+      "date": "2026-11-15",
+      "opponent": "gpt-6-luna",
+      "side": "A",
+      "rounds": [
+       2,
+       2
+      ],
+      "result": "drawn",
+      "replay": "replays/season3/s3_deepseek-v4-1-flash-1017_vs_openai-gpt-6-luna_4.json",
+      "replay_id": "s3_deepseek-v4-1-flash-1017_vs_openai-gpt-6-luna_4"
+     },
      {
       "date": "2026-11-15",
       "opponent": "gpt-6-luna",
@@ -329,18 +353,6 @@
       "result": "won",
       "replay": "replays/season3/s3_deepseek-v4-1-flash-1017_vs_nemotron-3.5-super-vl_8.json",
       "replay_id": "s3_deepseek-v4-1-flash-1017_vs_nemotron-3.5-super-vl_8"
-     },
-     {
-      "date": "2026-11-14",
-      "opponent": "nemotron-3.5-super",
-      "side": "A",
-      "rounds": [
-       3,
-       0
-      ],
-      "result": "won",
-      "replay": "replays/season3/s3_deepseek-v4-1-flash-1017_vs_nemotron-3.5-super-vl_6.json",
-      "replay_id": "s3_deepseek-v4-1-flash-1017_vs_nemotron-3.5-super-vl_6"
      }
     ]
    },
@@ -355,9 +367,9 @@
     "id": "google/gemma-4-31b-it",
     "country": "US",
     "quantization": "bf16",
-    "rating": 1017,
-    "low": 840,
-    "high": 1175,
+    "rating": 1013,
+    "low": 854,
+    "high": 1184,
     "one_sided": null,
     "matches": 10,
     "rounds": {
@@ -442,9 +454,9 @@
     "id": "claude-haiku-5-5",
     "country": "US",
     "quantization": "unknown",
-    "rating": 1003,
-    "low": 858,
-    "high": 1172,
+    "rating": 1001,
+    "low": 866,
+    "high": 1170,
     "one_sided": null,
     "matches": 13,
     "rounds": {
@@ -521,7 +533,7 @@
    {
     "rank": 5,
     "rank_range": [
-     2,
+     3,
      9
     ],
     "model": "nemotron-3.5-super",
@@ -529,9 +541,9 @@
     "id": "nvidia/nemotron-3.5-super-vl",
     "country": "US",
     "quantization": "bf16",
-    "rating": 988,
-    "low": 825,
-    "high": 1144,
+    "rating": 987,
+    "low": 826,
+    "high": 1147,
     "one_sided": null,
     "matches": 10,
     "rounds": {
@@ -616,9 +628,9 @@
     "id": "qwen/qwen3.8-27b",
     "country": "CN",
     "quantization": "bf16",
-    "rating": 963,
+    "rating": 961,
     "low": 832,
-    "high": 1092,
+    "high": 1078,
     "one_sided": null,
     "matches": 12,
     "rounds": {
@@ -703,9 +715,9 @@
     "id": "qwen-3-8-flash",
     "country": "CN",
     "quantization": "unknown",
-    "rating": 913,
-    "low": 723,
-    "high": 1137,
+    "rating": 908,
+    "low": 720,
+    "high": 1128,
     "one_sided": null,
     "matches": 9,
     "rounds": {
@@ -784,7 +796,7 @@
    {
     "rank": 8,
     "rank_range": [
-     4,
+     3,
      11
     ],
     "model": "nemotron-3-ultra",
@@ -792,9 +804,9 @@
     "id": "nvidia-nemotron-3-ultra-550b-a55b",
     "country": "US",
     "quantization": "fp8",
-    "rating": 878,
-    "low": 687,
-    "high": 1016,
+    "rating": 876,
+    "low": 679,
+    "high": 1019,
     "one_sided": null,
     "matches": 11,
     "rounds": {
@@ -879,9 +891,9 @@
     "id": "xiaomi-mimo-v2-6-flash",
     "country": "CN",
     "quantization": "fp8",
-    "rating": 869,
-    "low": 624,
-    "high": 1059,
+    "rating": 867,
+    "low": 622,
+    "high": 1052,
     "one_sided": null,
     "matches": 11,
     "rounds": {
@@ -968,9 +980,9 @@
     "id": "openai/gpt-oss-120b",
     "country": "US",
     "quantization": "bf16",
-    "rating": 798,
-    "low": 608,
-    "high": 927,
+    "rating": 797,
+    "low": 614,
+    "high": 926,
     "one_sided": null,
     "matches": 15,
     "rounds": {
@@ -1055,9 +1067,9 @@
     "id": "mistral-small-3-2-24b-instruct",
     "country": "FR",
     "quantization": "fp8",
-    "rating": 717,
-    "low": 485,
-    "high": 854,
+    "rating": 715,
+    "low": 493,
+    "high": 853,
     "one_sided": null,
     "matches": 10,
     "rounds": {
@@ -1065,10 +1077,8 @@
      "drawn": 7,
      "lost": 24
     },
-    "provisional": true,
-    "why": [
-     "interval wider than ±180"
-    ],
+    "provisional": false,
+    "why": [],
     "connected": true,
     "last": [
      {
@@ -1144,9 +1154,9 @@
     "id": "nvidia-nemotron-3-nano-30b-a3b",
     "country": "US",
     "quantization": "fp8",
-    "rating": 671,
-    "low": 456,
-    "high": 809,
+    "rating": 669,
+    "low": 473,
+    "high": 807,
     "one_sided": null,
     "matches": 10,
     "rounds": {
