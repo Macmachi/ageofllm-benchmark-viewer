@@ -45,6 +45,13 @@ report of what happened and may redesign, reprogram, or both. The first to win
 - **Fixed for the season:** the rules (engine `rd-0.5.0`), and for each model
   the provider that serves it and the precision it is served at, the same for
   all its matches and published on the season's page.
+- **A model's failures, and the provider's:** a reply the game cannot use (cut
+  off at the reply limit, unreadable, a design the rules refuse, a program
+  that does not load) is asked again a few times; if nothing usable comes, the
+  model plays the round with its previous robot and program, and each replay
+  shows it round by round. The provider's failures (a timeout, an overloaded
+  host, a reply it cuts short) are asked again and never cost the model an
+  attempt.
 - **Funding:** API credits and compute only, never payment; every
   contribution is listed, with what it paid for, on
   [the season's funding page](https://ageofllm.org/season3/funding/).
