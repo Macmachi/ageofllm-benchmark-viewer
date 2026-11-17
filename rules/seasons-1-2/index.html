@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<!-- Age of LLM · Copyright (C) 2026 Rymentz · AGPL-3.0-or-later · https://ageofllm.org -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-src 'none'" />
+  <title>Rules history · Seasons 1 and 2 · Age of LLM™ Benchmark</title>
+  <meta name="description" content="How the rules, the scoring and the system prompt of Age of LLM Seasons 1 and 2 changed, game engine version by version, from 0.9.2 to 0.18.0." />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Age of LLM" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Age of LLM · Rules history, Seasons 1 and 2" />
+  <meta property="og:description" content="The rules, the scoring and the system prompt of Seasons 1 and 2, version by version, with the known differences between the prompt and the engine." />
+  <meta property="og:url" content="https://ageofllm.org/rules/seasons-1-2/" />
+  <meta property="og:image" content="https://ageofllm.org/assets/images/og-ageofllm.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="627" />
+  <meta property="og:image:alt" content="Age of LLM Benchmark: two armies, blue and red, face each other across a mountain ridge" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Age of LLM · Rules history, Seasons 1 and 2" />
+  <meta name="twitter:description" content="The rules, the scoring and the system prompt of Seasons 1 and 2, version by version." />
+  <meta name="twitter:image" content="https://ageofllm.org/assets/images/og-ageofllm.jpg" />
+  <meta name="twitter:image:alt" content="Age of LLM Benchmark: two armies, blue and red, face each other across a mountain ridge" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght%40400;500;600;700;800&amp;family=JetBrains+Mono:wght%40400;500;700&amp;display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../../assets/images/favicon/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="../../assets/images/favicon/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="../../assets/images/favicon/favicon-16x16.png" />
+  <link rel="manifest" href="../../assets/images/favicon/site.webmanifest" />
+  <link rel="icon" href="../../assets/images/favicon/favicon.ico" />
+  <link rel="canonical" href="https://ageofllm.org/rules/seasons-1-2/" />
+  <style>
+:root {
+  color-scheme: dark;
+}
+.season-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 0 0 22px;
+}
+.season-chip {
+  display: flex;
+  flex-direction: column;
+  padding: 5px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-dim);
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+}
+.season-chip[hidden],
+[data-season3][hidden] {
+  display: none;
+}
+.season-chip small {
+  color: var(--text-faint);
+  font-size: 11px;
+  font-weight: 500;
+}
+a.season-chip:hover,
+a.season-chip:focus-visible {
+  color: var(--text);
+  border-color: var(--text-dim);
+}
+.doc {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 4px 48px;
+}
+.doc h2 {
+  font-size: 15px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 700;
+  margin: 42px 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-soft);
+  scroll-margin-top: 16px;
+}
+.doc h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 26px 0 10px;
+  scroll-margin-top: 16px;
+}
+.doc p {
+  line-height: 1.65;
+  margin: 0 0 14px;
+  color: var(--text);
+  font-size: 15px;
+}
+.doc p.lede {
+  font-size: 16.5px;
+}
+.doc .muted {
+  color: var(--text-dim);
+  font-size: 14px;
+}
+.doc a.inline {
+  color: var(--p0);
+  border-bottom: 1px solid rgba(77, 166, 255, .35);
+}
+.doc a.inline:hover {
+  border-bottom-color: var(--p0);
+}
+.doc ul.plain {
+  margin: 0 0 14px 20px;
+}
+.doc ul.plain li {
+  line-height: 1.6;
+  margin-bottom: 7px;
+  font-size: 15px;
+  color: var(--text);
+}
+.doc code {
+  font-family: var(--mono);
+  font-size: .88em;
+  color: var(--text);
+  background: var(--bg-2);
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  padding: 0 4px;
+  overflow-wrap: anywhere;
+}
+.doc-title {
+  font-size: clamp(22px, 5vw, 26px);
+  font-weight: 800;
+  letter-spacing: -.01em;
+  margin: 0 0 10px;
+}
+.updated {
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-faint);
+  margin: 0 0 18px;
+}
+.toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+  margin: 6px 0 4px;
+  padding: 0;
+  list-style: none;
+}
+.toc a {
+  display: inline-block;
+  padding: 4px 10px;
+  border: 1px solid var(--border-soft);
+  border-radius: 6px;
+  font-size: 13px;
+  color: var(--text-dim);
+  background: var(--panel-solid);
+}
+.toc a:hover,
+.toc a:focus-visible {
+  color: var(--text);
+  border-color: var(--border);
+}
+.table-scroll {
+  overflow-x: auto;
+  margin: 4px 0 16px;
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+}
+.doc table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.doc table.wide {
+  min-width: 680px;
+}
+.doc table th {
+  text-align: left;
+  padding: 9px 12px;
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 700;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-2);
+}
+.doc table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--text);
+  vertical-align: top;
+  line-height: 1.5;
+}
+.doc table td.num,
+.doc table th.num {
+  text-align: right;
+  white-space: nowrap;
+}
+.doc table td.num {
+  font-family: var(--mono);
+}
+.doc table td.ver {
+  font-family: var(--mono);
+  white-space: nowrap;
+  font-weight: 700;
+}
+.doc table td.ver a {
+  color: var(--p0);
+}
+.doc table td.nowrap {
+  white-space: nowrap;
+}
+.doc table td.none {
+  color: var(--text-faint);
+}
+.doc table tr:last-child td {
+  border-bottom: none;
+}
+.ver-card {
+  background: var(--panel-solid);
+  border: 1px solid var(--border-soft);
+  border-left: 3px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px 6px;
+  margin: 0 0 12px;
+  scroll-margin-top: 16px;
+}
+.ver-card.s1 {
+  border-left-color: var(--gold);
+}
+.ver-card.s2 {
+  border-left-color: var(--p0);
+}
+.ver-card.mirror {
+  border-left-color: var(--text-faint);
+}
+.ver-card.unplayed {
+  border-left-style: dashed;
+}
+.ver-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 12px;
+  margin-bottom: 10px;
+}
+.ver-num {
+  font-family: var(--mono);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+}
+.ver-month {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+.ver-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-dim);
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  padding: 1px 7px;
+}
+.ver-tag.basis {
+  border-style: dashed;
+  color: var(--text-faint);
+}
+.ver-card ul {
+  margin: 0 0 8px 18px;
+}
+.ver-card li {
+  line-height: 1.6;
+  margin-bottom: 7px;
+  font-size: 14.5px;
+  color: var(--text);
+}
+.ver-card li strong {
+  color: var(--text);
+}
+.pq {
+  margin: 0 0 14px;
+  padding: 12px 16px;
+  background: var(--bg-2);
+  border: 1px solid var(--border-soft);
+  border-left: 3px solid var(--amber);
+  border-radius: var(--radius);
+}
+.pq p {
+  font-family: var(--mono);
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text);
+  margin: 0 0 6px;
+  overflow-wrap: break-word;
+}
+.pq .pq-src {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  color: var(--text-dim);
+  margin: 6px 0 0;
+}
+.pq.after {
+  border-left-color: var(--uranium);
+}
+.diff {
+  background: var(--panel-solid);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin: 0 0 12px;
+}
+.diff h3 {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+.diff dl {
+  display: grid;
+  grid-template-columns: minmax(64px, max-content) 1fr;
+  gap: 6px 14px;
+  margin: 0;
+}
+.diff dt {
+  font-size: 11px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  font-weight: 700;
+  padding-top: 3px;
+}
+.diff dd {
+  margin: 0;
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--text);
+}
+.note {
+  background: var(--bg-2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin: 0 0 16px;
+  color: var(--text-dim);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.note strong {
+  color: var(--text);
+}
+.cite {
+  font-family: var(--mono);
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--bg-2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  margin: 0 0 14px;
+  overflow-wrap: anywhere;
+}
+  </style>
+</head>
+<body>
+  <div class="lb-root">
+
+    <nav class="season-nav" aria-label="Seasons">
+      <a class="season-chip" href="../../season3/" data-season3>Season 3 · Robot Duel</a>
+      <a class="season-chip" href="../../throne/">Season 2 · The Throne<small>September to October 2026</small></a>
+      <a class="season-chip" href="../../ladder/">Season 2 · The Ladder<small>August 2026</small></a>
+      <a class="season-chip" href="../../v1.html">Season 1 · The Leaderboard<small>May to June 2026</small></a>
+    </nav>
+
+    <div class="lb-header">
+      <a href="../../"><img src="../../assets/images/Logo_AOL.png" alt="Age of LLM" class="header-logo" /></a>
+      <h1>Age of LLM™ <span class="lb-tag">· Rules history</span></h1>
+      <span class="lb-ver">Seasons 1 and 2</span>
+      <span class="lb-eng" title="Game-engine (rules) versions covered by this page. Not the site version.">game engine 0.9.2 to 0.18.0</span>
+    </div>
+
+    <div class="doc">
+
+      <h1 class="doc-title">Rules history: Seasons 1 and 2</h1>
+      <p class="updated">Last updated November 2026</p>
+
+      <div class="v1-notice">
+        <span class="v1-tag">FROZEN</span>
+        <span>
+          <strong>Both seasons are over and their rules are frozen.</strong>
+          No further match will be played under them. Known defects are documented
+          on this page rather than fixed, so that every published match can be
+          replayed exactly as it was played.
+        </span>
+      </div>
+
+      <p class="lede">
+        Seasons 1 and 2 of Age of LLM were played on the same game: a turn-based
+        strategy duel in which two language models face each other on a small map,
+        with no strategic advice. Between May and October 2026 its rules, its scoring
+        and the system prompt given to the models changed several times. This page
+        records those changes, version by version, so that each match can be read
+        against the rules it was played under.
+      </p>
+      <p class="muted">
+        Season 3 (Robot Duel) is a different game, with its own rules and version
+        numbers, and is not covered here.
+      </p>
+
+      <ul class="toc" aria-label="On this page">
+        <li><a href="#sources">Versions and sources</a></li>
+        <li><a href="#glance">Seasons at a glance</a></li>
+        <li><a href="#versions">Version by version</a></li>
+        <li><a href="#scoring">Scoring and ranking</a></li>
+        <li><a href="#alert">The nuclear launch alert</a></li>
+        <li><a href="#differences">Prompt and engine differences</a></li>
+        <li><a href="#advice">Advice removed from the prompt</a></li>
+        <li><a href="#cite">How to cite</a></li>
+      </ul>
+
+      <h2 id="sources">Versions and sources</h2>
+      <p>
+        <strong>The game engine version.</strong> Every match replay records the game
+        engine version it was played on. That number changes only when something that
+        could make a match go differently changes: the rules, the system prompt, what
+        each player is shown about the game, or how its actions are checked. Changes
+        to the website and to the tools that run matches carry a separate site
+        version, which never appears in a replay. Until August 2026 a single number
+        covered both, which is why two engine numbers (0.16.1 and 0.16.2) were raised
+        without any change to the rules.
+      </p>
+      <p>
+        <strong>The system prompt</strong> is the fixed text sent to every model with
+        each request. It states the rules, the scoring and the reply format. With it,
+        each turn, the model receives <strong>the state</strong>: a description of the
+        game as that player can see it.
+      </p>
+      <p>
+        <strong>Sources.</strong> This page is compiled from the release notes written
+        when each version was published. The engine's preserved source history begins
+        with version 0.15.0: from that version on, every statement below was also
+        checked against the engine code and the prompt text, and quotations of the
+        prompt are exact. For versions 0.9.2 to 0.14.0 only the release notes are
+        available, and their statements could not be re-checked against the code. One
+        test copy of the 0.14.0 engine has also been preserved. It was prepared for
+        scenario tests and differs in places from the version used in matches (for
+        example, it has no free-text message channel), so it is cited only for
+        sentences it shares with 0.15.0.
+      </p>
+      <p class="muted">
+        Match counts below are taken from the version recorded in each published
+        replay. Quotations keep the prompt's capital letters; [...] marks a passage
+        left out.
+      </p>
+
+      <h2 id="glance">Seasons at a glance</h2>
+      <div class="table-scroll">
+        <table class="wide">
+          <thead>
+            <tr><th>Season or campaign</th><th>When</th><th>Game engine</th><th class="num">Matches</th><th>Format</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Season 1</strong>, The Leaderboard</td>
+              <td class="nowrap">May to June 2026</td>
+              <td>0.9.2 to 0.15.0 (seven versions)</td>
+              <td class="num">54</td>
+              <td>Every model ranked in a single points table.</td>
+            </tr>
+            <tr>
+              <td><strong>Mirror campaign</strong> (a measurement, not a season)</td>
+              <td class="nowrap">August 2026</td>
+              <td>0.16.1</td>
+              <td class="num">57</td>
+              <td>One model (Nemotron 3.5 Lightning) against itself, to check whether either side of the map is favoured. Not ranked.</td>
+            </tr>
+            <tr>
+              <td><strong>Season 2</strong>, The Ladder</td>
+              <td class="nowrap">August 2026</td>
+              <td>0.17.0 (opening), 0.18.0 (challenges)</td>
+              <td class="num">12 + 18</td>
+              <td>An opening round-robin of four models, then challengers climbing a four-place ladder.</td>
+            </tr>
+            <tr>
+              <td><strong>Season 2</strong>, The Throne</td>
+              <td class="nowrap">September to October 2026</td>
+              <td>0.18.0</td>
+              <td class="num">14</td>
+              <td>Each challenger plays the reigning champion over two matches.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2 id="versions">Version by version</h2>
+      <p>
+        One row per game engine version from the first Season 1 match to the end of
+        Season 2, including the versions on which no match was played. Each version
+        has its own section below the table.
+      </p>
+      <div class="table-scroll">
+        <table class="wide">
+          <thead>
+            <tr><th>Version</th><th>Month</th><th>Played in</th><th class="num">Matches</th><th>Main change to the rules, scoring or prompt</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="ver"><a href="#v0-9-2">0.9.2</a></td><td class="nowrap">May 2026</td><td>Season 1</td><td class="num">6</td><td>First version used for ranked matches.</td></tr>
+            <tr><td class="ver"><a href="#v0-9-3">0.9.3</a></td><td class="nowrap">May 2026</td><td>Season 1</td><td class="num">8</td><td>No release note describes the change from 0.9.2.</td></tr>
+            <tr><td class="ver"><a href="#v0-9-4">0.9.4</a></td><td class="nowrap">May or June 2026</td><td class="none">no match</td><td class="num">0</td><td>Accepting an ultimatum scores 0.5 instead of 0.</td></tr>
+            <tr><td class="ver"><a href="#v0-10-0">0.10.0</a></td><td class="nowrap">June 2026</td><td>Season 1</td><td class="num">4</td><td>Map rework: line of sight, mines on either half, varying terrain, finite deposits.</td></tr>
+            <tr><td class="ver"><a href="#v0-11-0">0.11.0</a></td><td class="nowrap">June 2026</td><td>Season 1</td><td class="num">17</td><td>Base hit points lowered from 8 to 4.</td></tr>
+            <tr><td class="ver"><a href="#v0-12-0">0.12.0</a></td><td class="nowrap">June 2026</td><td>Season 1</td><td class="num">8</td><td>Balance: SAM movement, central mine cost, uranium reserves, map fairness.</td></tr>
+            <tr><td class="ver"><a href="#v0-13-0">0.13.0</a></td><td class="nowrap">June 2026</td><td class="none">no match</td><td class="num">0</td><td>Prompt explains the order in which a player's actions are applied.</td></tr>
+            <tr><td class="ver"><a href="#v0-14-0">0.14.0</a></td><td class="nowrap">June 2026</td><td>Season 1</td><td class="num">9</td><td>Deposits on the opponent's half are remembered once seen.</td></tr>
+            <tr><td class="ver"><a href="#v0-15-0">0.15.0</a></td><td class="nowrap">June 2026</td><td>Season 1</td><td class="num">2</td><td>Nuclear launch alert added to the state; prompt unchanged.</td></tr>
+            <tr><td class="ver"><a href="#v0-16-0">0.16.0</a></td><td class="nowrap">June 2026</td><td class="none">no match</td><td class="num">0</td><td>Two tactical sentences removed from the prompt.</td></tr>
+            <tr><td class="ver"><a href="#v0-16-1">0.16.1</a></td><td class="nowrap">August 2026</td><td>Mirror campaign</td><td class="num">57</td><td>No change: same rules and prompt as 0.16.0.</td></tr>
+            <tr><td class="ver"><a href="#v0-16-1">0.16.2</a></td><td class="nowrap">August 2026</td><td class="none">no match</td><td class="num">0</td><td>No change: same rules and prompt as 0.16.0.</td></tr>
+            <tr><td class="ver"><a href="#v0-17-0">0.17.0</a></td><td class="nowrap">August 2026</td><td>Season 2, opening of The Ladder</td><td class="num">12</td><td>New units wait one turn; fog-of-war leak closed; seven phrases of advice removed.</td></tr>
+            <tr><td class="ver"><a href="#v0-18-0">0.18.0</a></td><td class="nowrap">August 2026</td><td>Season 2, Ladder challenges and The Throne</td><td class="num">32</td><td>Prompt describes the launch alert instead of ruling out any reaction; ceasefire and bomb-cost wording corrected.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="muted">
+        The mirror campaign's replays are not part of either season's published
+        replays; its summary is published with the Season 1 archive data.
+      </p>
+
+      <article class="ver-card s1" id="v0-9-2">
+        <div class="ver-head">
+          <span class="ver-num">0.9.2</span><span class="ver-month">May 2026</span>
+          <span class="ver-tag">Season 1 · 6 matches</span><span class="ver-tag basis">release notes</span>
+        </div>
+        <ul>
+          <li>The first version on which ranked matches were played. No release note
+            describes it as a change; its rules are known through what later versions
+            changed. Before 0.10.0, for example, the map layout was fixed, attacks were
+            not blocked by obstacles and mines could only be built in a player's own
+            territory; before 0.11.0, a base had 8 hit points.</li>
+        </ul>
+      </article>
+
+      <article class="ver-card s1" id="v0-9-3">
+        <div class="ver-head">
+          <span class="ver-num">0.9.3</span><span class="ver-month">May 2026</span>
+          <span class="ver-tag">Season 1 · 8 matches</span><span class="ver-tag basis">release notes</span>
+        </div>
+        <ul>
+          <li>No release note describes what changed from 0.9.2.</li>
+        </ul>
+      </article>
+
+      <article class="ver-card unplayed" id="v0-9-4">
+        <div class="ver-head">
+          <span class="ver-num">0.9.4</span><span class="ver-month">May or June 2026</span>
+          <span class="ver-tag">no match</span><span class="ver-tag basis">release notes</span>
+        </div>
+        <ul>
+          <li><strong>Scoring:</strong> a player who accepts an ultimatum loses the match
+            but now scores 0.5 points instead of 0 (an ordinary defeat scores 0). The
+            prompt, the scoring and the replay viewer's legend were updated together.</li>
+          <li><strong>Fog-of-war memory:</strong> a destroyed enemy building is removed
+            from each player's list of remembered buildings, so the state no longer
+            shows it as still standing.</li>
+          <li>No match was played on this version; the next Season 1 matches were played
+            on 0.10.0.</li>
+        </ul>
+      </article>
+
+      <article class="ver-card s1" id="v0-10-0">
+        <div class="ver-head">
+          <span class="ver-num">0.10.0</span><span class="ver-month">June 2026</span>
+          <span class="ver-tag">Season 1 · 4 matches</span><span class="ver-tag basis">release notes</span>
+        </div>
+        <ul>
+          <li><strong>Line of sight:</strong> a ground attack (tank or SAM) fails if a
+            mountain or a building lies on the straight line between the attacker and
+            its target. Air attacks (fighter) are not blocked. The target's own cell
+            never blocks.</li>
+          <li><strong>Mines on either half:</strong> a mine can be built on any matching
+            deposit that is free and in view, including on the opponent's half. An intact
+            enemy mine cannot be captured: it must first be destroyed, or its deposit run
+            out. The silo can still only be built in a player's own territory.</li>
+          <li><strong>Terrain varies by match:</strong> the central mountain barrier, its
+            passages and the central uranium deposit are generated from each match's
+            seed, and a few extra mountains are placed inside each territory, mirrored
+            between the two sides.</li>
+          <li><strong>Mine costs:</strong> credit and uranium mines from 1 to 2 credits;
+            the central mine from 2 to 3 credits.</li>
+          <li><strong>Finite deposits:</strong> a credits deposit holds 18 units and a
+            uranium deposit 16. An exhausted deposit disappears with its mine, and a new
+            deposit of the same kind appears elsewhere on the same side.</li>
+          <li><strong>Prompt and state:</strong> the prompt no longer gives a fixed map
+            layout and describes line of sight, the new costs and depletion. The state
+            now includes the reserve left in each visible deposit.</li>
+        </ul>
+      </article>
+
+      <article class="ver-card s1" id="v0-11-0">
+        <div class="ver-head">
+          <span class="ver-num">0.11.0</span><span class="ver-month">June 2026</span>
+          <span class="ver-tag">Season 1 · 17 matches</span><span class="ver-tag basis">release notes</span>
+        </div>
+        <ul>
+          <li><strong>Base hit points from 8 to 4.</strong> A tank hit removes 2 hit
+            points, so a base now falls to two hits instead of four. Unit hit points do
+            not exist in this game: any successful attack destroys a unit.</li>
+          <li><strong>Prompt:</strong> the line-of-sight rule is spelled out, with the
+            exact message the engine returns ("Line of sight blocked by a mountain or
+            building"), and states that a target in range is not enough if the line to
+            it is blocked.</li>
+          <li>Other changes in this release concern how matches are run (a longer time
+            limit per request, automatic saving and resuming). They do not change the
+            rules.</li>
+        </ul>
+      </article>
+
+      <article class="ver-card s1" id="v0-12-0">
+        <div class="ver-head">
+          <span class="ver-num">0.12.0</span><span class="ver-month">June 2026</span>
+          <span class="ver-tag">Season 1 · 8 matches</span><span class="ver-tag basis">release notes</span>
+        </div>
+        <ul>
+          <li><strong>SAM movement</strong> from 1 to 2 cells per turn, the same as a
+            tank.</li>
+          <li><strong>Central mine cost</strong> from 3 to 4 credits.</li>
+          <li><strong>Uranium deposit reserve</strong> from 16 to 12 units.</li>
+          <li><strong>Map fairness:</strong> extra mountains are no longer placed in the
+            column next to the central barrier on either side, so a passage through the
+            barrier cannot be blocked on one side only.</li>
+        </ul>
+      </article>
+
+      <article class="ver-card unplayed" id="v0-13-0">
+        <div class="ver-head">
+          <span class="ver-num">0.13.0</span><span class="ver-month">June 2026</span>
+          <span class="ver-tag">no match</span><span class="ver-tag basis">release notes</span>
+        </div>
+        <ul>
+          <li><strong>Prompt:</strong> explains that a player's actions are applied one by
+            one, in the order listed, each on the board left by the previous one. For
+            example, moving a unit away can remove the view that a later build in the
+            same reply needed.</li>
+          <li>A scripted reference opponent was added to the software. It played no
+            Season 1 or Season 2 match.</li>
+        </ul>
+      </article>
+
+      <article class="ver-card s1" id="v0-14-0">
+        <div class="ver-head">
+          <span class="ver-num">0.14.0</span><span class="ver-month">June 2026</span>
+          <span class="ver-tag">Season 1 · 9 matches</span><span class="ver-tag basis">release notes</span>
+        </div>
+        <ul>
+          <li><strong>Deposits on the opponent's half:</strong> once seen, such a deposit
+            is remembered and listed in the state (kind, position, reserve, turn last
+            seen). Before, these deposits were never shown, even when in view. Building a
+            mine on one still requires the cell to be in view at that moment, and an
+            exhausted deposit is dropped from memory.</li>
+        </ul>
+      </article>
+
+      <article class="ver-card s1" id="v0-15-0">
+        <div class="ver-head">
+          <span class="ver-num">0.15.0</span><span class="ver-month">June 2026</span>
+          <span class="ver-tag">Season 1 · 2 matches</span><span class="ver-tag basis">release notes, checked against source</span>
+        </div>
+        <ul>
+          <li><strong>Nuclear launch alert:</strong> a new field in the state,
+            <code>enemy_launch_detected</code>. See
+            <a class="inline" href="#alert">The nuclear launch alert</a>.</li>
+          <li><strong>Prompt unchanged.</strong> It still said that a launch could not be
+            seen or answered by the opponent.</li>
+          <li>The earliest version whose engine code and prompt text are preserved.</li>
+        </ul>
+      </article>
+
+      <article class="ver-card unplayed" id="v0-16-0">
+        <div class="ver-head">
+          <span class="ver-num">0.16.0</span><span class="ver-month">June 2026</span>
+          <span class="ver-tag">no match</span><span class="ver-tag basis">release notes, checked against source</span>
+        </div>
+        <ul>
+          <li><strong>Prompt:</strong> two tactical sentences removed: "Push tanks + a
+            scout into enemy ground to contest their economy." and "Scout with a drone
+            early." The release notes describe them as the last two residual hints in the
+            prompt. According to the same notes, every Season 1 match was played with both
+            sentences present (confirmed in the source for 0.15.0).</li>
+          <li>Nothing else changed.</li>
+        </ul>
+      </article>
+
+      <article class="ver-card mirror" id="v0-16-1">
+        <div class="ver-head">
+          <span class="ver-num">0.16.1 and 0.16.2</span><span class="ver-month">August 2026</span>
+          <span class="ver-tag">Mirror campaign · 57 matches on 0.16.1</span><span class="ver-tag basis">checked against source</span>
+        </div>
+        <ul>
+          <li><strong>No change to the rules or the prompt.</strong> Both numbers were
+            raised by tool releases at a time when one number covered both the site and
+            the engine; the engine code is identical to 0.16.0 apart from the version
+            string. Later in August 2026 the engine version was set back to 0.16.0, then
+            moved to 0.17.0.</li>
+          <li><strong>The mirror campaign</strong> was played on 0.16.1: one model against
+            itself, to measure whether either side of the map was favoured. It is a
+            measurement campaign, outside both seasons and every ranking. It therefore
+            used the 0.16.0 prompt, including the sentence that ruled out any reaction to
+            a launch.</li>
+        </ul>
+      </article>
+
+      <article class="ver-card s2" id="v0-17-0">
+        <div class="ver-head">
+          <span class="ver-num">0.17.0</span><span class="ver-month">August 2026</span>
+          <span class="ver-tag">Season 2, opening · 12 matches</span><span class="ver-tag basis">release notes, checked against source</span>
+        </div>
+        <ul>
+          <li><strong>New units wait one turn:</strong> a unit produced in a turn cannot
+            move or attack until its owner's next turn, the same one-turn delay that
+            already applied to buildings. The engine chooses its cell and its identifier,
+            and both appear in the next state. This replaced the earlier statement that a
+            new unit could act at once (see <a class="inline" href="#d-unit">Using a unit
+            the turn it is produced</a>).</li>
+          <li><strong>Fog of war in build checks:</strong> a build aimed at a cell out of
+            view is now refused for that reason first, so the refusal no longer reveals
+            whether a building stands there (see <a class="inline" href="#d-fog">Building
+            into the fog</a>).</li>
+          <li><strong>Prompt:</strong> seven phrases of advice removed, together with the
+            mentions of which failures "count as illegal" (listed under
+            <a class="inline" href="#advice">Advice removed from the prompt</a>).</li>
+          <li><strong>Statistics only:</strong> a refusal caused by something the player
+            could not see, such as moving onto a hidden enemy unit, is recorded as such
+            and counted apart from illegal actions. This does not change the game.</li>
+          <li>A paused match can no longer be resumed under a different engine
+            version.</li>
+          <li>Used only for the 12 opening matches of Season 2; every later match was
+            played on 0.18.0.</li>
+        </ul>
+      </article>
+
+      <article class="ver-card s2" id="v0-18-0">
+        <div class="ver-head">
+          <span class="ver-num">0.18.0</span><span class="ver-month">August 2026, in use until October 2026</span>
+          <span class="ver-tag">Season 2, challenges · 32 matches</span><span class="ver-tag basis">release notes, checked against source</span>
+        </div>
+        <ul>
+          <li><strong>Prompt:</strong> the sentences ruling out any reaction to a launch
+            are removed, and the launch alert is described. See
+            <a class="inline" href="#alert">The nuclear launch alert</a>.</li>
+          <li><strong>Prompt:</strong> the length of a ceasefire is spelled out (a
+            ceasefire accepted on turn T is in force on turns T to T+3). The engine was
+            not changed.</li>
+          <li><strong>Prompt:</strong> the bomb-cost schedule is listed in full (23 uranium
+            from turn 40, then 21, 19, 17, and 15 from turn 80), with the statement that
+            the 13-unit floor is not reached in an 80-turn match. The engine was not
+            changed.</li>
+          <li><strong>Replays</strong> now record, for each player and turn, the alert
+            value the player was given before deciding, and the turn until which a
+            ceasefire is in force. The replay viewer shows both.</li>
+          <li>Game behaviour is unchanged: only the prompt text and the contents of the
+            replays changed. All three prompt corrections were in place before the first
+            match on this version.</li>
+          <li>Played: the 18 challenge matches of The Ladder (August 2026) and the 14
+            matches of The Throne (September to October 2026).</li>
+          <li>One challenger of The Throne, Jev 1.13 (two matches, September 2026), is
+            not a chat model. It played through a separate interface of typed choices,
+            with the same engine version, the same rules text and the same state, but
+            without free-text messages.</li>
+        </ul>
+      </article>
+
+      <h2 id="scoring">Scoring and ranking</h2>
+      <h3>Points per match</h3>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr><th>Outcome</th><th class="num">Points</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Win: by nuclear bomb, by destroying the enemy base with tanks, or when the opponent accepts your ultimatum</td><td class="num">3</td></tr>
+            <tr><td>Draw: peace accepted, or the turn limit (80 turns) reached</td><td class="num">1 each</td></tr>
+            <tr><td>Loss</td><td class="num">0</td></tr>
+            <tr><td>Loss by accepting an ultimatum (from 0.9.4; 0 before)</td><td class="num">0.5</td></tr>
+            <tr><td>Mutual destruction: both bases destroyed, both players lose</td><td class="num">0 each</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="plain">
+        <li><strong>Mutual destruction</strong> is scored 0 for both players in the
+          prompt (in every preserved version) and in the Season 1 table. In Season 2,
+          the program that scored the ladder's matches counted it as a draw, 1 point
+          each, until site version 0.17.5 (August 2026), when it was corrected to 0. The
+          release notes state that one two-match tie had been scored under the old rule
+          and that its outcome did not change.</li>
+        <li><strong>Season 1 ranking:</strong> models were ranked by average points per
+          match, then win rate, then head-to-head results between the tied models, then
+          fewer turns to win, then number of matches, then total points. Models with
+          fewer than 3 matches were listed after the others as provisional.</li>
+        <li><strong>Season 2, opening:</strong> four models played each other twice, once
+          from each side (12 matches). The table was ranked on points, then wins, then
+          head-to-head results between the tied models, then the average number of turns
+          taken to win (fewer first), then the average number of turns taken to lose
+          (more first). Its top four took the four places of the ladder.</li>
+        <li><strong>Season 2, challenges:</strong> every challenge is a tie of two
+          matches with the sides swapped. The tie is decided on points. If the points
+          are level and each model won one match, the model that won its own match in
+          fewer turns takes the tie (decided on speed). If neither model won a match, or
+          both won in the same number of turns, the model already in place keeps it.
+          This rule applied from the first challenge.</li>
+        <li><strong>The Ladder (August 2026):</strong> a challenger first played the
+          fourth place; each tie it won moved it up to face the next place, and its
+          climb stopped at the first tie it did not win. <strong>The Throne (from
+          September 2026):</strong> a challenger plays the reigning champion and nobody
+          else. The tie rule is the same in both formats.</li>
+        <li><strong>Published label:</strong> the Season 2 data file states the tie rule
+          as <code>"incumbent_retains"</code>. That label names only the last fallback;
+          the rule applied compares speed first, as described above.</li>
+      </ul>
+
+      <h2 id="alert">The nuclear launch alert</h2>
+      <h3>What the engine does (from 0.15.0, June 2026)</h3>
+      <p>
+        From game engine 0.15.0, the state each player receives contains a field named
+        <code>enemy_launch_detected</code>. It is true when two conditions hold at the
+        moment the player is asked to decide: the opponent has launched a bomb earlier
+        in the same turn, and at least one of the opponent's silos is inside the
+        player's current field of view. Otherwise it is false and the launch stays
+        invisible. The field never says whether the opponent is able to launch: uranium
+        stays secret.
+      </p>
+      <p>
+        <strong>Who can receive it.</strong> Each turn, both players take one half-turn.
+        Who plays first is drawn at random for the first turn and then alternates every
+        turn. Launches are resolved at the end of the turn, after both half-turns, and
+        the record of the launch is cleared at that point. The alert can therefore only
+        reach the player who plays <strong>second</strong> in the turn of the launch, and
+        only if that player can see one of the launcher's silos. The player who plays
+        first can never receive it.
+      </p>
+      <p>
+        <strong>What it allows.</strong> A bomb cannot be stopped. The only possible
+        response is to launch in the same half-turn, which requires an operational silo,
+        enough uranium for the current bomb cost, and the opponent's base already
+        discovered. Two launches in the same turn produce a mutual destruction (both
+        lose, 0 points each) instead of a nuclear defeat for the player who did not
+        launch. Because a launch always ends the match at the end of its turn, the alert
+        can only ever be true on the last half-turn of a match.
+      </p>
+
+      <h3>What the prompt said before 0.18.0</h3>
+      <div class="pq">
+        <p>Launches are SIMULTANEOUS and resolved by the engine at the END of the turn, after BOTH players have played. A bomb fired this turn is "in flight": because uranium and launches are SECRET, the opponent does NOT see it and cannot consciously react. There is no manual retaliation.</p>
+        <p class="pq-src">System prompt, section "SIMULTANEOUS NUCLEAR LAUNCH", game engine 0.15.0, 0.16.0 and 0.17.0 (and so 0.16.1).</p>
+      </div>
+      <div class="pq">
+        <p>Whether you play first or second this turn does not change this: the opponent could already have a ready bomb</p>
+        <p class="pq-src">Same section, same versions. The sentence continued "Launching is a calculated risk, not a guaranteed win." up to 0.16.0, and ", and you cannot observe it." in 0.17.0.</p>
+      </div>
+      <ul class="plain">
+        <li>The prompt did not describe the new field. The release notes of 0.15.0 state
+          that the prompt was left unchanged on purpose, on the reasoning that "the model
+          discovers the signal directly in its state".</li>
+        <li>The preserved test copy of the 0.14.0 engine carries the same sentence and
+          has no alert field: before 0.15.0 the sentence matched what the engine did.
+          Whether it was present before 0.14.0 cannot be checked.</li>
+        <li>Matches played with the alert in the engine and this sentence in the prompt:
+          those on 0.15.0 (Season 1, 2 matches), on 0.16.1 (mirror campaign, 57 matches)
+          and on 0.17.0 (Season 2 opening, 12 matches).</li>
+      </ul>
+
+      <h3>What changed in 0.18.0 (August 2026)</h3>
+      <p>
+        The sentences above were removed. The same section now reads, after the
+        description of simultaneous launches:
+      </p>
+      <div class="pq after">
+        <p>A bomb cannot be intercepted: there is no defence against one already fired. The ONE thing you can do is fire back the same turn, and for that you must first know a launch happened [...]. Whether the warning reaches you depends on what you can SEE.</p>
+        <p class="pq-src">System prompt, section "SIMULTANEOUS NUCLEAR LAUNCH", game engine 0.18.0.</p>
+      </div>
+      <p>and the section on fog of war gained this paragraph:</p>
+      <div class="pq after">
+        <p>NUCLEAR EARLY WARNING: "enemy_launch_detected" is true when the enemy has launched a bomb THIS turn AND one of their silos is currently in your field of view. Without that line of sight the launch stays secret. It can only ever be true for whoever plays SECOND in the turn (the engine alternates who plays first), and it never tells you whether the enemy CAN launch [...]. If it is true and you are able to launch this turn, launching makes it mutual destruction (0 pts each) instead of your defeat.</p>
+        <p class="pq-src">System prompt, section "FOG OF WAR", game engine 0.18.0.</p>
+      </div>
+      <ul class="plain">
+        <li>The mechanism itself did not change in 0.18.0: only its description.</li>
+        <li>From 0.18.0, each replay records the alert value the player was given before
+          deciding. Replays of earlier versions do not record it, so for those matches it
+          can only be reconstructed from what each player could see.</li>
+      </ul>
+
+      <h2 id="differences">Where the prompt and the engine disagreed</h2>
+      <p>
+        The prompt is the only description of the rules a model receives. The cases
+        below are those where it said something the engine did not do, or left out
+        something the engine did. Unless stated otherwise, each is confirmed in the
+        preserved source, that is from 0.15.0 onward; whether it already existed in
+        earlier versions is not known. Two further differences concern scoring rather
+        than the engine (mutual destruction on the ladder, and the published tie-rule
+        label); they are described under <a class="inline" href="#scoring">Scoring and
+        ranking</a>.
+      </p>
+
+      <div class="diff" id="d-launch">
+        <h3>1. Reacting to a launch</h3>
+        <dl>
+          <dt>Prompt</dt><dd>"the opponent does NOT see it and cannot consciously react. There is no manual retaliation." (0.15.0 to 0.17.0)</dd>
+          <dt>Engine</dt><dd>The player who plays second could be told of the launch and could answer it with its own launch the same turn, turning a defeat into a mutual destruction.</dd>
+          <dt>Status</dt><dd>Prompt corrected in 0.18.0. See <a class="inline" href="#alert">The nuclear launch alert</a>.</dd>
+        </dl>
+      </div>
+
+      <div class="diff" id="d-ceasefire">
+        <h3>2. Length of a ceasefire</h3>
+        <dl>
+          <dt>Prompt</dt><dd>"No attacks for 3 turns", "neither side may ATTACK for 3 turns" and "The ceasefire ends automatically after 3 turns; combat is allowed again afterwards." (0.15.0 to 0.17.0, and in the 0.14.0 test copy)</dd>
+          <dt>Engine</dt><dd>A ceasefire accepted on turn T is in force on turns T, T+1, T+2 and T+3: the rest of the turn it is accepted on plus three full turns. Attacks are allowed again from turn T+4.</dd>
+          <dt>Status</dt><dd>Prompt corrected in 0.18.0; the engine kept its behaviour.</dd>
+        </dl>
+      </div>
+
+      <div class="diff" id="d-bomb">
+        <h3>3. Lowest cost of the bomb</h3>
+        <dl>
+          <dt>Prompt</dt><dd>"PRESSURE after turn 40: cost drops 2U every 10 turns (floor 13U)." (0.15.0 to 0.17.0, and in the 0.14.0 test copy)</dd>
+          <dt>Engine</dt><dd>The first reduction applies on turn 40 itself (from 25 to 23 uranium). The 13-unit floor is only reached on turn 90, after the 80-turn limit, so the lowest cost reachable in a match was 15.</dd>
+          <dt>Status</dt><dd>Prompt corrected in 0.18.0; the engine kept its behaviour.</dd>
+        </dl>
+      </div>
+
+      <div class="diff" id="d-unit">
+        <h3>4. Using a unit the turn it is produced</h3>
+        <dl>
+          <dt>Prompt</dt><dd>"A unit produced this turn CAN move and attack the same turn." (0.15.0 and 0.16.0, and in the 0.14.0 test copy)</dd>
+          <dt>Engine</dt><dd>The engine chose the new unit's cell and gave it an identifier from a counter shared by both players, and reported both only after the whole reply had been executed. Since a model sends all its actions for the turn in one reply, it could not reliably refer to the new unit in that reply.</dd>
+          <dt>Status</dt><dd>Resolved in 0.17.0 by changing the rule: a new unit acts from its owner's next turn.</dd>
+        </dl>
+      </div>
+
+      <div class="diff" id="d-fog">
+        <h3>5. Building into the fog</h3>
+        <dl>
+          <dt>Prompt</dt><dd>"You can only BUILD on a cell currently in your FIELD OF VIEW" (all preserved versions)</dd>
+          <dt>Engine</dt><dd>Before 0.17.0, the engine checked whether the cell already held a building before checking whether the player could see it. A build aimed at an unseen cell holding a building was refused with "Cell already has a building", which revealed that building.</dd>
+          <dt>Status</dt><dd>Fixed in 0.17.0: visibility is checked first.</dd>
+        </dl>
+      </div>
+
+      <div class="diff" id="d-actions">
+        <h3>6. Three actions per turn</h3>
+        <dl>
+          <dt>Prompt</dt><dd>"Maximum 3 actions per turn." The state also gives <code>"actions_per_turn": 3</code>. (All preserved versions)</dd>
+          <dt>Engine</dt><dd>The limit was not applied to language models: every action in a reply was executed, however many there were.</dd>
+          <dt>Status</dt><dd>Never corrected; the rules are frozen.</dd>
+        </dl>
+      </div>
+
+      <div class="diff" id="d-los">
+        <h3>7. Line of sight in both directions</h3>
+        <dl>
+          <dt>Prompt</dt><dd>A ground attack is blocked "if a mountain OR a building lies on the straight line between the shooter and its target". (Line of sight exists since 0.10.0.)</dd>
+          <dt>Engine</dt><dd>The engine traces the cells from the shooter to the target. The trace from B to A does not always cross the same cells as the trace from A to B, so with a mountain next to the line one side can fire and the other cannot. Smallest case found: from (0, 0) to (1, 2), with a mountain at (0, 1), the shot is blocked; from (1, 2) to (0, 0), it is not. The same trace is used in every preserved version, including the 0.14.0 test copy.</dd>
+          <dt>Status</dt><dd>Never corrected; the rules are frozen.</dd>
+        </dl>
+      </div>
+
+      <div class="diff" id="d-tank">
+        <h3>8. A tank victory in a launch turn</h3>
+        <dl>
+          <dt>Prompt</dt><dd>Lists "You bring the enemy base HP to 0 with tanks" as a military victory, and gives a mutual destruction only when "Both players launch on the SAME turn" (all preserved versions). It also tells the player facing a launch that there is nothing else to do: "There is no manual retaliation" (0.15.0 to 0.17.0), then "The ONE thing you can do is fire back the same turn" (0.18.0).</dd>
+          <dt>Engine</dt><dd>If a tank destroys the base of a player who has already launched a bomb earlier in that turn, the bomb still lands and the result is a mutual destruction, not a military victory. This gives the player facing a nuclear defeat a second way, besides launching back, to turn it into a mutual destruction. No preserved version of the prompt states this case. The same rule is in every preserved version of the engine, including the 0.14.0 test copy.</dd>
+          <dt>Status</dt><dd>Never corrected; the rules are frozen. The case never occurred in a published match: every mutual destruction of Seasons 1 and 2 came from two launches in the same turn.</dd>
+        </dl>
+      </div>
+
+      <p class="muted">
+        One other known defect: a reply whose list of actions contains a bare word (for
+        example <code>["wait"]</code> instead of <code>[{"type": "wait"}]</code>) stops the
+        program running the match with an error, instead of being refused as an invalid
+        action.
+      </p>
+
+      <h2 id="advice">Advice removed from the prompt</h2>
+      <p>
+        The prompt is meant to describe the rules, the scoring and the reply format, and
+        nothing about how to play. Two releases removed sentences that went beyond
+        that.
+      </p>
+      <h3>0.16.0 (June 2026)</h3>
+      <ul class="plain">
+        <li>"Push tanks + a scout into enemy ground to contest their economy."</li>
+        <li>"Scout with a drone early."</li>
+      </ul>
+      <h3>0.17.0 (August 2026)</h3>
+      <p>The release notes count seven phrases of advice, removed while keeping every payoff and mechanic they mentioned:</p>
+      <ul class="plain">
+        <li>"So accepting a hopeless position is rewarded over fighting on." (with "surrendering a lost position is rewarded" in the description of the ultimatum)</li>
+        <li>"So a mine is not forever: keep scouting, and be ready to relocate and rebuild when a deposit runs dry."</li>
+        <li>"Launching is a calculated risk, not a guaranteed win."</li>
+        <li>"factor the 2 C rebuild cost into raids and defence."</li>
+        <li>"Defend fresh builds [...]"</li>
+        <li>"position yourself for when it ends." (about a ceasefire)</li>
+        <li>"Use it to judge whether the opponent is honest, bluffing, or has broken earlier promises [...]" (about the history of messages and proposals)</li>
+      </ul>
+      <p>Also removed or reworded in 0.17.0:</p>
+      <ul class="plain">
+        <li>two mentions that a failed action "counts as illegal" or "counts as an illegal action";</li>
+        <li>the remark that a blocked line of sight is "the most common reason a ground attack is rejected";</li>
+        <li>the description of a refused ultimatum as "only psychological pressure backed by the proposer's real board position", replaced by "no mechanical effect of any kind";</li>
+        <li>"A unit produced this turn CAN move and attack the same turn.", replaced by the new deployment rule (see 0.17.0).</li>
+      </ul>
+
+      <h2 id="cite">How to cite this page</h2>
+      <div class="cite">Age of LLM. (2026). Rules history: Seasons 1 and 2. Age of LLM Benchmark. https://ageofllm.org/rules/seasons-1-2/</div>
+      <p class="muted">
+        Each version and each difference has its own address, for example
+        https://ageofllm.org/rules/seasons-1-2/#v0-18-0 or https://ageofllm.org/rules/seasons-1-2/#d-ceasefire.
+        Since this page may still receive corrections, give the month and year you
+        consulted it.
+      </p>
+
+      <h2 id="corrections">Corrections to this page</h2>
+      <p class="muted">
+        None so far. Any correction will be listed here with its month. Page first
+        written in November 2026.
+      </p>
+    </div>
+
+    <footer class="site-footer">
+      <a class="foot-link" href="../../throne/" title="Season 2, The Throne">▲ The Throne</a>
+      <a class="foot-link" href="../../v1.html" title="Season 1, The Leaderboard (archive)">▤ Season 1</a>
+      <a class="foot-link" href="https://youtu.be/Ec-CV1uzyVY" target="_blank" rel="noopener" title="Presentation video">▶ Presentation ↗</a>
+      <a class="foot-link" href="../../funding/" title="Funding &amp; independence">⚖ Funding &amp; independence</a>
+      <span class="foot-copy">© 2026 Rymentz · Age of LLM™ · Code AGPL-3.0 · Data CC BY 4.0</span>
+    </footer>
+  </div>
+</body>
+</html>
