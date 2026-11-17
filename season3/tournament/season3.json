@@ -42,17 +42,17 @@
    "native": null,
    "output_limit": 32000
   },
-  "minimax-m3.1-flash": {
-   "name": "MiniMax M3.1 Flash",
-   "id": "minimax/minimax-m3.1-flash",
+  "minimax-m3": {
+   "name": "MiniMax M3",
+   "id": "minimax/minimax-m3",
    "country": "CN",
    "quantization": "fp8",
    "provider_name": "OpenRouter",
-   "host_name": "Parasail",
-   "params_b": 220,
+   "host_name": "GMICloud",
+   "params_b": 427,
    "active_b": null,
    "open": true,
-   "native": "fp8",
+   "native": "bf16",
    "output_limit": 32000
   },
   "nemotron-3.5-super": {
@@ -68,6 +68,19 @@
    "native": "unknown",
    "output_limit": 32000
   },
+  "gemma-4-31b": {
+   "name": "Gemma 4 31B",
+   "id": "google/gemma-4-31b-it",
+   "country": "US",
+   "quantization": "bf16",
+   "provider_name": "OpenRouter",
+   "host_name": "Crusoe",
+   "params_b": 31,
+   "active_b": null,
+   "open": true,
+   "native": "bf16",
+   "output_limit": 32000
+  },
   "glm-5.3-flash": {
    "name": "GLM 5.3 Flash",
    "id": "z-ai/glm-5.3-flash",
@@ -81,17 +94,17 @@
    "native": "fp8",
    "output_limit": 32000
   },
-  "gemma-4-31b": {
-   "name": "Gemma 4 31B",
-   "id": "google/gemma-4-31b-it",
-   "country": "US",
-   "quantization": "bf16",
+  "minimax-m3.1-flash": {
+   "name": "MiniMax M3.1 Flash",
+   "id": "minimax/minimax-m3.1-flash",
+   "country": "CN",
+   "quantization": "fp8",
    "provider_name": "OpenRouter",
-   "host_name": "Crusoe",
-   "params_b": 31,
+   "host_name": "Parasail",
+   "params_b": 220,
    "active_b": null,
    "open": true,
-   "native": "bf16",
+   "native": "fp8",
    "output_limit": 32000
   },
   "qwen-3.8-27b": {
@@ -194,9 +207,9 @@
    "engine_sha": "6dae1e2fd827",
    "legacy": false
   },
-  "updated": "2026-11-16",
-  "matches": 86,
-  "rounds": 317,
+  "updated": "2026-11-17",
+  "matches": 94,
+  "rounds": 353,
   "center": 1000,
   "centred_on": [
    "claude-haiku-5.5",
@@ -221,15 +234,15 @@
     "rank": 1,
     "rank_range": [
      1,
-     4
+     5
     ],
     "model": "deepseek-v4.1-flash",
     "name": "DeepSeek V4.1 Flash 1017",
     "id": "deepseek-v4-1-flash-1017",
     "country": "CN",
     "quantization": "fp8",
-    "rating": 1156,
-    "low": 1049,
+    "rating": 1155,
+    "low": 1055,
     "high": 1311,
     "one_sided": null,
     "matches": 19,
@@ -315,20 +328,32 @@
     "id": "openai-gpt-6-luna",
     "country": "US",
     "quantization": "unknown",
-    "rating": 1151,
-    "low": 1000,
-    "high": 1354,
+    "rating": 1140,
+    "low": 1016,
+    "high": 1325,
     "one_sided": null,
-    "matches": 10,
+    "matches": 11,
     "rounds": {
-     "won": 24,
+     "won": 27,
      "drawn": 1,
-     "lost": 13
+     "lost": 15
     },
     "provisional": false,
     "why": [],
     "connected": true,
     "last": [
+     {
+      "date": "2026-11-17",
+      "opponent": "minimax-m3",
+      "side": "B",
+      "rounds": [
+       3,
+       2
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_minimax-m3_vs_openai-gpt-6-luna_7.json",
+      "replay_id": "s3_minimax-m3_vs_openai-gpt-6-luna_7"
+     },
      {
       "date": "2026-11-16",
       "opponent": "minimax-m3.1-flash",
@@ -376,18 +401,6 @@
       "result": "won",
       "replay": "replays/season3/s3_openai-gpt-6-luna_vs_nemotron-3.5-super-vl_7.json",
       "replay_id": "s3_openai-gpt-6-luna_vs_nemotron-3.5-super-vl_7"
-     },
-     {
-      "date": "2026-11-15",
-      "opponent": "deepseek-v4.1-flash",
-      "side": "B",
-      "rounds": [
-       1,
-       3
-      ],
-      "result": "lost",
-      "replay": "replays/season3/s3_deepseek-v4-1-flash-1017_vs_openai-gpt-6-luna_6.json",
-      "replay_id": "s3_deepseek-v4-1-flash-1017_vs_openai-gpt-6-luna_6"
      }
     ]
    },
@@ -402,20 +415,32 @@
     "id": "claude-haiku-5-5",
     "country": "US",
     "quantization": "unknown",
-    "rating": 1031,
-    "low": 894,
-    "high": 1194,
+    "rating": 1041,
+    "low": 911,
+    "high": 1195,
     "one_sided": null,
-    "matches": 16,
+    "matches": 17,
     "rounds": {
-     "won": 34,
-     "drawn": 3,
-     "lost": 17
+     "won": 37,
+     "drawn": 4,
+     "lost": 18
     },
     "provisional": false,
     "why": [],
     "connected": true,
     "last": [
+     {
+      "date": "2026-11-17",
+      "opponent": "minimax-m3",
+      "side": "A",
+      "rounds": [
+       3,
+       1
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_claude-haiku-5-5_vs_minimax-m3_6.json",
+      "replay_id": "s3_claude-haiku-5-5_vs_minimax-m3_6"
+     },
      {
       "date": "2026-11-16",
       "opponent": "minimax-m3.1-flash",
@@ -463,107 +488,93 @@
       "result": "drawn",
       "replay": "replays/season3/s3_gemma-4-31b-it_vs_claude-haiku-5-5_3.json",
       "replay_id": "s3_gemma-4-31b-it_vs_claude-haiku-5-5_3"
-     },
-     {
-      "date": "2026-11-14",
-      "opponent": "nemotron-3.5-super",
-      "side": "B",
-      "rounds": [
-       2,
-       3
-      ],
-      "result": "lost",
-      "replay": "replays/season3/s3_nemotron-3.5-super-vl_vs_claude-haiku-5-5_7.json",
-      "replay_id": "s3_nemotron-3.5-super-vl_vs_claude-haiku-5-5_7"
      }
     ]
    },
    {
     "rank": 4,
     "rank_range": [
-     1,
-     11
+     2,
+     9
     ],
-    "model": "minimax-m3.1-flash",
-    "name": "MiniMax M3.1 Flash",
-    "id": "minimax/minimax-m3.1-flash",
+    "model": "minimax-m3",
+    "name": "MiniMax M3",
+    "id": "minimax/minimax-m3",
     "country": "CN",
     "quantization": "fp8",
-    "rating": 1014,
-    "low": 808,
-    "high": 1266,
+    "rating": 1019,
+    "low": 893,
+    "high": 1166,
     "one_sided": null,
     "matches": 8,
     "rounds": {
-     "won": 17,
-     "drawn": 0,
-     "lost": 12
+     "won": 19,
+     "drawn": 1,
+     "lost": 16
     },
-    "provisional": true,
-    "why": [
-     "interval wider than ±180"
-    ],
+    "provisional": false,
+    "why": [],
     "connected": true,
     "last": [
      {
-      "date": "2026-11-16",
-      "opponent": "gpt-6-luna",
+      "date": "2026-11-17",
+      "opponent": "minimax-m3.1-flash",
       "side": "B",
       "rounds": [
        3,
        1
       ],
       "result": "won",
-      "replay": "replays/season3/s3_openai-gpt-6-luna_vs_minimax-m3.1-flash_8.json",
-      "replay_id": "s3_openai-gpt-6-luna_vs_minimax-m3.1-flash_8"
+      "replay": "replays/season3/s3_minimax-m3.1-flash_vs_minimax-m3_8.json",
+      "replay_id": "s3_minimax-m3.1-flash_vs_minimax-m3_8"
      },
      {
-      "date": "2026-11-16",
-      "opponent": "gpt-oss-120b",
+      "date": "2026-11-17",
+      "opponent": "gpt-6-luna",
       "side": "A",
       "rounds": [
-       3,
-       0
-      ],
-      "result": "won",
-      "replay": "replays/season3/s3_minimax-m3.1-flash_vs_gpt-oss-120b_7.json",
-      "replay_id": "s3_minimax-m3.1-flash_vs_gpt-oss-120b_7"
-     },
-     {
-      "date": "2026-11-16",
-      "opponent": "mimo-v2.6-flash",
-      "side": "B",
-      "rounds": [
-       3,
-       0
-      ],
-      "result": "won",
-      "replay": "replays/season3/s3_xiaomi-mimo-v2-6-flash_vs_minimax-m3.1-flash_6.json",
-      "replay_id": "s3_xiaomi-mimo-v2-6-flash_vs_minimax-m3.1-flash_6"
-     },
-     {
-      "date": "2026-11-16",
-      "opponent": "qwen-3.8-flash",
-      "side": "A",
-      "rounds": [
-       0,
+       2,
        3
       ],
       "result": "lost",
-      "replay": "replays/season3/s3_minimax-m3.1-flash_vs_qwen-3-8-flash_5.json",
-      "replay_id": "s3_minimax-m3.1-flash_vs_qwen-3-8-flash_5"
+      "replay": "replays/season3/s3_minimax-m3_vs_openai-gpt-6-luna_7.json",
+      "replay_id": "s3_minimax-m3_vs_openai-gpt-6-luna_7"
      },
      {
-      "date": "2026-11-16",
+      "date": "2026-11-17",
       "opponent": "claude-haiku-5.5",
       "side": "B",
       "rounds": [
-       0,
+       1,
        3
       ],
       "result": "lost",
-      "replay": "replays/season3/s3_claude-haiku-5-5_vs_minimax-m3.1-flash_4.json",
-      "replay_id": "s3_claude-haiku-5-5_vs_minimax-m3.1-flash_4"
+      "replay": "replays/season3/s3_claude-haiku-5-5_vs_minimax-m3_6.json",
+      "replay_id": "s3_claude-haiku-5-5_vs_minimax-m3_6"
+     },
+     {
+      "date": "2026-11-17",
+      "opponent": "glm-5.3-flash",
+      "side": "A",
+      "rounds": [
+       3,
+       2
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_minimax-m3_vs_glm-5.3-flash_5.json",
+      "replay_id": "s3_minimax-m3_vs_glm-5.3-flash_5"
+     },
+     {
+      "date": "2026-11-17",
+      "opponent": "minimax-m3.1-flash",
+      "side": "B",
+      "rounds": [
+       3,
+       0
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_minimax-m3.1-flash_vs_minimax-m3_4.json",
+      "replay_id": "s3_minimax-m3.1-flash_vs_minimax-m3_4"
      }
     ]
    },
@@ -571,16 +582,16 @@
     "rank": 5,
     "rank_range": [
      2,
-     9
+     11
     ],
     "model": "nemotron-3.5-super",
     "name": "Nemotron 3.5 Super",
     "id": "nvidia/nemotron-3.5-super-vl",
     "country": "US",
     "quantization": "bf16",
-    "rating": 1010,
-    "low": 865,
-    "high": 1151,
+    "rating": 1012,
+    "low": 871,
+    "high": 1158,
     "one_sided": null,
     "matches": 12,
     "rounds": {
@@ -657,96 +668,7 @@
    {
     "rank": 6,
     "rank_range": [
-     2,
-     11
-    ],
-    "model": "glm-5.3-flash",
-    "name": "GLM 5.3 Flash",
-    "id": "z-ai/glm-5.3-flash",
-    "country": "CN",
-    "quantization": "fp8",
-    "rating": 1003,
-    "low": 814,
-    "high": 1191,
-    "one_sided": null,
-    "matches": 9,
-    "rounds": {
-     "won": 16,
-     "drawn": 1,
-     "lost": 17
-    },
-    "provisional": true,
-    "why": [
-     "interval wider than ±180"
-    ],
-    "connected": true,
-    "last": [
-     {
-      "date": "2026-11-16",
-      "opponent": "minimax-m3.1-flash",
-      "side": "B",
-      "rounds": [
-       1,
-       3
-      ],
-      "result": "lost",
-      "replay": "replays/season3/s3_minimax-m3.1-flash_vs_glm-5.3-flash_3.json",
-      "replay_id": "s3_minimax-m3.1-flash_vs_glm-5.3-flash_3"
-     },
-     {
-      "date": "2026-11-16",
-      "opponent": "nemotron-3.5-super",
-      "side": "B",
-      "rounds": [
-       0,
-       3
-      ],
-      "result": "lost",
-      "replay": "replays/season3/s3_nemotron-3.5-super-vl_vs_glm-5.3-flash_8.json",
-      "replay_id": "s3_nemotron-3.5-super-vl_vs_glm-5.3-flash_8"
-     },
-     {
-      "date": "2026-11-16",
-      "opponent": "deepseek-v4.1-flash",
-      "side": "A",
-      "rounds": [
-       0,
-       3
-      ],
-      "result": "lost",
-      "replay": "replays/season3/s3_glm-5.3-flash_vs_deepseek-v4-1-flash-1017_7.json",
-      "replay_id": "s3_glm-5.3-flash_vs_deepseek-v4-1-flash-1017_7"
-     },
-     {
-      "date": "2026-11-16",
-      "opponent": "gpt-6-luna",
-      "side": "B",
-      "rounds": [
-       3,
-       2
-      ],
-      "result": "won",
-      "replay": "replays/season3/s3_openai-gpt-6-luna_vs_glm-5.3-flash_6.json",
-      "replay_id": "s3_openai-gpt-6-luna_vs_glm-5.3-flash_6"
-     },
-     {
-      "date": "2026-11-16",
-      "opponent": "gemma-4-31b",
-      "side": "A",
-      "rounds": [
-       3,
-       0
-      ],
-      "result": "won",
-      "replay": "replays/season3/s3_glm-5.3-flash_vs_gemma-4-31b-it_5.json",
-      "replay_id": "s3_glm-5.3-flash_vs_gemma-4-31b-it_5"
-     }
-    ]
-   },
-   {
-    "rank": 7,
-    "rank_range": [
-     2,
+     3,
      11
     ],
     "model": "gemma-4-31b",
@@ -754,20 +676,32 @@
     "id": "google/gemma-4-31b-it",
     "country": "US",
     "quantization": "bf16",
-    "rating": 982,
-    "low": 808,
-    "high": 1137,
+    "rating": 994,
+    "low": 848,
+    "high": 1134,
     "one_sided": null,
-    "matches": 11,
+    "matches": 12,
     "rounds": {
-     "won": 20,
+     "won": 23,
      "drawn": 1,
-     "lost": 23
+     "lost": 25
     },
     "provisional": false,
     "why": [],
     "connected": true,
     "last": [
+     {
+      "date": "2026-11-16",
+      "opponent": "minimax-m3",
+      "side": "B",
+      "rounds": [
+       3,
+       2
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_minimax-m3_vs_gemma-4-31b-it_1.json",
+      "replay_id": "s3_minimax-m3_vs_gemma-4-31b-it_1"
+     },
      {
       "date": "2026-11-16",
       "opponent": "glm-5.3-flash",
@@ -815,33 +749,195 @@
       "result": "lost",
       "replay": "replays/season3/s3_xiaomi-mimo-v2-6-flash_vs_gemma-4-31b-it_8.json",
       "replay_id": "s3_xiaomi-mimo-v2-6-flash_vs_gemma-4-31b-it_8"
+     }
+    ]
+   },
+   {
+    "rank": 7,
+    "rank_range": [
+     2,
+     12
+    ],
+    "model": "glm-5.3-flash",
+    "name": "GLM 5.3 Flash",
+    "id": "z-ai/glm-5.3-flash",
+    "country": "CN",
+    "quantization": "fp8",
+    "rating": 992,
+    "low": 839,
+    "high": 1162,
+    "one_sided": null,
+    "matches": 10,
+    "rounds": {
+     "won": 18,
+     "drawn": 1,
+     "lost": 20
+    },
+    "provisional": false,
+    "why": [],
+    "connected": true,
+    "last": [
+     {
+      "date": "2026-11-17",
+      "opponent": "minimax-m3",
+      "side": "B",
+      "rounds": [
+       2,
+       3
+      ],
+      "result": "lost",
+      "replay": "replays/season3/s3_minimax-m3_vs_glm-5.3-flash_5.json",
+      "replay_id": "s3_minimax-m3_vs_glm-5.3-flash_5"
      },
      {
-      "date": "2026-11-15",
-      "opponent": "qwen-3.8-27b",
-      "side": "A",
+      "date": "2026-11-16",
+      "opponent": "minimax-m3.1-flash",
+      "side": "B",
       "rounds": [
        1,
        3
       ],
       "result": "lost",
-      "replay": "replays/season3/s3_gemma-4-31b-it_vs_qwen3.8-27b_7.json",
-      "replay_id": "s3_gemma-4-31b-it_vs_qwen3.8-27b_7"
+      "replay": "replays/season3/s3_minimax-m3.1-flash_vs_glm-5.3-flash_3.json",
+      "replay_id": "s3_minimax-m3.1-flash_vs_glm-5.3-flash_3"
+     },
+     {
+      "date": "2026-11-16",
+      "opponent": "nemotron-3.5-super",
+      "side": "B",
+      "rounds": [
+       0,
+       3
+      ],
+      "result": "lost",
+      "replay": "replays/season3/s3_nemotron-3.5-super-vl_vs_glm-5.3-flash_8.json",
+      "replay_id": "s3_nemotron-3.5-super-vl_vs_glm-5.3-flash_8"
+     },
+     {
+      "date": "2026-11-16",
+      "opponent": "deepseek-v4.1-flash",
+      "side": "A",
+      "rounds": [
+       0,
+       3
+      ],
+      "result": "lost",
+      "replay": "replays/season3/s3_glm-5.3-flash_vs_deepseek-v4-1-flash-1017_7.json",
+      "replay_id": "s3_glm-5.3-flash_vs_deepseek-v4-1-flash-1017_7"
+     },
+     {
+      "date": "2026-11-16",
+      "opponent": "gpt-6-luna",
+      "side": "B",
+      "rounds": [
+       3,
+       2
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_openai-gpt-6-luna_vs_glm-5.3-flash_6.json",
+      "replay_id": "s3_openai-gpt-6-luna_vs_glm-5.3-flash_6"
      }
     ]
    },
    {
     "rank": 8,
     "rank_range": [
+     2,
+     12
+    ],
+    "model": "minimax-m3.1-flash",
+    "name": "MiniMax M3.1 Flash",
+    "id": "minimax/minimax-m3.1-flash",
+    "country": "CN",
+    "quantization": "fp8",
+    "rating": 963,
+    "low": 777,
+    "high": 1134,
+    "one_sided": null,
+    "matches": 10,
+    "rounds": {
+     "won": 18,
+     "drawn": 0,
+     "lost": 18
+    },
+    "provisional": false,
+    "why": [],
+    "connected": true,
+    "last": [
+     {
+      "date": "2026-11-17",
+      "opponent": "minimax-m3",
+      "side": "A",
+      "rounds": [
+       1,
+       3
+      ],
+      "result": "lost",
+      "replay": "replays/season3/s3_minimax-m3.1-flash_vs_minimax-m3_8.json",
+      "replay_id": "s3_minimax-m3.1-flash_vs_minimax-m3_8"
+     },
+     {
+      "date": "2026-11-17",
+      "opponent": "minimax-m3",
+      "side": "A",
+      "rounds": [
+       0,
+       3
+      ],
+      "result": "lost",
+      "replay": "replays/season3/s3_minimax-m3.1-flash_vs_minimax-m3_4.json",
+      "replay_id": "s3_minimax-m3.1-flash_vs_minimax-m3_4"
+     },
+     {
+      "date": "2026-11-16",
+      "opponent": "gpt-6-luna",
+      "side": "B",
+      "rounds": [
+       3,
+       1
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_openai-gpt-6-luna_vs_minimax-m3.1-flash_8.json",
+      "replay_id": "s3_openai-gpt-6-luna_vs_minimax-m3.1-flash_8"
+     },
+     {
+      "date": "2026-11-16",
+      "opponent": "gpt-oss-120b",
+      "side": "A",
+      "rounds": [
+       3,
+       0
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_minimax-m3.1-flash_vs_gpt-oss-120b_7.json",
+      "replay_id": "s3_minimax-m3.1-flash_vs_gpt-oss-120b_7"
+     },
+     {
+      "date": "2026-11-16",
+      "opponent": "mimo-v2.6-flash",
+      "side": "B",
+      "rounds": [
+       3,
+       0
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_xiaomi-mimo-v2-6-flash_vs_minimax-m3.1-flash_6.json",
+      "replay_id": "s3_xiaomi-mimo-v2-6-flash_vs_minimax-m3.1-flash_6"
+     }
+    ]
+   },
+   {
+    "rank": 9,
+    "rank_range": [
      4,
-     11
+     12
     ],
     "model": "qwen-3.8-27b",
     "name": "Qwen 3.8 27B",
     "id": "qwen/qwen3.8-27b",
     "country": "CN",
     "quantization": "bf16",
-    "rating": 956,
+    "rating": 953,
     "low": 844,
     "high": 1052,
     "one_sided": null,
@@ -918,7 +1014,7 @@
     ]
    },
    {
-    "rank": 9,
+    "rank": 10,
     "rank_range": [
      3,
      12
@@ -928,20 +1024,32 @@
     "id": "qwen-3-8-flash",
     "country": "CN",
     "quantization": "unknown",
-    "rating": 926,
-    "low": 764,
-    "high": 1120,
+    "rating": 942,
+    "low": 785,
+    "high": 1124,
     "one_sided": null,
-    "matches": 11,
+    "matches": 12,
     "rounds": {
-     "won": 19,
+     "won": 22,
      "drawn": 0,
-     "lost": 18
+     "lost": 20
     },
     "provisional": false,
     "why": [],
     "connected": true,
     "last": [
+     {
+      "date": "2026-11-16",
+      "opponent": "minimax-m3",
+      "side": "A",
+      "rounds": [
+       3,
+       2
+      ],
+      "result": "won",
+      "replay": "replays/season3/s3_qwen-3-8-flash_vs_minimax-m3_2.json",
+      "replay_id": "s3_qwen-3-8-flash_vs_minimax-m3_2"
+     },
      {
       "date": "2026-11-16",
       "opponent": "minimax-m3.1-flash",
@@ -989,46 +1097,46 @@
       "result": "won",
       "replay": "replays/season3/s3_mistral-small-3-2-24b-instruct_vs_qwen-3-8-flash_8.json",
       "replay_id": "s3_mistral-small-3-2-24b-instruct_vs_qwen-3-8-flash_8"
-     },
-     {
-      "date": "2026-11-15",
-      "opponent": "nemotron-3-ultra",
-      "side": "A",
-      "rounds": [
-       1,
-       3
-      ],
-      "result": "lost",
-      "replay": "replays/season3/s3_qwen-3-8-flash_vs_nvidia-nemotron-3-ultra-550b-a55b_7.json",
-      "replay_id": "s3_qwen-3-8-flash_vs_nvidia-nemotron-3-ultra-550b-a55b_7"
      }
     ]
    },
    {
-    "rank": 10,
+    "rank": 11,
     "rank_range": [
      6,
-     13
+     14
     ],
     "model": "nemotron-3-ultra",
     "name": "Nemotron 3 Ultra",
     "id": "nvidia-nemotron-3-ultra-550b-a55b",
     "country": "US",
     "quantization": "fp8",
-    "rating": 856,
-    "low": 676,
-    "high": 980,
+    "rating": 852,
+    "low": 687,
+    "high": 974,
     "one_sided": null,
-    "matches": 13,
+    "matches": 14,
     "rounds": {
-     "won": 22,
+     "won": 23,
      "drawn": 2,
-     "lost": 26
+     "lost": 29
     },
     "provisional": false,
     "why": [],
     "connected": true,
     "last": [
+     {
+      "date": "2026-11-17",
+      "opponent": "minimax-m3",
+      "side": "B",
+      "rounds": [
+       1,
+       3
+      ],
+      "result": "lost",
+      "replay": "replays/season3/s3_minimax-m3_vs_nvidia-nemotron-3-ultra-550b-a55b_3.json",
+      "replay_id": "s3_minimax-m3_vs_nvidia-nemotron-3-ultra-550b-a55b_3"
+     },
      {
       "date": "2026-11-16",
       "opponent": "minimax-m3.1-flash",
@@ -1076,35 +1184,23 @@
       "result": "lost",
       "replay": "replays/season3/s3_gemma-4-31b-it_vs_nvidia-nemotron-3-ultra-550b-a55b_1.json",
       "replay_id": "s3_gemma-4-31b-it_vs_nvidia-nemotron-3-ultra-550b-a55b_1"
-     },
-     {
-      "date": "2026-11-14",
-      "opponent": "nemotron-3.5-super",
-      "side": "B",
-      "rounds": [
-       3,
-       2
-      ],
-      "result": "won",
-      "replay": "replays/season3/s3_nemotron-3.5-super-vl_vs_nvidia-nemotron-3-ultra-550b-a55b_1.json",
-      "replay_id": "s3_nemotron-3.5-super-vl_vs_nvidia-nemotron-3-ultra-550b-a55b_1"
      }
     ]
    },
    {
-    "rank": 11,
+    "rank": 12,
     "rank_range": [
-     5,
-     13
+     6,
+     15
     ],
     "model": "mimo-v2.6-flash",
     "name": "MiMo V2.6 Flash",
     "id": "xiaomi-mimo-v2-6-flash",
     "country": "CN",
     "quantization": "fp8",
-    "rating": 849,
-    "low": 629,
-    "high": 1029,
+    "rating": 848,
+    "low": 614,
+    "high": 1024,
     "one_sided": null,
     "matches": 12,
     "rounds": {
@@ -1181,19 +1277,19 @@
     ]
    },
    {
-    "rank": 12,
+    "rank": 13,
     "rank_range": [
-     9,
-     14
+     10,
+     15
     ],
     "model": "gpt-oss-120b",
     "name": "gpt-oss 120B",
     "id": "openai/gpt-oss-120b",
     "country": "US",
     "quantization": "bf16",
-    "rating": 784,
-    "low": 596,
-    "high": 914,
+    "rating": 782,
+    "low": 605,
+    "high": 919,
     "one_sided": null,
     "matches": 16,
     "rounds": {
@@ -1268,10 +1364,10 @@
     ]
    },
    {
-    "rank": 13,
+    "rank": 14,
     "rank_range": [
-     11,
-     14
+     12,
+     15
     ],
     "model": "mistral-small-3.2",
     "name": "Mistral Small 3.2 24B",
@@ -1279,8 +1375,8 @@
     "country": "FR",
     "quantization": "fp8",
     "rating": 712,
-    "low": 497,
-    "high": 850,
+    "low": 509,
+    "high": 851,
     "one_sided": null,
     "matches": 10,
     "rounds": {
@@ -1355,10 +1451,10 @@
     ]
    },
    {
-    "rank": 14,
+    "rank": 15,
     "rank_range": [
-     12,
-     14
+     13,
+     15
     ],
     "model": "nemotron-3-nano",
     "name": "Nemotron 3 Nano 30B",
@@ -1366,7 +1462,7 @@
     "country": "US",
     "quantization": "fp8",
     "rating": 662,
-    "low": 468,
+    "low": 475,
     "high": 801,
     "one_sided": null,
     "matches": 10,
