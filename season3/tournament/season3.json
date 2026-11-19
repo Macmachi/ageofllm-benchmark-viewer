@@ -1618,6 +1618,40 @@
  },
  "exhibitions": [
   {
+   "date": "2026-11-19",
+   "players": [
+    {
+     "name": "Claude Fable 5.2",
+     "model": "claude-fable-5-2",
+     "country": "US",
+     "provider": "venice",
+     "host_name": null,
+     "lab": "Anthropic",
+     "quantization": "unknown",
+     "open": false,
+     "provider_name": "Venice AI"
+    },
+    {
+     "name": "Gemini 4 Neon",
+     "model": "google/gemini-4-neon",
+     "country": "US",
+     "provider": "openrouter",
+     "host_name": null,
+     "lab": "Google",
+     "quantization": "unknown",
+     "open": false,
+     "provider_name": "OpenRouter"
+    }
+   ],
+   "rounds": [
+    1,
+    3
+   ],
+   "result": "B",
+   "replay": "replays/season3/s3-exhibition-claude-fable-5.2_vs_gemini-4-neon.json",
+   "replay_id": "s3-exhibition-claude-fable-5.2_vs_gemini-4-neon"
+  },
+  {
    "date": "2026-11-12",
    "players": [
     {

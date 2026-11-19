@@ -596,6 +596,86 @@
    "sha": "9679af7fa2f7058a",
    "text": "Gemini four Carbon takes the round!"
   },
+  "gemini-4-neon-openrouter:destroyed.1": {
+   "file": "models/gemini-4-neon-openrouter/destroyed.1.mp3",
+   "sha": "76cb71da7c6af425",
+   "text": "Gemini four Neon is destroyed!"
+  },
+  "gemini-4-neon-openrouter:intro_a.1": {
+   "file": "models/gemini-4-neon-openrouter/intro_a.1.mp3",
+   "sha": "822aa0dbeac20b72",
+   "text": "In the blue corner, Gemini four Neon!"
+  },
+  "gemini-4-neon-openrouter:intro_b.1": {
+   "file": "models/gemini-4-neon-openrouter/intro_b.1.mp3",
+   "sha": "7dc61f339bb5273d",
+   "text": "And in the red corner, Gemini four Neon!"
+  },
+  "gemini-4-neon-openrouter:knocked_out.1": {
+   "file": "models/gemini-4-neon-openrouter/knocked_out.1.mp3",
+   "sha": "6a625b87594361b7",
+   "text": "Gemini four Neon is knocked out!"
+  },
+  "gemini-4-neon-openrouter:match_won.1": {
+   "file": "models/gemini-4-neon-openrouter/match_won.1.mp3",
+   "sha": "10755f0fa58d1b3c",
+   "text": "Gemini four Neon wins the match!"
+  },
+  "gemini-4-neon-openrouter:program_idle.1": {
+   "file": "models/gemini-4-neon-openrouter/program_idle.1.mp3",
+   "sha": "e75bebe5cb3c5c88",
+   "text": "Gemini four Neon's program did not load! Its robot does nothing this round."
+  },
+  "gemini-4-neon-openrouter:program_stopped.1": {
+   "file": "models/gemini-4-neon-openrouter/program_stopped.1.mp3",
+   "sha": "a0c0ebef0189aaa5",
+   "text": "Gemini four Neon's program has stopped!"
+  },
+  "gemini-4-neon-openrouter:round_won.1": {
+   "file": "models/gemini-4-neon-openrouter/round_won.1.mp3",
+   "sha": "4b273da8e088ce07",
+   "text": "Gemini four Neon takes the round!"
+  },
+  "gemini-4-neon:destroyed.1": {
+   "file": "models/gemini-4-neon/destroyed.1.mp3",
+   "sha": "76cb71da7c6af425",
+   "text": "Gemini four Neon is destroyed!"
+  },
+  "gemini-4-neon:intro_a.1": {
+   "file": "models/gemini-4-neon/intro_a.1.mp3",
+   "sha": "822aa0dbeac20b72",
+   "text": "In the blue corner, Gemini four Neon!"
+  },
+  "gemini-4-neon:intro_b.1": {
+   "file": "models/gemini-4-neon/intro_b.1.mp3",
+   "sha": "7dc61f339bb5273d",
+   "text": "And in the red corner, Gemini four Neon!"
+  },
+  "gemini-4-neon:knocked_out.1": {
+   "file": "models/gemini-4-neon/knocked_out.1.mp3",
+   "sha": "6a625b87594361b7",
+   "text": "Gemini four Neon is knocked out!"
+  },
+  "gemini-4-neon:match_won.1": {
+   "file": "models/gemini-4-neon/match_won.1.mp3",
+   "sha": "10755f0fa58d1b3c",
+   "text": "Gemini four Neon wins the match!"
+  },
+  "gemini-4-neon:program_idle.1": {
+   "file": "models/gemini-4-neon/program_idle.1.mp3",
+   "sha": "e75bebe5cb3c5c88",
+   "text": "Gemini four Neon's program did not load! Its robot does nothing this round."
+  },
+  "gemini-4-neon:program_stopped.1": {
+   "file": "models/gemini-4-neon/program_stopped.1.mp3",
+   "sha": "a0c0ebef0189aaa5",
+   "text": "Gemini four Neon's program has stopped!"
+  },
+  "gemini-4-neon:round_won.1": {
+   "file": "models/gemini-4-neon/round_won.1.mp3",
+   "sha": "4b273da8e088ce07",
+   "text": "Gemini four Neon takes the round!"
+  },
   "gemma-4-31b:destroyed.1": {
    "file": "models/gemma-4-31b/destroyed.1.mp3",
    "sha": "4369fec81f7302fe",
@@ -1998,6 +2078,14 @@
   "gemini-4-carbon": {
    "name": "Gemini 4 Carbon",
    "spoken": "Gemini four Carbon"
+  },
+  "gemini-4-neon": {
+   "name": "Gemini 4 Neon",
+   "spoken": "Gemini four Neon"
+  },
+  "gemini-4-neon-openrouter": {
+   "name": "Gemini 4 Neon",
+   "spoken": "Gemini four Neon"
   },
   "gemma-4-31b": {
    "name": "Gemma 4 31B",
